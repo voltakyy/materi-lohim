@@ -1,0 +1,2341 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jadwal Kuliah — Muhammad Rizky Prasetya</title>
+
+<script>document.documentElement.classList.add('js');</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============ RESET ============ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#14213D; --gold:#D9A441; --teal:#197C7A;
+  --bg:#F7F7F5; --surface:#FFFFFF;
+  --tp:#18212F; --ts:#667085;
+  --border:#E4E7EC;
+  --success:#2F7D5A; --warning:#C58A24; --danger:#B84A4A;
+  --sp1:4px;--sp2:8px;--sp3:12px;--sp4:16px;--sp5:24px;--sp6:32px;--sp7:48px;--sp8:64px;
+  --rb:8px;--rc:12px;
+  --sh-sm:0 1px 3px rgba(16,24,40,.06);
+  --sh-hv:0 4px 12px rgba(16,24,40,.08);
+  --fh:'Plus Jakarta Sans','Inter',sans-serif;
+  --fb:'Inter',sans-serif;
+  --mw:1200px;--hh:72px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --ease-smooth:cubic-bezier(.16,1,.3,1);
+  --ease-bounce:cubic-bezier(.34,1.56,.64,1);
+}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{font-family:var(--fb);background:var(--bg);color:var(--tp);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--fh);font-weight:700;letter-spacing:-.02em;line-height:1.15}
+h1{font-size:36px}h2{font-size:26px}h3{font-size:19px}h4{font-size:15px}
+@media(max-width:768px){h1{font-size:28px}h2{font-size:22px}h3{font-size:17px}}
+.container{max-width:var(--mw);margin:0 auto;padding:0 var(--sp5)}
+@media(max-width:768px){.container{padding:0 var(--sp4)}}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ============================================================
+   MOTION SYSTEM — smooth, longer, noticeable
+   Only transform + opacity animated.
+============================================================ */
+@keyframes fadeUpSm{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInOnly{from{opacity:0}to{opacity:1}}
+@keyframes pulseDot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(1.4)}}
+
+/* ---------- PAGE LOAD ---------- */
+@keyframes headerDrop{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes heroTitle{from{opacity:0;transform:translateY(28px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes summaryIn{from{opacity:0;transform:translateY(36px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes cardStagger{from{opacity:0;transform:translateY(36px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes slideInLeft{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes cdPop{0%{transform:scale(1)}40%{transform:scale(1.18);color:var(--gold)}100%{transform:scale(1)}}
+@keyframes currentGlow{0%,100%{box-shadow:0 2px 10px rgba(25,124,122,.16)}50%{box-shadow:0 10px 28px rgba(25,124,122,.38)}}
+
+.header{animation:headerDrop 700ms var(--ease-smooth) backwards}
+.page-intro .eyebrow{animation:fadeUp 800ms var(--ease-smooth) 120ms backwards}
+.page-intro h1{animation:heroTitle 900ms var(--ease-smooth) 220ms backwards}
+.page-intro > .container > p{animation:fadeUp 800ms var(--ease-smooth) 380ms backwards}
+.student-info{animation:fadeUp 800ms var(--ease-smooth) 500ms backwards}
+.today-summary{animation:summaryIn 900ms var(--ease-smooth) 600ms backwards}
+
+/* ---------- SCROLL REVEAL ---------- */
+.js .reveal{opacity:0;transform:translateY(52px);transition:opacity 900ms var(--ease-smooth),transform 900ms var(--ease-smooth);will-change:opacity,transform}
+.js .reveal.is-visible{opacity:1;transform:translateY(0);will-change:auto}
+.js .reveal .overview-card,
+.js .reveal .course-acc,
+.js .reveal .roadmap-item,
+.js .reveal .strategy-card,
+.js .reveal .consent-card,
+.js .reveal .guide-card{
+  opacity:0;transform:translateY(32px);
+  transition:opacity 800ms var(--ease-smooth),transform 800ms var(--ease-smooth);
+}
+.js .reveal.is-visible .overview-card,
+.js .reveal.is-visible .course-acc,
+.js .reveal.is-visible .roadmap-item,
+.js .reveal.is-visible .strategy-card,
+.js .reveal.is-visible .consent-card,
+.js .reveal.is-visible .guide-card{
+  opacity:1;transform:translateY(0);
+}
+
+/* HEADER */
+.header{position:sticky;top:0;z-index:100;background:var(--surface);border-bottom:1px solid var(--border);height:var(--hh);display:flex;align-items:center;
+  transition:box-shadow 400ms var(--ease-smooth),border-color 400ms var(--ease-smooth),background-color 400ms var(--ease-smooth);}
+.header.scrolled{box-shadow:0 8px 24px rgba(16,24,40,.08);border-bottom-color:#D0D5DD;background:rgba(255,255,255,.98)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;width:100%}
+.header-brand{text-decoration:none;color:var(--tp);display:flex;flex-direction:column;gap:2px}
+.header-brand-title{font-family:var(--fh);font-weight:700;font-size:17px;color:var(--navy);line-height:1.2}
+.header-brand-sub{font-size:11px;font-weight:500;color:var(--ts);line-height:1.2}
+.header-nav{display:flex;align-items:center;gap:2px;flex-wrap:wrap}
+.header-nav a{font-size:13px;font-weight:500;color:var(--ts);text-decoration:none;padding:var(--sp2) var(--sp3);border-radius:var(--rb);transition:color 220ms var(--ease-smooth), background-color 220ms var(--ease-smooth)}
+.header-nav a:hover{color:var(--navy);background:var(--bg)}
+.header-nav a.active{color:var(--navy);font-weight:600;background:var(--bg)}
+.menu-toggle{display:none;background:none;border:none;cursor:pointer;padding:var(--sp2);color:var(--tp);border-radius:var(--rb);transition:background-color 220ms var(--ease-smooth), transform 200ms var(--ease-smooth)}
+.menu-toggle:hover{background:var(--bg)}
+.menu-toggle:active{transform:scale(.96)}
+@media(max-width:1100px){
+  .header-nav{display:none;position:absolute;top:var(--hh);left:0;right:0;background:var(--surface);border-bottom:1px solid var(--border);flex-direction:column;padding:var(--sp3);box-shadow:var(--sh-sm)}
+  .header-nav.open{display:flex;animation:fadeUpSm 260ms var(--ease-smooth) backwards}
+  .header-nav a{padding:var(--sp3) var(--sp4);width:100%}
+  .menu-toggle{display:flex;align-items:center}
+}
+
+/* PAGE INTRO */
+.page-intro{padding:var(--sp8) 0 var(--sp6)}
+@media(max-width:768px){.page-intro{padding:var(--sp6) 0 var(--sp5)}}
+.page-intro .eyebrow{margin-bottom:var(--sp2)}
+.page-intro h1{margin-bottom:var(--sp2)}
+.page-intro p{color:var(--ts);font-size:16px;max-width:620px}
+.student-info{display:flex;flex-wrap:wrap;gap:var(--sp2) var(--sp5);margin-top:var(--sp5);padding:var(--sp4) 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.student-info-item{display:flex;align-items:center;gap:var(--sp2);font-size:14px;color:var(--ts)}
+.student-info-item svg{width:16px;height:16px;stroke-width:1.8;color:var(--navy)}
+.student-info-item strong{color:var(--tp);font-weight:600}
+
+/* TODAY SUMMARY */
+.today-summary{background:var(--surface);border:1px solid var(--border);border-radius:var(--rc);padding:var(--sp6);box-shadow:var(--sh-sm);
+  transition:border-color 300ms var(--ease-smooth), box-shadow 300ms var(--ease-smooth);}
+@media(max-width:768px){.today-summary{padding:var(--sp5)}}
+.today-header{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:var(--sp4);margin-bottom:var(--sp5)}
+.today-date{display:flex;flex-direction:column;gap:var(--sp1)}
+.today-date .day-name{font-family:var(--fh);font-size:22px;font-weight:700;color:var(--navy);text-transform:uppercase}
+.today-date .full-date{font-size:13px;color:var(--ts);font-weight:500;text-transform:uppercase;letter-spacing:.04em}
+.today-class-count{display:flex;align-items:center;gap:var(--sp2);background:var(--bg);padding:var(--sp2) var(--sp4);border-radius:var(--rb);font-size:14px;font-weight:600;color:var(--navy)}
+.today-next{display:flex;align-items:flex-start;gap:var(--sp4);padding-top:var(--sp4);border-top:1px solid var(--border)}
+.today-next-icon{width:40px;height:40px;background:var(--navy);border-radius:var(--rb);display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0;
+  transition:background-color 300ms var(--ease-smooth);}
+.today-next-info{flex:1;min-width:0}
+.today-next-label{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ts);margin-bottom:var(--sp1)}
+.today-next-course{font-family:var(--fh);font-size:16px;font-weight:700;color:var(--tp);margin-bottom:var(--sp1);line-height:1.3}
+.today-next-time{font-size:14px;color:var(--ts);font-weight:500}
+.today-next-status{display:inline-flex;align-items:center;gap:var(--sp2);font-size:12px;font-weight:600;padding:var(--sp1) var(--sp3);border-radius:100px;margin-top:var(--sp2);
+  transition:background-color 300ms var(--ease-smooth), color 300ms var(--ease-smooth);}
+.today-next-status .dot{width:8px;height:8px;border-radius:50%;transition:background-color 300ms var(--ease-smooth)}
+.st-upcoming{background:#F0F4FF;color:#3B5BDB}.st-upcoming .dot{background:#3B5BDB}
+.st-ongoing{background:#E6F7F0;color:var(--success)}.st-ongoing .dot{background:var(--success);animation:pulseDot 1.6s ease-in-out infinite}
+.st-free{background:#FFF8E6;color:var(--warning)}.st-free .dot{background:var(--warning)}
+
+.today-next-countdown{display:inline-flex;align-items:baseline;gap:6px;margin-top:var(--sp3);padding:6px 10px;background:var(--bg);border-radius:var(--rb);
+  font-size:12px;color:var(--ts);font-weight:500;}
+.today-next-countdown .cd-label{letter-spacing:.02em}
+.today-next-countdown .cd-value{font-family:var(--fh);font-weight:700;color:var(--navy);font-size:13px;font-variant-numeric:tabular-nums;letter-spacing:.02em;display:inline-block}
+.cd-value.cd-pop{animation:cdPop 500ms var(--ease-bounce)}
+
+/* SECTION BASE */
+.sec{margin-top:var(--sp7)}
+.sec-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sp5);flex-wrap:wrap;gap:var(--sp3)}
+.sec-h h2{font-size:24px}
+.sec-h .sub{font-size:13px;color:var(--ts);margin-top:4px;max-width:640px}
+@media(max-width:768px){.sec-h h2{font-size:20px}}
+
+/* DAY TABS */
+.day-tabs{display:flex;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.day-tabs::-webkit-scrollbar{display:none}
+.day-tab{position:relative;background:none;border:none;border-bottom:2px solid transparent;padding:var(--sp3) var(--sp4);font-family:var(--fb);font-size:14px;font-weight:500;color:var(--ts);cursor:pointer;
+  transition:color 350ms var(--ease-smooth), border-color 450ms var(--ease-smooth), background-color 350ms var(--ease-smooth);white-space:nowrap;margin-bottom:-1px}
+.day-tab::after{content:"";position:absolute;left:12px;right:12px;bottom:-1px;height:2px;background:var(--navy);border-radius:2px;transform:scaleX(0);transform-origin:center;transition:transform 450ms var(--ease-smooth);pointer-events:none}
+.day-tab:hover{color:var(--navy)}
+.day-tab.active{color:var(--navy);font-weight:600;border-bottom-color:transparent}
+.day-tab.active::after{transform:scaleX(1)}
+.day-tab .cc{display:inline-block;background:var(--bg);color:var(--ts);font-size:11px;font-weight:600;padding:1px 7px;border-radius:100px;margin-left:var(--sp2);
+  transition:background-color 300ms var(--ease-smooth), color 300ms var(--ease-smooth);}
+.day-tab.has-c .cc{background:var(--teal);color:#fff}
+.day-tab.active .cc{background:var(--navy);color:#fff}
+
+/* SCHEDULE CARDS */
+.schedule-list{display:flex;flex-direction:column;gap:var(--sp3);margin-top:var(--sp5)}
+.schedule-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rc);padding:var(--sp5) var(--sp6);display:grid;grid-template-columns:140px 1fr auto;gap:var(--sp5);align-items:center;position:relative;
+  animation:cardStagger 800ms var(--ease-smooth) backwards;
+  transition:transform 320ms var(--ease-smooth),box-shadow 320ms var(--ease-smooth),border-color 320ms var(--ease-smooth),background-color 300ms var(--ease-smooth);}
+.schedule-list .schedule-card:nth-child(1){animation-delay:80ms}
+.schedule-list .schedule-card:nth-child(2){animation-delay:180ms}
+.schedule-list .schedule-card:nth-child(3){animation-delay:280ms}
+.schedule-list .schedule-card:nth-child(4){animation-delay:380ms}
+.schedule-list .schedule-card:nth-child(5){animation-delay:480ms}
+@media(max-width:900px){.schedule-card{grid-template-columns:120px 1fr;padding:var(--sp4) var(--sp5);gap:var(--sp4)}}
+@media(max-width:600px){.schedule-card{grid-template-columns:1fr;padding:var(--sp4);gap:var(--sp3)}}
+
+@media(hover:hover){
+  .schedule-card:hover{transform:translateY(-7px) scale(1.012);box-shadow:0 18px 36px rgba(16,24,40,.14);border-color:#B8C0CC}
+}
+.schedule-card:focus-within{border-color:#C8CDD5;box-shadow:var(--sh-hv)}
+
+.schedule-card.is-current{
+  border-color:var(--teal);
+  background:linear-gradient(0deg, rgba(25,124,122,.05), rgba(25,124,122,.05)), var(--surface);
+  animation:cardStagger 800ms var(--ease-smooth) backwards, currentGlow 2.8s ease-in-out infinite;
+  transform:translateY(-1px);
+}
+.schedule-card.is-current::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--teal);border-radius:var(--rc) 0 0 var(--rc);
+}
+
+.card-time{display:flex;flex-direction:column;gap:var(--sp1)}
+.card-time-value{font-family:var(--fh);font-size:17px;font-weight:700;color:var(--navy);line-height:1.2}
+.card-time-jam{font-size:12px;font-weight:500;color:var(--ts)}
+.card-main{min-width:0}
+.card-course{font-family:var(--fh);font-size:16px;font-weight:700;color:var(--tp);margin-bottom:var(--sp1);line-height:1.3}
+.card-code{font-size:12px;font-weight:500;color:var(--ts);font-family:'SF Mono','Fira Code',monospace}
+.card-meta{display:flex;flex-wrap:wrap;gap:var(--sp2) var(--sp5);margin-top:var(--sp3)}
+.card-meta-item{display:flex;align-items:center;gap:var(--sp2);font-size:13px;color:var(--ts)}
+.card-meta-item svg{width:15px;height:15px;stroke-width:1.8;color:var(--navy);flex-shrink:0}
+.card-meta-item strong{color:var(--tp);font-weight:600}
+.card-side{display:flex;flex-direction:column;align-items:flex-end;gap:var(--sp2)}
+.card-kelas-badge{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:var(--navy);color:#fff;border-radius:var(--rb);font-family:var(--fh);font-weight:700;font-size:14px}
+@media(max-width:900px){.card-side{grid-column:1/-1;flex-direction:row;align-items:center;justify-content:flex-start;gap:var(--sp4);padding-top:var(--sp3);border-top:1px solid var(--border)}}
+
+.empty-state{text-align:center;padding:var(--sp8) var(--sp5);background:var(--surface);border:1px dashed var(--border);border-radius:var(--rc);color:var(--ts);animation:cardStagger 600ms var(--ease-smooth) backwards}
+.empty-state h3{font-size:18px;color:var(--tp);margin-bottom:var(--sp2)}
+.empty-state p{font-size:14px;max-width:320px;margin:0 auto}
+
+/* WEEK OVERVIEW */
+.overview-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--sp3)}
+@media(max-width:900px){.overview-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){.overview-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:400px){.overview-grid{grid-template-columns:1fr}}
+.overview-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rc);padding:var(--sp4) var(--sp5);
+  transition:transform 320ms var(--ease-smooth),box-shadow 320ms var(--ease-smooth),border-color 320ms var(--ease-smooth);}
+.overview-card:hover{transform:translateY(-5px);box-shadow:var(--sh-hv);border-color:#C8CDD5}
+.overview-card .day{font-family:var(--fh);font-size:14px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.03em;margin-bottom:var(--sp2)}
+.overview-card .count{font-family:var(--fh);font-size:32px;font-weight:700;color:var(--tp);line-height:1;margin-bottom:var(--sp1);
+  transition:transform 320ms var(--ease-bounce),color 320ms var(--ease-smooth);display:inline-block}
+.overview-card:hover .count{transform:scale(1.12);color:var(--navy)}
+.overview-card .count-label{font-size:12px;color:var(--ts);font-weight:500}
+.overview-card.empty .count{color:#C8CDD5}
+
+/* ACCORDION COURSES */
+.course-list{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--border);border-radius:var(--rc);overflow:hidden}
+.course-acc{border-bottom:1px solid var(--border)}
+.course-acc:last-child{border-bottom:none}
+.course-acc-header{display:grid;grid-template-columns:1fr auto;gap:var(--sp4);padding:var(--sp4) var(--sp6);cursor:pointer;align-items:center;background:none;border:none;width:100%;text-align:left;font-family:var(--fb);
+  transition:background-color 250ms var(--ease-smooth),transform 250ms var(--ease-smooth);}
+.course-acc-header:hover{background:#FAFAF9;transform:translateX(4px)}
+@media(max-width:600px){.course-acc-header{padding:var(--sp4) var(--sp5);grid-template-columns:1fr auto}}
+.course-acc-info{min-width:0}
+.course-acc-name{font-family:var(--fh);font-size:15px;font-weight:700;color:var(--tp);margin-bottom:2px}
+.course-acc-code{font-size:12px;font-weight:500;color:var(--ts);font-family:'SF Mono','Fira Code',monospace}
+.course-acc-meta{display:flex;flex-wrap:wrap;gap:var(--sp2) var(--sp4);margin-top:var(--sp2)}
+.course-acc-meta span{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--ts)}
+.course-acc-meta svg{width:13px;height:13px;stroke-width:1.8;color:var(--navy)}
+.course-acc-right{display:flex;align-items:center;gap:var(--sp3)}
+.course-acc-badge{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;background:var(--bg);color:var(--navy);border-radius:var(--rb);font-family:var(--fh);font-weight:700;font-size:14px;flex-shrink:0}
+.course-acc-chevron{width:20px;height:20px;color:var(--ts);transition:transform 450ms var(--ease-smooth);flex-shrink:0}
+.course-acc.open .course-acc-chevron{transform:rotate(180deg)}
+.course-acc-body{max-height:0;overflow:hidden;transition:max-height 650ms var(--ease-smooth)}
+.course-acc.open .course-acc-body{max-height:4000px}
+.course-acc-inner{padding:0 var(--sp6) var(--sp5);border-top:1px solid var(--border)}
+@media(max-width:600px){.course-acc-inner{padding:0 var(--sp5) var(--sp4)}}
+.course-acc.open .course-acc-inner > .acc-block{animation:fadeUpSm 420ms var(--ease-smooth) backwards}
+.course-acc.open .course-acc-inner > .acc-block:nth-child(1){animation-delay:40ms}
+.course-acc.open .course-acc-inner > .acc-block:nth-child(2){animation-delay:80ms}
+.course-acc.open .course-acc-inner > .acc-block:nth-child(3){animation-delay:120ms}
+.course-acc.open .course-acc-inner > .acc-block:nth-child(4){animation-delay:160ms}
+.course-acc.open .course-acc-inner > .acc-block:nth-child(5){animation-delay:200ms}
+.course-acc.open .course-acc-inner > .acc-block:nth-child(6){animation-delay:240ms}
+.course-acc.open .course-acc-inner > .acc-block:nth-child(7){animation-delay:280ms}
+
+.acc-block{padding-top:var(--sp4)}
+.acc-block h5{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ts);margin-bottom:var(--sp2)}
+.acc-block p{font-size:14px;color:var(--tp);line-height:1.6}
+.acc-block ul{list-style:none;padding:0;margin:0}
+.acc-block ul li{position:relative;padding-left:18px;font-size:14px;color:var(--tp);line-height:1.6;margin-bottom:var(--sp1)}
+.acc-block ul li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;background:var(--teal);border-radius:50%}
+.acc-ref{display:flex;flex-direction:column;gap:var(--sp2)}
+.acc-ref-item{display:flex;gap:var(--sp3);align-items:flex-start;font-size:13px;color:var(--tp);padding:var(--sp2) var(--sp3);background:var(--bg);border-radius:var(--rb);line-height:1.5}
+.acc-ref-item .tag{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--navy);background:var(--surface);padding:2px 6px;border-radius:4px;flex-shrink:0;border:1px solid var(--border)}
+.acc-tip{background:#F0F8F7;border-left:3px solid var(--teal);padding:var(--sp3) var(--sp4);border-radius:0 var(--rb) var(--rb) 0;font-size:13px;color:var(--tp);line-height:1.6}
+.acc-rps-note{background:#FFFBF0;border-left:3px solid var(--gold);padding:var(--sp3) var(--sp4);border-radius:0 var(--rb) var(--rb) 0;font-size:13px;color:var(--tp);line-height:1.6;display:flex;flex-direction:column;gap:4px}
+.acc-rps-note strong{color:var(--navy);font-weight:600}
+.tag-wajib{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#fff;background:var(--navy);padding:2px 8px;border-radius:100px;margin-left:var(--sp2);vertical-align:middle}
+
+/* SKALA NILAI */
+.skala-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:var(--sp2)}
+.skala-item{display:flex;align-items:center;justify-content:space-between;padding:var(--sp3) var(--sp4);background:var(--bg);border-radius:var(--rb);border-left:3px solid var(--navy);font-size:13px}
+.skala-item .grade{font-family:var(--fh);font-weight:700;color:var(--navy);font-size:16px;min-width:32px}
+.skala-item .range{color:var(--ts);font-size:12px;font-family:'SF Mono','Fira Code',monospace}
+.skala-item.a{border-left-color:var(--success)}
+.skala-item.a .grade{color:var(--success)}
+.skala-item.b{border-left-color:var(--teal)}
+.skala-item.b .grade{color:var(--teal)}
+.skala-item.c{border-left-color:var(--gold)}
+.skala-item.c .grade{color:var(--gold)}
+.skala-item.d{border-left-color:var(--warning)}
+.skala-item.d .grade{color:var(--warning)}
+.skala-item.e{border-left-color:var(--danger)}
+.skala-item.e .grade{color:var(--danger)}
+
+/* EVALUASI TABLE */
+.eval-table{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:var(--rb);overflow:hidden}
+.eval-row{display:grid;grid-template-columns:1fr auto auto;gap:var(--sp3);padding:var(--sp3) var(--sp4);border-bottom:1px solid var(--border);font-size:13px;align-items:center}
+.eval-row:last-child{border-bottom:none}
+.eval-row:hover{background:#FAFAF9}
+.eval-row .komponen{color:var(--tp);font-weight:500}
+.eval-row .sumber{color:var(--ts);font-size:12px;text-align:right}
+.eval-row .bobot{font-family:var(--fh);font-weight:700;color:var(--navy);font-size:14px;min-width:48px;text-align:right}
+.eval-row.highlight{background:#FFFBF0}
+.eval-row.highlight .bobot{color:var(--gold)}
+@media(max-width:600px){.eval-row{grid-template-columns:1fr auto;gap:var(--sp2);padding:var(--sp3)}.eval-row .sumber{display:none}}
+
+/* MATERI PAGE */
+.materi-layout{display:grid;grid-template-columns:300px 1fr;gap:var(--sp5);align-items:start}
+@media(max-width:900px){.materi-layout{grid-template-columns:1fr;gap:var(--sp4)}}
+.materi-sidebar{background:var(--surface);border:1px solid var(--border);border-radius:var(--rc);padding:var(--sp3);position:sticky;top:88px;max-height:calc(100vh - 110px);overflow-y:auto}
+@media(max-width:900px){.materi-sidebar{position:static;max-height:none;display:flex;overflow-x:auto;gap:var(--sp2);padding:var(--sp3);scrollbar-width:none}}
+@media(max-width:900px){.materi-sidebar::-webkit-scrollbar{display:none}}
+.materi-sidebar-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ts);padding:var(--sp2) var(--sp3);margin-bottom:var(--sp1)}
+@media(max-width:900px){.materi-sidebar-title{display:none}}
+.materi-item{display:flex;align-items:flex-start;gap:var(--sp3);padding:var(--sp3);border-radius:var(--rb);cursor:pointer;border:none;background:none;width:100%;text-align:left;font-family:var(--fb);margin-bottom:2px;
+  transition:background-color 250ms var(--ease-smooth), color 250ms var(--ease-smooth), transform 250ms var(--ease-smooth);}
+.materi-item:hover{background:var(--bg);transform:translateX(6px)}
+.materi-item.active{background:var(--navy);color:#fff}
+.materi-item.active .materi-item-code,.materi-item.active .materi-item-name{color:#fff}
+.materi-item.active .materi-item-count{background:rgba(255,255,255,.15);color:#fff}
+@media(max-width:900px){.materi-item{flex-shrink:0;width:auto;white-space:nowrap;margin-bottom:0;padding:var(--sp2) var(--sp4)}}
+.materi-item-num{width:28px;height:28px;background:var(--bg);color:var(--navy);border-radius:var(--rb);display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-weight:700;font-size:12px;flex-shrink:0}
+.materi-item.active .materi-item-num{background:rgba(255,255,255,.15);color:#fff}
+@media(max-width:900px){.materi-item-num{display:none}}
+.materi-item-info{min-width:0;flex:1}
+.materi-item-name{font-family:var(--fh);font-size:13px;font-weight:700;color:var(--tp);line-height:1.3;margin-bottom:2px}
+.materi-item-code{font-size:10px;font-weight:500;color:var(--ts);font-family:'SF Mono','Fira Code',monospace}
+.materi-item-count{font-size:10px;font-weight:700;background:var(--bg);color:var(--ts);padding:2px 7px;border-radius:100px;flex-shrink:0;align-self:center}
+@media(max-width:900px){.materi-item-count{display:none}}
+.materi-main{background:var(--surface);border:1px solid var(--border);border-radius:var(--rc);overflow:hidden;min-height:600px}
+.materi-header{padding:var(--sp5) var(--sp6);border-bottom:1px solid var(--border);background:linear-gradient(135deg,#FAFAF9 0%,#FFFFFF 100%)}
+@media(max-width:600px){.materi-header{padding:var(--sp4) var(--sp5)}}
+.materi-header-top{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--sp4);flex-wrap:wrap;margin-bottom:var(--sp2)}
+.materi-header h3{font-size:19px;margin-bottom:var(--sp1)}
+.materi-header-code{font-size:12px;font-weight:500;color:var(--ts);font-family:'SF Mono','Fira Code',monospace}
+.materi-header-meta{display:flex;flex-wrap:wrap;gap:var(--sp2) var(--sp4);margin-top:var(--sp3)}
+.materi-header-meta span{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ts)}
+.materi-header-meta svg{width:13px;height:13px;stroke-width:1.8;color:var(--navy)}
+.materi-actions{display:flex;gap:var(--sp2);flex-wrap:wrap}
+.materi-action-btn{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:7px 12px;border-radius:var(--rb);text-decoration:none;border:1px solid var(--border);background:var(--surface);color:var(--tp);cursor:pointer;font-family:var(--fb);
+  transition:transform 200ms var(--ease-smooth),background-color 250ms var(--ease-smooth),box-shadow 250ms var(--ease-smooth),border-color 250ms var(--ease-smooth);}
+.materi-action-btn:hover{background:var(--bg);transform:translateY(-2px);box-shadow:0 6px 16px rgba(16,24,40,.12)}
+.materi-action-btn:active{transform:scale(.97)}
+.materi-action-btn.primary{background:var(--navy);color:#fff;border-color:var(--navy)}
+.materi-action-btn.primary:hover{background:#0D1730}
+.materi-action-btn svg{width:13px;height:13px;stroke-width:2}
+.materi-tabs{display:flex;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;background:var(--surface);padding:0 var(--sp6)}
+@media(max-width:600px){.materi-tabs{padding:0 var(--sp5)}}
+.materi-tabs::-webkit-scrollbar{display:none}
+.materi-tab{display:inline-flex;align-items:center;gap:6px;background:none;border:none;border-bottom:2px solid transparent;padding:var(--sp3) var(--sp4);font-family:var(--fb);font-size:13px;font-weight:600;color:var(--ts);cursor:pointer;white-space:nowrap;margin-bottom:-1px;line-height:1;
+  transition:color 250ms var(--ease-smooth), border-color 350ms var(--ease-smooth);}
+.materi-tab svg{width:14px;height:14px;stroke-width:2;flex-shrink:0}
+.materi-tab:hover{color:var(--navy)}
+.materi-tab.active{color:var(--navy);border-bottom-color:var(--navy)}
+.materi-panel{display:none;padding:var(--sp5) var(--sp6)}
+.materi-panel.active{display:block;animation:fadeInOnly 350ms var(--ease-smooth) backwards}
+@media(max-width:600px){.materi-panel{padding:var(--sp4) var(--sp5)}}
+.materi-viewer-wrap{position:relative;width:100%;background:var(--bg);border:1px solid var(--border);border-radius:var(--rb);overflow:hidden;margin-bottom:var(--sp4)}
+.materi-viewer-wrap iframe{width:100%;height:620px;border:0;display:block;background:#fff}
+@media(max-width:768px){.materi-viewer-wrap iframe{height:480px}}
+.materi-viewer-note{font-size:12px;color:var(--ts);font-style:italic;text-align:center;padding:var(--sp3);background:var(--bg);border-radius:var(--rb)}
+.materi-topics-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sp4);flex-wrap:wrap;gap:var(--sp3)}
+.materi-topics-header h4{font-size:15px}
+.materi-progress{display:flex;align-items:center;gap:var(--sp3);font-size:12px;color:var(--ts)}
+.materi-progress-bar{width:120px;height:6px;background:var(--border);border-radius:100px;overflow:hidden;position:relative}
+.materi-progress-fill{height:100%;background:var(--teal);transition:width 700ms var(--ease-smooth);width:0%}
+.materi-topics{display:flex;flex-direction:column;gap:var(--sp2)}
+.materi-topic{display:flex;align-items:flex-start;gap:var(--sp3);padding:var(--sp3) var(--sp4);background:var(--bg);border-radius:var(--rb);cursor:pointer;border:1px solid transparent;
+  transition:background-color 250ms var(--ease-smooth), opacity 250ms var(--ease-smooth), transform 250ms var(--ease-smooth);}
+.materi-topic:hover{background:#F0F1EF;transform:translateX(4px)}
+.materi-topic.done{opacity:.65}
+.materi-topic.done .materi-topic-name{text-decoration:line-through;color:var(--ts)}
+.materi-topic input[type=checkbox]{width:18px;height:18px;accent-color:var(--teal);cursor:pointer;flex-shrink:0;margin-top:2px}
+.materi-topic-num{font-family:'SF Mono','Fira Code',monospace;font-size:11px;font-weight:600;color:var(--ts);flex-shrink:0;min-width:22px;margin-top:2px}
+.materi-topic-body{flex:1;min-width:0}
+.materi-topic-name{font-size:14px;font-weight:500;color:var(--tp);line-height:1.5;display:block;cursor:pointer}
+.materi-topic-desc{font-size:12px;color:var(--ts);margin-top:2px;line-height:1.5}
+.materi-loading{text-align:center;padding:var(--sp8) var(--sp5);color:var(--ts);font-style:italic;font-size:13px}
+
+/* SILABUS PAGE */
+.silabus-layout{display:grid;grid-template-columns:300px 1fr;gap:var(--sp5);align-items:start}
+@media(max-width:900px){.silabus-layout{grid-template-columns:1fr;gap:var(--sp4)}}
+.silabus-sidebar{background:var(--surface);border:1px solid var(--border);border-radius:var(--rc);padding:var(--sp3);position:sticky;top:88px;max-height:calc(100vh - 110px);overflow-y:auto}
+@media(max-width:900px){.silabus-sidebar{position:static;max-height:none;display:flex;overflow-x:auto;gap:var(--sp2);padding:var(--sp3);scrollbar-width:none}}
+@media(max-width:900px){.silabus-sidebar::-webkit-scrollbar{display:none}}
+.silabus-sidebar-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ts);padding:var(--sp2) var(--sp3);margin-bottom:var(--sp1)}
+@media(max-width:900px){.silabus-sidebar-title{display:none}}
+.silabus-item{display:flex;align-items:flex-start;gap:var(--sp3);padding:var(--sp3);border-radius:var(--rb);cursor:pointer;border:none;background:none;width:100%;text-align:left;font-family:var(--fb);margin-bottom:2px;
+  transition:background-color 250ms var(--ease-smooth), color 250ms var(--ease-smooth), transform 250ms var(--ease-smooth);}
+.silabus-item:hover{background:var(--bg);transform:translateX(6px)}
+.silabus-item.active{background:var(--navy);color:#fff}
+.silabus-item.active .silabus-item-code,.silabus-item.active .silabus-item-name{color:#fff}
+.silabus-item.active .silabus-item-count{background:rgba(255,255,255,.15);color:#fff}
+@media(max-width:900px){.silabus-item{flex-shrink:0;width:auto;white-space:nowrap;margin-bottom:0;padding:var(--sp2) var(--sp4)}}
+.silabus-item-num{width:28px;height:28px;background:var(--bg);color:var(--navy);border-radius:var(--rb);display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-weight:700;font-size:12px;flex-shrink:0}
+.silabus-item.active .silabus-item-num{background:rgba(255,255,255,.15);color:#fff}
+@media(max-width:900px){.silabus-item-num{display:none}}
+.silabus-item-info{min-width:0;flex:1}
+.silabus-item-name{font-family:var(--fh);font-size:13px;font-weight:700;color:var(--tp);line-height:1.3;margin-bottom:2px}
+.silabus-item-code{font-size:10px;font-weight:500;color:var(--ts);font-family:'SF Mono','Fira Code',monospace}
+.silabus-item-count{font-size:10px;font-weight:700;background:var(--bg);color:var(--ts);padding:2px 7px;border-radius:100px;flex-shrink:0;align-self:center}
+@media(max-width:900px){.silabus-item-count{display:none}}
+.silabus-main{background:var(--surface);border:1px solid var(--border);border-radius:var(--rc);overflow:hidden;min-height:500px}
+.silabus-header{padding:var(--sp5) var(--sp6);border-bottom:1px solid var(--border);background:linear-gradient(135deg,#FAFAF9 0%,#FFFFFF 100%)}
+@media(max-width:600px){.silabus-header{padding:var(--sp4) var(--sp5)}}
+.silabus-header h3{font-size:19px;margin-bottom:var(--sp1)}
+.silabus-header-code{font-size:12px;font-weight:500;color:var(--ts);font-family:'SF Mono','Fira Code',monospace}
+.silabus-header-meta{display:flex;flex-wrap:wrap;gap:var(--sp2) var(--sp4);margin-top:var(--sp3)}
+.silabus-header-meta span{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ts)}
+.silabus-header-meta svg{width:13px;height:13px;stroke-width:1.8;color:var(--navy)}
+.silabus-body{padding:var(--sp5) var(--sp6)}
+@media(max-width:600px){.silabus-body{padding:var(--sp4) var(--sp5)}}
+.silabus-table{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:var(--rb);overflow:hidden}
+.silabus-row{border-bottom:1px solid var(--border);background:var(--surface);transition:background-color 250ms var(--ease-smooth), transform 250ms var(--ease-smooth)}
+.silabus-row:last-child{border-bottom:none}
+.silabus-row:hover{background:#FAFAF9}
+.silabus-row.has-detail:hover{transform:translateX(4px)}
+.silabus-row-head{display:grid;grid-template-columns:56px 1fr auto;gap:var(--sp4);padding:var(--sp4);align-items:flex-start;cursor:pointer;user-select:none}
+.silabus-row-head .num{font-family:var(--fh);font-weight:700;color:var(--navy);font-size:15px;letter-spacing:.02em;text-align:center;padding-top:1px}
+.silabus-row-head .content{min-width:0}
+.silabus-row-head .materi-title{color:var(--tp);font-weight:600;font-size:14px;line-height:1.45;margin-bottom:3px;font-family:var(--fh)}
+.silabus-row-head .materi-desc{color:var(--ts);font-size:13px;line-height:1.55}
+.silabus-row-head .chev{width:18px;height:18px;color:var(--ts);transition:transform 450ms var(--ease-smooth);flex-shrink:0;margin-top:3px}
+.silabus-row.open .silabus-row-head .chev{transform:rotate(180deg)}
+.silabus-row-detail{display:none;padding:0 var(--sp4) var(--sp5) var(--sp4);border-top:1px dashed var(--border);margin-top:0}
+.silabus-row.open .silabus-row-detail{display:block;padding-top:var(--sp4);animation:slideDown 500ms var(--ease-smooth) backwards}
+.silabus-row.uts,.silabus-row.uas{background:#FFFBF0}
+.silabus-row.uts .silabus-row-head,.silabus-row.uas .silabus-row-head{grid-template-columns:1fr;text-align:center;cursor:default}
+.silabus-row.uts .materi-title,.silabus-row.uas .materi-title{font-family:var(--fh);font-weight:700;color:var(--warning);letter-spacing:.06em;text-transform:uppercase;font-size:13px;margin-bottom:0}
+.silabus-row.uts .chev,.silabus-row.uas .chev{display:none}
+@media(max-width:600px){
+  .silabus-row-head{grid-template-columns:44px 1fr auto;padding:var(--sp3);gap:var(--sp3)}
+  .silabus-row-head .num{font-size:14px}
+  .silabus-row-head .materi-title{font-size:13.5px}
+  .silabus-row-head .materi-desc{font-size:12.5px}
+  .silabus-row-detail{padding:0 var(--sp3) var(--sp4) var(--sp3)}
+}
+.detail-section{margin-bottom:var(--sp5)}
+.detail-section:last-child{margin-bottom:0}
+.detail-section h6{font-family:var(--fh);font-size:13px;font-weight:700;color:var(--navy);letter-spacing:.02em;margin-bottom:var(--sp3);padding-bottom:var(--sp2);border-bottom:1px solid var(--border);text-transform:uppercase}
+.detail-section p{font-size:13.5px;color:var(--tp);line-height:1.7;margin-bottom:var(--sp3)}
+.detail-section ul{list-style:none;padding:0;margin:0 0 var(--sp3) 0}
+.detail-section ul li{position:relative;padding-left:18px;font-size:13.5px;color:var(--tp);line-height:1.7;margin-bottom:6px}
+.detail-section ul li::before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;background:var(--teal);border-radius:50%}
+.detail-section ul ul{margin-top:6px;margin-left:6px}
+.detail-section ul ul li::before{background:var(--ts);width:4px;height:4px}
+.detail-section strong{color:var(--navy);font-weight:600}
+.detail-example{background:var(--bg);border-left:3px solid var(--gold);padding:var(--sp3) var(--sp4);border-radius:0 var(--rb) var(--rb) 0;margin-bottom:var(--sp3);font-size:13px;line-height:1.65;color:var(--tp)}
+.detail-example .label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;display:block}
+.detail-example p{margin-bottom:4px;font-size:13px}
+.detail-example ul{margin:6px 0 0 0}
+.detail-example ul li{font-size:13px;margin-bottom:3px}
+.detail-note{background:#F0F8F7;border-left:3px solid var(--teal);padding:var(--sp3) var(--sp4);border-radius:0 var(--rb) var(--rb) 0;font-size:13px;color:var(--tp);line-height:1.65;margin-bottom:var(--sp3)}
+.detail-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--navy);padding:2px 7px;border-radius:4px;margin-right:4px;vertical-align:middle}
+.detail-tag.gold{background:var(--gold)}
+.detail-tag.teal{background:var(--teal)}
+.detail-tag.red{background:var(--danger)}
+.detail-tag.green{background:var(--success)}
+
+/* TRUTH TABLE & LINK BOX DI SILABUS */
+.silabus-truth-wrap{overflow-x:auto;margin:12px 0 16px;border:1px solid var(--border);border-radius:var(--rb);background:#fff}
+.silabus-truth-table{width:100%;border-collapse:collapse;font-size:12.5px;text-align:center}
+.silabus-truth-table th,.silabus-truth-table td{padding:6px 10px;border-bottom:1px solid var(--border);border-right:1px solid var(--border)}
+.silabus-truth-table th:last-child,.silabus-truth-table td:last-child{border-right:none}
+.silabus-truth-table tr:last-child td{border-bottom:none}
+.silabus-truth-table th{background:#F8FAFC;color:var(--navy);font-weight:700;font-size:11.5px;letter-spacing:.02em}
+.silabus-truth-table .val-t{color:#0D9488;font-weight:700}
+.silabus-truth-table .val-f{color:#E11D48;font-weight:700}
+.silabus-truth-table .cell-key{background:#FFF1F2}
+.silabus-truth-table .cell-taut{background:#F0FDFA;color:#0D9488;font-weight:700}
+.silabus-link-box{margin-top:14px;padding:12px 14px;background:#F0FDFA;border-radius:var(--rb);border:1px solid #CCFBF1;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.silabus-link-box span{font-size:12.5px;color:#0F766E;font-weight:500}
+.silabus-link-box a{font-size:12px;font-weight:700;color:#0D9488;text-decoration:none;display:inline-flex;align-items:center;gap:4px;padding:5px 12px;background:#fff;border-radius:6px;border:1px solid #99F6E4;transition:background-color 200ms ease}
+.silabus-link-box a:hover{background:#CCFBF1}
+
+.silabus-empty{text-align:center;padding:var(--sp8) var(--sp5);color:var(--ts)}
+.silabus-empty h4{font-size:16px;color:var(--tp);margin-bottom:var(--sp2);font-family:var(--fh)}
+.silabus-empty p{font-size:13px;max-width:400px;margin:0 auto;line-height:1.6}
+.silabus-empty svg{width:40px;height:40px;stroke-width:1.5;color:#C8CDD5;margin-bottom:var(--sp3)}
+
+/* TOOLS */
+.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp4)}
+@media(max-width:900px){.tools-grid{grid-template-columns:1fr}}
+.tool-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rc);padding:var(--sp5)}
+.tool-card h3{font-size:16px;margin-bottom:var(--sp1);display:flex;align-items:center;gap:var(--sp2)}
+.tool-card h3 svg{width:18px;height:18px;stroke-width:2;color:var(--navy)}
+.tool-card .tool-sub{font-size:12px;color:var(--ts);margin-bottom:var(--sp4)}
+.todo-input-row{display:flex;gap:var(--sp2);margin-bottom:var(--sp3)}
+.todo-input{flex:1;padding:10px 12px;border:1px solid var(--border);border-radius:var(--rb);font-family:var(--fb);font-size:14px;color:var(--tp);outline:none;transition:border-color 250ms var(--ease-smooth)}
+.todo-input:focus{border-color:var(--navy)}
+.todo-add{background:var(--navy);color:#fff;border:none;border-radius:var(--rb);padding:10px 16px;font-family:var(--fb);font-weight:600;font-size:13px;cursor:pointer;
+  transition:transform 200ms var(--ease-smooth),background-color 250ms var(--ease-smooth),box-shadow 250ms var(--ease-smooth);}
+.todo-add:hover{background:#0D1730;transform:translateY(-2px);box-shadow:0 6px 16px rgba(16,24,40,.12)}
+.todo-add:active{transform:scale(.97)}
+.todo-list{list-style:none;display:flex;flex-direction:column;gap:var(--sp2);max-height:280px;overflow-y:auto}
+.todo-item{display:flex;align-items:center;gap:var(--sp3);padding:var(--sp3);background:var(--bg);border-radius:var(--rb);font-size:14px;animation:slideInLeft 500ms var(--ease-smooth) backwards;
+  transition:transform 250ms var(--ease-smooth);}
+.todo-item:hover{transform:translateX(4px)}
+.todo-item input[type=checkbox]{width:18px;height:18px;accent-color:var(--teal);cursor:pointer;flex-shrink:0}
+.todo-item.done label{text-decoration:line-through;color:var(--ts)}
+.todo-item label{flex:1;cursor:pointer;word-break:break-word}
+.todo-del{background:none;border:none;color:var(--ts);cursor:pointer;padding:4px;border-radius:4px;line-height:0;transition:color 200ms var(--ease-smooth), background-color 200ms var(--ease-smooth)}
+.todo-del:hover{color:var(--danger);background:#FBEEEE}
+.todo-empty{font-size:13px;color:var(--ts);text-align:center;padding:var(--sp4);font-style:italic}
+.pomo-display{font-family:var(--fh);font-size:56px;font-weight:700;color:var(--navy);text-align:center;line-height:1;margin:var(--sp4) 0 var(--sp2);font-variant-numeric:tabular-nums}
+.pomo-mode{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ts);text-align:center;margin-bottom:var(--sp4)}
+.pomo-modes{display:flex;justify-content:center;gap:var(--sp2);margin-bottom:var(--sp4);flex-wrap:wrap}
+.pomo-mode-btn{background:var(--bg);border:1px solid var(--border);color:var(--ts);padding:6px 12px;border-radius:var(--rb);font-family:var(--fb);font-size:12px;font-weight:600;cursor:pointer;
+  transition:transform 200ms var(--ease-smooth),background-color 250ms var(--ease-smooth),color 250ms var(--ease-smooth),border-color 250ms var(--ease-smooth);}
+.pomo-mode-btn:active{transform:scale(.97)}
+.pomo-mode-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.pomo-controls{display:flex;justify-content:center;gap:var(--sp2)}
+.pomo-btn{background:var(--navy);color:#fff;border:none;border-radius:var(--rb);padding:10px 24px;font-family:var(--fb);font-weight:600;font-size:13px;cursor:pointer;
+  transition:transform 200ms var(--ease-smooth),background-color 250ms var(--ease-smooth),box-shadow 250ms var(--ease-smooth);}
+.pomo-btn:hover{background:#0D1730;transform:translateY(-2px);box-shadow:0 6px 16px rgba(16,24,40,.12)}
+.pomo-btn:active{transform:scale(.97)}
+.pomo-btn.secondary{background:var(--bg);color:var(--tp);border:1px solid var(--border)}
+.ipk-courses{display:flex;flex-direction:column;gap:var(--sp2);max-height:320px;overflow-y:auto;margin-bottom:var(--sp4)}
+.ipk-row{display:grid;grid-template-columns:1fr 90px;gap:var(--sp2);align-items:center;padding:var(--sp2) var(--sp3);background:var(--bg);border-radius:var(--rb);font-size:13px}
+.ipk-row .ipk-name{font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ipk-row select{padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-family:var(--fb);font-size:13px;background:var(--surface);color:var(--tp);cursor:pointer;outline:none;transition:border-color 200ms var(--ease-smooth)}
+.ipk-row select:focus{border-color:var(--navy)}
+.ipk-summary{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp3);padding-top:var(--sp4);border-top:1px solid var(--border)}
+.ipk-stat{text-align:center}
+.ipk-stat .val{font-family:var(--fh);font-size:28px;font-weight:700;color:var(--navy);line-height:1;font-variant-numeric:tabular-nums}
+.ipk-stat .lab{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ts);margin-top:var(--sp1)}
+.ipk-stat.gold .val{color:var(--gold)}
+.notes-textarea{width:100%;min-height:180px;padding:var(--sp3);border:1px solid var(--border);border-radius:var(--rb);font-family:var(--fb);font-size:14px;color:var(--tp);line-height:1.6;resize:vertical;outline:none;transition:border-color 250ms var(--ease-smooth)}
+.notes-textarea:focus{border-color:var(--navy)}
+.notes-status{font-size:12px;color:var(--ts);margin-top:var(--sp2);text-align:right;font-style:italic;transition:color 250ms var(--ease-smooth)}
+
+/* PANDUAN BELAJAR */
+.guide-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp4)}
+@media(max-width:900px){.guide-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.guide-grid{grid-template-columns:1fr}}
+.guide-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rc);padding:var(--sp5);transition:border-color 300ms var(--ease-smooth), box-shadow 300ms var(--ease-smooth), transform 300ms var(--ease-smooth)}
+.guide-card:hover{border-color:#C8CDD5;box-shadow:var(--sh-hv);transform:translateY(-4px)}
+.guide-num{font-family:var(--fh);font-size:13px;font-weight:700;color:var(--gold);letter-spacing:.05em;margin-bottom:var(--sp2)}
+.guide-card h3{font-size:16px;margin-bottom:var(--sp2)}
+.guide-card p{font-size:13px;color:var(--tp);line-height:1.6;margin-bottom:var(--sp3)}
+.guide-card ul{list-style:none;padding:0}
+.guide-card ul li{position:relative;padding-left:16px;font-size:12px;color:var(--ts);line-height:1.55;margin-bottom:6px}
+.guide-card ul li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;background:var(--teal);border-radius:50%}
+
+/* PETA STUDI */
+.semester-tabs{display:flex;gap:2px;overflow-x:auto;border-bottom:1px solid var(--border);scrollbar-width:none;margin-bottom:var(--sp5)}
+.semester-tabs::-webkit-scrollbar{display:none}
+.sem-tab{background:none;border:none;border-bottom:2px solid transparent;padding:var(--sp3) var(--sp4);font-family:var(--fb);font-size:13px;font-weight:600;color:var(--ts);cursor:pointer;white-space:nowrap;margin-bottom:-1px;
+  transition:color 250ms var(--ease-smooth), border-color 350ms var(--ease-smooth);}
+.sem-tab:hover{color:var(--navy)}
+.sem-tab.active{color:var(--navy);border-bottom-color:var(--navy)}
+.sem-content{display:none}
+.sem-content.active{display:block;animation:fadeUpSm 500ms var(--ease-smooth) backwards}
+.sem-info{background:var(--bg);border-radius:var(--rb);padding:var(--sp3) var(--sp4);font-size:13px;color:var(--ts);margin-bottom:var(--sp4);display:flex;flex-wrap:wrap;gap:var(--sp2) var(--sp4);align-items:center}
+.sem-info strong{color:var(--navy)}
+.sem-list{display:flex;flex-direction:column;gap:var(--sp2)}
+.sem-item{display:grid;grid-template-columns:auto 1fr auto;gap:var(--sp3);padding:var(--sp3) var(--sp4);background:var(--surface);border:1px solid var(--border);border-radius:var(--rb);align-items:center;font-size:14px;
+  transition:border-color 250ms var(--ease-smooth), transform 250ms var(--ease-smooth), box-shadow 250ms var(--ease-smooth);}
+.sem-item:hover{border-color:#C8CDD5;transform:translateX(4px);box-shadow:var(--sh-sm)}
+.sem-item .code{font-family:'SF Mono','Fira Code',monospace;font-size:12px;color:var(--ts);flex-shrink:0}
+.sem-item .name{color:var(--tp);font-weight:500}
+.sem-item .sks-badge{background:var(--navy);color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:4px}
+.sem-item.highlight{border-left:3px solid var(--gold)}
+.sem-item.consent{border-left:3px solid var(--teal)}
+
+/* STRATEGI & KONSENTRASI */
+.strategy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp4);margin-bottom:var(--sp6)}
+@media(max-width:900px){.strategy-grid{grid-template-columns:1fr}}
+.strategy-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rc);padding:var(--sp5);position:relative;
+  transition:border-color 300ms var(--ease-smooth), box-shadow 300ms var(--ease-smooth), transform 300ms var(--ease-smooth);}
+.strategy-card:hover{border-color:#C8CDD5;box-shadow:var(--sh-hv);transform:translateY(-4px)}
+.strategy-card::before{content:attr(data-num);position:absolute;top:var(--sp4);right:var(--sp4);font-family:var(--fh);font-size:36px;font-weight:700;color:#F0F0EE;line-height:1}
+.strategy-card h3{font-size:16px;margin-bottom:var(--sp2);position:relative;z-index:1}
+.strategy-card p{font-size:13px;color:var(--tp);line-height:1.6;margin-bottom:var(--sp3);position:relative;z-index:1}
+.strategy-card ul{list-style:none;padding:0;position:relative;z-index:1}
+.strategy-card ul li{position:relative;padding-left:16px;font-size:12px;color:var(--ts);line-height:1.55;margin-bottom:6px}
+.strategy-card ul li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;background:var(--gold);border-radius:50%}
+.consent-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp4)}
+@media(max-width:900px){.consent-grid{grid-template-columns:1fr}}
+.consent-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rc);overflow:hidden;display:flex;flex-direction:column;
+  transition:border-color 300ms var(--ease-smooth), box-shadow 300ms var(--ease-smooth), transform 300ms var(--ease-smooth);}
+.consent-card:hover{border-color:#C8CDD5;box-shadow:var(--sh-hv);transform:translateY(-4px)}
+.consent-head{padding:var(--sp5);border-bottom:1px solid var(--border);background:linear-gradient(135deg,#FAFAF9 0%,#FFFFFF 100%)}
+.consent-head .tag-line{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:var(--sp2)}
+.consent-head h3{font-size:18px;margin-bottom:var(--sp2);line-height:1.25}
+.consent-head .total{font-size:12px;color:var(--ts);font-weight:500}
+.consent-body{padding:var(--sp5);flex:1;display:flex;flex-direction:column;gap:var(--sp4)}
+.consent-body h5{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ts);margin-bottom:var(--sp2)}
+.consent-body ul{list-style:none;padding:0}
+.consent-body ul li{position:relative;padding-left:16px;font-size:12.5px;color:var(--tp);line-height:1.55;margin-bottom:5px}
+.consent-body ul li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;background:var(--teal);border-radius:50%}
+.consent-fit{background:#F0F8F7;border-radius:var(--rb);padding:var(--sp3);font-size:12px;color:var(--tp);line-height:1.55;border-left:3px solid var(--teal)}
+.consent-career{display:flex;flex-wrap:wrap;gap:6px}
+.consent-career span{font-size:11px;font-weight:500;color:var(--navy);background:var(--bg);padding:3px 9px;border-radius:100px;border:1px solid var(--border)}
+
+/* ROADMAP */
+.roadmap{position:relative;padding-left:var(--sp6)}
+.roadmap::before{content:"";position:absolute;left:14px;top:8px;bottom:8px;width:2px;background:var(--border)}
+.roadmap-item{position:relative;padding-bottom:var(--sp5)}
+.roadmap-item:last-child{padding-bottom:0}
+.roadmap-item::before{content:"";position:absolute;left:-22px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--surface);border:3px solid var(--navy)}
+.roadmap-item.gold::before{border-color:var(--gold)}
+.roadmap-item.teal::before{border-color:var(--teal)}
+.roadmap-head{display:flex;align-items:center;gap:var(--sp3);flex-wrap:wrap;margin-bottom:var(--sp2)}
+.roadmap-head h3{font-size:16px}
+.roadmap-tag{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--navy);background:var(--bg);padding:3px 8px;border-radius:100px}
+.roadmap-item p{font-size:14px;color:var(--tp);line-height:1.6;margin-bottom:var(--sp2)}
+.roadmap-item ul{list-style:none;padding:0;margin-top:var(--sp2)}
+.roadmap-item ul li{position:relative;padding-left:16px;font-size:13px;color:var(--ts);line-height:1.55;margin-bottom:5px}
+.roadmap-item ul li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;background:var(--navy);border-radius:50%}
+
+/* EXPORT BAR */
+.export-bar{display:flex;gap:var(--sp3);flex-wrap:wrap;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--rc);padding:var(--sp4) var(--sp5);margin-top:var(--sp5)}
+.export-bar p{flex:1;font-size:13px;color:var(--ts);min-width:220px}
+.btn{display:inline-flex;align-items:center;gap:var(--sp2);background:var(--navy);color:#fff;border:none;border-radius:var(--rb);padding:10px 16px;font-family:var(--fb);font-weight:600;font-size:13px;cursor:pointer;text-decoration:none;
+  transition:transform 200ms var(--ease-smooth),background-color 250ms var(--ease-smooth),box-shadow 250ms var(--ease-smooth);}
+.btn:hover{background:#0D1730;transform:translateY(-2px);box-shadow:0 6px 16px rgba(16,24,40,.12)}
+.btn:active{transform:scale(.97)}
+.btn svg{width:15px;height:15px}
+
+/* FOOTER */
+.footer{margin-top:var(--sp8);border-top:1px solid var(--border);background:var(--surface);padding:var(--sp7) 0}
+.footer-inner{display:flex;flex-direction:column;gap:var(--sp4)}
+.footer-brand{display:flex;flex-direction:column;gap:var(--sp1)}
+.footer-brand-title{font-family:var(--fh);font-size:16px;font-weight:700;color:var(--navy)}
+.footer-brand-sub{font-size:13px;color:var(--ts)}
+.footer-divider{height:1px;background:var(--border)}
+.footer-meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--sp4);font-size:13px;color:var(--ts)}
+.footer-meta-item{display:flex;align-items:center;gap:var(--sp2)}
+.footer-tagline{font-size:12px;color:#98A2B3;font-style:italic}
+
+:focus-visible{outline:2px solid var(--navy);outline-offset:2px;border-radius:2px}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:#C8CDD5;border-radius:4px}
+
+/* MOBILE — tetap terasa, tidak berat */
+@media(max-width:768px){
+  .schedule-card:hover{transform:none}
+  .js .reveal{transform:translateY(24px);transition-duration:600ms}
+  .schedule-list .schedule-card{animation-duration:520ms}
+  .js .reveal .overview-card,
+  .js .reveal .course-acc,
+  .js .reveal .roadmap-item,
+  .js .reveal .strategy-card,
+  .js .reveal .consent-card,
+  .js .reveal .guide-card{
+    transition-duration:520ms;transform:translateY(20px);
+  }
+}
+
+/* ACCESSIBILITY — prefers-reduced-motion */
+@media(prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
+  }
+  .header,.page-intro .eyebrow,.page-intro h1,.page-intro > .container > p,
+  .student-info,.today-summary,.schedule-list .schedule-card,
+  .schedule-card.is-current,.st-ongoing .dot,.cd-value.cd-pop,
+  .todo-item,.silabus-row.open .silabus-row-detail,.sem-content.active,
+  .course-acc.open .course-acc-inner > .acc-block{
+    animation:none !important;
+  }
+  .js .reveal,
+  .js .reveal .overview-card,
+  .js .reveal .course-acc,
+  .js .reveal .roadmap-item,
+  .js .reveal .strategy-card,
+  .js .reveal .consent-card,
+  .js .reveal .guide-card{
+    transition:none !important;opacity:1 !important;transform:none !important;
+  }
+  .schedule-card.is-current{transform:none !important}
+  .schedule-card:hover{transform:none !important}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header" id="siteHeader" role="banner">
+  <div class="container header-inner">
+    <a href="#" class="header-brand">
+      <span class="header-brand-title">Jadwal Kuliah</span>
+      <span class="header-brand-sub">Semester Gasal 2026/2027</span>
+    </a>
+    <nav class="header-nav" id="headerNav" role="navigation">
+      <a href="#today" class="active">Jadwal</a>
+      <a href="#weekly">Mingguan</a>
+      <a href="#materi">Materi</a>
+      <a href="#silabus">Silabus</a>
+      <a href="#courses">Mata Kuliah</a>
+      <a href="#peta">Peta Studi</a>
+      <a href="#konsentrasi">Konsentrasi</a>
+      <a href="#tools">Alat Bantu</a>
+      <a href="#roadmap">Roadmap</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Buka menu" aria-expanded="false">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- PAGE INTRO -->
+  <section class="page-intro" id="today">
+    <div class="container">
+      <span class="eyebrow">SEMESTER GASAL 2026/2027</span>
+      <h1>Jadwal Kuliah</h1>
+      <p>Dashboard pribadi mahasiswa: jadwal, materi, silabus, alat bantu belajar, dan roadmap menuju cumlaude.</p>
+      <div class="student-info">
+        <div class="student-info-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span><strong>Muhammad Rizky Prasetya</strong></span>
+        </div>
+        <div class="student-info-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
+          <span>NIM: <strong>L200260089</strong></span>
+        </div>
+        <div class="student-info-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          <span>Kelas: <strong>B</strong> • Total: <strong>19 SKS</strong></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TODAY SUMMARY -->
+  <section class="container">
+    <h2 class="sr-only">Ringkasan Hari Ini</h2>
+    <div class="today-summary" id="todaySummary"></div>
+  </section>
+
+  <!-- WEEKLY SCHEDULE -->
+  <section class="container sec reveal" id="weekly">
+    <div class="sec-h">
+      <div>
+        <h2>Jadwal Mingguan</h2>
+        <p class="sub">Klik tab hari untuk melihat jadwal lengkap</p>
+      </div>
+    </div>
+    <div class="day-tabs" role="tablist">
+      <button class="day-tab active has-c" role="tab" aria-selected="true" data-day="senin">Senin <span class="cc">3</span></button>
+      <button class="day-tab has-c" role="tab" aria-selected="false" data-day="selasa">Selasa <span class="cc">2</span></button>
+      <button class="day-tab has-c" role="tab" aria-selected="false" data-day="rabu">Rabu <span class="cc">1</span></button>
+      <button class="day-tab has-c" role="tab" aria-selected="false" data-day="kamis">Kamis <span class="cc">1</span></button>
+      <button class="day-tab" role="tab" aria-selected="false" data-day="jumat">Jumat <span class="cc">0</span></button>
+    </div>
+    <div class="schedule-list" id="scheduleContent" role="tabpanel" aria-live="polite"></div>
+    <div class="export-bar">
+      <p>Simpan jadwal ini ke kalender digital (Google Calendar, Apple Calendar, Outlook) agar otomatis muncul di ponselmu.</p>
+      <button class="btn" id="exportICS">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+        Export .ics
+      </button>
+    </div>
+  </section>
+
+  <!-- WEEK OVERVIEW -->
+  <section class="container sec reveal" id="overview">
+    <div class="sec-h"><div><h2>Ringkasan Mingguan</h2></div></div>
+    <div class="overview-grid" id="weekOverview"></div>
+  </section>
+
+  <!-- MATERI PEMBELAJARAN -->
+  <section class="container sec" id="materi">
+    <div class="sec-h">
+      <div>
+        <h2>Materi Pembelajaran</h2>
+        <p class="sub">Akses materi setiap mata kuliah langsung dari Google Drive. Klik mata kuliah untuk membaca, dan tandai topik yang sudah selesai.</p>
+      </div>
+    </div>
+    <div class="materi-layout">
+      <aside class="materi-sidebar" id="materiSidebar" role="navigation" aria-label="Daftar mata kuliah"></aside>
+      <div class="materi-main" id="materiMain"></div>
+    </div>
+  </section>
+
+  <!-- SILABUS -->
+  <section class="container sec" id="silabus">
+    <div class="sec-h">
+      <div>
+        <h2>Silabus Mata Kuliah</h2>
+        <p class="sub">Rencana pembelajaran per pertemuan. Klik mata kuliah di samping, lalu klik salah satu pertemuan untuk membuka detail materinya.</p>
+      </div>
+    </div>
+    <div class="silabus-layout">
+      <aside class="silabus-sidebar" id="silabusSidebar" role="navigation" aria-label="Daftar mata kuliah"></aside>
+      <div class="silabus-main" id="silabusMain"></div>
+    </div>
+  </section>
+
+  <!-- COURSE SUMMARY -->
+  <section class="container sec reveal" id="courses">
+    <div class="sec-h">
+      <div>
+        <h2>Mata Kuliah Semester Ini</h2>
+        <p class="sub">Deskripsi, capaian pembelajaran, referensi, bobot penilaian, dan skala nilai berdasarkan RPS/dokumen resmi UMS.</p>
+      </div>
+    </div>
+    <div class="course-list" id="courseList"></div>
+  </section>
+
+  <!-- PETA STUDI -->
+  <section class="container sec" id="peta">
+    <div class="sec-h">
+      <div>
+        <h2>Peta Studi 8 Semester</h2>
+        <p class="sub">Sebaran mata kuliah Kurikulum 2022 Teknik Informatika UMS.</p>
+      </div>
+    </div>
+    <div class="semester-tabs" id="semesterTabs" role="tablist"></div>
+    <div id="semesterContent"></div>
+  </section>
+
+  <!-- KONSENTRASI -->
+  <section class="container sec" id="konsentrasi">
+    <div class="sec-h">
+      <div>
+        <h2>Strategi Memilih Konsentrasi</h2>
+        <p class="sub">Konsentrasi dipilih di Semester 5. Persiapkan dirimu dari sekarang.</p>
+      </div>
+    </div>
+    <div class="strategy-grid">
+      <div class="strategy-card" data-num="01">
+        <h3>Kenali Diri Sendiri</h3>
+        <p>Pahami minat, kekuatan, dan gaya belajarmu sebelum memilih.</p>
+        <ul>
+          <li>Suka coding & merancang sistem? → RPL</li>
+          <li>Suka infrastruktur & keamanan? → SJ</li>
+          <li>Suka AI, game, & interaksi cerdas? → SIC</li>
+          <li>Perhatikan nilai tertinggi di Semester 1–3</li>
+        </ul>
+      </div>
+      <div class="strategy-card" data-num="02">
+        <h3>Riset Pasar Kerja</h3>
+        <p>Lihat tren industri 5 tahun ke depan dan peluang kariernya.</p>
+        <ul>
+          <li>Cek lowongan di LinkedIn & JobStreet</li>
+          <li>Ikuti webinar karier IT</li>
+          <li>Tanya alumni yang sudah bekerja</li>
+          <li>Perhatikan gaji dan demand posisi</li>
+        </ul>
+      </div>
+      <div class="strategy-card" data-num="03">
+        <h3>Bangun Portofolio Sejak Dini</h3>
+        <p>Mulai proyek kecil yang relevan dengan konsentrasi incaranmu di Semester 2–4.</p>
+        <ul>
+          <li>RPL: aplikasi web/mobile sederhana</li>
+          <li>SJ: konfigurasi server sendiri (VPS)</li>
+          <li>SIC: ikut Kaggle atau buat game mini</li>
+          <li>Dokumentasikan di GitHub</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-h">
+      <div>
+        <h2>Detail Konsentrasi</h2>
+        <p class="sub">Tiga jalur konsentrasi di Semester 5.</p>
+      </div>
+    </div>
+
+    <div class="consent-grid">
+      <div class="consent-card">
+        <div class="consent-head">
+          <div class="tag-line">Konsentrasi 1</div>
+          <h3>Rekayaka Perangkat Lunak (RPL)</h3>
+          <div class="total">Total 145 SKS</div>
+        </div>
+        <div class="consent-body">
+          <div>
+            <h5>Mata Kuliah Khas</h5>
+            <ul>
+              <li>Manajemen Proyek Perangkat Lunak (3 SKS)</li>
+              <li>Data Warehousing & Data Mining (3 SKS) + Praktikum (1 SKS)</li>
+              <li>Analisis dan Perancangan Sistem (3 SKS)</li>
+              <li>Audit dan Tata Kelola TI (3 SKS)</li>
+              <li>Pengujian Perangkat Lunak (3 SKS)</li>
+            </ul>
+          </div>
+          <div class="consent-fit"><strong>Cocok untuk kamu yang:</strong> Suka merancang sistem end-to-end dan senang bekerja dalam tim proyek besar.</div>
+          <div>
+            <h5>Prospek Karier</h5>
+            <div class="consent-career">
+              <span>Software Engineer</span><span>Backend Developer</span><span>QA Engineer</span><span>IT Project Manager</span><span>System Analyst</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="consent-card">
+        <div class="consent-head">
+          <div class="tag-line">Konsentrasi 2</div>
+          <h3>Sistem Jaringan (SJ)</h3>
+          <div class="total">Total 147 SKS</div>
+        </div>
+        <div class="consent-body">
+          <div>
+            <h5>Mata Kuliah Khas</h5>
+            <ul>
+              <li>Administrasi Jaringan Komputer (3 SKS)</li>
+              <li>Cloud Computing (3 SKS)</li>
+              <li>Internet of Things (3 SKS) + Praktikum (1 SKS)</li>
+              <li>Keamanan Jaringan Komputer (3 SKS) + Praktikum (1 SKS)</li>
+              <li>Perancangan Sistem Jaringan (3 SKS) + Praktikum (1 SKS)</li>
+            </ul>
+          </div>
+          <div class="consent-fit"><strong>Cocok untuk kamu yang:</strong> Tertarik pada infrastruktur, server, cloud, dan keamanan siber.</div>
+          <div>
+            <h5>Prospek Karier</h5>
+            <div class="consent-career">
+              <span>Network Engineer</span><span>Cloud Architect</span><span>Cybersecurity Analyst</span><span>DevOps Engineer</span><span>IoT Engineer</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="consent-card">
+        <div class="consent-head">
+          <div class="tag-line">Konsentrasi 3</div>
+          <h3>Sistem Interaktif Cerdas (SIC)</h3>
+          <div class="total">Total 145 SKS</div>
+        </div>
+        <div class="consent-body">
+          <div>
+            <h5>Mata Kuliah Khas</h5>
+            <ul>
+              <li>Kecerdasan Buatan / AI (3 SKS)</li>
+              <li>Animasi Komputer (3 SKS)</li>
+              <li>Virtual World (3 SKS)</li>
+              <li>Pemrograman Game (3 SKS) + Praktikum (1 SKS)</li>
+              <li>Machine Learning (3 SKS)</li>
+            </ul>
+          </div>
+          <div class="consent-fit"><strong>Cocok untuk kamu yang:</strong> Suka AI, machine learning, game development, dan animasi.</div>
+          <div>
+            <h5>Prospek Karier</h5>
+            <div class="consent-career">
+              <span>ML Engineer</span><span>Data Scientist</span><span>Game Developer</span><span>AI Researcher</span><span>Computer Vision Engineer</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <section class="container sec" id="tools">
+    <div class="sec-h">
+      <div><h2>Alat Bantu Belajar</h2><p class="sub">Semua data tersimpan otomatis di browser kamu</p></div>
+    </div>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/></svg>To-Do List</h3>
+        <p class="tool-sub">Catat tugas dan deadline.</p>
+        <div class="todo-input-row">
+          <input type="text" class="todo-input" id="todoInput" placeholder="Tambah tugas baru..." aria-label="Tugas baru">
+          <button class="todo-add" id="todoAdd">Tambah</button>
+        </div>
+        <ul class="todo-list" id="todoList"></ul>
+      </div>
+      <div class="tool-card">
+        <h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Pomodoro Timer</h3>
+        <p class="tool-sub">25 menit fokus, 5 menit istirahat.</p>
+        <div class="pomo-modes">
+          <button class="pomo-mode-btn active" data-mode="focus" data-min="25">Fokus 25m</button>
+          <button class="pomo-mode-btn" data-mode="short" data-min="5">Istirahat 5m</button>
+          <button class="pomo-mode-btn" data-mode="long" data-min="15">Istirahat 15m</button>
+        </div>
+        <div class="pomo-display" id="pomoDisplay">25:00</div>
+        <div class="pomo-mode" id="pomoLabel">Waktu Fokus</div>
+        <div class="pomo-controls">
+          <button class="pomo-btn" id="pomoStart">Mulai</button>
+          <button class="pomo-btn secondary" id="pomoReset">Reset</button>
+        </div>
+      </div>
+      <div class="tool-card">
+        <h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>Pelacak IPK</h3>
+        <p class="tool-sub">Masukkan nilai untuk melihat proyeksi IPK.</p>
+        <div class="ipk-courses" id="ipkCourses"></div>
+        <div class="ipk-summary">
+          <div class="ipk-stat"><div class="val" id="ipkTotalSKS">0</div><div class="lab">Total SKS</div></div>
+          <div class="ipk-stat gold"><div class="val" id="ipkValue">0.00</div><div class="lab">Proyeksi IPK</div></div>
+        </div>
+      </div>
+      <div class="tool-card">
+        <h3><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg>Catatan Cepat</h3>
+        <p class="tool-sub">Jurnal belajar dan refleksi.</p>
+        <textarea class="notes-textarea" id="notesArea" placeholder="Tulis catatanmu di sini..."></textarea>
+        <div class="notes-status" id="notesStatus">Tersimpan otomatis</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section class="container sec reveal" id="roadmap">
+    <div class="sec-h">
+      <div>
+        <h2>Roadmap Cumlaude</h2>
+        <p class="sub">Target: IPK minimal 3,51 &amp; lulus maksimal 10 semester.</p>
+      </div>
+    </div>
+    <div class="roadmap">
+      <div class="roadmap-item">
+        <div class="roadmap-head"><h3>Semester 1–2: Fondasi &amp; Adaptasi</h3><span class="roadmap-tag">Kamu di sini</span></div>
+        <p>Bangun kebiasaan belajar kuat dan kuasai dasar-dasar keilmuan.</p>
+        <ul><li>Target IPK 3,5+ untuk dua semester pertama</li><li>Kuasai Python (Algoritma &amp; Praktikum)</li><li>Lulus Test TOEFL Reguler minimal 500</li><li>Rajin ke jam konsultasi dosen</li></ul>
+      </div>
+      <div class="roadmap-item teal">
+        <div class="roadmap-head"><h3>Semester 3–4: Spesialisasi &amp; Portofolio</h3><span class="roadmap-tag">Eksplorasi</span></div>
+        <p>Bangun portofolio nyata. Akhir Semester 4, tentukan konsentrasi.</p>
+        <ul><li>Kuasai OOP</li><li>Ikut minimal 1 lomba IT atau hackathon</li><li>Bangun proyek pribadi di GitHub</li><li>Ikut sertifikasi dasar</li></ul>
+      </div>
+      <div class="roadmap-item gold">
+        <div class="roadmap-head"><h3>Semester 5: Pemilihan Konsentrasi</h3><span class="roadmap-tag">Keputusan Kunci</span></div>
+        <p>Semester penentu antara RPL, SJ, atau SIC.</p>
+        <ul><li>Ambil Metodologi Penelitian dengan serius</li><li>Mulai riset topik skripsi</li><li>Ikut proyek penelitian dosen</li><li>Target publikasi minimal 1 artikel</li></ul>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-head"><h3>Semester 6–7: Capstone &amp; Prestasi</h3><span class="roadmap-tag">Puncak</span></div>
+        <p>Capstone Project jadi ajang unjuk gigi.</p>
+        <ul><li>Selesaikan Capstone Project</li><li>Ikut PKN di perusahaan IT</li><li>Ambil mata kuliah pilihan relevan</li><li>Jaga IPK stabil di atas 3,5</li></ul>
+      </div>
+      <div class="roadmap-item gold">
+        <div class="roadmap-head"><h3>Semester 8: Skripsi &amp; Penyelesaian</h3><span class="roadmap-tag">Finishing</span></div>
+        <p>Skripsi berbobot 6 SKS. Fokus penuh.</p>
+        <ul><li>Ajukan proposal skripsi lebih awal</li><li>Disiplin bimbingan rutin</li><li>Tidak ada nilai C, D, atau E</li><li>Targetkan lulus maksimal semester 8</li></ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer" role="contentinfo">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <span class="footer-brand-title">Jadwal Kuliah</span>
+      <span class="footer-brand-sub">Semester Gasal 2026/2027</span>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-meta">
+      <div class="footer-meta-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Muhammad Rizky Prasetya — L200260089</span>
+      </div>
+      <span class="footer-tagline">Academic schedule dashboard • Kurikulum 2022</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ICONS */
+const icons = {
+  clock:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+  mapPin:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
+  user:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+  cal:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>',
+  arrowR:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>',
+  calOff:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/><path d="m2 2 20 20"/></svg>',
+  extLink:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>',
+  chev:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>',
+  trash:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>',
+  fileText:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg>',
+  list:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><line x1="3" x2="3.01" y1="6" y2="6"/><line x1="3" x2="3.01" y1="12" y2="12"/><line x1="3" x2="3.01" y1="18" y2="18"/></svg>',
+  download:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>',
+  clipboard:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>',
+  chevSmall:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>',
+  award:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>'
+};
+
+/* DATA JADWAL */
+const scheduleData = {
+  senin:[
+    {jamKe:"1–2", waktu:"06.30–08.10", nama:"Praktikum Algoritma dan Pemrograman", kode:"TIF3221104", kelas:"B", ruang:"LABRPL", sks:1, dosen:"Dias Fithry Mahmudah, S.Kom., M.Inf."},
+    {jamKe:"4–6", waktu:"09.00–11.30", nama:"Logika dan Himpunan", kode:"TIF3221308", kelas:"B", ruang:"G0301", sks:3, dosen:"Reinal Ariyuda, B.Eng., M.Eng."},
+    {jamKe:"10–12", waktu:"15.30–18.00", nama:"Pemrograman Visual", kode:"TIF3221307", kelas:"B", ruang:"J0407", sks:3, dosen:"Widi Widayat, S.Kom., M.Eng."}
+  ],
+  selasa:[
+    {jamKe:"1–3", waktu:"06.30–09.00", nama:"Kalkulus", kode:"TIF3221305", kelas:"B", ruang:"G0301", sks:3, dosen:"Cahyangingtyas Sekar Wahyuni"},
+    {jamKe:"5–6", waktu:"09.50–11.30", nama:"English for Academic Purpose", kode:"TIF1221202", kelas:"B", ruang:"G0304", sks:2, dosen:"Romadhani Wulandari, S.Pd., M.Pd."}
+  ],
+  rabu:[
+    {jamKe:"4–6", waktu:"09.00–11.30", nama:"Algoritma dan Pemrograman", kode:"TIF3221303", kelas:"B", ruang:"JSEM2", sks:3, dosen:"Husni Thamrin, M.T., Ph.D."}
+  ],
+  kamis:[
+    {jamKe:"5–6", waktu:"09.50–11.30", nama:"Kepemimpinan dan Komunikasi Interpersonal", kode:"TIF3221206", kelas:"B", ruang:"G0301", sks:2, dosen:"Azizah Fatmawati, M.Sc., S.T."}
+  ],
+  jumat:[]
+};
+
+/* DATA MATERI */
+const materiData = [
+  {kode:"TIF3221303", nama:"Algoritma dan Pemrograman", dosen:"Husni Thamrin, M.T., Ph.D.", sks:3, kelas:"B", driveId:"1DDCo_tBclIjpki0GYXxVkymLSYf1hJIW", link:"https://drive.google.com/file/d/1DDCo_tBclIjpki0GYXxVkymLSYf1hJIW/view?usp=drivesdk", topics:[
+    {nama:"Permasalahan komputasional, algoritma, dan flowchart", desc:"Pengantar cara berpikir komputasional dan representasi solusi"},
+    {nama:"Perintah dasar, tipe data primitif, dan operasi", desc:"Variabel, tipe data, operator aritmatika, perbandingan, string, boolean"},
+    {nama:"Perulangan, percabangan, dan perulangan kondisional", desc:"Struktur kendali program untuk menyelesaikan persoalan"},
+    {nama:"Fungsi, class, akses berkas, dan modul", desc:"Prinsip modularisasi dan pengelolaan file"},
+    {nama:"Algoritma searching dan sorting sederhana", desc:"Sequential search, binary search, bubble sort, selection sort"},
+    {nama:"Kinerja algoritma dan kompleksitas", desc:"Analisis efisiensi algoritma"},
+    {nama:"Akses jaringan, web, atau aplikasi desktop", desc:"Proyek akhir: program yang mengakses data lewat web atau desktop"}
+  ]},
+  {kode:"TIF3221104", nama:"Praktikum Algoritma dan Pemrograman", dosen:"Dias Fithry Mahmudah, S.Kom., M.Inf.", sks:1, kelas:"B", driveId:"1ODA-KQfClk5sKRBUwAZShg2N6Y0pJbWg", link:"https://drive.google.com/file/d/1ODA-KQfClk5sKRBUwAZShg2N6Y0pJbWg/view?usp=drivesdk", topics:[
+    {nama:"Instalasi software GvRng", desc:"Persiapan lingkungan praktikum"},
+    {nama:"Instruksi dasar di GvRng", desc:"Perintah dasar dan struktur program"},
+    {nama:"Instruksi pembuatan fungsi", desc:"Modularisasi dan reuse kode"},
+    {nama:"Instruksi kendali: perulangan dan pengambilan keputusan", desc:"Kontrol alur program"},
+    {nama:"Instruksi perulangan kondisional", desc:"Perulangan dengan kondisi berhenti"},
+    {nama:"Data dan operator", desc:"Manipulasi data dalam praktikum"},
+    {nama:"Mengolah data pada berkas", desc:"File I/O dasar"},
+    {nama:"Komunikasi jaringan, GUI, dan Web Service", desc:"Proyek akhir terintegrasi"}
+  ]},
+  {kode:"TIF3221305", nama:"Kalkulus", dosen:"Cahyangingtyas Sekar Wahyuni", sks:3, kelas:"B", driveId:"1_W7jLMNmrvJsQqg71nh8ZtFsm8hr_3OW", link:"https://drive.google.com/file/d/1_W7jLMNmrvJsQqg71nh8ZtFsm8hr_3OW/view?usp=drivesdk", topics:[
+    {nama:"Bilangan dan representasinya", desc:"Sistem bilangan dan notasi matematis"},
+    {nama:"Bilangan trigonometri", desc:"Fungsi trigonometri dan aplikasinya"},
+    {nama:"Fungsi bilangan", desc:"Konsep fungsi dan grafiknya"},
+    {nama:"Konsep limit dan aturannya", desc:"Limit fungsi dan teorema limit"},
+    {nama:"Limit berhingga dan tak berhingga", desc:"Perilaku fungsi di titik kritis"},
+    {nama:"Kontinyuitas fungsi", desc:"Kekontinuan dan jenis diskontinu"},
+    {nama:"Konsep turunan dan aturannya", desc:"Diferensiasi dasar"},
+    {nama:"Turunan trigonometri, aturan rantai, turunan tingkat tinggi", desc:"Teknik diferensiasi lanjutan"},
+    {nama:"Aplikasi penggunaan turunan", desc:"Optimasi dan analisis laju perubahan"},
+    {nama:"Konsep integral dan aturannya", desc:"Integrasi dasar"},
+    {nama:"Integral trigonometri, integral tertentu, integral tak hingga", desc:"Teknik integrasi"},
+    {nama:"Aplikasi penggunaan integral", desc:"Luas, volume, dan aplikasi lainnya"}
+  ]},
+  {kode:"TIF3221308", nama:"Logika dan Himpunan", dosen:"Reinal Ariyuda, B.Eng., M.Eng.", sks:3, kelas:"B", driveId:"1PA2EuAmK1yo7AD-EQxved5ALjk9pJEz-", link:"https://drive.google.com/file/d/1PA2EuAmK1yo7AD-EQxved5ALjk9pJEz-/view?usp=drivesdk", topics:[
+    {nama:"Pengenalan Logika Matematika", desc:"Pendahuluan, argumen, validitas, logika klasik & modern"},
+    {nama:"Logika Proposisional", desc:"Argumen, proposisi, pemberian nilai"},
+    {nama:"Tabel Kebenaran", desc:"Operator dan operator khusus"},
+    {nama:"Proposisi Majemuk", desc:"Ekspresi logika, skema, analisis, aturan pengurutan"},
+    {nama:"Tautologi", desc:"Evaluasi validitas, kontradiksi, contingent, pemanfaatan tautologi"},
+    {nama:"Ekuivalensi Logis", desc:"Komutatif, asosiatif, hukum logika"},
+    {nama:"Penyederhanaan", desc:"Operasi penyederhanaan dan perangkai dasar"},
+    {nama:"Strategi Pembalikan", desc:"Konsistensi, operasi sistem pembalikan, model & counter model"},
+    {nama:"Tablo Semantik", desc:"Aturan tablo dan penerapannya pada argumen"},
+    {nama:"Bentuk Normal (CNF & DNF)", desc:"Klausa, konversi, dan komplementasi"},
+    {nama:"Resolusi", desc:"Resolving argumen, himpunan klausa, resolvent"},
+    {nama:"Himpunan dan Diagram Venn", desc:"Keanggotaan, kardinalitas, himpunan kuasa"},
+    {nama:"Relasi dan Operasi Himpunan", desc:"Interseksi, union, selisih, komplemen, sifat dasar"}
+  ]},
+  {kode:"TIF3221206", nama:"Kepemimpinan dan Komunikasi Interpersonal", dosen:"Azizah Fatmawati, M.Sc., S.T.", sks:2, kelas:"B", driveId:"1OWklYAtehc46BRc_f8VBSXcniDft37rl", link:"https://drive.google.com/file/d/1OWklYAtehc46BRc_f8VBSXcniDft37rl/view?usp=drivesdk", topics:[
+    {nama:"Konsep dasar kepemimpinan", desc:"Pengertian, peran, dan tugas kepemimpinan"},
+    {nama:"Aqidah dan Kepemimpinan", desc:"Kaitan aqidah dengan kepemimpinan"},
+    {nama:"Akhlaq kepemimpinan", desc:"Etika dan akhlak dalam kepemimpinan"},
+    {nama:"Tantangan Kepemimpinan", desc:"Permasalahan yang dihadapi pemimpin"},
+    {nama:"Skill/Kecakapan Kepemimpinan", desc:"Keterampilan dasar seorang pemimpin"},
+    {nama:"Cara meningkatkan skill kepemimpinan", desc:"Strategi pengembangan diri"},
+    {nama:"Konsep dasar komunikasi", desc:"Pengantar ilmu komunikasi"},
+    {nama:"Karakter komunikasi interpersonal", desc:"Ciri khas komunikasi antar pribadi"},
+    {nama:"Tantangan/hambatan komunikasi interpersonal", desc:"Hambatan dan solusinya"},
+    {nama:"Skill komunikasi interpersonal", desc:"Keterampilan komunikasi efektif"},
+    {nama:"Cara meningkatkan skill komunikasi interpersonal", desc:"Latihan dan pengembangan"},
+    {nama:"Implementasi aqidah dan akhlaq dalam komunikasi", desc:"Penerapan nilai keislaman"},
+    {nama:"Pentingnya komunikasi interpersonal dalam kepemimpinan", desc:"Peran komunikasi bagi pemimpin"}
+  ]},
+  {kode:"TIF3221307", nama:"Pemrograman Visual", dosen:"Widi Widayat, S.Kom., M.Eng.", sks:3, kelas:"B", driveId:"1UdI73LC32DAAF4U_9zIsyeoG_3I0AMW6", link:"https://drive.google.com/file/d/1UdI73LC32DAAF4U_9zIsyeoG_3I0AMW6/view?usp=drivesdk", topics:[
+    {nama:"Pemrograman Visual vs Pemrograman Tekstual", desc:"Perbandingan paradigma pemrograman"},
+    {nama:"Pengenalan Alice 3", desc:"Pengenalan & instalasi Alice 3"},
+    {nama:"Class dan Object", desc:"Menambahkan class, object, procedure & argument"},
+    {nama:"Struktur Kendali & Fungsi", desc:"Struktur kendali, fungsi, operasi aritmatik, variabel global/lokal"},
+    {nama:"Pemahaman Dasar OOP", desc:"Konsep dasar pemrograman berbasis obyek"},
+    {nama:"Perancangan Animasi/Game", desc:"Skenario dan story board pembuatan animasi/game"},
+    {nama:"Pengenalan Greenfoot", desc:"IDE pemrograman visual berbasis Java"},
+    {nama:"Pembuatan Class & Object Greenfoot", desc:"Implementasi OOP di Greenfoot"},
+    {nama:"Variabel Global dan Lokal", desc:"Scope variabel dalam program"},
+    {nama:"Data Array dan Perulangan", desc:"Struktur data array dan kontrol perulangan"},
+    {nama:"Sound & Keyboard Control", desc:"Sound animation dan keyboard control"},
+    {nama:"Pengembangan Game Lanjutan", desc:"Proyek game berbasis Greenfoot"},
+    {nama:"Testing Game", desc:"Testing dan debugging program game"},
+    {nama:"Presentasi Proyek Akhir", desc:"Demo proyek animasi/game akhir"}
+  ]},
+  {kode:"TIF1221202", nama:"English for Academic Purpose", dosen:"Romadhani Wulandari, S.Pd., M.Pd.", sks:2, kelas:"B", driveId:"19OGcHUuEgTl46OBFU3qdX9MPsBwO8S-k", link:"https://drive.google.com/file/d/19OGcHUuEgTl46OBFU3qdX9MPsBwO8S-k/view?usp=drivesdk", topics:[
+    {nama:"Reading academic texts", desc:"Membaca dan memahami teks akademik"},
+    {nama:"Vocabulary building", desc:"Kosakata teknis bidang informatika"},
+    {nama:"Note-taking skills", desc:"Teknik mencatat dari sumber berbahasa Inggris"},
+    {nama:"Academic writing basics", desc:"Menulis abstrak dan laporan teknis"},
+    {nama:"Presentation skills", desc:"Presentasi akademik dalam bahasa Inggris"},
+    {nama:"Grammar review", desc:"Tata bahasa untuk konteks akademik"}
+  ]}
+];
+
+/* DATA SILABUS */
+const silabusData = {
+  "TIF3221308": {
+    nama: "Logika dan Himpunan",
+    kode: "TIF3221308",
+    dosen: "Reinal Ariyuda, B.Eng., M.Eng.",
+    sks: 3,
+    kelas: "B",
+    items: [
+      {
+        pertemuan: 1,
+        materi: "Pengenalan Logika Matematika",
+        desc: "Pendahuluan logika, argumen, validitas, logika klasik, logika modern, dan logika banyak nilai.",
+        detail: `
+          <div class="detail-note"><strong>Catatan Pertemuan 1</strong> — Materi ini mencakup 6 topik besar: (1) Pendahuluan, (2) Argumen, (3) Validitas Argumen, (4) Logika Klasik, (5) Logika Modern, dan (6) Logika Banyak Nilai.</div>
+          <div class="detail-section"><h6>1. Pendahuluan — Logika Sebagai Penalaran Deduktif</h6>
+          <p>Logika berhubungan dengan <strong>penalaran deduktif</strong> (<em>deductive reasoning</em>) yang secara umum hanya mengambil <strong>kesimpulan (K)</strong> dari <strong>premis-premisnya (P)</strong>.</p>
+          <p>Berbeda dengan <strong>penalaran induktif</strong> (<em>inductive reasoning</em>), yaitu pengambilan simpulan umum yang diperoleh dari suatu observasi.</p>
+          <div class="detail-example"><span class="label">Contoh Deductive Reasoning</span><p>Semua yang pergi kuliah memakai baju.</p><p>Joko pergi kuliah.</p><p><strong>Dengan demikian, Joko memakai baju.</strong></p></div>
+          <p><strong>Peranan Logika:</strong></p>
+          <ul><li><strong>Matematika</strong> — Komputasi, Matematika Diskret, Aljabar Linier</li><li><strong>Elektronika</strong> — Rangkaian Digital</li><li><strong>Ilmu Komputer</strong> — Membuat dan menguji program</li><li><strong>Artificial Intelligence</strong> — Expert Systems, Logic Programming, Soft Computing</li></ul>
+          </div>
+          <div class="detail-section"><h6>2. Argumen</h6>
+          <p><strong>Argumen</strong> adalah suatu usaha untuk mencari kebenaran dari suatu pernyataan berupa <strong>kesimpulan</strong> dengan berdasarkan kebenaran dari suatu kumpulan pernyataan yang disebut dengan <strong>premis</strong>.</p>
+          </div>
+          <div class="detail-section"><h6>3. Validitas Argumen</h6>
+          <p><span class="detail-tag green">Argumen Kuat Secara Logis (Sound)</span></p>
+          <p><strong>Validitas yang logis</strong> adalah hubungan antara premis-premis dengan kesimpulan yang memastikan bahwa jika premis benar, kesimpulan harus benar.</p>
+          <div class="detail-example"><span class="label">Contoh 5 — Argumen Kuat</span><p>P1: Semua karyawan mendapat THR.</p><p>P2: Siti adalah karyawan.</p><p><strong>K: Dengan demikian, Siti mendapat THR.</strong></p></div>
+          <p><span class="detail-tag red">Argumen Tidak Valid (Invalid)</span></p>
+          <div class="detail-example"><span class="label">Contoh 4</span><p>P1: Ada jenis makhluk hidup berkaki dua.</p><p>P2: Semua manusia adalah makhluk hidup.</p><p><strong>K: Semua manusia berkaki dua.</strong></p><p><em>Tidak valid, tapi kesimpulan benar.</em></p></div>
+          <p><span class="detail-tag">Argumen Valid (Tapi Premis Salah)</span></p>
+          <div class="detail-example"><span class="label">Contoh 3</span><p>P1: Semua mamalia adalah hewan berkaki empat.</p><p>P2: Semua manusia adalah mamalia.</p><p><strong>K: Semua manusia adalah hewan berkaki empat.</strong></p><p><em>Valid secara logika, tapi premis salah. Disebut <strong>tautologi</strong>.</em></p></div>
+          <p><span class="detail-tag red">Argumen Tidak Kuat Secara Logis</span></p>
+          <div class="detail-example"><span class="label">Contoh 6</span><p>P1: Semua mahasiswa rajin belajar.</p><p>P2: Fuji seorang mahasiswa.</p><p><strong>K: Fafa rajin belajar.</strong></p><p><em>Tidak ada hubungan antara premis dan kesimpulan.</em></p></div>
+          </div>
+          <div class="detail-section"><h6>4. Logika Klasik (Aristoteles)</h6>
+          <p>Dikenalkan oleh <strong>Aristoteles</strong>. Merumuskan aturan penalaran formal melalui <strong>Silogisme</strong> (<em>Syllogism</em>).</p>
+          <p><strong>Bentuk Pernyataan Dasar Silogisme:</strong></p>
+          <ul><li><strong>Semua A adalah B</strong> (Universal Positif) — Semua mahasiswa (A) adalah pembelajar (B).</li><li><strong>Tidak ada A yang merupakan B</strong> (Universal Negatif) — Tidak ada ikan (A) yang bernapas dengan paru-paru (B).</li><li><strong>Beberapa A adalah B</strong> (Partikular Positif) — Beberapa dosen (A) adalah penulis buku (B).</li><li><strong>Beberapa A adalah bukan B</strong> (Partikular Negatif) — Beberapa kendaraan (A) adalah bukan mobil (B).</li></ul>
+          </div>
+          <div class="detail-section"><h6>5. Logika Modern</h6>
+          <p>Dikembangkan oleh <strong>De Morgan</strong> &amp; <strong>Boole</strong>, diperkaya oleh <strong>Frege</strong>, <strong>Russell</strong>, dan <strong>Whitehead</strong>.</p>
+          <ul><li>Operator dasar: AND, OR, IF...THEN..., IF AND ONLY IF</li><li><strong>Prinsip Logika Dua Nilai</strong> (<em>Bivalent Logic</em>): Benar (1) atau Salah (0)</li><li>Penerapan: <strong>Aljabar Boolean</strong> → mikroprosesor & komputer digital</li></ul>
+          <p><strong>Well-Formed Formulae (wff)</strong> — rumus standar yang sah. <strong>Fully Parentheses Expression (FPE)</strong> — tanda kurung presisi.</p>
+          <div class="detail-example"><span class="label">Contoh Formulasi</span><p>Kalimat: "Jika hujan turun, maka jalanan basah."</p><p>Simbol: P = Hujan turun, Q = Jalanan basah.</p><p><strong>FPE (wff):</strong> (P → Q)</p></div>
+          </div>
+          <div class="detail-section"><h6>6. Logika Banyak Nilai &amp; Logika Fuzzy</h6>
+          <p><span class="detail-tag teal">Many-Valued Logic</span> — Diperkenalkan <strong>Jan Lukasiewicz</strong> (1920). Nilai ketiga: Netral. Probabilitas 0 hingga 1 atau -1 hingga +1.</p>
+          <p><span class="detail-tag teal">Fuzzy Logic</span> — Dikembangkan <strong>Lofti A. Zadeh</strong> (1973). Konsep "Himpunan Fuzzy".</p>
+          <div class="detail-example"><span class="label">Klasik vs Fuzzy</span><p><strong>Klasik:</strong> Air 37°C = "Panas = 0" (Salah) karena batas 40°C.</p><p><strong>Fuzzy:</strong> Air 37°C = "Panas" 0,8 (80%) dan "Dingin" 0,2 (20%).</p></div>
+          </div>
+          <div class="silabus-link-box">
+            <span>Pelajari lebih dalam dengan tabel interaktif &amp; visualisasi materi:</span>
+            <a href="materi-lohim.html#p1" target="_blank">Buka Materi Lengkap Pertemuan 1 →</a>
+          </div>
+        `
+      },
+      {
+        pertemuan: 2,
+        materi: "Pengantar Logika Proposisional",
+        desc: "Konsep proposisi, argumen, variabel proposisional, nilai kebenaran, dan operasi dasar logika.",
+        detail: `
+          <div class="detail-note"><strong>Catatan Pertemuan 2</strong> — Fokus materi: (1) Definisi Proposisi, (2) Proposisi Atomik vs Majemuk, (3) Variabel Proposisional & Konstanta Logika, (4) Pembahasan Contoh Slide 2.1 s.d. 2.14.</div>
+          <div class="detail-section"><h6>1. Definisi & Kriteria Proposisi (Slide 4–7)</h6>
+          <p><strong>Proposisi</strong> adalah suatu pernyataan (<em>statement</em>) berupa kalimat deklaratif yang memiliki nilai kebenaran tunggal: <strong>Benar (True / T) saja</strong> atau <strong>Salah (False / F) saja</strong>, tetapi tidak dapat sekaligus bernilai keduanya.</p>
+          <div class="detail-example"><span class="label">Contoh Proposisi vs Bukan Proposisi (Slide 5–7)</span>
+          <p>• <strong>Contoh 2.1:</strong> "Yogyakarta adalah kota pelajar." ⇒ <em>Proposisi (Bernilai Benar / T)</em></p>
+          <p>• <strong>Contoh 2.2:</strong> "2 + 2 = 5" ⇒ <em>Proposisi (Bernilai Salah / F)</em></p>
+          <p>• <strong>Contoh 2.3:</strong> "Bawakan saya secangkir kopi!" ⇒ <em>BUKAN Proposisi (Kalimat perintah / imperatif)</em></p>
+          <p>• <strong>Contoh 2.4:</strong> "Apakah hari ini hujan?" ⇒ <em>BUKAN Proposisi (Kalimat tanya)</em></p>
+          </div>
+          </div>
+
+          <div class="detail-section"><h6>2. Proposisi Atomik & Proposisi Majemuk (Slide 8–14)</h6>
+          <p>• <strong>Proposisi Atomik (Sederhana):</strong> Proposisi yang berdiri sendiri tanpa menggunakan kata hubung / perangkai logika (Contoh 2.5: "Pemuda itu tinggi").</p>
+          <p>• <strong>Proposisi Majemuk (Compound):</strong> Gabungan dari dua atau lebih proposisi atomik yang dirangkai dengan kata hubung logika (Contoh 2.7: "Pemuda itu tinggi dan pemuda itu tampan").</p>
+          </div>
+
+          <div class="detail-section"><h6>3. Variabel Proposisional & Konstanta Logika (Slide 15–22)</h6>
+          <p>• <strong>Variabel Proposisional:</strong> Dinyatakan dengan huruf kapital latin seperti <code>A, B, C, ...</code> atau <code>P, Q, R</code> yang dapat bernilai T atau F.</p>
+          <p>• <strong>Konstanta Logika:</strong> Nilai kebenaran pasti, yaitu <strong>T (True / Benar / 1)</strong> dan <strong>F (False / Salah / 0)</strong>.</p>
+          <div class="detail-example"><span class="label">Contoh 2.14 (Slide 22)</span>
+          <p>Jika A = T dan B = F, maka "A atau B" menghasilkan nilai <strong>T</strong>. Untuk membuktikan seluruh kemungkinan nilai kombinasi secara sistematis digunakan <strong>Tabel Kebenaran</strong>.</p>
+          </div>
+          </div>
+
+          <div class="silabus-link-box">
+            <span>Lihat visualisasi lengkap &amp; seluruh contoh slide 2.1–2.14:</span>
+            <a href="materi-lohim.html#p2" target="_blank">Buka Materi Lengkap Pertemuan 2 →</a>
+          </div>
+        `
+      },
+      {
+        pertemuan: 3,
+        materi: "Tabel Kebenaran & Perangkai Logika",
+        desc: "Konstruksi tabel kebenaran untuk berbagai operator logika dengan urutan dosen T-First.",
+        detail: `
+          <div class="detail-note"><strong>Catatan Pertemuan 3</strong> — Materi inti: (1) Definisi Tabel Kebenaran, (2) 5 Perangkai Dasar (Not, And, Or, Implikasi, Ekuivalensi), (3) Master Truth Table pola dosen (T di atas, F di bawah), (4) Pembuktian Argumen Hukum Logika.</div>
+          <div class="detail-section"><h6>1. 5 Perangkai Logika Dasar (Slide 9–20)</h6>
+          <ul>
+            <li><strong>Tidak / Bukan (¬ / not) — Unary:</strong> Membalikkan nilai kebenaran. Jika A = T maka ¬A = F. Double negasi: <code>¬¬A ≡ A</code>.</li>
+            <li><strong>Dan (∧ / and) — Konjungsi:</strong> Bernilai <strong>T</strong> HANYA JIKA kedua operan bernilai T. Selain itu bernilai F.</li>
+            <li><strong>Atau (∨ / or) — Disjungsi Inklusif:</strong> Bernilai <strong>F</strong> HANYA JIKA kedua operan bernilai F. Selain itu bernilai T.</li>
+            <li><strong>Jika... maka... (→) — Implikasi:</strong> Bernilai <strong>F</strong> HANYA JIKA anteseden T dan konsekuen F (<code>T → F = F</code>).</li>
+            <li><strong>... jika dan hanya jika... (↔) — Ekuivalensi / Biimplikasi:</strong> Bernilai <strong>T</strong> jika kedua operan bernilai SAMA (keduanya T atau keduanya F).</li>
+          </ul>
+          </div>
+
+          <div class="detail-section"><h6>2. Master Tabel Kebenaran (Pola Dosen: T-First)</h6>
+          <p>Tabel kebenaran standar kelas dosen Reinal Ariyuda diawali dengan <strong>T</strong> lalu <strong>F</strong> di bawahnya:</p>
+          <div class="silabus-truth-wrap">
+            <table class="silabus-truth-table">
+              <thead>
+                <tr><th>A</th><th>B</th><th>¬A</th><th>¬B</th><th>A ∧ B</th><th>A ∨ B</th><th>A → B</th><th>A ↔ B</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>T</td><td>T</td><td>F</td><td>F</td><td><span class="val-t">T</span></td><td><span class="val-t">T</span></td><td><span class="val-t">T</span></td><td><span class="val-t">T</span></td></tr>
+                <tr><td>T</td><td>F</td><td>F</td><td>T</td><td><span class="val-f">F</span></td><td><span class="val-t">T</span></td><td class="cell-key"><span class="val-f">F</span> (Kunci!)</td><td><span class="val-f">F</span></td></tr>
+                <tr><td>F</td><td>T</td><td>T</td><td>F</td><td><span class="val-f">F</span></td><td><span class="val-t">T</span></td><td><span class="val-t">T</span></td><td><span class="val-f">F</span></td></tr>
+                <tr><td>F</td><td>F</td><td>T</td><td>T</td><td><span class="val-f">F</span></td><td><span class="val-f">F</span></td><td><span class="val-t">T</span></td><td><span class="val-t">T</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size:12px;color:var(--ts)">* Perhatikan baris ke-2 kolom Implikasi (<code>T → F = F</code>): ini adalah satu-satunya kondisi di mana implikasi menghasilkan False.</p>
+          </div>
+
+          <div class="detail-section"><h6>3. Hukum Argumen Penting (Slide 25–26)</h6>
+          <ul>
+            <li><strong>Modus Ponens:</strong> <code>((A → B) ∧ A) → B</code> (Terbukti Tautologi)</li>
+            <li><strong>Modus Tollens:</strong> <code>((A → B) ∧ ¬B) → ¬A</code> (Terbukti Tautologi)</li>
+            <li><strong>Silogisme Disjungtif:</strong> <code>((A ∨ B) ∧ ¬A) → B</code> (Terbukti Tautologi)</li>
+            <li><strong>Silogisme Hipotetis:</strong> <code>((A → B) ∧ (B → C)) → (A → C)</code> (Terbukti Tautologi)</li>
+          </ul>
+          </div>
+
+          <div class="silabus-link-box">
+            <span>Uji tabel dan jalankan simulator kebenaran interaktif:</span>
+            <a href="materi-lohim.html#p3" target="_blank">Buka Simulator Kebenaran P3 →</a>
+          </div>
+        `
+      },
+      {
+        pertemuan: 4,
+        materi: "Proposisi Majemuk & Parse Tree",
+        desc: "Ekspresi logika kompleks, skema, hierarki operator, dan parse tree (pohon penguraian).",
+        detail: `
+          <div class="detail-note"><strong>Catatan Pertemuan 4</strong> — Materi inti: (1) Ekspresi Logika Kompleks, (2) Aturan Pengurutan / Hierarki Operator, (3) Parse Tree (Pohon Penguraian), (4) Fully Parentheses Expression (FPE) dan wff.</div>
+          <div class="detail-section"><h6>1. Aturan Pengurutan & Hierarki Operator (Slide 20)</h6>
+          <p>Jika dalam suatu ekspresi majemuk tidak ada tanda kurung, operasi dievaluasi sesuai hierarki:</p>
+          <ul>
+            <li><strong>Hirarki 1 (Tertinggi):</strong> <code>¬</code> (Negasi)</li>
+            <li><strong>Hirarki 2:</strong> <code>∧</code> (Konjungsi)</li>
+            <li><strong>Hirarki 3:</strong> <code>∨</code> (Disjungsi)</li>
+            <li><strong>Hirarki 4:</strong> <code>→</code> (Implikasi)</li>
+            <li><strong>Hirarki 5 (Terendah):</strong> <code>↔</code> (Ekuivalensi / Biimplikasi)</li>
+          </ul>
+          </div>
+
+          <div class="detail-section"><h6>2. Parse Tree / Pohon Penguraian (Slide 15–19)</h6>
+          <p><strong>Parse Tree</strong> digunakan untuk memetakan bagaimana suatu ekspresi logika majemuk didekomposisi:</p>
+          <ul>
+            <li><strong>Root (Akar):</strong> Merupakan <em>main operator</em> (perangkai utama) yang dievaluasi paling akhir.</li>
+            <li><strong>Branch (Cabang):</strong> Merupakan sub-ekspresi atau perangkai perantara.</li>
+            <li><strong>Leaf (Daun):</strong> Merupakan variabel proposisional (<code>A, B, C</code>) atau konstanta logika.</li>
+            <li><strong>Arah Evaluasi:</strong> Dilakukan secara <em>bottom-up</em> dari daun menuju akar.</li>
+          </ul>
+          </div>
+
+          <div class="detail-section"><h6>3. FPE dan Well-Formed Formulae (wff)</h6>
+          <p><strong>FPE</strong> memastikan ekspresi bebas dari multi-tafsir dengan penempatan tanda kurung yang presisi di setiap perangkai biner. Contoh: <code>A ∧ B → C</code> harus diubah menjadi <code>((A ∧ B) → C)</code>.</p>
+          </div>
+
+          <div class="silabus-link-box">
+            <span>Lihat diagram Parse Tree visual &amp; analisis contoh slide 4.1–4.8:</span>
+            <a href="materi-lohim.html#p4" target="_blank">Buka Materi Lengkap Pertemuan 4 →</a>
+          </div>
+        `
+      },
+      {
+        pertemuan: 5,
+        materi: "Tautologi, Kontradiksi, dan Contingent",
+        desc: "Evaluasi validitas argumen, rumus 2^N baris tabel, tautologi, kontradiksi, dan contingent.",
+        detail: `
+          <div class="detail-note"><strong>Catatan Pertemuan 5</strong> — Materi inti: (1) Rumus Baris Tabel 2^N, (2) Definisi & Pembuktian Tautologi, (3) Kontradiksi, (4) Contingent (Formula Campuran), (5) Pembahasan Slide 5.1 s.d. 5.10.</div>
+          <div class="detail-section"><h6>1. Rumus Baris Tabel Kebenaran: 2ⁿ (Slide 8)</h6>
+          <p>Jumlah baris pada tabel kebenaran untuk mencakup seluruh kombinasi nilai ditentukan oleh rumus: <strong>2<sup>N</sup></strong> (di mana N = jumlah variabel proposisional unik). Untuk 3 variabel (A, B, C), jumlah baris adalah <strong>2<sup>3</sup> = 8 baris</strong>.</p>
+          </div>
+
+          <div class="detail-section"><h6>2. Tiga Klasifikasi Nilai Ekspresi Logika (Slide 15–26)</h6>
+          <ul>
+            <li><strong>1. Tautologi (Slide 15):</strong> Ekspresi logika yang <strong>selalu bernilai Benar (T)</strong> pada seluruh baris tabel kebenarannya. Menandakan argumen yang valid / sound argument. (Contoh 5.6: <code>A ∨ ¬A</code>).</li>
+            <li><strong>2. Kontradiksi (Slide 22):</strong> Kebalikan tautologi, yaitu ekspresi yang <strong>selalu bernilai Salah (F)</strong> pada seluruh baris tabel kebenarannya. (Contoh 5.8: <code>A ∧ ¬A</code>).</li>
+            <li><strong>3. Contingent / Formula Campuran (Slide 25):</strong> Ekspresi logika yang memiliki <strong>kombinasi nilai Benar (T) dan Salah (F)</strong> pada kolom hasil akhirnya.</li>
+          </ul>
+          </div>
+
+          <div class="detail-section"><h6>3. Contoh Pembuktian Tautologi 3 Variabel — Contoh 5.5 (Slide 16–17)</h6>
+          <p>Ekspresi: <code>(A ∧ B) → (C ∨ (¬B → ¬C))</code></p>
+          <div class="silabus-truth-wrap">
+            <table class="silabus-truth-table">
+              <thead>
+                <tr><th>A</th><th>B</th><th>C</th><th>A∧B</th><th>¬B→¬C</th><th>C∨(¬B→¬C)</th><th class="cell-taut">Hasil Akhir</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>T</td><td>T</td><td>T</td><td>T</td><td>T</td><td>T</td><td class="cell-taut">T</td></tr>
+                <tr><td>T</td><td>T</td><td>F</td><td>T</td><td>T</td><td>T</td><td class="cell-taut">T</td></tr>
+                <tr><td>T</td><td>F</td><td>T</td><td>F</td><td>F</td><td>T</td><td class="cell-taut">T</td></tr>
+                <tr><td>T</td><td>F</td><td>F</td><td>F</td><td>T</td><td>T</td><td class="cell-taut">T</td></tr>
+                <tr><td>F</td><td>T</td><td>T</td><td>F</td><td>T</td><td>T</td><td class="cell-taut">T</td></tr>
+                <tr><td>F</td><td>T</td><td>F</td><td>F</td><td>T</td><td>T</td><td class="cell-taut">T</td></tr>
+                <tr><td>F</td><td>F</td><td>T</td><td>F</td><td>F</td><td>T</td><td class="cell-taut">T</td></tr>
+                <tr><td>F</td><td>F</td><td>F</td><td>F</td><td>T</td><td>T</td><td class="cell-taut">T</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size:12.5px;color:var(--teal);font-weight:700">✓ Seluruh 8 baris bernilai T ⇒ Terbukti TAUTOLOGI!</p>
+          </div>
+
+          <div class="silabus-link-box">
+            <span>Coba simulator tautologi &amp; pembuktian argumen Tono-Tini-Siska:</span>
+            <a href="materi-lohim.html#p5" target="_blank">Buka Simulator Tautologi P5 →</a>
+          </div>
+        `
+      },
+      {pertemuan: 6, materi: "Ekuivalensi Logis", desc: "Hukum-hukum logika: komutatif, asosiatif, distributif."},
+      {pertemuan: 7, materi: "Penyederhanaan", desc: "Operasi penyederhanaan ekspresi logika."},
+      {pertemuan: null, materi: "UTS", tipe: "uts"},
+      {pertemuan: 8, materi: "Strategi Pembalikan", desc: "Konsistensi, operasi sistem pembalikan, model & counter model."},
+      {pertemuan: 9, materi: "Tablo Semantik", desc: "Aturan tablo dan penerapannya pada argumen."},
+      {pertemuan: 10, materi: "Bentuk Normal", desc: "CNF, DNF, klausa, dan konversi antar bentuk."},
+      {pertemuan: 11, materi: "Resolusi", desc: "Metode resolusi untuk validitas argumen."},
+      {pertemuan: 12, materi: "Himpunan dan Diagram Venn", desc: "Keanggotaan, kardinalitas, himpunan kuasa."},
+      {pertemuan: 13, materi: "Relasi dan Operasi Himpunan", desc: "Interseksi, union, selisih, komplemen."},
+      {pertemuan: 14, materi: "Review Materi", desc: "Pengulangan materi pertemuan 1–13."},
+      {pertemuan: null, materi: "UAS", tipe: "uas"}
+    ]
+  },
+  "TIF3221307": {
+    nama: "Pemrograman Visual",
+    kode: "TIF3221307",
+    dosen: "Widi Widayat, S.Kom., M.Eng.",
+    sks: 3,
+    kelas: "B",
+    items: [
+      {pertemuan: 1, materi: "Kontrak Kuliah & Pengantar Pemrograman Visual", desc: "Kontrak kuliah, perbedaan pemrograman visual dengan pemrograman tekstual."},
+      {pertemuan: 2, materi: "Pengenalan & Instalasi Alice 3", desc: "Penggunaan Alice 3: pengenalan & instalasi, menambahkan class dan object, procedure & argument."},
+      {pertemuan: 3, materi: "Struktur Kendali, Fungsi, dan Variabel", desc: "Mendefinisikan struktur kendali, fungsi, operasi aritmatik, variabel global dan lokal, keyboard control."},
+      {pertemuan: 4, materi: "Konsep Dasar Pemrograman Berbasis Obyek", desc: "Perbedaan dan persamaan pemrograman menggunakan kaks bantu dengan pemrograman berbasis object."},
+      {pertemuan: 5, materi: "Perancangan Animasi/Game dengan Alice", desc: "Menyusun skenario dan story board pembuatan animasi/game, implementasi ke dalam Alice, dan testing program."},
+      {pertemuan: 6, materi: "Instalasi & Penggunaan Greenfoot", desc: "Instalasi & penggunaan Greenfoot, pembuatan class dan object."},
+      {pertemuan: 7, materi: "Fungsi, Struktur Kendali, Variabel Global/Lokal", desc: "Memanfaatkan kode perulangan fungsi, struktur kendali, dan variabel global dan lokal."},
+      {pertemuan: null, materi: "UTS", tipe: "uts"},
+      {pertemuan: 8, materi: "Sound & Keyboard Control", desc: "Memanfaatkan kode perulangan animasi dengan sound dan kontrol keyboard."},
+      {pertemuan: 9, materi: "Kode Perulangan & Array", desc: "Membahas kode perulangan dan struktur data array."},
+      {pertemuan: 10, materi: "Sound Animation & Game Constructor", desc: "Penerapan sound animation dan game constructor."},
+      {pertemuan: 11, materi: "Membuat Data List & Story Board", desc: "Membuat data list dan story board pembuatan animasi/game."},
+      {pertemuan: 12, materi: "Implementasi Greenfoot & Testing", desc: "Implementasi ke dalam Greenfoot dan melakukan testing program."},
+      {pertemuan: 13, materi: "Review Materi & Persiapan UAS", desc: "Pengulangan menyeluruh materi pertemuan 1–12."},
+      {pertemuan: 14, materi: "Presentasi Proyek Akhir", desc: "Presentasi dan demo proyek animasi/game akhir."},
+      {pertemuan: null, materi: "UAS", tipe: "uas"}
+    ]
+  }
+};
+
+/* DATA KRS */
+const krsData = [
+  {kode:"TIF1221201", nama:"Agama", kelas:"A", sks:2, jadwal:"Tidak dijadwalkan", ruang:"-", dosen:"Tim Pengampu", nonSched:true,
+    pengembangRPS:"Tim Pengampu MK Agama UMS",
+    deskripsi:"Mata kuliah pengembangan kepribadian yang membentuk karakter religius, etika, dan moral mahasiswa.",
+    capaian:["Memahami nilai-nilai keagamaan","Membentuk akhlak mulia","Menganalisis isu kontemporer dari perspektif agama"],
+    referensi:[{tag:"Buku",text:"Pendidikan Agama Islam untuk Perguruan Tinggi"}],
+    tips:"Berbasis diskusi dan refleksi. Manfaatkan untuk memperkuat fondasi moralmu.",
+    bobot:"Partisipasi, tugas, UTS, UAS"},
+  {kode:"TIF3221303", nama:"Algoritma dan Pemrograman", kelas:"B", sks:3, jadwal:"Rabu 09.00–11.30", ruang:"JSEM2", dosen:"Husni Thamrin, M.T., Ph.D.",
+    pengembangRPS:"Husni Thamrin, M.T., Ph.D",
+    deskripsi:"Memperkenalkan dasar-dasar pemrograman komputer dan analisis algoritma menggunakan Python.",
+    capaian:["Menganalisis masalah komputasi","Menerangkan unsur program","Menerangkan struktur kendali","Menerapkan modularisasi","Menganalisis searching & sorting"],
+    referensi:[{tag:"Utama",text:"Zarman, Wendi. (2020). Implementasi algoritma dalam bahasa Python. Informatika"},{tag:"Utama",text:"Rosa A. S. (2018). Logika algoritma dan pemrograman dasar. Modula"},{tag:"Pendukung",text:"Yuniarti, Wenty Dwi. (2019). Dasar-dasar pemrograman dengan python. Deepublish"}],
+    tips:"Bobot UAS 30%. Fokus pada proyek akhir yang mengakses jaringan/web.",
+    bobot:"Tugas 40%, UTS ~30%, UAS 30%"},
+  {kode:"TIF3221104", nama:"Praktikum Algoritma dan Pemrograman", kelas:"B", sks:1, jadwal:"Senin 06.30–08.10", ruang:"LABRPL", dosen:"Dias Fithry Mahmudah, S.Kom., M.Inf.",
+    pengembangRPS:"Dimas Aryo Anggoro, S.Kom., M.Sc.",
+    deskripsi:"Praktikum dasar pemrograman melalui praktik membuat dan memodifikasi program menggunakan GvRng (Python).",
+    capaian:["Menganalisis dan mendesain solusi proyek","Menganalisis desain siklus pengembangan","Menyusun model analisis dan desain"],
+    referensi:[{tag:"Utama",text:"Thamrin, H. et al. (2019). Algoritma dan Pemrograman: Petunjuk Praktikum. UMS Press"},{tag:"Pendukung",text:"Sianipar, R. H. & Wadi, H. (2015). Pemrograman Python. Informatika"}],
+    tips:"Kerjakan proyek akhir dengan serius—bisa jadi portofolio GitHub-mu.",
+    bobot:"Portofolio: 30% + 40% + 30%"},
+  {kode:"TIF3221305", nama:"Kalkulus", kelas:"B", sks:3, jadwal:"Selasa 06.30–09.00", ruang:"G0301", dosen:"Cahyangingtyas Sekar Wahyuni",
+    pengembangRPS:"Dr. Endah Sudarmilah, S.T., M.Eng",
+    deskripsi:"Mata kuliah wajib yang memberikan pengetahuan matematika mendasari informatika.",
+    capaian:["Menerapkan konsep bilangan","Menerapkan trigonometri","Menerapkan fungsi bilangan","Menerapkan limit","Menerapkan kontinyuitas","Menerapkan turunan dan integral"],
+    referensi:[{tag:"Utama",text:"Stewart, J. (2020). Calculus: Concepts and Contexts (5th ed.). Cengage."},{tag:"Utama",text:"Spivak, M. (2021). Calculus (4th ed.). Cambridge University Press."}],
+    tips:"Konsisten latihan soal jauh lebih efektif daripada belajar semalam.",
+    bobot:"Tiap topik 5–15%, UTS ~15%, UAS ~15%"},
+  {kode:"TIF3221206", nama:"Kepemimpinan dan Komunikasi Interpersonal", kelas:"B", sks:2, jadwal:"Kamis 09.50–11.30", ruang:"G0301", dosen:"Azizah Fatmawati, M.Sc., S.T.",
+    pengembangRPS:"Nurgiyatna, S.T., M.Sc., Ph.D",
+    deskripsi:"Mata kuliah wajib yang memberikan bekal kepemimpinan, manajemen tim, dan komunikasi interpersonal.",
+    capaian:["Menjelaskan konsep dasar kepemimpinan","Menjelaskan cara meningkatkan kecakapan kepemimpinan","Menjelaskan konsep komunikasi interpersonal","Menjelaskan tantangan komunikasi"],
+    referensi:[{tag:"Utama",text:"RPS Kepemimpinan — Nurgiyatna, UMS"}],
+    tips:"Manfaatkan setiap sesi diskusi untuk melatih public speaking.",
+    bobot:"Tiap topik 6–10%, UTS, UAS 10%"},
+  {kode:"TIF3221307", nama:"Pemrograman Visual", kelas:"B", sks:3, jadwal:"Senin 15.30–18.00", ruang:"J0407", dosen:"Widi Widayat, S.Kom., M.Eng.",
+    pengembangRPS:"Maryam, S.Kom., M.Eng.",
+    deskripsi:"Mata kuliah yang memberikan pengetahuan pemrograman berbasis obyek menggunakan blok kode visual (Alice & Greenfoot) sebagai pengganti penulisan kode program. Fokus pada penerapan logika pemrograman ke blok-blok kode dan menjadi aplikasi.",
+    capaian:["Menganalisis dan mendesain solusi proyek perangkat lunak","Menyusun model analisis dan desain","Mengimplementasikan solusi proyek","Merancang user interface","Menganalisis aspek manusia-komputer"],
+    referensi:[{tag:"Utama",text:"Cay Horstmann. (2021). Core Java: Fundamentals, Volume 1. Oracle Press"},{tag:"Pendukung",text:"Tutorial resmi Greenfoot & Alice"}],
+    tips:"Fokus pada proyek Greenfoot dan Alice. Project GAME ALICE (Individu) 30% — kerjakan dengan serius karena bobotnya besar.",
+    bobot:"Tugas 15% • UTS 15% • Project GAME ALICE (Individu) 30% • Project GAME (Team) & Kuis 20% • UAS 20%",
+    skalaNilai: [
+      {grade:"A", range:"80 – 100", kategori:"a"},
+      {grade:"AB", range:"75 – <80", kategori:"a"},
+      {grade:"B", range:"70 – <75", kategori:"b"},
+      {grade:"BC", range:"65 – <70", kategori:"b"},
+      {grade:"C", range:"55 – <65", kategori:"c"},
+      {grade:"D", range:"40 – <55", kategori:"d"},
+      {grade:"E", range:"0 – <40", kategori:"e"}
+    ],
+    evalDetail: [
+      {komponen:"Kemampuan menganalisis dan mendesain solusi proyek perangkat lunak", sumber:"Tugas", bobot:"15%"},
+      {komponen:"Kemampuan menyusun model analisis dan desain perangkat lunak", sumber:"UTS", bobot:"15%"},
+      {komponen:"Kemampuan mengimplementasikan solusi untuk proyek perangkat lunak", sumber:"Project GAME ALICE (Individu)", bobot:"30%", highlight:true},
+      {komponen:"Kemampuan menganalisis, merancang, dan merancang ulang user interface", sumber:"Project GAME (Team) & Kuis", bobot:"20%"},
+      {komponen:"Kemampuan menganalisis penerapan metode dengan aspek manusia & komputer", sumber:"UAS", bobot:"20%"}
+    ]},
+  {kode:"TIF3221308", nama:"Logika dan Himpunan", kelas:"B", sks:3, jadwal:"Senin 09.00–11.30", ruang:"G0301", dosen:"Reinal Ariyuda, B.Eng., M.Eng.",
+    pengembangRPS:"Dr.Eng. Yusuf Sulistyo Nugroho, S.T., M.Eng",
+    deskripsi:"Mata kuliah dasar logika matematika dan himpunan untuk ilmu komputer.",
+    capaian:["Menjelaskan teori informatika","Mengidentifikasi masalah aplikasi","Menjabarkan metode algoritma","Mengidentifikasi metode penyelesaian"],
+    referensi:[{tag:"Modul Web",text:"Rangkuman Lengkap & Simulator Logika Matematika P1–P5 (materi-lohim.html)"},{tag:"Utama",text:"Soesianto, F & Dwijono, Djoni. (2010). Logika Matematika untuk Ilmu Komputer. Andi Offset."},{tag:"Pendukung",text:"Jong Jek Siang. (2015). Logika Matematika: Soal dan Penyelesaian. Andi."}],
+    tips:"Kuasai tablo semantik, CNF, dan DNF. Gunakan Rangkuman Interaktif & Simulator Kebenaran (P1–P5) di tab Materi untuk latihan langsung.",
+    bobot:"UTS 25%, UAS 25%, Tugas 50%"},
+  {kode:"TIF1221202", nama:"English for Academic Purpose", kelas:"B", sks:2, jadwal:"Selasa 09.50–11.30", ruang:"G0304", dosen:"Romadhani Wulandari, S.Pd., M.Pd.",
+    pengembangRPS:"Tim Pengembang RPS EAP UMS",
+    deskripsi:"Bahasa Inggris akademik untuk membaca literatur, menulis paper, dan presentasi ilmiah.",
+    capaian:["Membaca teks akademik","Menulis abstrak & laporan","Presentasi akademik","Menguasai kosakata teknis TI"],
+    referensi:[{tag:"Utama",text:"English for Computer Science Students"},{tag:"Pendukung",text:"Academic Writing — Stephen Bailey"}],
+    tips:"Kuasai bahasa Inggris teknis untuk akses sumber belajar terbaik dunia.",
+    bobot:"Partisipasi, tugas, UTS, UAS"},
+  {kode:"MKCOT0102", nama:"Test TOEFL Reguler", kelas:"A", sks:0, jadwal:"Tidak dijadwalkan", ruang:"-", dosen:"-", nonSched:true, wajibMaba:true,
+    pengembangRPS:"Lembaga Pengembangan Bahasa & Kerjasama (LPBK) UMS",
+    deskripsi:"Tes kemampuan bahasa Inggris standar yang WAJIB diikuti seluruh mahasiswa baru angkatan 2026.",
+    capaian:["Mengukur kemampuan listening, structure, reading","Memenuhi syarat administratif","Pemetaan kemampuan bahasa Inggris"],
+    referensi:[{tag:"Buku",text:"Longman Preparation Course for the TOEFL Test"}],
+    tips:"Skor TOEFL di atas 500 sangat membantu untuk beasiswa dan magang.",
+    bobot:"Skor TOEFL (bukan bagian dari IPK)"},
+  {kode:"MKCOT0202", nama:"Test TOEFL Remidi", kelas:"A", sks:0, jadwal:"Tidak dijadwalkan", ruang:"-", dosen:"-", nonSched:true, wajibMaba:true,
+    pengembangRPS:"Lembaga Pengembangan Bahasa & Kerjasama (LPBK) UMS",
+    deskripsi:"Tes TOEFL ulang bagi mahasiswa baru yang belum memenuhi skor minimum.",
+    capaian:["Memperbaiki skor TOEFL","Memenuhi standar minimum","Meningkatkan kemampuan bahasa Inggris"],
+    referensi:[{tag:"Buku",text:"TOEFL iBT Preparation Book"}],
+    tips:"Fokus pada kelemahan skor sebelumnya.",
+    bobot:"Skor TOEFL (bukan bagian dari IPK)"}
+];
+
+/* KURIKULUM */
+const kurikulumData = {
+  1:{total:"19 SKS",items:[{kode:"TIF1221201",nama:"Agama",sks:2},{kode:"TIF1221202",nama:"English for Academic Purpose",sks:2},{kode:"TIF3221303",nama:"Algoritma dan Pemrograman",sks:3},{kode:"TIF3221104",nama:"Praktikum Algoritma dan Pemrograman",sks:1},{kode:"TIF3221305",nama:"Kalkulus",sks:3},{kode:"TIF3221206",nama:"Kepemimpinan dan Komunikasi Interpersonal",sks:2},{kode:"TIF3221307",nama:"Pemrograman Visual",sks:3},{kode:"TIF3221308",nama:"Logika dan Himpunan",sks:3}]},
+  2:{total:"21 SKS",items:[{kode:"TIF1221209",nama:"Ibadah dan Muamalah",sks:2},{kode:"TIF1221210",nama:"Standardized Test Preparation",sks:2},{kode:"TIF3221311",nama:"Sistem dan Teknologi Informasi",sks:3},{kode:"TIF3221312",nama:"Sistem Digital",sks:3},{kode:"TIF3221113",nama:"Praktikum Sistem Digital",sks:1},{kode:"TIF3221314",nama:"Matematika Diskret",sks:3},{kode:"TIF3221315",nama:"Aljabar Linier dan Matriks",sks:3},{kode:"TIF3221316",nama:"Sistem Basis Data",sks:3},{kode:"TIF3221117",nama:"Praktikum Sistem Basis Data",sks:1}]},
+  3:{total:"21 SKS",items:[{kode:"TIF1221218",nama:"Islam dan IPTEKS",sks:2},{kode:"TIF1221265",nama:"Pancasila",sks:2},{kode:"TIF3221319",nama:"Sistem Operasi",sks:3},{kode:"TIF3221120",nama:"Praktikum Sistem Operasi",sks:1},{kode:"TIF3221321",nama:"Metode Numerik",sks:3},{kode:"TIF3221322",nama:"Pemrograman Berorientasi Obyek",sks:3},{kode:"TIF3221123",nama:"Praktikum Pemrograman Berorientasi Obyek",sks:1},{kode:"TIF3221324",nama:"Teori Bahasa dan Automata",sks:3},{kode:"TIF3221325",nama:"Komunikasi Data",sks:3}]},
+  4:{total:"21 SKS",items:[{kode:"TIF1221226",nama:"Bahasa Indonesia",sks:2},{kode:"TIF1221227",nama:"Kemuhammadiyahan",sks:2},{kode:"TIF3221328",nama:"Algoritma dan Struktur Data",sks:3},{kode:"TIF3221129",nama:"Praktikum Algoritma dan Struktur Data",sks:1},{kode:"TIF3221330",nama:"Pemrograman WEB",sks:3},{kode:"TIF3221131",nama:"Praktikum Pemrograman WEB",sks:1},{kode:"TIF3221332",nama:"Jaringan Komputer",sks:3},{kode:"TIF3221133",nama:"Praktikum Jaringan Komputer",sks:1},{kode:"TIF3221334",nama:"Rekayasa Perangkat Lunak",sks:3},{kode:"TIF3221235",nama:"Organisasi dan Arsitektur Komputer",sks:2}]},
+  5:{total:"11 SKS Wajib + 10 SKS Konsentrasi",items:[{kode:"TIF3221336",nama:"Pemrograman Web Berbasis Framework",sks:3},{kode:"TIF3221237",nama:"Infrastruktur dan Platform Sains Data",sks:2},{kode:"TIF3221338",nama:"Probabilitas dan Statistik",sks:3},{kode:"TIF3221339",nama:"Metodologi Penelitian dan Publikasi Ilmiah",sks:3,highlight:true},{kode:"—",nama:"— Konsentrasi RPL —",sks:0,consent:true},{kode:"TIF3221340",nama:"Manajemen Proyek Perangkat Lunak",sks:3,consent:true},{kode:"TIF3221341",nama:"Data Warehousing dan Data Mining",sks:3,consent:true},{kode:"TIF3221342",nama:"Praktikum Data Warehousing dan Data Mining",sks:1,consent:true},{kode:"TIF3221356",nama:"Analisis dan Perancangan Sistem",sks:3,consent:true},{kode:"—",nama:"— Konsentrasi SJ —",sks:0,consent:true},{kode:"TIF3221343",nama:"Administrasi Jaringan Komputer",sks:3,consent:true},{kode:"TIF3221344",nama:"Cloud Computing",sks:3,consent:true},{kode:"TIF3221345",nama:"Internet of Things",sks:3,consent:true},{kode:"TIF3221146",nama:"Praktikum Internet of Things",sks:1,consent:true},{kode:"—",nama:"— Konsentrasi SIC —",sks:0,consent:true},{kode:"TIF3221347",nama:"Kecerdasan Buatan / AI",sks:3,consent:true},{kode:"TIF3221348",nama:"Animasi Komputer",sks:3,consent:true},{kode:"TIF3221349",nama:"Virtual World",sks:3,consent:true}]},
+  6:{total:"13 SKS Wajib + Konsentrasi",items:[{kode:"TIF3221270",nama:"Praktek Kerja Nyata",sks:2},{kode:"TIF1221251",nama:"Kewarganegaraan",sks:2},{kode:"TIF3221352",nama:"Pemrograman Perangkat Mobile",sks:3},{kode:"TIF3221353",nama:"Sistem Multimedia",sks:3},{kode:"TIF3221354",nama:"Capstone Project",sks:3,highlight:true},{kode:"—",nama:"— Konsentrasi RPL —",sks:0,consent:true},{kode:"TIF3221355",nama:"Audit dan Tata Kelola TI",sks:3,consent:true},{kode:"TIF3221357",nama:"Pengujian Perangkat Lunak",sks:3,consent:true},{kode:"—",nama:"— Konsentrasi SJ —",sks:0,consent:true},{kode:"TIF3221358",nama:"Keamanan Jaringan Komputer",sks:3,consent:true},{kode:"TIF3221159",nama:"Praktikum Keamanan Jaringan Komputer",sks:1,consent:true},{kode:"TIF3221360",nama:"Perancangan Sistem Jaringan Komputer",sks:3,consent:true},{kode:"TIF3221161",nama:"Praktikum Perancangan Sistem Jaringan",sks:1,consent:true},{kode:"—",nama:"— Konsentrasi SIC —",sks:0,consent:true},{kode:"TIF3221362",nama:"Pemrograman Game",sks:3,consent:true},{kode:"TIF3221163",nama:"Praktikum Pemrograman Game",sks:1,consent:true},{kode:"TIF3221364",nama:"Machine Learning",sks:3,consent:true}]},
+  7:{total:"17 SKS",items:[{kode:"TIF2221266",nama:"Informatika Sosial",sks:2},{kode:"TIF3221367",nama:"Interaksi Manusia dan Komputer",sks:3},{kode:"TIF3221268",nama:"Etika & Hukum Profesi",sks:2},{kode:"TIF3221269",nama:"Technopreneurship",sks:2},{kode:"TIF1221250",nama:"Keterampilan Berkebidupan (Life Skill)",sks:2},{kode:"TIF32213XX",nama:"MK Pilihan 1",sks:3},{kode:"TIF32213XX",nama:"MK Pilihan 2",sks:3}]},
+  8:{total:"6 SKS",items:[{kode:"TIF3221371",nama:"Skripsi",sks:6,highlight:true}]}
+};
+
+const dayNames = {senin:'SENIN',selasa:'SELASA',rabu:'RABU',kamis:'KAMIS',jumat:'JUMAT'};
+const DAY_KEYS = ['minggu','senin','selasa','rabu','kamis','jumat','sabtu'];
+
+/* HELPER */
+function getTimeRange(jamKeStr){
+  const parts = jamKeStr.split('–').map(s=>parseInt(s.trim()));
+  const s = parts[0], e = parts[1];
+  const tMap = {1:"06.30",2:"07.20",3:"08.10",4:"09.00",5:"09.50",6:"10.40",7:"12.30",8:"13.20",9:"14.10",10:"15.30",11:"16.20",12:"17.10",13:"18.30",14:"19.20",15:"20.10"};
+  const eMap = {1:"07.20",2:"08.10",3:"09.00",4:"09.50",5:"10.40",6:"11.30",7:"13.20",8:"14.10",9:"15.00",10:"16.20",11:"17.10",12:"18.00",13:"19.20",14:"20.10",15:"21.00"};
+  return {start:tMap[s]||"-", end:eMap[e]||"-"};
+}
+function timeToMinutes(t){
+  const [h,m] = t.split('.').map(Number);
+  return h*60 + m;
+}
+
+/* NEXT CLASS + COUNTDOWN */
+function findNextClass(){
+  const now = new Date();
+  const nowMin = now.getHours()*60 + now.getMinutes();
+  const todayKey = DAY_KEYS[now.getDay()];
+  const todayClasses = scheduleData[todayKey] || [];
+
+  for(const c of todayClasses){
+    const r = getTimeRange(c.jamKe);
+    const sM = timeToMinutes(r.start), eM = timeToMinutes(r.end);
+    if(nowMin >= sM && nowMin < eM){
+      return {cls:c, dayOffset:0, startMin:sM, endMin:eM, ongoing:true};
+    }
+  }
+  for(const c of todayClasses){
+    const r = getTimeRange(c.jamKe);
+    const sM = timeToMinutes(r.start);
+    if(sM > nowMin){
+      return {cls:c, dayOffset:0, startMin:sM, ongoing:false};
+    }
+  }
+  for(let d=1; d<=7; d++){
+    const key = DAY_KEYS[(now.getDay()+d)%7];
+    const list = scheduleData[key] || [];
+    if(list.length > 0){
+      const c = list[0];
+      const r = getTimeRange(c.jamKe);
+      return {cls:c, dayOffset:d, startMin:timeToMinutes(r.start), ongoing:false};
+    }
+  }
+  return null;
+}
+function formatCountdown(info){
+  if(!info || info.ongoing) return null;
+  const now = new Date();
+  const nowMin = now.getHours()*60 + now.getMinutes();
+  const diff = info.dayOffset*1440 + info.startMin - nowMin;
+  if(diff <= 0) return null;
+  const d = Math.floor(diff/1440);
+  const h = Math.floor((diff%1440)/60);
+  const m = diff%60;
+  if(d > 0) return `${d} hari ${h}j ${m}m`;
+  return `${String(h).padStart(2,'0')}j ${String(m).padStart(2,'0')}m`;
+}
+
+/* TODAY SUMMARY */
+function renderTodaySummary(){
+  const container = document.getElementById('todaySummary');
+  const now = new Date();
+  const todayKey = DAY_KEYS[now.getDay()];
+  const todayClasses = scheduleData[todayKey] || [];
+  const bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  const tanggal = now.getDate()+' '+bulan[now.getMonth()]+' '+now.getFullYear();
+
+  const info = findNextClass();
+  let html = `<div class="today-header">
+    <div class="today-date">
+      <span class="day-name">${dayNames[todayKey]||todayKey.toUpperCase()}</span>
+      <span class="full-date">${tanggal}</span>
+    </div>
+    <div class="today-class-count">${icons.cal} ${todayClasses.length} Kelas</div>
+  </div>`;
+
+  if(info){
+    const r = getTimeRange(info.cls.jamKe);
+    const ongoing = info.ongoing;
+    const label = ongoing ? 'SEDANG BERLANGSUNG' : (info.dayOffset === 0 ? 'SELANJUTNYA' : 'KELAS BERIKUTNYA');
+    const cls = ongoing ? 'st-ongoing' : (info.dayOffset === 0 ? 'st-upcoming' : 'st-free');
+    const statusText = ongoing ? 'Sedang berlangsung' : (info.dayOffset === 0 ? 'Segera dimulai' : 'Di luar hari ini');
+    const cd = formatCountdown(info);
+
+    html += `<div class="today-next">
+      <div class="today-next-icon">${icons.arrowR}</div>
+      <div class="today-next-info">
+        <div class="today-next-label">${label}</div>
+        <div class="today-next-course">${info.cls.nama}</div>
+        <div class="today-next-time">${r.start}–${r.end} • ${info.cls.ruang} • ${info.cls.dosen}</div>
+        <span class="today-next-status ${cls}"><span class="dot"></span>${statusText}</span>
+        ${cd && !ongoing ? `<div class="today-next-countdown">
+          <span class="cd-label">Kelas berikutnya dalam</span>
+          <span class="cd-value" id="cdValue">${cd}</span>
+        </div>` : ''}
+      </div>
+    </div>`;
+  } else {
+    html += `<div class="today-next">
+      <div class="today-next-icon">${icons.calOff}</div>
+      <div class="today-next-info">
+        <div class="today-next-label">STATUS</div>
+        <div class="today-next-course">Tidak ada kelas tersisa minggu ini</div>
+        <div class="today-next-time">Selamat beristirahat</div>
+      </div>
+    </div>`;
+  }
+  container.innerHTML = html;
+}
+
+/* COUNTDOWN — update value + pop animation */
+function updateCountdown(){
+  const el = document.getElementById('cdValue');
+  if(!el) return;
+  const info = findNextClass();
+  const cd = formatCountdown(info);
+  if(cd && el.textContent !== cd){
+    el.textContent = cd;
+    el.classList.remove('cd-pop');
+    void el.offsetWidth;
+    el.classList.add('cd-pop');
+    setTimeout(()=>el.classList.remove('cd-pop'), 520);
+  }
+}
+
+/* SCHEDULE */
+let currentDayKey = 'senin';
+
+function renderSchedule(dayKey){
+  currentDayKey = dayKey;
+  const container = document.getElementById('scheduleContent');
+  const classes = scheduleData[dayKey]||[];
+  if(classes.length===0){
+    container.innerHTML = `<div class="empty-state"><h3>Tidak ada jadwal kuliah</h3><p>Hari ini tidak ada perkuliahan. Gunakan waktu untuk belajar mandiri atau istirahat.</p></div>`;
+    return;
+  }
+  const now = new Date();
+  const todayKey = DAY_KEYS[now.getDay()];
+  const isToday = dayKey === todayKey;
+  const nowMin = now.getHours()*60 + now.getMinutes();
+
+  let html='';
+  classes.forEach((c, i)=>{
+    const r=getTimeRange(c.jamKe);
+    const sM = timeToMinutes(r.start);
+    const eM = timeToMinutes(r.end);
+    const ongoing = isToday && nowMin >= sM && nowMin < eM;
+    html += `<div class="schedule-card${ongoing?' is-current':''}">
+      <div class="card-time">
+        <span class="card-time-value">${r.start}–${r.end}</span>
+        <span class="card-time-jam">Jam ke-${c.jamKe}</span>
+      </div>
+      <div class="card-main">
+        <div class="card-course">${c.nama}</div>
+        <div class="card-code">${c.kode} • ${c.sks} SKS</div>
+        <div class="card-meta">
+          <div class="card-meta-item">${icons.mapPin}<span>Ruang: <strong>${c.ruang}</strong></span></div>
+          <div class="card-meta-item">${icons.user}<span>${c.dosen}</span></div>
+        </div>
+      </div>
+      <div class="card-side"><div class="card-kelas-badge">${c.kelas}</div></div>
+    </div>`;
+  });
+  container.innerHTML=html;
+}
+
+function updateCurrentClassHighlight(){
+  const now = new Date();
+  const todayKey = DAY_KEYS[now.getDay()];
+  if(currentDayKey !== todayKey){
+    document.querySelectorAll('.schedule-card.is-current').forEach(el=>el.classList.remove('is-current'));
+    return;
+  }
+  const nowMin = now.getHours()*60 + now.getMinutes();
+  const classes = scheduleData[currentDayKey] || [];
+  const cards = document.querySelectorAll('#scheduleContent .schedule-card');
+  cards.forEach((card, i) => {
+    const c = classes[i];
+    if(!c) return;
+    const r = getTimeRange(c.jamKe);
+    const ongoing = nowMin >= timeToMinutes(r.start) && nowMin < timeToMinutes(r.end);
+    card.classList.toggle('is-current', ongoing);
+  });
+}
+
+/* WEEK OVERVIEW */
+function renderWeekOverview(){
+  const container=document.getElementById('weekOverview');
+  const days=['senin','selasa','rabu','kamis','jumat'];
+  let html='';
+  days.forEach(d=>{
+    const count=(scheduleData[d]||[]).length;
+    html += `<div class="overview-card ${count===0?'empty':''}">
+      <div class="day">${dayNames[d]}</div>
+      <div class="count">${count}</div>
+      <div class="count-label">${count===0?'Tidak ada kelas':'Kelas'}</div>
+    </div>`;
+  });
+  container.innerHTML=html;
+}
+
+/* MATERI */
+const MATERI_KEY='ums_materi_progress_v1';
+let materiProgress = JSON.parse(localStorage.getItem(MATERI_KEY)||'{}');
+function saveMateriProgress(){localStorage.setItem(MATERI_KEY, JSON.stringify(materiProgress));}
+function countDone(course){
+  const prog = materiProgress[course.kode] || {};
+  return course.topics.filter((_,i)=>prog[i]).length;
+}
+function renderMateriSidebar(){
+  const sidebar = document.getElementById('materiSidebar');
+  let html = '<div class="materi-sidebar-title">Daftar Mata Kuliah</div>';
+  materiData.forEach((c,i)=>{
+    const done = countDone(c);
+    const total = c.topics.length;
+    html += `<button class="materi-item ${i===0?'active':''}" data-kode="${c.kode}">
+      <div class="materi-item-num">${String(i+1).padStart(2,'0')}</div>
+      <div class="materi-item-info">
+        <div class="materi-item-name">${c.nama}</div>
+        <div class="materi-item-code">${c.kode} • ${c.sks} SKS</div>
+      </div>
+      <div class="materi-item-count">${done}/${total}</div>
+    </button>`;
+  });
+  sidebar.innerHTML = html;
+  sidebar.querySelectorAll('.materi-item').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      sidebar.querySelectorAll('.materi-item').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      renderMateriMain(btn.dataset.kode);
+    });
+  });
+}
+function renderMateriMain(kode){
+  const container = document.getElementById('materiMain');
+  const course = materiData.find(c=>c.kode===kode);
+  if(!course){container.innerHTML = '<div class="materi-loading">Pilih mata kuliah untuk melihat materi.</div>';return;}
+  const prog = materiProgress[course.kode] || {};
+  const doneCount = course.topics.filter((_,i)=>prog[i]).length;
+  const totalCount = course.topics.length;
+  const pct = totalCount>0 ? Math.round((doneCount/totalCount)*100) : 0;
+  const drivePreview = `https://drive.google.com/file/d/${course.driveId}/preview`;
+  let topicsHtml = '';
+  course.topics.forEach((t,i)=>{
+    const isDone = prog[i] ? 'checked' : '';
+    const isDoneClass = prog[i] ? 'done' : '';
+    topicsHtml += `<label class="materi-topic ${isDoneClass}">
+      <input type="checkbox" data-idx="${i}" ${isDone} aria-label="Tandai selesai: ${t.nama}">
+      <span class="materi-topic-num">${String(i+1).padStart(2,'0')}</span>
+      <span class="materi-topic-body">
+        <span class="materi-topic-name">${t.nama}</span>
+        <span class="materi-topic-desc">${t.desc}</span>
+      </span>
+    </label>`;
+  });
+  container.innerHTML = `
+    <div class="materi-header">
+      <div class="materi-header-top">
+        <div>
+          <h3>${course.nama}</h3>
+          <div class="materi-header-code">${course.kode} • ${course.sks} SKS • Kelas ${course.kelas}</div>
+          <div class="materi-header-meta"><span>${icons.user} ${course.dosen}</span></div>
+        </div>
+        <div class="materi-actions">
+          ${course.kode === 'TIF3221308' ? `<a href="materi-lohim.html" target="_blank" rel="noopener noreferrer" class="materi-action-btn primary" style="background:var(--teal);border-color:var(--teal);color:#fff">${icons.award} Rangkuman Interaktif &amp; Simulator</a>` : ''}
+          <a href="${course.link}" target="_blank" rel="noopener noreferrer" class="materi-action-btn primary">${icons.extLink} Buka di Drive</a>
+          <a href="${course.link.replace('/view?usp=drivesdk','/export?format=pdf')}" target="_blank" rel="noopener noreferrer" class="materi-action-btn">${icons.download} Unduh PDF</a>
+        </div>
+      </div>
+    </div>
+    <div class="materi-tabs" role="tablist">
+      <button class="materi-tab active" data-tab="viewer" role="tab" aria-selected="true">${icons.fileText} Viewer Materi</button>
+      ${course.kode === 'TIF3221308' ? `<button class="materi-tab" data-tab="interactive" role="tab" aria-selected="false">${icons.award} Rangkuman Interaktif (P1–P5)</button>` : ''}
+      <button class="materi-tab" data-tab="topics" role="tab" aria-selected="false">${icons.list} Topik Pembelajaran</button>
+    </div>
+    <div class="materi-panel active" data-panel="viewer">
+      <div class="materi-viewer-wrap"><iframe src="${drivePreview}" title="Materi ${course.nama}" loading="lazy" allow="autoplay; encrypted-media" referrerpolicy="no-referrer"></iframe></div>
+      <p class="materi-viewer-note">Jika viewer tidak muncul, klik tombol "Buka di Drive" di atas.</p>
+    </div>
+    ${course.kode === 'TIF3221308' ? `
+    <div class="materi-panel" data-panel="interactive">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;padding:12px 16px;background:#F0FDFA;border:1px solid #CCFBF1;border-radius:var(--rb);flex-wrap:wrap;">
+        <div>
+          <strong style="color:var(--navy);font-size:14px;display:block">Modul Interaktif: Logika dan Himpunan (Pertemuan 1 s.d. 5)</strong>
+          <span style="font-size:12.5px;color:var(--ts)">Rangkuman komprehensif berdasar slide dosen Reinal Ariyuda, B.Eng., M.Eng. dengan tabel kebenaran T-First &amp; simulator inferensi.</span>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <a href="materi-lohim.html#quiz" target="_blank" rel="noopener noreferrer" class="materi-action-btn" style="background:var(--gold);border-color:var(--gold);color:var(--navy);font-weight:700">
+            🎯 Bank Kuis &amp; Simulasi UTS
+          </a>
+          <a href="materi-lohim.html" target="_blank" rel="noopener noreferrer" class="materi-action-btn" style="background:#fff;border-color:#99F6E4;color:var(--teal);font-weight:700">
+            ${icons.extLink} Buka Tab Penuh
+          </a>
+        </div>
+      </div>
+      <div class="materi-viewer-wrap" style="height:760px;margin-bottom:0">
+        <iframe src="materi-lohim.html" title="Materi Interaktif Logika dan Himpunan" style="width:100%;height:760px;border:none"></iframe>
+      </div>
+    </div>` : ''}
+    <div class="materi-panel" data-panel="topics">
+      <div class="materi-topics-header">
+        <h4>Topik dari RPS (${doneCount}/${totalCount} selesai)</h4>
+        <div class="materi-progress">
+          <div class="materi-progress-bar"><div class="materi-progress-fill" style="width:${pct}%"></div></div>
+          <span>${pct}%</span>
+        </div>
+      </div>
+      <div class="materi-topics">${topicsHtml}</div>
+    </div>
+  `;
+  container.querySelectorAll('.materi-tab').forEach(tab=>{
+    tab.addEventListener('click',()=>{
+      container.querySelectorAll('.materi-tab').forEach(t=>{t.classList.remove('active');t.setAttribute('aria-selected','false')});
+      tab.classList.add('active');tab.setAttribute('aria-selected','true');
+      container.querySelectorAll('.materi-panel').forEach(p=>p.classList.remove('active'));
+      container.querySelector(`.materi-panel[data-panel="${tab.dataset.tab}"]`).classList.add('active');
+    });
+  });
+  container.querySelectorAll('.materi-topic input[type=checkbox]').forEach(cb=>{
+    cb.addEventListener('change',e=>{
+      const idx = +e.target.dataset.idx;
+      if(!materiProgress[course.kode]) materiProgress[course.kode] = {};
+      materiProgress[course.kode][idx] = e.target.checked;
+      saveMateriProgress();
+      const topic = e.target.closest('.materi-topic');
+      topic.classList.toggle('done', e.target.checked);
+      renderMateriSidebar();
+      const activeBtn = document.querySelector(`.materi-item[data-kode="${course.kode}"]`);
+      if(activeBtn) activeBtn.classList.add('active');
+      const newDone = course.topics.filter((_,i)=>materiProgress[course.kode][i]).length;
+      const newTotal = course.topics.length;
+      const newPct = newTotal>0 ? Math.round((newDone/newTotal)*100) : 0;
+      const headerH4 = container.querySelector('.materi-topics-header h4');
+      const progressFill = container.querySelector('.materi-progress-fill');
+      const progressPct = container.querySelector('.materi-progress span');
+      if(headerH4) headerH4.textContent = `Topik dari RPS (${newDone}/${newTotal} selesai)`;
+      if(progressFill) progressFill.style.width = newPct+'%';
+      if(progressPct) progressPct.textContent = newPct+'%';
+    });
+  });
+}
+function initMateri(){
+  renderMateriSidebar();
+  if(materiData.length>0) renderMateriMain(materiData[0].kode);
+}
+
+/* SILABUS */
+function renderSilabusSidebar(){
+  const sidebar = document.getElementById('silabusSidebar');
+  let html = '<div class="silabus-sidebar-title">Daftar Mata Kuliah</div>';
+  krsData.forEach((c,i)=>{
+    const hasSilabus = !!silabusData[c.kode];
+    const itemCount = hasSilabus ? silabusData[c.kode].items.length : 0;
+    const badgeText = hasSilabus ? `${itemCount} pertemuan` : '—';
+    html += `<button class="silabus-item ${i===0?'active':''}" data-kode="${c.kode}">
+      <div class="silabus-item-num">${String(i+1).padStart(2,'0')}</div>
+      <div class="silabus-item-info">
+        <div class="silabus-item-name">${c.nama}</div>
+        <div class="silabus-item-code">${c.kode} • ${c.sks} SKS</div>
+      </div>
+      <div class="silabus-item-count">${badgeText}</div>
+    </button>`;
+  });
+  sidebar.innerHTML = html;
+  sidebar.querySelectorAll('.silabus-item').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      sidebar.querySelectorAll('.silabus-item').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      renderSilabusMain(btn.dataset.kode);
+    });
+  });
+}
+function renderSilabusMain(kode){
+  const container = document.getElementById('silabusMain');
+  const course = krsData.find(c=>c.kode===kode);
+  if(!course){container.innerHTML='<div class="silabus-empty"><p>Pilih mata kuliah.</p></div>';return;}
+
+  const data = silabusData[kode];
+
+  if(!data){
+    container.innerHTML = `
+      <div class="silabus-header">
+        <h3>${course.nama}</h3>
+        <div class="silabus-header-code">${course.kode} • ${course.sks} SKS • Kelas ${course.kelas}</div>
+        <div class="silabus-header-meta"><span>${icons.user} ${course.dosen}</span></div>
+      </div>
+      <div class="silabus-empty">
+        ${icons.clipboard}
+        <h4>Silabus belum tersedia</h4>
+        <p>Silabus untuk mata kuliah ini belum diunggah. Silakan cek kembali nanti, atau minta dosen pengampu untuk membagikan silabus resminya.</p>
+      </div>
+    `;
+    return;
+  }
+
+  let rowsHtml = '';
+  data.items.forEach((item, idx)=>{
+    if(item.tipe === 'uts' || item.tipe === 'uas'){
+      rowsHtml += `<div class="silabus-row ${item.tipe}">
+        <div class="silabus-row-head"><span class="materi-title">${item.materi}</span></div>
+      </div>`;
+    } else {
+      const hasDetail = item.detail ? 'has-detail' : '';
+      const chevIcon = item.detail ? `<span class="chev">${icons.chevSmall}</span>` : '';
+      rowsHtml += `<div class="silabus-row ${hasDetail}" data-idx="${idx}">
+        <div class="silabus-row-head">
+          <span class="num">${item.pertemuan}</span>
+          <div class="content">
+            <div class="materi-title">${item.materi}</div>
+            <div class="materi-desc">${item.desc || ''}</div>
+          </div>
+          ${chevIcon}
+        </div>
+        ${item.detail ? `<div class="silabus-row-detail">${item.detail}</div>` : ''}
+      </div>`;
+    }
+  });
+
+  container.innerHTML = `
+    <div class="silabus-header">
+      <h3>${data.nama}</h3>
+      <div class="silabus-header-code">${data.kode} • ${data.sks} SKS • Kelas ${data.kelas}</div>
+      <div class="silabus-header-meta">
+        <span>${icons.user} ${data.dosen}</span>
+        <span>${icons.list} ${data.items.length} pertemuan</span>
+      </div>
+    </div>
+    <div class="silabus-body">
+      <div class="silabus-table">${rowsHtml}</div>
+    </div>
+  `;
+
+  container.querySelectorAll('.silabus-row.has-detail').forEach(row=>{
+    const head = row.querySelector('.silabus-row-head');
+    head.addEventListener('click', ()=>{row.classList.toggle('open');});
+  });
+}
+function initSilabus(){
+  renderSilabusSidebar();
+  renderSilabusMain(krsData[0].kode);
+}
+
+/* COURSE ACCORDION */
+function renderCourseList(){
+  const container=document.getElementById('courseList');
+  let html='';
+  krsData.forEach((c,idx)=>{
+    let badge = '';
+    if(c.nonSched) badge = '<span class="tag-wajib">Non-Jadwal</span>';
+
+    let skalaHtml = '';
+    if(c.skalaNilai){
+      skalaHtml = `<div class="acc-block"><h5>Skala Nilai Akhir</h5><div class="skala-grid">
+        ${c.skalaNilai.map(s=>`<div class="skala-item ${s.kategori}"><span class="grade">${s.grade}</span><span class="range">${s.range}</span></div>`).join('')}
+      </div></div>`;
+    }
+
+    let evalHtml = '';
+    if(c.evalDetail){
+      evalHtml = `<div class="acc-block"><h5>Detail Evaluasi Perkuliahan</h5><div class="eval-table">
+        ${c.evalDetail.map(e=>`<div class="eval-row ${e.highlight?'highlight':''}">
+          <span class="komponen">${e.komponen}</span>
+          <span class="sumber">${e.sumber}</span>
+          <span class="bobot">${e.bobot}</span>
+        </div>`).join('')}
+      </div></div>`;
+    }
+
+    html += `<div class="course-acc" data-idx="${idx}">
+      <button class="course-acc-header" aria-expanded="false">
+        <div class="course-acc-info">
+          <div class="course-acc-name">${c.nama} ${badge}</div>
+          <div class="course-acc-code">${c.kode} • ${c.sks} SKS</div>
+          <div class="course-acc-meta">
+            <span>${icons.cal} ${c.jadwal}</span>
+            ${!c.nonSched?`<span>${icons.mapPin} ${c.ruang}</span>`:''}
+            ${!c.nonSched?`<span>${icons.user} ${c.dosen}</span>`:''}
+          </div>
+        </div>
+        <div class="course-acc-right">
+          <div class="course-acc-badge">${c.kelas}</div>
+          <div class="course-acc-chevron">${icons.chev}</div>
+        </div>
+      </button>
+      <div class="course-acc-body">
+        <div class="course-acc-inner">
+          <div class="acc-block"><h5>Dosen Pengampu (STAR UMS)</h5><p>${c.dosen}</p></div>
+          <div class="acc-block"><h5>Dosen Pengembang RPS</h5><div class="acc-rps-note"><span><strong>${c.pengembangRPS}</strong></span><span style="font-size:12px;color:var(--ts);">RPS ini menjadi acuan materi perkuliahan kelasmu, meskipun dosen pengampu kelas berbeda.</span></div></div>
+          <div class="acc-block"><h5>Tentang Mata Kuliah</h5><p>${c.deskripsi}</p></div>
+          <div class="acc-block"><h5>Capaian Pembelajaran</h5><ul>${c.capaian.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+          <div class="acc-block"><h5>Referensi &amp; Sumber Belajar</h5><div class="acc-ref">${c.referensi.map(r=>`<div class="acc-ref-item"><span class="tag">${r.tag}</span><span>${r.text}</span></div>`).join('')}</div></div>
+          ${evalHtml}
+          ${skalaHtml}
+          ${c.bobot?`<div class="acc-block"><h5>Ringkasan Bobot</h5><div class="acc-tip">${c.bobot}</div></div>`:''}
+          <div class="acc-block"><h5>Tips Praktis</h5><div class="acc-tip">${c.tips}</div></div>
+        </div>
+      </div>
+    </div>`;
+  });
+  container.innerHTML=html;
+  container.querySelectorAll('.course-acc-header').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const parent = btn.closest('.course-acc');
+      const isOpen = parent.classList.contains('open');
+      container.querySelectorAll('.course-acc').forEach(a=>{
+        a.classList.remove('open');
+        a.querySelector('.course-acc-header').setAttribute('aria-expanded','false');
+      });
+      if(!isOpen){parent.classList.add('open');btn.setAttribute('aria-expanded','true');}
+    });
+  });
+}
+
+/* PETA STUDI */
+function renderPetaStudi(){
+  const tabsContainer = document.getElementById('semesterTabs');
+  const contentContainer = document.getElementById('semesterContent');
+  let tabsHtml = '';
+  for(let i=1;i<=8;i++) tabsHtml += `<button class="sem-tab ${i===1?'active':''}" data-sem="${i}">Semester ${i}</button>`;
+  tabsContainer.innerHTML = tabsHtml;
+  let contentHtml = '';
+  for(let i=1;i<=8;i++){
+    const data = kurikulumData[i];
+    const isActive = i===1 ? 'active' : '';
+    contentHtml += `<div class="sem-content ${isActive}" data-sem="${i}">
+      <div class="sem-info"><span>${icons.cal} <strong>Total: ${data.total}</strong></span></div>
+      <div class="sem-list">
+        ${data.items.map(item=>{
+          if(item.kode === '—') return `<div class="sem-item" style="background:var(--bg);border:none;padding:var(--sp2) var(--sp4);"><span class="name" style="font-weight:700;color:var(--navy);font-size:12px;letter-spacing:.05em;text-transform:uppercase;">${item.nama}</span></div>`;
+          const cls = item.highlight ? 'highlight' : (item.consent ? 'consent' : '');
+          return `<div class="sem-item ${cls}"><span class="code">${item.kode}</span><span class="name">${item.nama}</span><span class="sks-badge">${item.sks} SKS</span></div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }
+  contentContainer.innerHTML = contentHtml;
+  tabsContainer.querySelectorAll('.sem-tab').forEach(tab=>{
+    tab.addEventListener('click',()=>{
+      tabsContainer.querySelectorAll('.sem-tab').forEach(t=>t.classList.remove('active'));
+      tab.classList.add('active');
+      contentContainer.querySelectorAll('.sem-content').forEach(c=>c.classList.remove('active'));
+      contentContainer.querySelector(`.sem-content[data-sem="${tab.dataset.sem}"]`).classList.add('active');
+    });
+  });
+}
+
+/* TO-DO */
+const TODO_KEY='ums_todo_v1';
+let todos = JSON.parse(localStorage.getItem(TODO_KEY)||'[]');
+function saveTodos(){localStorage.setItem(TODO_KEY,JSON.stringify(todos))}
+function renderTodos(){
+  const list=document.getElementById('todoList');
+  if(todos.length===0){list.innerHTML='<div class="todo-empty">Belum ada tugas. Tambahkan yang pertama!</div>';return;}
+  list.innerHTML = todos.map((t,i)=>`<li class="todo-item ${t.done?'done':''}"><input type="checkbox" ${t.done?'checked':''} data-i="${i}"><label>${t.text}</label><button class="todo-del" data-i="${i}">${icons.trash}</button></li>`).join('');
+  list.querySelectorAll('input[type=checkbox]').forEach(cb=>{
+    cb.addEventListener('change',e=>{const i=+e.target.dataset.i;todos[i].done=e.target.checked;saveTodos();renderTodos();});
+  });
+  list.querySelectorAll('.todo-del').forEach(b=>{
+    b.addEventListener('click',e=>{const i=+e.currentTarget.dataset.i;todos.splice(i,1);saveTodos();renderTodos();});
+  });
+}
+document.getElementById('todoAdd').addEventListener('click',()=>{
+  const inp=document.getElementById('todoInput');
+  const v=inp.value.trim();
+  if(!v)return;
+  todos.push({text:v,done:false});
+  inp.value='';saveTodos();renderTodos();
+});
+document.getElementById('todoInput').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('todoAdd').click();});
+
+/* POMODORO */
+let pomoInterval=null, pomoRemaining=25*60, pomoRunning=false;
+const pomoDisplay=document.getElementById('pomoDisplay');
+const pomoLabel=document.getElementById('pomoLabel');
+const pomoStart=document.getElementById('pomoStart');
+function updatePomoDisplay(){
+  const m=Math.floor(pomoRemaining/60), s=pomoRemaining%60;
+  pomoDisplay.textContent = String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+}
+function setPomoMode(mode,min,btn){
+  document.querySelectorAll('.pomo-mode-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  pomoRemaining = min*60;updatePomoDisplay();
+  const labels={focus:'Waktu Fokus',short:'Istirahat Pendek',long:'Istirahat Panjang'};
+  pomoLabel.textContent = labels[mode];
+  if(pomoRunning){clearInterval(pomoInterval);pomoRunning=false;pomoStart.textContent='Mulai';}
+}
+document.querySelectorAll('.pomo-mode-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{setPomoMode(btn.dataset.mode, +btn.dataset.min, btn);});
+});
+pomoStart.addEventListener('click',()=>{
+  if(pomoRunning){clearInterval(pomoInterval);pomoRunning=false;pomoStart.textContent='Lanjut';}
+  else{
+    pomoRunning=true;pomoStart.textContent='Jeda';
+    pomoInterval=setInterval(()=>{
+      pomoRemaining--;updatePomoDisplay();
+      if(pomoRemaining<=0){
+        clearInterval(pomoInterval);pomoRunning=false;pomoStart.textContent='Mulai';
+        try{const ctx=new (window.AudioContext||window.webkitAudioContext)();const osc=ctx.createOscillator();osc.frequency.value=800;osc.connect(ctx.destination);osc.start();setTimeout(()=>osc.stop(),300);}catch(e){}
+      }
+    },1000);
+  }
+});
+document.getElementById('pomoReset').addEventListener('click',()=>{
+  clearInterval(pomoInterval);pomoRunning=false;pomoStart.textContent='Mulai';
+  const active=document.querySelector('.pomo-mode-btn.active');
+  pomoRemaining = +active.dataset.min*60;updatePomoDisplay();
+});
+updatePomoDisplay();
+
+/* IPK */
+const IPK_KEY='ums_ipk_v1';
+const gradeMap={'A':4,'AB':3.5,'A-':3.7,'B+':3.3,'B':3,'BC':2.5,'B-':2.7,'C+':2.3,'C':2,'D':1,'E':0};
+const grades=['','A','AB','A-','B+','B','BC','B-','C+','C','D','E'];
+let ipkData = JSON.parse(localStorage.getItem(IPK_KEY)||'{}');
+function renderIPK(){
+  const container=document.getElementById('ipkCourses');
+  const gradeable = krsData.filter(c => c.sks > 0);
+  container.innerHTML = gradeable.map(c=>{
+    const key=c.kode;
+    const cur=ipkData[key]||'';
+    return `<div class="ipk-row"><div class="ipk-name" title="${c.nama}">${c.nama} <span style="color:#98A2B3">(${c.sks} SKS)</span></div><select data-key="${key}" aria-label="Nilai ${c.nama}">${grades.map(g=>`<option value="${g}" ${cur===g?'selected':''}>${g||'—'}</option>`).join('')}</select></div>`;
+  }).join('');
+  container.querySelectorAll('select').forEach(sel=>{
+    sel.addEventListener('change',e=>{
+      const k=e.target.dataset.key;
+      if(e.target.value)ipkData[k]=e.target.value;
+      else delete ipkData[k];
+      localStorage.setItem(IPK_KEY,JSON.stringify(ipkData));
+      computeIPK();
+    });
+  });
+  computeIPK();
+}
+function computeIPK(){
+  let totalSKS=0,totalPoin=0;
+  krsData.filter(c=>c.sks>0).forEach(c=>{
+    const g=ipkData[c.kode];
+    if(g && gradeMap[g]!==undefined){totalSKS += c.sks;totalPoin += c.sks * gradeMap[g];}
+  });
+  const ipk = totalSKS>0 ? (totalPoin/totalSKS) : 0;
+  document.getElementById('ipkTotalSKS').textContent = totalSKS;
+  document.getElementById('ipkValue').textContent = ipk.toFixed(2);
+}
+
+/* NOTES */
+const NOTES_KEY='ums_notes_v1';
+const notesArea=document.getElementById('notesArea');
+const notesStatus=document.getElementById('notesStatus');
+notesArea.value = localStorage.getItem(NOTES_KEY)||'';
+let notesTimer=null;
+notesArea.addEventListener('input',()=>{
+  notesStatus.textContent='Mengetik...';
+  clearTimeout(notesTimer);
+  notesTimer=setTimeout(()=>{
+    localStorage.setItem(NOTES_KEY,notesArea.value);
+    notesStatus.textContent='Tersimpan '+new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
+  },500);
+});
+
+/* EXPORT ICS */
+document.getElementById('exportICS').addEventListener('click',()=>{
+  const dayMapICS={senin:0,selasa:1,rabu:2,kamis:3,jumat:4};
+  const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Jadwal Kuliah UMS//ID','CALSCALE:GREGORIAN','METHOD:PUBLISH'];
+  const baseDate=new Date(2026,8,14);
+  Object.keys(scheduleData).forEach(dk=>{
+    const dayIdx = dayMapICS[dk];
+    (scheduleData[dk]||[]).forEach(c=>{
+      const r=getTimeRange(c.jamKe);
+      const [sh,sm]=r.start.split('.').map(Number);
+      const [eh,em]=r.end.split('.').map(Number);
+      const date=new Date(baseDate);
+      date.setDate(baseDate.getDate()+dayIdx);
+      const dtStart=`${date.getFullYear()}${String(date.getMonth()+1).padStart(2,'0')}${String(date.getDate()).padStart(2,'0')}T${String(sh).padStart(2,'0')}${String(sm).padStart(2,'0')}00`;
+      const dtEnd=`${date.getFullYear()}${String(date.getMonth()+1).padStart(2,'0')}${String(date.getDate()).padStart(2,'0')}T${String(eh).padStart(2,'0')}${String(em).padStart(2,'0')}00`;
+      lines.push('BEGIN:VEVENT',`UID:${c.kode}-${dk}@jadwalkuliah`,`DTSTAMP:${new Date().toISOString().replace(/[-:]/g,'').split('.')[0]}Z`,`DTSTART;TZID=Asia/Jakarta:${dtStart}`,`DTEND;TZID=Asia/Jakarta:${dtEnd}`,`RRULE:FREQ=WEEKLY;COUNT=16`,`SUMMARY:${c.nama}`,`LOCATION:${c.ruang}`,`DESCRIPTION:Kode: ${c.kode}\\nDosen: ${c.dosen}\\nKelas: ${c.kelas}`,'END:VEVENT');
+    });
+  });
+  lines.push('END:VCALENDAR');
+  const blob=new Blob([lines.join('\r\n')],{type:'text/calendar;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download='jadwal-kuliah-ums.ics';a.click();
+  URL.revokeObjectURL(url);
+});
+
+/* NAV */
+function initTabs(){
+  document.querySelectorAll('.day-tab').forEach(tab=>{
+    tab.addEventListener('click',()=>{
+      document.querySelectorAll('.day-tab').forEach(t=>{t.classList.remove('active');t.setAttribute('aria-selected','false')});
+      tab.classList.add('active');tab.setAttribute('aria-selected','true');
+      renderSchedule(tab.dataset.day);
+    });
+  });
+}
+function initMenu(){
+  const toggle=document.getElementById('menuToggle');
+  const nav=document.getElementById('headerNav');
+  toggle.addEventListener('click',()=>{
+    const open=nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded',open);
+  });
+  nav.querySelectorAll('a').forEach(a=>{
+    a.addEventListener('click',()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');});
+  });
+}
+function initScrollSpy(){
+  const sections=['today','weekly','materi','silabus','courses','peta','konsentrasi','tools','roadmap'];
+  const navLinks=document.querySelectorAll('.header-nav a');
+  const header = document.getElementById('siteHeader');
+  let ticking = false;
+  window.addEventListener('scroll',()=>{
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(()=>{
+      header.classList.toggle('scrolled', window.scrollY > 8);
+      let current='today';
+      sections.forEach(id=>{
+        const el=document.getElementById(id);
+        if(el && el.getBoundingClientRect().top<=120) current=id;
+      });
+      navLinks.forEach(a=>{
+        a.classList.toggle('active', a.getAttribute('href')==='#'+current);
+      });
+      ticking = false;
+    });
+  }, {passive:true});
+}
+
+/* SCROLL REVEAL — IntersectionObserver, once only */
+function initReveal(){
+  const els = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){
+    els.forEach(el=>el.classList.add('is-visible'));
+    return;
+  }
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+  els.forEach(el=>io.observe(el));
+}
+
+/* STAGGER DELAY OTOMATIS */
+function applyStaggerDelays(){
+  document.querySelectorAll('.reveal').forEach(section=>{
+    const kids = section.querySelectorAll(
+      '.overview-card, .course-acc, .roadmap-item, .strategy-card, .consent-card, .guide-card'
+    );
+    kids.forEach((el, i)=>{
+      el.style.transitionDelay = (i * 90) + 'ms';
+    });
+  });
+}
+
+/* INIT */
+document.addEventListener('DOMContentLoaded',()=>{
+  renderTodaySummary();
+  renderSchedule('senin');
+  renderWeekOverview();
+  initMateri();
+  initSilabus();
+  renderCourseList();
+  renderPetaStudi();
+  renderTodos();
+  renderIPK();
+  initTabs();
+  initMenu();
+  initScrollSpy();
+  initReveal();
+  applyStaggerDelays();
+
+  // Real-time updates
+  setInterval(updateCountdown, 15000);
+  setInterval(updateCurrentClassHighlight, 20000);
+  setInterval(renderTodaySummary, 180000);
+});
+</script>
+</body>
+</html>

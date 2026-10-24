@@ -1,0 +1,3170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Logika dan Himpunan (TIF322103) — Catatan Perkuliahan &amp; Diktat Lengkap</title>
+
+<!-- Fonts: Plus Jakarta Sans (Headings/Sydney Style) & Inter (Body/Volta Style) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+
+<style>
+/* ==========================================================================
+   DESIGN TOKENS: MANDARINKU EDITORIAL + VOLTA DEEP NAVY & WARM CREAM
+   ========================================================================== */
+:root {
+  --bg1: #0C1830;
+  --bg2: #08101F;
+  --panel: #0F1D33;
+  --panel-hover: #13243F;
+  --line: #22355C;
+  --line-soft: #1B2B4A;
+  --cream: #F7F0E1;
+  --cream-line: #E2D6BD;
+  --zh: #131E33;
+  --ink-on-cream: #232F47;
+  --note: #6E6350;
+  --btn: #16233E;
+  --btn-dk: #0E1B30;
+  --warm: #E5A144;
+  --coral: #E96A4E;
+  --txt: #E9EDF5;
+  --muted: #8F9BB5;
+  --muted-2: #7F8CAB;
+  --mono: ui-monospace, 'Cascadia Mono', 'SF Mono', Consolas, monospace;
+  --serif: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+  --sans: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --ok: #4FBE86;
+  --container-max: 1220px;
+  --radius-sm: 3px;
+  --radius-md: 4px;
+}
+
+/* Reset & Basics */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.7;
+  background: linear-gradient(180deg, var(--bg1), var(--bg2)) fixed;
+  color: var(--txt);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--warm);
+  color: var(--zh);
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--serif);
+  font-weight: 600;
+  color: var(--cream);
+  letter-spacing: .01em;
+}
+
+a {
+  color: var(--warm);
+  text-decoration: none;
+  transition: .15s;
+}
+a:hover {
+  color: var(--cream);
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ==========================================================================
+   TOPBAR & HEADER (Mandarinku / Sydney Clean Navigation)
+   ========================================================================== */
+.sydney-topbar {
+  background: #08101F;
+  color: var(--muted);
+  font-size: 12.5px;
+  border-bottom: 1px solid var(--line);
+  padding: 8px 0;
+}
+.sydney-topbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.topbar-badge {
+  background: rgba(229, 161, 68, 0.12);
+  color: var(--warm);
+  border: 1px solid rgba(229, 161, 68, 0.3);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+.topbar-back {
+  color: var(--muted-2);
+  font-family: var(--mono);
+  font-size: 11.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 150ms ease;
+}
+.topbar-back:hover {
+  color: var(--cream);
+}
+
+.sydney-header {
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  background: rgba(12, 24, 48, 0.96);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 66px;
+}
+.brand-group {
+  display: flex;
+  flex-direction: column;
+}
+.brand-title {
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--cream);
+  letter-spacing: -0.01em;
+}
+.brand-subtitle {
+  font-size: 11.5px;
+  color: var(--muted);
+  font-family: var(--mono);
+  letter-spacing: 0.02em;
+}
+
+.sydney-nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.sydney-nav::-webkit-scrollbar { display: none; }
+.nav-link {
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: .03em;
+  color: var(--muted-2);
+  padding: 10px 14px 9px;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: all 150ms ease;
+}
+.nav-link:hover {
+  color: var(--cream);
+}
+.nav-link.active {
+  color: var(--cream);
+  border-bottom-color: var(--warm);
+}
+.nav-link.btn-cta {
+  color: var(--warm);
+  border-bottom-color: transparent;
+  font-weight: 700;
+}
+.nav-link.btn-cta:hover {
+  border-bottom-color: var(--warm);
+  color: var(--cream);
+}
+
+/* ==========================================================================
+   MASTHEAD / HERO (Mandarinku Style: Monospace Kicker, Serif Title, Streak Bar)
+   ========================================================================== */
+.sydney-hero {
+  background: linear-gradient(180deg, #0F1D33 0%, #0C1830 100%);
+  border-bottom: 1px solid var(--line);
+  padding: 44px 0 38px;
+  position: relative;
+}
+.hero-content {
+  max-width: 900px;
+}
+.hero-breadcrumbs {
+  font: 600 11px var(--mono);
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--warm);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.hero-breadcrumbs a {
+  color: var(--muted);
+}
+.hero-breadcrumbs a:hover {
+  color: var(--warm);
+}
+.hero-breadcrumbs span {
+  color: var(--warm);
+}
+.hero-title {
+  font-family: var(--serif);
+  font-size: 38px;
+  font-weight: 600;
+  color: var(--cream);
+  letter-spacing: .01em;
+  margin-bottom: 12px;
+  line-height: 1.25;
+}
+.hero-desc {
+  font-size: 15px;
+  color: #CBD5E1;
+  line-height: 1.7;
+  margin-bottom: 22px;
+}
+.hero-meta-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  padding: 12px 18px;
+  background: #08101F;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  font: 600 12px var(--mono);
+  letter-spacing: .04em;
+  color: var(--warm);
+}
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.meta-item strong {
+  color: var(--cream);
+  font-weight: 600;
+}
+.meta-item .gold-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--warm);
+}
+
+/* ==========================================================================
+   TWO-COLUMN EDITORIAL ARCHITECTURE
+   ========================================================================== */
+.sydney-layout {
+  display: grid;
+  grid-template-columns: 290px 1fr;
+  gap: 36px;
+  align-items: start;
+  padding: 38px 0 64px;
+}
+@media (max-width: 992px) {
+  .sydney-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+/* ==========================================================================
+   STICKY SIDEBAR (Mandarinku / Sydney Widget Style)
+   ========================================================================== */
+.sydney-sidebar {
+  position: sticky;
+  top: 86px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.sydney-widget {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.widget-title {
+  font: 700 11px var(--mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--warm);
+  padding: 12px 16px;
+  background: #08101F;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.widget-body {
+  padding: 16px;
+}
+
+/* Search Input — Mandarinku Underline Only */
+.widget-search {
+  position: relative;
+}
+.widget-search input {
+  width: 100%;
+  padding: 10px 4px;
+  font-family: inherit;
+  font-size: 13.5px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  color: var(--cream);
+  outline: none;
+  transition: border-bottom-color 150ms ease;
+}
+.widget-search input::placeholder {
+  color: #6C7A9C;
+}
+.widget-search input:focus {
+  border-bottom-color: var(--warm);
+}
+
+/* TOC Navigation List */
+.toc-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.toc-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted-2);
+  transition: all 120ms ease;
+}
+.toc-link:hover {
+  background: #13243F;
+  color: var(--cream);
+}
+.toc-link.active {
+  background: rgba(229, 161, 68, 0.12);
+  color: var(--warm);
+  font-weight: 600;
+}
+.toc-num {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 1px 6px;
+  background: #08101F;
+  border: 1px solid var(--line-soft);
+  border-radius: 2px;
+  color: var(--muted);
+}
+.toc-link.active .toc-num {
+  background: var(--warm);
+  color: var(--zh);
+  border-color: var(--warm);
+}
+
+/* Evaluator Widget */
+.evaluator-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.eval-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12.5px;
+  color: var(--muted);
+  font-family: var(--mono);
+}
+.eval-select {
+  padding: 5px 8px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-weight: 600;
+  background: #08101F;
+  color: var(--cream);
+  outline: none;
+}
+.eval-btn {
+  background: var(--btn);
+  color: var(--warm);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 12px;
+  font-family: var(--mono);
+  font-weight: 600;
+  letter-spacing: .04em;
+  cursor: pointer;
+  width: 100%;
+  transition: all 150ms ease;
+}
+.eval-btn:hover {
+  background: var(--warm);
+  color: var(--zh);
+  border-color: var(--warm);
+}
+.eval-result-box {
+  padding: 9px 12px;
+  background: #08101F;
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--cream);
+  font-weight: 600;
+  text-align: center;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--warm);
+}
+
+/* ==========================================================================
+   MAIN CONTENT STREAM (Mandarinku / Sydney Editorial Style)
+   ========================================================================== */
+.sydney-article {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 38px 42px;
+}
+@media (max-width: 768px) {
+  .sydney-article {
+    padding: 24px 18px;
+  }
+}
+
+.article-section {
+  padding-bottom: 44px;
+  margin-bottom: 44px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.article-section:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.section-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--warm);
+  text-transform: uppercase;
+  letter-spacing: .25em;
+  margin-bottom: 6px;
+  display: block;
+}
+.section-heading {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.section-heading::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 48px;
+  height: 2px;
+  background: var(--warm);
+}
+
+.article-section p {
+  color: #D3DCEE;
+  margin-bottom: 16px;
+  font-size: 15px;
+  line-height: 1.75;
+}
+.article-section p strong {
+  color: var(--cream);
+  font-weight: 600;
+}
+.article-section h3 {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--warm);
+  margin: 26px 0 12px;
+}
+.article-section h4 {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--cream);
+  margin: 18px 0 8px;
+}
+
+/* Editorial Callouts / Blockquotes */
+.editorial-callout {
+  background: #08101F;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--warm);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 16px 20px;
+  margin: 18px 0 24px;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: #D3DCEE;
+}
+.editorial-callout.gold {
+  border-left-color: var(--warm);
+}
+.editorial-callout.rose {
+  border-left-color: var(--coral);
+}
+.editorial-callout-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--warm);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  margin-bottom: 6px;
+}
+.editorial-callout p:last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   CONTOH SOAL & KARTU MATERI (Mandarinku Warm Cream Paper Card Style)
+   ========================================================================== */
+.slide-example {
+  background: var(--cream);
+  border: 1px solid var(--cream-line);
+  border-radius: var(--radius-md);
+  margin: 20px 0 26px;
+  overflow: hidden;
+  color: var(--ink-on-cream);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+.example-header {
+  background: transparent;
+  padding: 10px 18px;
+  border-bottom: 1px dashed var(--cream-line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.example-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #6E6350;
+}
+.example-slide-ref {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: #8C7E68;
+}
+.example-body {
+  padding: 18px 20px;
+  color: var(--ink-on-cream);
+  font-size: 14.5px;
+  line-height: 1.65;
+}
+.example-body p {
+  color: var(--ink-on-cream) !important;
+  margin-bottom: 10px;
+}
+.example-body p strong {
+  color: #131E33 !important;
+}
+.example-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* Formula & Code Blocks */
+.formula-block {
+  background: #08101F;
+  border: 1px solid var(--line);
+  color: var(--cream);
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  font-family: var(--mono);
+  font-size: 13.5px;
+  line-height: 1.6;
+  margin: 14px 0 20px;
+  overflow-x: auto;
+}
+.formula-block .comment {
+  color: #7282A5;
+}
+.formula-block .highlight-t {
+  color: var(--ok);
+  font-weight: 700;
+}
+.formula-block .highlight-f {
+  color: var(--coral);
+  font-weight: 700;
+}
+
+/* Parse Tree Diagram */
+.tree-diagram {
+  background: #060D1A;
+  border: 1px solid var(--line);
+  color: #C9D2E4;
+  padding: 16px 20px;
+  border-radius: var(--radius-sm);
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 14px 0 20px;
+  overflow-x: auto;
+}
+.tree-diagram .root {
+  color: var(--warm);
+  font-weight: 700;
+}
+.tree-diagram .branch {
+  color: #5B9BD5;
+}
+.tree-diagram .leaf {
+  color: var(--ok);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   ACADEMIC TRUTH TABLES (T-First Standard, Dark Editorial)
+   ========================================================================== */
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  margin: 18px 0 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--panel);
+}
+.academic-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  text-align: center;
+}
+.academic-table th, .academic-table td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--line-soft);
+  border-right: 1px solid var(--line-soft);
+}
+.academic-table th:last-child, .academic-table td:last-child {
+  border-right: none;
+}
+.academic-table tr:last-child td {
+  border-bottom: none;
+}
+.academic-table th {
+  background: #08101F;
+  color: var(--warm);
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 11.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.academic-table tbody tr:nth-child(even) td {
+  background: #0C1830;
+}
+.academic-table tbody tr:hover td {
+  background: #13243F;
+}
+.val-t {
+  color: var(--ok);
+  font-weight: 700;
+  font-family: var(--mono);
+}
+.val-f {
+  color: var(--coral);
+  font-weight: 700;
+  font-family: var(--mono);
+}
+.cell-pivot {
+  background: rgba(233, 106, 78, 0.15) !important;
+  color: var(--coral);
+  font-weight: 700;
+}
+.cell-taut {
+  background: rgba(79, 190, 134, 0.15) !important;
+  color: var(--ok);
+  font-weight: 700;
+}
+
+/* Two-column Comparison */
+.article-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 18px 0 24px;
+}
+@media (max-width: 680px) {
+  .article-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   INTERACTIVE QUIZ & UTS ENGINE (Mandarinku / Sydney Style)
+   ========================================================================== */
+.quiz-section {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+.quiz-header-banner {
+  background: #08101F;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--warm);
+  border-radius: var(--radius-md);
+  padding: 24px 28px;
+  margin-bottom: 24px;
+}
+.quiz-header-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.quiz-header-desc {
+  font-size: 13.5px;
+  color: var(--muted);
+  max-width: 720px;
+  line-height: 1.6;
+}
+
+.quiz-nav-tabs {
+  display: flex;
+  gap: 20px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.quiz-nav-tabs::-webkit-scrollbar { display: none; }
+.quiz-tab-btn {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: .03em;
+  color: var(--muted-2);
+  padding: 10px 4px 11px;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: .15s;
+}
+.quiz-tab-btn:hover {
+  color: var(--cream);
+}
+.quiz-tab-btn.active {
+  color: var(--cream);
+  border-bottom-color: var(--warm);
+}
+
+.quiz-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: #08101F;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-bottom: 20px;
+}
+.quiz-level-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.level-filter-label {
+  font: 700 11px var(--mono);
+  text-transform: uppercase;
+  color: var(--muted);
+  letter-spacing: .1em;
+  margin-right: 4px;
+}
+.level-pill {
+  font: 600 11px var(--mono);
+  padding: 4px 10px;
+  border-radius: 3px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted-2);
+  cursor: pointer;
+  transition: all 120ms ease;
+}
+.level-pill:hover {
+  border-color: var(--warm);
+  color: var(--cream);
+}
+.level-pill.active {
+  background: rgba(229, 161, 68, 0.15);
+  color: var(--warm);
+  border-color: var(--warm);
+}
+.quiz-stats-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 12.5px;
+}
+.quiz-stat-item {
+  font-family: var(--mono);
+  font-weight: 600;
+  color: var(--warm);
+}
+.btn-reset-quiz {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font: 600 11px var(--mono);
+  padding: 4px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 120ms ease;
+}
+.btn-reset-quiz:hover {
+  border-color: var(--coral);
+  color: var(--coral);
+  background: rgba(233, 106, 78, 0.1);
+}
+
+/* UTS Timer & Banner */
+.uts-control-panel {
+  display: none;
+  background: #08101F;
+  border: 1px solid var(--warm);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.uts-timer-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.uts-timer-display {
+  font-family: var(--mono);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--warm);
+  background: #0C1830;
+  padding: 4px 14px;
+  border-radius: 3px;
+  border: 1px solid var(--line);
+}
+.uts-actions {
+  display: flex;
+  gap: 8px;
+}
+.btn-uts-finish {
+  background: var(--warm);
+  color: var(--zh);
+  font: 700 12px var(--mono);
+  letter-spacing: .06em;
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  transition: opacity 150ms ease;
+}
+.btn-uts-finish:hover {
+  opacity: .9;
+}
+
+/* Individual Question Card */
+.quiz-card {
+  background: #08101F;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 22px 24px;
+  margin-bottom: 20px;
+  transition: border-color 150ms ease;
+}
+.quiz-card:hover {
+  border-color: #2E4577;
+}
+.quiz-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.quiz-meta-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tag-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--warm);
+  background: rgba(229, 161, 68, 0.1);
+  border: 1px solid rgba(229, 161, 68, 0.25);
+  padding: 2px 7px;
+  border-radius: 2px;
+}
+.tag-pert {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.quiz-level-badge {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+.quiz-level-badge.mudah {
+  background: rgba(79, 190, 134, 0.12);
+  color: var(--ok);
+  border: 1px solid rgba(79, 190, 134, 0.25);
+}
+.quiz-level-badge.sedang {
+  background: rgba(229, 161, 68, 0.12);
+  color: var(--warm);
+  border: 1px solid rgba(229, 161, 68, 0.25);
+}
+.quiz-level-badge.sukar {
+  background: rgba(233, 106, 78, 0.12);
+  color: var(--coral);
+  border: 1px solid rgba(233, 106, 78, 0.25);
+}
+.quiz-question-text {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--cream);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.quiz-question-text strong {
+  color: var(--warm);
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.option-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: #0C1830;
+  color: var(--txt);
+  font-family: var(--mono);
+  font-size: 13.5px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 120ms ease;
+  width: 100%;
+}
+.option-btn:hover:not(:disabled) {
+  border-color: var(--warm);
+  background: #13243F;
+  color: var(--cream);
+}
+.option-btn:disabled {
+  cursor: default;
+}
+.option-key {
+  font-weight: 700;
+  color: var(--warm);
+  min-width: 22px;
+}
+.option-text {
+  flex: 1;
+}
+
+.option-btn.selected-correct {
+  background: rgba(79, 190, 134, 0.15) !important;
+  border-color: var(--ok) !important;
+  color: var(--ok) !important;
+  font-weight: 700;
+}
+.option-btn.selected-wrong {
+  background: rgba(233, 106, 78, 0.15) !important;
+  border-color: var(--coral) !important;
+  color: var(--coral) !important;
+  font-weight: 700;
+}
+.option-btn.show-correct {
+  border-color: var(--ok) !important;
+  color: var(--ok) !important;
+}
+
+/* Feedback & Explanation Box */
+.quiz-feedback {
+  margin-top: 14px;
+  padding: 14px 18px;
+  border-radius: 3px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  background: #060D1A;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--warm);
+  display: none;
+}
+.quiz-feedback.show {
+  display: block;
+}
+.quiz-feedback.correct {
+  border-left-color: var(--ok);
+}
+.quiz-feedback.incorrect {
+  border-left-color: var(--coral);
+}
+.feedback-status {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+.feedback-status.correct { color: var(--ok); }
+.feedback-status.incorrect { color: var(--coral); }
+.feedback-status.revealed { color: var(--warm); }
+.feedback-explanation {
+  color: #D3DCEE;
+  margin-top: 4px;
+}
+.feedback-explanation strong {
+  color: var(--warm);
+}
+
+/* UTS Final Score Banner */
+.uts-summary-card {
+  display: none;
+  background: #08101F;
+  border: 2px solid var(--warm);
+  border-radius: var(--radius-md);
+  padding: 28px;
+  margin-bottom: 24px;
+}
+.uts-summary-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.uts-score-big {
+  font-family: var(--mono);
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--warm);
+}
+.uts-grade-badge {
+  font-family: var(--mono);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  padding: 4px 16px;
+  border-radius: 3px;
+  background: rgba(229, 161, 68, 0.15);
+  color: var(--warm);
+  border: 1px solid var(--warm);
+}
+.uts-diagnostics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+.diag-card {
+  background: #0C1830;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+}
+.diag-title {
+  font: 600 11px var(--mono);
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+.diag-score {
+  font-family: var(--mono);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--cream);
+  margin-top: 2px;
+}
+
+/* ==========================================================================
+   FOOTER (Mandarinku / Sydney Multi-Column Footer)
+   ========================================================================== */
+.sydney-footer {
+  background: #060D1A;
+  color: var(--muted-2);
+  padding: 48px 0 24px;
+  border-top: 1px solid var(--line);
+  font-size: 13.5px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr;
+  gap: 36px;
+  margin-bottom: 36px;
+}
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+.footer-col h4 {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 12px;
+  letter-spacing: .02em;
+}
+.footer-col p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.footer-nav {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.footer-nav a {
+  color: var(--muted);
+  transition: color 150ms ease;
+}
+.footer-nav a:hover {
+  color: var(--warm);
+}
+.footer-bottom {
+  padding-top: 20px;
+  border-top: 1px solid var(--line-soft);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  font: 500 11.5px var(--mono);
+  color: var(--muted);
+}
+</style>
+</head>
+<body>
+
+<!-- 1. TOP UTILITY BAR (Sydney Style) -->
+<div class="sydney-topbar">
+  <div class="container">
+    <div class="topbar-left">
+      <span class="topbar-badge">TIF322103</span>
+      <span>Logika dan Himpunan • Semester Gasal 2026/2027</span>
+    </div>
+    <div>
+      <a href="index.html" class="topbar-back">← Kembali ke Dashboard Jadwal Kuliah</a>
+    </div>
+  </div>
+</div>
+
+<!-- 2. SITE HEADER -->
+<header class="sydney-header">
+  <div class="container header-row">
+    <div class="brand-group">
+      <span class="brand-title">Diktat Logika &amp; Himpunan</span>
+      <span class="brand-subtitle">Program Studi Teknik Informatika — Universitas Muhammadiyah Surakarta</span>
+    </div>
+    <nav class="sydney-nav">
+      <a href="#kontrak" class="nav-link">Kontrak</a>
+      <a href="#p1" class="nav-link">P1</a>
+      <a href="#p2" class="nav-link">P2</a>
+      <a href="#p3" class="nav-link">P3</a>
+      <a href="#p4" class="nav-link">P4</a>
+      <a href="#p5" class="nav-link">P5</a>
+      <a href="#evaluator" class="nav-link">Evaluator</a>
+      <a href="#quiz" class="nav-link btn-cta">🎯 Kuis &amp; UTS</a>
+    </nav>
+  </div>
+</header>
+
+<!-- 3. HERO SECTION (Sydney Signature Hero Banner) -->
+<section class="sydney-hero">
+  <div class="container hero-content">
+    <div class="hero-breadcrumbs">
+      <a href="index.html" >Jadwal Kuliah</a> / <span>Mata Kuliah Dasar Keilmuan</span> / <span>Logika dan Himpunan</span>
+    </div>
+    <h1 class="hero-title">Logika dan Himpunan</h1>
+    <p class="hero-desc">
+      Diktat perkuliahan komprehensif Pertemuan 1 sampai dengan Pertemuan 5. Disusun runut, berstruktur akademik, dan persis mengikuti materi slide resmi pengampu perkuliahan Reinal Ariyuda, B.Eng., M.Eng. dengan seluruh tabel kebenaran berurutan baku T-First.
+    </p>
+
+    <div class="hero-meta-bar">
+      <div class="meta-item"><span class="gold-dot"></span> Dosen: <strong>Reinal Ariyuda, B.Eng., M.Eng.</strong></div>
+      <div class="meta-item"><span class="gold-dot"></span> Bobot: <strong>3 SKS (Kelas C / B)</strong></div>
+      <div class="meta-item"><span class="gold-dot"></span> Jadwal: <strong>Senin, Jam ke 7–9 (12.30–15.00 WIB)</strong></div>
+      <div class="meta-item"><span class="gold-dot"></span> Ruang: <strong>G0301 Kampus 2 UMS</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. TWO-COLUMN EDITORIAL LAYOUT -->
+<div class="container">
+  <div class="sydney-layout">
+
+    <!-- STICKY SIDEBAR -->
+    <aside class="sydney-sidebar">
+      
+      <!-- Widget: Pencarian Slide -->
+      <div class="sydney-widget">
+        <div class="widget-title">Pencarian Slide &amp; Topik</div>
+        <div class="widget-body">
+          <div class="widget-search">
+            <input type="text" id="slideSearch" placeholder="Cari topik (misal: '4.5', 'modus ponens', 'tautologi')..." />
+          </div>
+        </div>
+      </div>
+
+      <!-- Widget: Daftar Isi Materi (TOC) -->
+      <div class="sydney-widget">
+        <div class="widget-title">Daftar Isi Perkuliahan</div>
+        <div class="widget-body">
+          <ul class="toc-list" id="tocNav">
+            <li><a href="#kontrak" class="toc-link active"><span>Kontrak &amp; Silabus</span><span class="toc-num">00</span></a></li>
+            <li><a href="#p1" class="toc-link"><span>P1: Pengenalan Logika</span><span class="toc-num">01</span></a></li>
+            <li><a href="#p2" class="toc-link"><span>P2: Logika Proposisional</span><span class="toc-num">02</span></a></li>
+            <li><a href="#p3" class="toc-link"><span>P3: Tabel Kebenaran</span><span class="toc-num">03</span></a></li>
+            <li><a href="#p4" class="toc-link"><span>P4: Proposisi Majemuk</span><span class="toc-num">04</span></a></li>
+            <li><a href="#p5" class="toc-link"><span>P5: Tautologi &amp; Bukti</span><span class="toc-num">05</span></a></li>
+            <li><a href="#evaluator" class="toc-link"><span>Evaluator Kebenaran</span><span class="toc-num">★</span></a></li>
+            <li><a href="#quiz" class="toc-link"><span>Bank Kuis &amp; UTS</span><span class="toc-num">🎯</span></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Widget: Evaluator Logika Mini Interaktif -->
+      <div class="sydney-widget" id="widget-evaluator">
+        <div class="widget-title">Evaluator Proposisi Cepat</div>
+        <div class="widget-body">
+          <div class="evaluator-box">
+            <div class="eval-row">
+              <span>Nilai A:</span>
+              <select id="quickValA" class="eval-select">
+                <option value="T">T (True)</option>
+                <option value="F">F (False)</option>
+              </select>
+            </div>
+            <div class="eval-row">
+              <span>Perangkai:</span>
+              <select id="quickOp" class="eval-select">
+                <option value="and">∧ (Konjungsi)</option>
+                <option value="or">∨ (Disjungsi)</option>
+                <option value="imp">→ (Implikasi)</option>
+                <option value="iff">↔ (Biimplikasi)</option>
+              </select>
+            </div>
+            <div class="eval-row">
+              <span>Nilai B:</span>
+              <select id="quickValB" class="eval-select">
+                <option value="T">T (True)</option>
+                <option value="F">F (False)</option>
+              </select>
+            </div>
+            <button class="eval-btn" onclick="calcQuickLogic()">Hitung Nilai Logika</button>
+            <div class="eval-result-box" id="quickEvalOut">A ∧ B = T (True)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Widget: Komponen Nilai & Presensi -->
+      <div class="sydney-widget">
+        <div class="widget-title">Aturan Kuliah (Slide P1)</div>
+        <div class="widget-body" style="font-size:13px;line-height:1.6">
+          <p>• <strong>Presensi:</strong> 10% (Max 4x absen, toleransi 10 mnt)<br>
+          • <strong>Tugas &amp; Kuis:</strong> 40%<br>
+          • <strong>UTS:</strong> 25% • <strong>UAS:</strong> 25%<br>
+          • <strong>Target Nilai A:</strong> Nilai Akhir &ge; 80</p>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- MAIN ARTICLE STREAM -->
+    <main class="sydney-article" id="articleStream">
+
+      <!-- ====================================================================
+           SECTION 00: KONTRAK KULIAH & SILABUS
+           ==================================================================== -->
+      <article class="article-section content-item" id="kontrak">
+        <span class="section-eyebrow">Slide Pertemuan 1 — Halaman 2 s.d. 6</span>
+        <h2 class="section-heading gold">Kontrak Perkuliahan &amp; Silabus 14 Minggu</h2>
+
+        <p>
+          Mata kuliah <strong>Logika dan Himpunan (TIF322103)</strong> membekali mahasiswa Teknik Informatika dengan landasan berpikir deduktif, pemodelan matematis, serta penalaran formal yang mendasari algoritma dan arsitektur sistem komputer.
+        </p>
+
+        <div class="article-grid-2">
+          <div>
+            <h4>Mekanisme Perkuliahan (Slide 3–4)</h4>
+            <p>
+              • <strong>Offline (75%):</strong> Perkuliahan tatap muka di ruang G0301 Kampus 2 UMS.<br>
+              • <strong>Online (25%):</strong> Melalui SPADA UMS via Zoom / Google Meet.<br>
+              • <strong>Batas Presensi:</strong> Kehadiran minimal 75% (maksimal tidak hadir 4 kali). Toleransi keterlambatan 10 menit.
+            </p>
+          </div>
+          <div>
+            <h4>Komponen Penilaian Resmi (Slide 5)</h4>
+            <p>
+              • Presensi: <strong>10%</strong><br>
+              • Tugas-tugas &amp; Kuis: <strong>40%</strong><br>
+              • Ujian Tengah Semester (UTS): <strong>25%</strong><br>
+              • Ujian Akhir Semester (UAS): <strong>25%</strong>
+            </p>
+          </div>
+        </div>
+
+        <h4>Tabel Skala Konversi Nilai Akhir (Slide 5)</h4>
+        <div class="table-wrap">
+          <table class="academic-table">
+            <thead>
+              <tr><th>Huruf</th><th>Angka</th><th>Rentang Nilai Akhir</th><th>Keterangan Predikat</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>A</strong></td><td>4,0</td><td>Nilai &ge; 80</td><td><span class="val-t">Unggul / Sangat Memuaskan</span></td></tr>
+              <tr><td><strong>AB</strong></td><td>3,5</td><td>70 &le; Nilai &lt; 80</td><td>Baik Sekali</td></tr>
+              <tr><td><strong>B</strong></td><td>3,0</td><td>65 &le; Nilai &lt; 70</td><td>Baik</td></tr>
+              <tr><td><strong>BC</strong></td><td>2,5</td><td>60 &le; Nilai &lt; 65</td><td>Lebih dari Cukup</td></tr>
+              <tr><td><strong>C</strong></td><td>2,0</td><td>50 &le; Nilai &lt; 60</td><td>Cukup</td></tr>
+              <tr><td><strong>D</strong></td><td>1,0</td><td>35 &le; Nilai &lt; 50</td><td><span class="val-f">Kurang (Wajib Remidi)</span></td></tr>
+              <tr><td><strong>E</strong></td><td>0,0</td><td>Nilai &lt; 35</td><td><span class="val-f">Gagal / Mengulang</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>Peta Silabus 14 Pertemuan Semester Gasal (Slide 6)</h4>
+        <div class="table-wrap">
+          <table class="academic-table">
+            <thead>
+              <tr><th>Pertemuan</th><th>Topik Perkuliahan</th><th>Fokus Capaian Pembelajaran</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>P1</td><td>Pengenalan Logika Matematika</td><td>Penalaran deduktif, argumen, validitas, silogisme, fuzzy</td></tr>
+              <tr><td>P2</td><td>Pengantar Logika Proposisional</td><td>Proposisi atomik, majemuk, variabel logika, tabel kebenaran</td></tr>
+              <tr><td>P3</td><td>Tabel Kebenaran</td><td>Operator unary (not), binary (and, or, if, iff), urutan T-First</td></tr>
+              <tr><td>P4</td><td>Proposisi Majemuk</td><td>Hierarki operator, skema, parse tree, wff, FPE</td></tr>
+              <tr><td>P5</td><td>Tautologi</td><td>Evaluasi rumus 2^N, validitas argumen, kontradiksi, contingent</td></tr>
+              <tr><td>P6</td><td>Ekuivalensi Logis</td><td>Hukum-hukum aljabar logika, hukum de Morgan</td></tr>
+              <tr><td>P7</td><td>Penyederhanaan</td><td>Operasi penyederhanaan ekspresi menggunakan hukum logika</td></tr>
+              <tr style="background:#FEF3C7;font-weight:700"><td>UTS</td><td colspan="2">Ujian Tengah Semester (Pertemuan 1 s.d. 7)</td></tr>
+              <tr><td>P8</td><td>Strategi Pembalikan</td><td>Konsistensi argumen, model, counter model</td></tr>
+              <tr><td>P9</td><td>Tablo Semantik</td><td>Aturan perluasan pohon tablo semantik, pembuktian validitas</td></tr>
+              <tr><td>P10</td><td>Bentuk Normal (CNF &amp; DNF)</td><td>Konjungsi &amp; disjungsi normal form, klausa literal</td></tr>
+              <tr><td>P11</td><td>Resolusi</td><td>Resolving clause, proof by resolution</td></tr>
+              <tr><td>P12</td><td>Himpunan dan Diagram Venn</td><td>Keanggotaan himpunan, kardinalitas, himpunan kuasa</td></tr>
+              <tr><td>P13</td><td>Relasi dan Operasi Himpunan</td><td>Irisan (intersection), gabungan (union), selisih, komplemen</td></tr>
+              <tr><td>P14</td><td>Review Materi &amp; Evaluasi</td><td>Pendalaman keseluruhan materi dan persiapan ujian akhir</td></tr>
+              <tr style="background:#CCFBF1;font-weight:700"><td>UAS</td><td colspan="2">Ujian Akhir Semester (Materi Komprehensif)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <!-- ====================================================================
+           SECTION 01: PERTEMUAN 1
+           ==================================================================== -->
+      <article class="article-section content-item" id="p1">
+        <span class="section-eyebrow">Slide Pertemuan 1 — Halaman 8 s.d. 32</span>
+        <h2 class="section-heading">Pertemuan 1: Pengenalan Logika Matematika</h2>
+
+        <p>
+          Kata <strong>Logika</strong> berasal dari bahasa Yunani <em>“logos”</em> (kata, ucapan, atau pemikiran). Secara ilmiah, logika didefinisikan sebagai <strong>ilmu tentang metode penalaran yang berhubungan dengan pembuktian validitas suatu argumen</strong>.
+        </p>
+
+        <h3>1. Penalaran Deduktif vs Induktif (Slide 11–12)</h3>
+        <p>
+          Dalam matematika dan informatika, logika yang digunakan adalah <strong>penalaran deduktif (deductive reasoning)</strong>, yaitu penarikan kesimpulan khusus (K) yang secara niscaya ditarik dari premis-premis umumnya (P).
+        </p>
+
+        <div class="slide-example">
+          <div class="example-header">
+            <span class="example-tag">Contoh Slide 11 — Penalaran Deduktif</span>
+            <span class="example-slide-ref">Slide P1 Halaman 11</span>
+          </div>
+          <div class="example-body">
+            <p><strong>Premis 1 (P1):</strong> Semua yang pergi kuliah memakai baju.</p>
+            <p><strong>Premis 2 (P2):</strong> Joko pergi kuliah.</p>
+            <p><strong>Kesimpulan (K):</strong> Dengan demikian, Joko memakai baju.</p>
+            <p style="font-size:13px;color:var(--text-muted);margin-top:6px">
+              <em>Penjelasan:</em> Hubungan antara premis dan kesimpulan bersifat mutlak benar secara struktur logika.
+            </p>
+          </div>
+        </div>
+
+        <div class="editorial-callout">
+          <div class="editorial-callout-title">Peranan Logika dalam Ilmu Komputer (Slide 13)</div>
+          <p>
+            • <strong>Matematika:</strong> Komputasi diskret, aljabar linier, dan teori pembuktian.<br>
+            • <strong>Elektronika:</strong> Desain gerbang logika (logic gates) dan sirkuit terpadu mikroprosesor.<br>
+            • <strong>Software Engineering:</strong> Verifikasi program, perancangan algoritma, basis data relasional.<br>
+            • <strong>Artificial Intelligence:</strong> Expert systems, logic programming (Prolog), automated reasoning.
+          </p>
+        </div>
+
+        <h3>2. Argumen dan Validitas Logis (Slide 14–22)</h3>
+        <p>
+          <strong>Argumen</strong> adalah usaha untuk mencari kebenaran suatu pernyataan (kesimpulan) berdasarkan kebenaran kumpulan pernyataan lain (premis).
+        </p>
+        <p>
+          <strong>Kriteria Penting:</strong> Suatu argumen dikatakan <strong>valid</strong> jika dan hanya jika premis-premisnya benar, maka kesimpulannya tidak mungkin bernilai salah. Jika premisnya benar dan kesimpulannya juga benar di dunia nyata, argumen tersebut disebut <strong>sound argument (argumen kuat / sahih)</strong>.
+        </p>
+
+        <div class="article-grid-2">
+          <div class="slide-example">
+            <div class="example-header">
+              <span class="example-tag">Contoh 3 — Valid Tapi Premis Salah</span>
+              <span class="example-slide-ref">Slide P1 Hal 19</span>
+            </div>
+            <div class="example-body">
+              <p>P1: Semua mamalia hewan berkaki empat.<br>
+              P2: Semua manusia adalah mamalia.<br>
+              <strong>K: Semua manusia hewan berkaki empat.</strong></p>
+              <p style="font-size:12.5px;color:var(--text-muted);margin-top:6px">
+                <em>Analisis:</em> Struktur silogismenya <strong>VALID</strong>, namun premis P1 salah faktual.
+              </p>
+            </div>
+          </div>
+
+          <div class="slide-example">
+            <div class="example-header">
+              <span class="example-tag">Contoh 5 — Sound Argument (Sahih)</span>
+              <span class="example-slide-ref">Slide P1 Hal 21</span>
+            </div>
+            <div class="example-body">
+              <p>P1: Semua karyawan mendapat THR.<br>
+              P2: Siti adalah karyawan.<br>
+              <strong>K: Dengan demikian, Siti mendapat THR.</strong></p>
+              <p style="font-size:12.5px;color:var(--teal-dark);margin-top:6px;font-weight:600">
+                <em>Analisis:</em> Struktur valid dan seluruh premis bernilai benar di dunia nyata (Sound).
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <h3>3. Logika Klasik Aristoteles: Silogisme (Slide 23–26)</h3>
+        <p>
+          Aristoteles (384–322 SM) merumuskan <strong>Silogisme</strong> yang tersusun atas 4 bentuk pernyataan dasar:
+        </p>
+
+        <div class="table-wrap">
+          <table class="academic-table">
+            <thead>
+              <tr><th>Bentuk Pernyataan Silogisme</th><th>Pola Formal</th><th>Contoh di Slide Dosen</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Universal Positif</strong></td><td>Semua A adalah B</td><td>Semua mahasiswa (A) adalah pembelajar (B).</td></tr>
+              <tr><td><strong>Universal Negatif</strong></td><td>Tidak ada A yang merupakan B</td><td>Tidak ada ikan (A) yang bernapas dengan paru-paru (B).</td></tr>
+              <tr><td><strong>Partikular Positif</strong></td><td>Beberapa A adalah B</td><td>Beberapa dosen (A) adalah penulis buku (B).</td></tr>
+              <tr><td><strong>Partikular Negatif</strong></td><td>Beberapa A adalah bukan B</td><td>Beberapa kendaraan (A) adalah bukan mobil (B).</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>4. Logika Modern &amp; Logika Banyak Nilai (Slide 27–32)</h3>
+        <p>
+          • <strong>Logika Modern (Bivalent Logic):</strong> Dipelopori oleh De Morgan, George Boole, dan Gottlob Frege. Menganut prinsip dua nilai: <strong>Benar (1 / T)</strong> atau <strong>Salah (0 / F)</strong>. Mendasari gerbang logika dan arsitektur CPU.<br>
+          • <strong>Many-Valued Logic (Jan Lukasiewicz, 1920):</strong> Mengenalkan nilai ketiga (Netral / Tidak tentu) dengan probabilitas antara 0 hingga 1.<br>
+          • <strong>Fuzzy Logic (Lofti A. Zadeh, 1973):</strong> Derajat keanggotaan kontinu antara 0 dan 1. Contoh di slide: Suhu air 37°C dalam logika biner bernilai salah untuk "Panas" (karena batas 40°C), tetapi dalam fuzzy logic memiliki derajat 0,8 panas dan 0,2 dingin.
+        </p>
+      </article>
+
+      <!-- ====================================================================
+           SECTION 02: PERTEMUAN 2
+           ==================================================================== -->
+      <article class="article-section content-item" id="p2">
+        <span class="section-eyebrow">Slide Pertemuan 2 — Halaman 1 s.d. 24</span>
+        <h2 class="section-heading">Pertemuan 2: Logika Proposisional</h2>
+
+        <p>
+          <strong>Proposisi</strong> adalah pernyataan deklaratif yang memiliki nilai kebenaran pasti: <strong>Benar (T / 1) saja</strong> atau <strong>Salah (F / 0) saja</strong>, tetapi tidak dapat keduanya sekaligus.
+        </p>
+
+        <h3>1. Analisis Contoh Slide 2.1 s.d. 2.4 (Slide 5–7)</h3>
+        <div class="table-wrap">
+          <table class="academic-table">
+            <thead>
+              <tr><th>Kalimat di Slide</th><th>Status</th><th>Nilai</th><th>Alasan Ilmiah</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>"Yogyakarta adalah kota pelajar." (Contoh 2.1)</td><td>Proposisi</td><td><span class="val-t">T (True)</span></td><td>Kalimat deklaratif bernilai faktual benar</td></tr>
+              <tr><td>"2 + 2 = 5" (Contoh 2.2)</td><td>Proposisi</td><td><span class="val-f">F (False)</span></td><td>Kalimat deklaratif bernilai faktual salah</td></tr>
+              <tr><td>"Bawakan saya secangkir kopi!" (Contoh 2.3)</td><td>Bukan Proposisi</td><td>—</td><td>Kalimat imperatif / perintah</td></tr>
+              <tr><td>"Apakah hari ini ada kuliah?" (Contoh 2.4)</td><td>Bukan Proposisi</td><td>—</td><td>Kalimat tanya / interogatif</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2. Proposisi Atomik vs Majemuk (Slide 8–14)</h3>
+        <p>
+          • <strong>Proposisi Atomik (Sederhana):</strong> Tidak mengandung kata perangkai logika (Contoh 2.5: <em>"Pemuda itu tinggi"</em>).<br>
+          • <strong>Proposisi Majemuk (Compound):</strong> Gabungan dua atau lebih proposisi atomik menggunakan perangkai logika (Contoh 2.7: <em>"Pemuda itu tinggi dan pemuda itu tampan"</em>).
+        </p>
+
+        <div class="slide-example">
+          <div class="example-header">
+            <span class="example-tag">Contoh 2.9 &amp; 2.10 — Simbolisasi</span>
+            <span class="example-slide-ref">Slide P2 Hal 13–14</span>
+          </div>
+          <div class="example-body">
+            <p>A = Pemuda itu tinggi • B = Pemuda itu tampan</p>
+            <p>1) Pemuda itu tinggi dan tampan ⇒ <code>A ∧ B</code></p>
+            <p>2) Pemuda itu tinggi tetapi tidak tampan ⇒ <code>A ∧ ¬B</code></p>
+            <p>3) Tidak benar bahwa pemuda itu pendek dan tampan ⇒ <code>¬(¬A ∧ B)</code></p>
+          </div>
+        </div>
+
+        <h3>3. Variabel Proposisional &amp; Evaluasi Nilai (Slide 15–22)</h3>
+        <p>
+          Variabel proposisional dilambangkan dengan huruf besar <code>A, B, C, ...</code>. Jika nilai kebenaran variabel diketahui, nilai proposisi majemuk dapat dihitung secara pasti.
+        </p>
+        <div class="editorial-callout">
+          <div class="editorial-callout-title">Kaidah Penentuan Nilai — Contoh 2.14 (Slide 22)</div>
+          <p>
+            Jika variabel <strong>A bernilai T</strong> dan <strong>B bernilai F</strong>, maka ekspresi <em>"A atau B"</em> (<code>A ∨ B</code>) bernilai <strong>T</strong>. Untuk mencari seluruh kemungkinan nilai dari pasangan variabel, digunakan instrumen <strong>Tabel Kebenaran (Truth Table)</strong>.
+          </p>
+        </div>
+      </article>
+
+      <!-- ====================================================================
+           SECTION 03: PERTEMUAN 3
+           ==================================================================== -->
+      <article class="article-section content-item" id="p3">
+        <span class="section-eyebrow">Slide Pertemuan 3 — Halaman 1 s.d. 26</span>
+        <h2 class="section-heading">Pertemuan 3: Tabel Kebenaran &amp; Perangkai Logika</h2>
+
+        <p>
+          <strong>Tabel Kebenaran</strong> adalah tabel matematis yang menyajikan seluruh kemungkinan kombinasi nilai kebenaran variabel proposisional sederhana beserta hasil evaluasi ekspresi majemuknya.
+        </p>
+
+        <h3>1. 5 Perangkai Logika Dasar (Slide 9–20)</h3>
+        <div class="table-wrap">
+          <table class="academic-table">
+            <thead>
+              <tr><th>Perangkai</th><th>Simbol</th><th>Jenis</th><th>Aturan Nilai Kebenaran</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Tidak / Negasi</strong> (Slide 15)</td><td><code>¬</code></td><td>Unary</td><td>Membalikkan nilai. ¬T = F, ¬F = T. Hukum negasi ganda: <code>¬¬A ≡ A</code>.</td></tr>
+              <tr><td><strong>Dan / Konjungsi</strong> (Slide 10)</td><td><code>∧</code></td><td>Binary</td><td>Hanya bernilai T jika kedua operan bernilai T. Selain itu bernilai F.</td></tr>
+              <tr><td><strong>Atau / Disjungsi</strong> (Slide 11)</td><td><code>∨</code></td><td>Binary</td><td>Hanya bernilai F jika kedua operan bernilai F. Selain itu bernilai T.</td></tr>
+              <tr><td><strong>Jika... maka... / Implikasi</strong> (Slide 18)</td><td><code>→</code></td><td>Binary</td><td>Hanya bernilai F jika Anteseden = T dan Konsekuen = F (<code>T → F = F</code>).</td></tr>
+              <tr><td><strong>Ekuivalensi / Biimplikasi</strong> (Slide 20)</td><td><code>↔</code></td><td>Binary</td><td>Bernilai T jika kedua operan bernilai SAMA (keduanya T atau keduanya F).</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="article-grid-2">
+          <div class="slide-example">
+            <div class="example-header">
+              <span class="example-tag">Inclusive-OR vs Exclusive-OR</span>
+              <span class="example-slide-ref">Slide P3 Hal 12–14</span>
+            </div>
+            <div class="example-body">
+              <p>• <strong>In-OR (Contoh 3.5):</strong> <em>"You have either pizza or spaghetti."</em> Diizinkan memilih salah satu atau keduanya sekaligus.<br>
+              • <strong>Ex-OR (Contoh 3.6):</strong> <em>"Saya berada di Yogyakarta atau Surabaya jam 8 malam kemarin."</em> Fisik tidak bisa berada di 2 lokasi bersamaan.</p>
+            </div>
+          </div>
+
+          <div class="slide-example">
+            <div class="example-header">
+              <span class="example-tag">Negasi sebagai Unary — Contoh 3.7</span>
+              <span class="example-slide-ref">Slide P3 Hal 16–17</span>
+            </div>
+            <div class="example-body">
+              <p>Kalimat: <em>"Badu pandai atau Badu bodoh."</em><br>
+              A = Badu pandai, B = Badu bodoh. Bentuk logika: <code>A ∨ B</code>.<br>
+              <strong>Peringatan Dosen:</strong> Tidak boleh diubah jadi <code>A ∨ ¬A</code>, karena ¬A berarti <em>"Badu tidak pandai"</em>, bukan <em>"Badu bodoh"</em>.</p>
+            </div>
+          </div>
+        </div>
+
+        <h3>2. Master Tabel Kebenaran (Pola Baku Dosen: T-First)</h3>
+        <p>
+          Seluruh tabel kebenaran di kelas dosen Reinal Ariyuda diawali dengan <strong>T</strong> lalu <strong>F</strong> di bawahnya:
+        </p>
+
+        <div class="table-wrap">
+          <table class="academic-table">
+            <thead>
+              <tr><th>A</th><th>B</th><th>¬A</th><th>¬B</th><th>A ∧ B</th><th>A ∨ B</th><th>A → B</th><th>A ↔ B</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>T</td><td>T</td><td>F</td><td>F</td><td><span class="val-t">T</span></td><td><span class="val-t">T</span></td><td><span class="val-t">T</span></td><td><span class="val-t">T</span></td></tr>
+              <tr><td>T</td><td>F</td><td>F</td><td>T</td><td><span class="val-f">F</span></td><td><span class="val-t">T</span></td><td class="cell-pivot"><span class="val-f">F</span> (Kunci Implikasi!)</td><td><span class="val-f">F</span></td></tr>
+              <tr><td>F</td><td>T</td><td>T</td><td>F</td><td><span class="val-f">F</span></td><td><span class="val-t">T</span></td><td><span class="val-t">T</span></td><td><span class="val-f">F</span></td></tr>
+              <tr><td>F</td><td>F</td><td>T</td><td>T</td><td><span class="val-f">F</span></td><td><span class="val-f">F</span></td><td><span class="val-t">T</span></td><td><span class="val-t">T</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>3. Latihan Slide 24 &amp; Hukum Argumen Logika (Slide 25–26)</h3>
+        <div class="table-wrap">
+          <table class="academic-table">
+            <thead>
+              <tr><th>Hukum Argumen Logika</th><th>Bentuk Formal Implikasi</th><th>Status Nilai</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Modus Ponens</strong> (Slide 25)</td><td><code>((A → B) ∧ A) → B</code></td><td><span class="val-t">Tautologi (Valid)</span></td></tr>
+              <tr><td><strong>Modus Tollens</strong> (Slide 25)</td><td><code>((A → B) ∧ ¬B) → ¬A</code></td><td><span class="val-t">Tautologi (Valid)</span></td></tr>
+              <tr><td><strong>Silogisme Disjungtif</strong> (Slide 26)</td><td><code>((A ∨ B) ∧ ¬A) → B</code></td><td><span class="val-t">Tautologi (Valid)</span></td></tr>
+              <tr><td><strong>Silogisme Hipotetis</strong> (Slide 26)</td><td><code>((A → B) ∧ (B → C)) → (A → C)</code></td><td><span class="val-t">Tautologi (Valid)</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <!-- ====================================================================
+           SECTION 04: PERTEMUAN 4
+           ==================================================================== -->
+      <article class="article-section content-item" id="p4">
+        <span class="section-eyebrow">Slide Pertemuan 4 — Halaman 1 s.d. 28</span>
+        <h2 class="section-heading">Pertemuan 4: Proposisi Majemuk &amp; Parse Tree</h2>
+
+        <p>
+          Proposisi majemuk dibentuk dari gabungan beberapa proposisi atomik. Untuk menghindari kerancuan penafsiran saat tidak terdapat tanda kurung, diberlakukan <strong>Aturan Pengurutan Hierarki Operator</strong>.
+        </p>
+
+        <h3>1. Hierarki Urutan Operator Logika (Slide 20)</h3>
+        <div class="table-wrap">
+          <table class="academic-table">
+            <thead>
+              <tr><th>Urutan Tingkat</th><th>Perangkai</th><th>Nama Operator</th><th>Sifat Evaluasi</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>1 (Tertinggi)</strong></td><td><code>¬</code></td><td>Negasi</td><td>Dievaluasi paling awal pada operan terdekat</td></tr>
+              <tr><td><strong>2</strong></td><td><code>∧</code></td><td>Konjungsi</td><td>Mengikat lebih kuat dibanding disjungsi</td></tr>
+              <tr><td><strong>3</strong></td><td><code>∨</code></td><td>Disjungsi</td><td>Mengikat sebelum implikasi</td></tr>
+              <tr><td><strong>4</strong></td><td><code>→</code></td><td>Implikasi</td><td>Mengevaluasi hubungan sebelum ekuivalensi</td></tr>
+              <tr><td><strong>5 (Terendah)</strong></td><td><code>↔</code></td><td>Ekuivalensi</td><td>Dievaluasi paling akhir sebagai pembagi utama</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2. Fully Parentheses Expression (FPE) &amp; wff</h3>
+        <p>
+          <strong>Fully Parentheses Expression (FPE)</strong> adalah bentuk ekspresi logika di mana setiap perangkai biner diapit tanda kurung secara eksplisit. Rumus yang memenuhi aturan pembentukan ini disebut <strong>Well-Formed Formulae (wff)</strong>.
+        </p>
+        <div class="formula-block">
+          <span class="comment">// Contoh Slide 4.4 & 4.5: Ambiguitas tanpa kurung</span><br>
+          Ekspresi Asli  : A ∧ B → C ∨ D<br>
+          Bentuk FPE/wff : ((A ∧ B) → (C ∨ D))<br><br>
+          <span class="comment">// Aturan: Negasi menempel langsung tanpa kurung: ¬A ∧ B = ((¬A) ∧ B)</span>
+        </div>
+
+        <h3>3. Parse Tree / Pohon Penguraian (Slide 15–19)</h3>
+        <p>
+          <strong>Parse Tree</strong> memetakan ekspresi majemuk ke dalam struktur hierarkis pohon biner:
+        </p>
+        <ul>
+          <li><strong>Root (Akar):</strong> <em>Main Operator</em> (perangkai utama) yang dievaluasi paling akhir.</li>
+          <li><strong>Branch (Cabang):</strong> Operator penghubung sub-ekspresi.</li>
+          <li><strong>Leaf (Daun):</strong> Variabel proposisional atomik (A, B, C, D).</li>
+          <li><strong>Arah Evaluasi:</strong> Berjalan secara <em>bottom-up</em> dari daun menuju akar.</li>
+        </ul>
+
+        <div class="tree-diagram">
+          <span class="comment">/* Parse Tree untuk Ekspresi: ((A ∧ ¬B) → ¬C) */</span><br><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="root">[ → ] (Root / Main Operator)</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;\<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="branch">[ ∧ ]</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="branch">[ ¬ ]</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+          &nbsp;&nbsp;&nbsp;<span class="leaf">( A )</span>&nbsp;&nbsp;<span class="branch">[ ¬ ]</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="leaf">( C )</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="leaf">( B )</span>
+        </div>
+      </article>
+
+      <!-- ====================================================================
+           SECTION 05: PERTEMUAN 5
+           ==================================================================== -->
+      <article class="article-section content-item" id="p5">
+        <span class="section-eyebrow">Slide Pertemuan 5 — Halaman 1 s.d. 28</span>
+        <h2 class="section-heading">Pertemuan 5: Tautologi, Kontradiksi &amp; Contingent</h2>
+
+        <p>
+          Berdasarkan hasil evaluasi tabel kebenarannya, setiap ekspresi logika proposisional dapat diklasifikasikan ke dalam salah satu dari tiga kategori utama: <strong>Tautologi</strong>, <strong>Kontradiksi</strong>, atau <strong>Contingent</strong>.
+        </p>
+
+        <h3>1. Rumus Baris Tabel Kebenaran: 2ⁿ (Slide 8)</h3>
+        <div class="editorial-callout">
+          <div class="editorial-callout-title">Rumus Baris Tabel Kebenaran (Slide 8)</div>
+          <p>
+            Jumlah baris untuk memuat seluruh kemungkinan nilai variabel dihitung dengan rumus: <strong>2<sup>N</sup></strong> (di mana N = jumlah variabel proposisional unik).<br>
+            • 2 Variabel (A, B) ⇒ 2<sup>2</sup> = <strong>4 baris</strong>.<br>
+            • 3 Variabel (A, B, C) ⇒ 2<sup>3</sup> = <strong>8 baris</strong>.<br>
+            • 4 Variabel (A, B, C, D) ⇒ 2<sup>4</sup> = <strong>16 baris</strong>.
+          </p>
+        </div>
+
+        <h3>2. Tiga Kategori Evaluasi Logika (Slide 15–26)</h3>
+        <p>
+          • <strong>Tautologi (Slide 15):</strong> Ekspresi yang <strong>selalu bernilai True (T)</strong> pada seluruh baris tabel kebenarannya. Menandakan argumen yang valid / sound argument.<br>
+          • <strong>Kontradiksi (Slide 22):</strong> Kebalikan tautologi, yaitu ekspresi yang <strong>selalu bernilai False (F)</strong> pada seluruh baris tabel kebenarannya.<br>
+          • <strong>Contingent (Slide 25):</strong> Formula campuran yang memiliki kombinasi nilai <strong>T dan F</strong> pada hasil akhirnya.
+        </p>
+
+        <h3>3. Contoh 5.1 (Slide 6–7) — Tabel 3 Variabel (8 Baris T-First)</h3>
+        <p>Ekspresi: <code>(A ∧ ¬B) → ¬C</code> ("Jika Anda ambil matkul Lohim dan tidak paham tautologi, maka Anda tidak lulus")</p>
+        <div class="table-wrap">
+          <table class="academic-table">
+            <thead>
+              <tr><th>A</th><th>B</th><th>C</th><th>¬B</th><th>¬C</th><th>A ∧ ¬B</th><th style="background:#0F766E;color:#fff">(A ∧ ¬B) → ¬C</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>T</td><td>T</td><td>T</td><td>F</td><td>F</td><td>F</td><td><span class="val-t">T</span></td></tr>
+              <tr><td>T</td><td>T</td><td>F</td><td>F</td><td>T</td><td>F</td><td><span class="val-t">T</span></td></tr>
+              <tr><td>T</td><td>F</td><td>T</td><td>T</td><td>F</td><td>T</td><td class="cell-pivot"><span class="val-f">F</span> (Anteseden T, Konsekuen F)</td></tr>
+              <tr><td>T</td><td>F</td><td>F</td><td>T</td><td>T</td><td>T</td><td><span class="val-t">T</span></td></tr>
+              <tr><td>F</td><td>T</td><td>T</td><td>F</td><td>F</td><td>F</td><td><span class="val-t">T</span></td></tr>
+              <tr><td>F</td><td>T</td><td>F</td><td>F</td><td>T</td><td>F</td><td><span class="val-t">T</span></td></tr>
+              <tr><td>F</td><td>F</td><td>T</td><td>T</td><td>F</td><td>F</td><td><span class="val-t">T</span></td></tr>
+              <tr><td>F</td><td>F</td><td>F</td><td>T</td><td>T</td><td>F</td><td><span class="val-t">T</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>4. Pembuktian Tautologi 3 Variabel — Contoh 5.5 (Slide 16–17)</h3>
+        <p>Buktikan bahwa ekspresi <code>(A ∧ B) → (C ∨ (¬B → ¬C))</code> adalah Tautologi:</p>
+        <div class="table-wrap">
+          <table class="academic-table">
+            <thead>
+              <tr><th>A</th><th>B</th><th>C</th><th>A ∧ B</th><th>¬B → ¬C</th><th>C ∨ (¬B → ¬C)</th><th class="cell-taut">Hasil Akhir</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>T</td><td>T</td><td>T</td><td>T</td><td>T</td><td>T</td><td class="cell-taut">T</td></tr>
+              <tr><td>T</td><td>T</td><td>F</td><td>T</td><td>T</td><td>T</td><td class="cell-taut">T</td></tr>
+              <tr><td>T</td><td>F</td><td>T</td><td>F</td><td>F</td><td>T</td><td class="cell-taut">T</td></tr>
+              <tr><td>T</td><td>F</td><td>F</td><td>F</td><td>T</td><td>T</td><td class="cell-taut">T</td></tr>
+              <tr><td>F</td><td>T</td><td>T</td><td>F</td><td>T</td><td>T</td><td class="cell-taut">T</td></tr>
+              <tr><td>F</td><td>T</td><td>F</td><td>F</td><td>T</td><td>T</td><td class="cell-taut">T</td></tr>
+              <tr><td>F</td><td>F</td><td>T</td><td>F</td><td>F</td><td>T</td><td class="cell-taut">T</td></tr>
+              <tr><td>F</td><td>F</td><td>F</td><td>F</td><td>T</td><td>T</td><td class="cell-taut">T</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:13px;color:var(--teal-dark);font-weight:700">✓ Seluruh 8 baris bernilai T ⇒ Terbukti TAUTOLOGI (Sound Argument)</p>
+
+        <h3>5. Pembuktian Kontradiksi &amp; Contingent (Slide 24 &amp; 26)</h3>
+        <div class="article-grid-2">
+          <div>
+            <h4>Contoh 5.9: Kontradiksi (Slide 24)</h4>
+            <p>Ekspresi: <code>((A ∨ B) ∧ ¬A) ∧ ¬B</code></p>
+            <div class="table-wrap">
+              <table class="academic-table">
+                <thead>
+                  <tr><th>A</th><th>B</th><th>A ∨ B</th><th>Hasil Akhir</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>T</td><td>T</td><td>T</td><td class="cell-pivot"><span class="val-f">F</span></td></tr>
+                  <tr><td>T</td><td>F</td><td>T</td><td class="cell-pivot"><span class="val-f">F</span></td></tr>
+                  <tr><td>F</td><td>T</td><td>T</td><td class="cell-pivot"><span class="val-f">F</span></td></tr>
+                  <tr><td>F</td><td>F</td><td>F</td><td class="cell-pivot"><span class="val-f">F</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p style="font-size:12px;color:var(--rose);font-weight:700">✓ Seluruh baris bernilai F (KONTRADIKSI)</p>
+          </div>
+
+          <div>
+            <h4>Contoh 5.10: Contingent (Slide 26)</h4>
+            <p>Ekspresi: <code>((A ∧ B) → C) → A</code></p>
+            <div class="table-wrap">
+              <table class="academic-table">
+                <thead>
+                  <tr><th>Baris</th><th>Kombinasi</th><th>Hasil Akhir</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>1–4</td><td>A = T</td><td><span class="val-t">T, T, T, T</span></td></tr>
+                  <tr><td>5–8</td><td>A = F</td><td><span class="val-f">F, F, F, F</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p style="font-size:12px;color:var(--gold-dark);font-weight:700">✓ Campuran 4 T dan 4 F (CONTINGENT)</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ====================================================================
+           SECTION 06: EVALUATOR LOGIKA
+           ==================================================================== -->
+      <article class="article-section content-item" id="evaluator">
+        <span class="section-eyebrow">Alat Bantu Studi Interaktif</span>
+        <h2 class="section-heading gold">Interactive Logic Truth Tester</h2>
+        <p>
+          Gunakan evaluator di bawah ini untuk menguji secara dinamis bagaimana nilai kebenaran dari proposisi dihitung berdasarkan aturan inferensi perkuliahan:
+        </p>
+
+        <div style="background:var(--bg-subtle);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px;margin-top:16px;">
+          <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:16px;">
+            <label style="font-weight:600;font-size:13.5px">Pilih Ekspresi yang Ingin Dievaluasi:</label>
+            <select id="simExpSelect" style="padding:8px 12px;border:1px solid var(--border);border-radius:4px;font-family:var(--font-body);font-size:13.5px;font-weight:500;" onchange="runInteractiveEval()">
+              <option value="imp">Implikasi Material: A → B</option>
+              <option value="and">Konjungsi: A ∧ B</option>
+              <option value="or">Disjungsi Inklusif: A ∨ B</option>
+              <option value="iff">Ekuivalensi: A ↔ B</option>
+              <option value="ponens">Modus Ponens: ((A → B) ∧ A) → B</option>
+              <option value="tollens">Modus Tollens: ((A → B) ∧ ¬B) → ¬A</option>
+              <option value="ex51">Contoh 5.1: (A ∧ ¬B) → ¬C</option>
+            </select>
+          </div>
+
+          <div id="simDisplayBox" class="formula-block" style="margin-bottom:0">
+            // Pilih ekspresi di atas untuk menampilkan reduksi langkah evaluasi
+          </div>
+        </div>
+      </article>
+
+      <!-- ====================================================================
+           SECTION 07: BANK KUIS INTERAKTIF & SIMULASI UTS (P1–P5)
+           ==================================================================== -->
+      <article class="article-section content-item quiz-section" id="quiz">
+        <span class="section-eyebrow">Evaluasi Formatif &amp; Uji Kompetensi</span>
+        <h2 class="section-heading gold">Bank Kuis Interaktif &amp; Simulasi UTS</h2>
+
+        <div class="quiz-header-banner">
+          <div class="quiz-header-title">
+            <span>🎯 Portal Uji Mandiri &amp; Simulasi UTS Logika</span>
+          </div>
+          <p class="quiz-header-desc">
+            Pilih kuis per pertemuan (P1 s.d. P5) untuk mematangkan konsep bertahap, atau ambil <strong>Simulasi UTS Komprehensif</strong> (campuran level Mudah, Sedang, dan Sukar/HOTS). Setiap soal dilengkapi kunci, pembahasan matematis, dan rujukan slide resmi pengampu.
+          </p>
+        </div>
+
+        <!-- TAB NAVIGATION -->
+        <div class="quiz-nav-tabs" id="quizNavTabs">
+          <button class="quiz-tab-btn tab-uts active" data-tab="uts" onclick="switchQuizTab('uts')">
+            <span>🎯 Simulasi UTS</span> <span class="quiz-tab-count">15 Soal</span>
+          </button>
+          <button class="quiz-tab-btn" data-tab="all" onclick="switchQuizTab('all')">
+            <span>Semua Bank Soal</span> <span class="quiz-tab-count">38 Soal</span>
+          </button>
+          <button class="quiz-tab-btn" data-tab="p1" onclick="switchQuizTab('p1')">
+            <span>P1: Pengenalan</span> <span class="quiz-tab-count">4</span>
+          </button>
+          <button class="quiz-tab-btn" data-tab="p2" onclick="switchQuizTab('p2')">
+            <span>P2: Majemuk</span> <span class="quiz-tab-count">4</span>
+          </button>
+          <button class="quiz-tab-btn" data-tab="p3" onclick="switchQuizTab('p3')">
+            <span>P3: Tabel &amp; Trees</span> <span class="quiz-tab-count">4</span>
+          </button>
+          <button class="quiz-tab-btn" data-tab="p4" onclick="switchQuizTab('p4')">
+            <span>P4: Implikasi (19+ Soal)</span> <span class="quiz-tab-count">21</span>
+          </button>
+          <button class="quiz-tab-btn" data-tab="p5" onclick="switchQuizTab('p5')">
+            <span>P5: Inferensi &amp; Falasi</span> <span class="quiz-tab-count">5</span>
+          </button>
+        </div>
+
+        <!-- UTS CONTROL PANEL (Timer & Finish) -->
+        <div class="uts-control-panel" id="utsControlPanel" style="display:flex">
+          <div class="uts-timer-wrap">
+            <span style="font-size:13px;font-weight:700;color:var(--navy)">⏱️ Sisa Waktu Ujian:</span>
+            <span class="uts-timer-display" id="utsTimerDisplay">30:00</span>
+            <button class="btn-reset-quiz" id="btnUtsTimerToggle" onclick="toggleUtsTimer()">Pause</button>
+          </div>
+          <div class="uts-actions">
+            <button class="btn-uts-finish" onclick="finishUtsExam()">Selesaikan &amp; Rekap Nilai UTS →</button>
+          </div>
+        </div>
+
+        <!-- UTS SUMMARY CARD (Shown on finish) -->
+        <div class="uts-summary-card" id="utsSummaryCard">
+          <div class="uts-summary-header">
+            <div>
+              <span style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase">Hasil Ujian Tengah Semester (Simulasi UTS)</span>
+              <div class="uts-score-big" id="utsFinalScore">0 / 100</div>
+              <div style="font-size:13px;color:var(--text-muted)" id="utsStatsText">Benar: 0 | Salah: 0 | Total: 15 Soal</div>
+            </div>
+            <div style="text-align:right">
+              <span style="font-size:11px;font-weight:700;color:var(--text-muted);display:block;margin-bottom:4px">Predikat Kelulusan</span>
+              <span class="uts-grade-badge" id="utsFinalGrade">Nilai: -</span>
+            </div>
+          </div>
+          <h4 style="font-size:13.5px;color:var(--navy);margin-bottom:10px">Diagnostik Penguasaan Per Topik Pertemuan:</h4>
+          <div class="uts-diagnostics-grid" id="utsDiagnosticsGrid"></div>
+          <div style="margin-top:16px;display:flex;gap:10px">
+            <button class="btn-quiz-check" onclick="retryUts()">Ulangi Simulasi UTS</button>
+            <button class="btn-quiz-reveal" onclick="reviewUtsErrors()">Fokus Tinjau Soal yang Salah</button>
+          </div>
+        </div>
+
+        <!-- QUIZ TOOLBAR (Level Filter & Stats) -->
+        <div class="quiz-toolbar">
+          <div class="quiz-level-group">
+            <span class="level-filter-label">Filter Tingkat:</span>
+            <button class="level-pill active" data-lvl="all" onclick="filterQuizLevel('all')">Semua Tingkat</button>
+            <button class="level-pill" data-lvl="mudah" onclick="filterQuizLevel('mudah')">🟢 Fondasi (Mudah)</button>
+            <button class="level-pill" data-lvl="sedang" onclick="filterQuizLevel('sedang')">🟡 Analisis (Sedang)</button>
+            <button class="level-pill" data-lvl="sukar" onclick="filterQuizLevel('sukar')">🔴 HOTS (Sukar)</button>
+          </div>
+          <div class="quiz-stats-group">
+            <span class="quiz-stat-item" id="quizScoreDisplay">Terjawab: 0 / 15</span>
+            <button class="btn-reset-quiz" onclick="revealAllAnswersInTab()">👁️ Buka Semua Kunci</button>
+            <button class="btn-reset-quiz" onclick="resetActiveQuiz()">Reset Kuis</button>
+          </div>
+        </div>
+
+        <!-- DYNAMIC QUIZ CARDS CONTAINER -->
+        <div class="quiz-container" id="quizContainer">
+          <!-- Rendered via JavaScript -->
+        </div>
+
+      </article>
+
+    </main>
+  </div>
+</div>
+
+<!-- 5. SYDNEY ACADEMIC FOOTER -->
+<footer class="sydney-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h5>Mata Kuliah TIF322103</h5>
+        <p><strong>Logika dan Himpunan</strong> merupakan mata kuliah wajib dasar pada Program Studi Teknik Informatika, Fakultas Komunikasi dan Informatika, Universitas Muhammadiyah Surakarta.</p>
+        <p style="font-size:12px;color:#64748B">Dosen Pengampu: Reinal Ariyuda, B.Eng., M.Eng. • Semester Gasal 2026/2027.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Navigasi Materi</h5>
+        <ul class="footer-nav">
+          <li><a href="#kontrak">Kontrak Kuliah &amp; Silabus</a></li>
+          <li><a href="#p1">Pertemuan 1: Pengenalan Logika</a></li>
+          <li><a href="#p2">Pertemuan 2: Logika Proposisional</a></li>
+          <li><a href="#p3">Pertemuan 3: Tabel Kebenaran</a></li>
+          <li><a href="#p4">Pertemuan 4: Proposisi Majemuk</a></li>
+          <li><a href="#p5">Pertemuan 5: Tautologi &amp; Bukti</a></li>
+          <li><a href="#quiz">Bank Kuis Interaktif &amp; Simulasi UTS</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Referensi Kepustakaan</h5>
+        <p>1. Soesianto, F. &amp; Dwijono, Djoni. (2010). <em>Logika Matematika untuk Ilmu Komputer</em>. Andi Offset.</p>
+        <p>2. Jong Jek Siang. (2015). <em>Logika Matematika: Soal dan Penyelesaian</em>. Andi Offset.</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>Diktat Akademik Mahasiswa — Mengadopsi Arsitektur Editorial Sydney WordPress Theme &amp; Sistem Warna Jadwal Volta</span>
+      <a href="index.html" style="color:var(--gold);font-weight:600">Buka Jadwal Kuliah Utama →</a>
+    </div>
+  </div>
+</footer>
+
+<!-- SCRIPT: INTERACTIVE CONTROLS, SEARCH, AND EVALUATOR -->
+<script>
+// 1. Quick Logic Evaluator (Sidebar)
+function calcQuickLogic() {
+  const a = document.getElementById('quickValA').value === 'T';
+  const b = document.getElementById('quickValB').value === 'T';
+  const op = document.getElementById('quickOp').value;
+  const out = document.getElementById('quickEvalOut');
+
+  let res = false;
+  let sym = '∧';
+  if (op === 'and') { res = a && b; sym = '∧'; }
+  else if (op === 'or') { res = a || b; sym = '∨'; }
+  else if (op === 'imp') { res = (!a) || b; sym = '→'; }
+  else if (op === 'iff') { res = a === b; sym = '↔'; }
+
+  const aStr = a ? 'T' : 'F';
+  const bStr = b ? 'T' : 'F';
+  const resStr = res ? 'T (True)' : 'F (False)';
+  out.textContent = `${aStr} ${sym} ${bStr} = ${resStr}`;
+}
+
+// 2. Interactive Logic Truth Tester (Section 06)
+function runInteractiveEval() {
+  const sel = document.getElementById('simExpSelect').value;
+  const box = document.getElementById('simDisplayBox');
+
+  if (sel === 'imp') {
+    box.innerHTML = `// OPERATOR: IMPLIKASI MATERIAL (A → B) — Pola Baku Dosen (T-First)
+• T → T = <span class="highlight-t">T</span>
+• T → F = <span class="highlight-f">F</span> (Kunci: Anteseden Benar mengingkari Konsekuen!)
+• F → T = <span class="highlight-t">T</span>
+• F → F = <span class="highlight-t">T</span>
+
+Kaidah: Bernilai False HANYA JIKA Anteseden bernilai True dan Konsekuen bernilai False.`;
+  } else if (sel === 'and') {
+    box.innerHTML = `// OPERATOR: KONJUNGSI (A ∧ B) — Pola Baku Dosen (T-First)
+• T ∧ T = <span class="highlight-t">T</span> (Kondisi tunggal True)
+• T ∧ F = <span class="highlight-f">F</span>
+• F ∧ T = <span class="highlight-f">F</span>
+• F ∧ F = <span class="highlight-f">F</span>
+
+Kaidah: Bernilai True HANYA JIKA kedua operan bernilai True.`;
+  } else if (sel === 'or') {
+    box.innerHTML = `// OPERATOR: DISJUNGSI INKLUSIF (A ∨ B) — Pola Baku Dosen (T-First)
+• T ∨ T = <span class="highlight-t">T</span>
+• T ∨ F = <span class="highlight-t">T</span>
+• F ∨ T = <span class="highlight-t">T</span>
+• F ∨ F = <span class="highlight-f">F</span> (Kondisi tunggal False)
+
+Kaidah: Bernilai False HANYA JIKA kedua operan bernilai False.`;
+  } else if (sel === 'iff') {
+    box.innerHTML = `// OPERATOR: BIIMPLIKASI / EKUIVALENSI (A ↔ B) — Pola Baku Dosen (T-First)
+• T ↔ T = <span class="highlight-t">T</span>
+• T ↔ F = <span class="highlight-f">F</span>
+• F ↔ T = <span class="highlight-f">F</span>
+• F ↔ F = <span class="highlight-t">T</span>
+
+Kaidah: Bernilai True HANYA JIKA kedua operan bernilai SAMA.`;
+  } else if (sel === 'ponens') {
+    box.innerHTML = `// HUKUM INFERENSI: MODUS PONENS ((A → B) ∧ A) → B
+• Baris 1 (A=T, B=T): ((T → T) ∧ T) → T = (T ∧ T) → T = T → T = <span class="highlight-t">T</span>
+• Baris 2 (A=T, B=F): ((T → F) ∧ T) → F = (F ∧ T) → F = F → F = <span class="highlight-t">T</span>
+• Baris 3 (A=F, B=T): ((F → T) ∧ F) → T = (T ∧ F) → T = F → T = <span class="highlight-t">T</span>
+• Baris 4 (A=F, B=F): ((F → F) ∧ F) → F = (T ∧ F) → F = F → F = <span class="highlight-t">T</span>
+
+Evaluasi Hasil: TAUTOLOGI (Argumen Kuat / Valid secara Mutlak)`;
+  } else if (sel === 'tollens') {
+    box.innerHTML = `// HUKUM INFERENSI: MODUS TOLLENS ((A → B) ∧ ¬B) → ¬A
+• Baris 1 (A=T, B=T): ((T) ∧ F) → F = F → F = <span class="highlight-t">T</span>
+• Baris 2 (A=T, B=F): ((F) ∧ T) → F = F → F = <span class="highlight-t">T</span>
+• Baris 3 (A=F, B=T): ((T) ∧ F) → T = F → T = <span class="highlight-t">T</span>
+• Baris 4 (A=F, B=F): ((T) ∧ T) → T = T → T = <span class="highlight-t">T</span>
+
+Evaluasi Hasil: TAUTOLOGI (Argumen Kuat / Valid secara Mutlak)`;
+  } else if (sel === 'ex51') {
+    box.innerHTML = `// CONTOH 5.1 SLIDE: (A ∧ ¬B) → ¬C
+• T, T, T : (T ∧ F) → F = F → F = <span class="highlight-t">T</span>
+• T, T, F : (T ∧ F) → T = F → T = <span class="highlight-t">T</span>
+• T, F, T : (T ∧ T) → F = T → F = <span class="highlight-f">F</span> (Anteseden T, Konsekuen F!)
+• T, F, F : (T ∧ T) → T = T → T = <span class="highlight-t">T</span>
+• F, T, T : (F ∧ F) → F = F → F = <span class="highlight-t">T</span>
+• F, T, F : (F ∧ F) → T = F → T = <span class="highlight-t">T</span>
+• F, F, T : (F ∧ T) → F = F → F = <span class="highlight-t">T</span>
+• F, F, F : (F ∧ T) → T = F → T = <span class="highlight-t">T</span>
+
+Evaluasi Hasil: CONTINGENT (7 Nilai True dan 1 Nilai False)`;
+  }
+}
+
+// 3. Search Filter Function
+const searchBox = document.getElementById('slideSearch');
+if (searchBox) {
+  searchBox.addEventListener('input', (e) => {
+    const q = e.target.value.toLowerCase().trim();
+    const sections = document.querySelectorAll('.content-item');
+    if (!q) {
+      sections.forEach(s => s.style.display = 'block');
+      return;
+    }
+    sections.forEach(sec => {
+      const text = sec.innerText.toLowerCase();
+      sec.style.display = text.includes(q) ? 'block' : 'none';
+    });
+  });
+}
+
+// 4. ScrollSpy for Sticky Table of Contents
+window.addEventListener('scroll', () => {
+  const sections = document.querySelectorAll('.article-section');
+  const scrollPos = window.scrollY + 120;
+  let currentId = 'kontrak';
+
+  sections.forEach(sec => {
+    if (sec.offsetTop <= scrollPos) {
+      currentId = sec.getAttribute('id');
+    }
+  });
+
+  document.querySelectorAll('#tocNav .toc-link').forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + currentId);
+  });
+});
+
+/* ==========================================================================
+   BANK DATA SOAL & QUIZ ENGINE INTERAKTIF (P1–P5 + UTS)
+   ========================================================================== */
+const quizData = [
+  // --- PERTEMUAN 1 ---
+  {
+    id: 'p1_q1',
+    pert: 'P1',
+    level: 'mudah',
+    isUts: false,
+    type: 'single',
+    q: 'Manakah di antara kalimat berikut yang merupakan <code>PROPOSISI DEKLARATIF</code>?',
+    opts: [
+      'Tolong tutup pintu laboratorium itu!',
+      'Berapakah hasil dari 15 + 27?',
+      'Surakarta adalah salah satu kota di provinsi Jawa Tengah.',
+      'Semoga Anda lulus mata kuliah Logika dengan nilai A!'
+    ],
+    ans: [2],
+    exp: 'Proposisi adalah kalimat deklaratif (pernyataan) yang bernilai BENAR atau SALAH, tetapi tidak keduanya sekaligus (Slide P1 Halaman 8). Kalimat perintah, pertanyaan, dan harapan bukan merupakan proposisi.'
+  },
+  {
+    id: 'p1_q2',
+    pert: 'P1',
+    level: 'mudah',
+    isUts: true,
+    type: 'single',
+    q: 'Pernyataan <code>"17 adalah bilangan genap"</code> merupakan proposisi dengan nilai kebenaran:',
+    opts: [
+      'Benar (T)',
+      'Salah (F)',
+      'Bukan Proposisi',
+      'Kalimat Terbuka'
+    ],
+    ans: [1],
+    exp: 'Sebuah kalimat tidak harus selalu benar untuk menjadi proposisi. "17 adalah bilangan genap" adalah proposisi deklaratif yang bernilai SALAH (F) karena 17 adalah bilangan ganjil (Slide P1 Halaman 9).'
+  },
+  {
+    id: 'p1_q3',
+    pert: 'P1',
+    level: 'sedang',
+    isUts: true,
+    type: 'single',
+    q: 'Mengapa ekspresi matematika <code>"x + 5 = 12"</code> BUKAN merupakan proposisi dalam logika dasar?',
+    opts: [
+      'Karena memuat simbol aritmatika tambah dan sama dengan',
+      'Karena nilai kebenarannya belum dapat ditentukan tanpa mengetahui nilai variabel bebas x (Kalimat Terbuka)',
+      'Karena ekspresi tersebut selalu bernilai Salah',
+      'Karena tidak memiliki tanda titik di akhir kalimat'
+    ],
+    ans: [1],
+    exp: 'Ekspresi ini adalah Kalimat Terbuka (Open Sentence). Selama variabel x belum diberi nilai spesifik, nilai kebenarannya belum dapat ditentukan (Slide P1 Halaman 10).'
+  },
+  {
+    id: 'p1_q4',
+    pert: 'P1',
+    level: 'sukar',
+    isUts: true,
+    type: 'single',
+    q: 'Pernyataan <code>"Kalimat di dalam tanda petik ini adalah bohong"</code> digolongkan sebagai:',
+    opts: [
+      'Proposisi bernilai Benar (T)',
+      'Proposisi bernilai Salah (F)',
+      'Bukan Proposisi (Paradoks Diri / Liar Paradox yang melanggar Hukum Ketiga Ditiadakan)',
+      'Kontradiksi Mutlak'
+    ],
+    ans: [2],
+    exp: 'Paradoks Pembohong (Liar Paradox) melanggar Hukum Ketiga Ditiadakan (Law of Excluded Middle). Jika dianggap Benar, maka ia bohong (F). Jika dianggap Bohong, maka ia benar (T). Oleh karena itu, kalimat paradoks bukan proposisi (Slide P1 Halaman 12).'
+  },
+
+  // --- PERTEMUAN 2 ---
+  {
+    id: 'p2_q1',
+    pert: 'P2',
+    level: 'mudah',
+    isUts: true,
+    type: 'single',
+    q: 'Operasi DISJUNGSI INKLUSIF (p ∨ q) bernilai SALAH (F) hanya jika:',
+    opts: [
+      'p = T dan q = F',
+      'p = F dan q = T',
+      'Kedua operan p dan q bernilai F (F ∨ F = F)',
+      'Salah satu operan bernilai T'
+    ],
+    ans: [2],
+    exp: 'Disjungsi inklusif bernilai Benar (T) jika minimal satu operan bernilai True. Kondisi tunggal bernilai False terjadi saat F ∨ F = F (Slide P2 Halaman 14).'
+  },
+  {
+    id: 'p2_q2',
+    pert: 'P2',
+    level: 'mudah',
+    isUts: false,
+    type: 'single',
+    q: 'Berdasarkan Hukum Negasi Ganda (Involusi), formula <code>¬(¬p)</code> secara logis ekuivalen dengan:',
+    opts: [
+      '¬p',
+      'p',
+      'Tautologi (T)',
+      'Kontradiksi (F)'
+    ],
+    ans: [1],
+    exp: 'Hukum Involusi: Menyangkal negasi suatu proposisi akan mengembalikan nilai proposisi itu sendiri: ¬(¬p) ≡ p (Slide P2 Halaman 16).'
+  },
+  {
+    id: 'p2_q3',
+    pert: 'P2',
+    level: 'sedang',
+    isUts: true,
+    type: 'single',
+    q: 'Diberikan p: "Budi belajar giat", q: "Budi lulus ujian". Manakah bentuk simbolik dari: <em>"Meskipun Budi belajar giat, Budi tidak lulus ujian"</em>?',
+    opts: [
+      'p → ¬q',
+      'p ∧ ¬q',
+      '¬(p ∧ q)',
+      'p ∨ ¬q'
+    ],
+    ans: [1],
+    exp: 'Kata hubung bahasa alami seperti "meskipun", "tetapi", atau "namun" dalam logika proposisi diterjemahkan sebagai Konjungsi (∧) (Slide P2 Contoh 2.4).'
+  },
+  {
+    id: 'p2_q4',
+    pert: 'P2',
+    level: 'sukar',
+    isUts: true,
+    type: 'single',
+    q: 'Sesuai Hukum De Morgan, bentuk negasi yang setara dari <em>"Server aktif dan koneksi lancar"</em> adalah:',
+    opts: [
+      'Server tidak aktif dan koneksi tidak lancar',
+      'Server tidak aktif atau koneksi tidak lancar',
+      'Jika server aktif maka koneksi tidak lancar',
+      'Server aktif tetapi koneksi putus'
+    ],
+    ans: [1],
+    exp: 'Hukum De Morgan: ¬(p ∧ q) ≡ ¬p ∨ ¬q. Operator konjungsi ("dan") berbalik menjadi disjungsi ("atau") dan masing-masing klausa dinegasikan (Slide P2 Halaman 18).'
+  },
+
+  // --- PERTEMUAN 3 ---
+  {
+    id: 'p3_q1',
+    pert: 'P3',
+    level: 'mudah',
+    isUts: true,
+    type: 'single',
+    q: 'Sebuah formula logika memuat 4 variabel proposisional atomik yang berbeda (p, q, r, s). Berapakah jumlah baris pada tabel kebenarannya?',
+    opts: [
+      '8 baris',
+      '12 baris',
+      '16 baris',
+      '32 baris'
+    ],
+    ans: [2],
+    exp: 'Rumus baku ukuran tabel kebenaran adalah 2^n di mana n adalah jumlah variabel atomik. Untuk n = 4, jumlah baris = 2^4 = 16 baris (Slide P3 Halaman 4).'
+  },
+  {
+    id: 'p3_q2',
+    pert: 'P3',
+    level: 'mudah',
+    isUts: false,
+    type: 'single',
+    q: 'Sesuai pola baku yang diajarkan dosen pengampu Reinal Ariyuda, B.Eng., M.Eng., urutan baris kebenaran pada 2 variabel (p, q) adalah:',
+    opts: [
+      'FF, FT, TF, TT (Urutan biner naik)',
+      'TT, TF, FT, FF (Pola Baku T-First)',
+      'TF, FT, TT, FF',
+      'Urutan bebas tanpa pola'
+    ],
+    ans: [1],
+    exp: 'Pola dosen perkuliahan selalu dimulai dengan True di baris teratas dan False di baris terbawah: TT, TF, FT, FF (Slide P3 Halaman 6).'
+  },
+  {
+    id: 'p3_q3',
+    pert: 'P3',
+    level: 'sedang',
+    isUts: true,
+    type: 'single',
+    q: 'Manakah urutan pengerjaan operator logika (Presedensi) dari prioritas tertinggi ke terendah jika tanpa kurung?',
+    opts: [
+      '∧, ∨, ¬, →, ↔',
+      '¬, ∧, ∨, →, ↔',
+      '→, ↔, ¬, ∧, ∨',
+      '¬, →, ↔, ∧, ∨'
+    ],
+    ans: [1],
+    exp: 'Hirarki presedensi resmi: 1. Negasi (¬), 2. Konjungsi (∧), 3. Disjungsi (∨), 4. Implikasi (→), 5. Biimplikasi (↔) (Slide P3 Halaman 8).'
+  },
+  {
+    id: 'p3_q4',
+    pert: 'P3',
+    level: 'sukar',
+    isUts: true,
+    type: 'single',
+    q: 'Pada pohon sintaks (parse tree) dari formula: <code>((p ∧ q) ∨ ¬r) → (s ↔ t)</code>, simpul yang menjadi Simpul Akar (Root Node) utama adalah:',
+    opts: [
+      'Operator ∨',
+      'Operator ↔',
+      'Operator → (Implikasi Utama)',
+      'Operator ∧'
+    ],
+    ans: [2],
+    exp: 'Operator utama yang menghubungkan sub-pohon kiri ((p ∧ q) ∨ ¬r) dengan sub-pohon kanan (s ↔ t) adalah implikasi (→), sehingga operator ini menjadi Simpul Akar (Root Node) tertinggi pada parse tree (Slide P3 Contoh 3.5).'
+  },
+
+  // --- PERTEMUAN 4 (19 REVIEW QUESTIONS + 2 SOAL LANJUTAN) ---
+  {
+    id: 'p4_q1',
+    pert: 'P4',
+    level: 'mudah',
+    isUts: true,
+    type: 'single',
+    q: '1. Manakah pernyataan operasi KONJUNGSI (∧) berikut yang bernilai BENAR (T)?',
+    opts: ['T ∧ T', 'T ∧ F', 'F ∧ T', 'F ∧ F'],
+    ans: [0],
+    exp: 'Konjungsi (∧) bernilai Benar (T) HANYA JIKA kedua operannya bernilai Benar: T ∧ T = T (Slide P4).'
+  },
+  {
+    id: 'p4_q2',
+    pert: 'P4',
+    level: 'mudah',
+    isUts: false,
+    type: 'single',
+    q: '2. Manakah pernyataan operasi KONJUNGSI (∧) berikut yang bernilai SALAH (F)?',
+    opts: ['T ∧ T', 'T ∧ F', '¬F ∧ T', 'T ∧ (F ∨ T)'],
+    ans: [1],
+    exp: 'T ∧ F = F karena salah satu operan bernilai False.'
+  },
+  {
+    id: 'p4_q3',
+    pert: 'P4',
+    level: 'mudah',
+    isUts: false,
+    type: 'single',
+    q: '3. Manakah pernyataan operasi DISJUNGSI (∨) berikut yang bernilai BENAR (T)?',
+    opts: ['F ∨ F', '¬T ∨ F', 'T ∨ F', 'F ∧ F'],
+    ans: [2],
+    exp: 'T ∨ F = T karena minimal ada satu operan yang bernilai True.'
+  },
+  {
+    id: 'p4_q4',
+    pert: 'P4',
+    level: 'mudah',
+    isUts: true,
+    type: 'single',
+    q: '4. Manakah pernyataan operasi DISJUNGSI (∨) berikut yang bernilai SALAH (F)?',
+    opts: ['T ∨ T', 'T ∨ F', 'F ∨ T', 'F ∨ F'],
+    ans: [3],
+    exp: 'Disjungsi (∨) bernilai Salah (F) HANYA JIKA kedua operannya bernilai Salah: F ∨ F = F (Slide P4).'
+  },
+  {
+    id: 'p4_q5',
+    pert: 'P4',
+    level: 'mudah',
+    isUts: false,
+    type: 'single',
+    q: '5. Manakah pernyataan operasi IMPLIKASI (→) berikut yang bernilai BENAR (T)?',
+    opts: ['T → F', 'T ∧ F', 'F ∨ F', 'T → T'],
+    ans: [3],
+    exp: 'T → T = T. Implikasi bernilai True jika kedua operan bernilai True.'
+  },
+  {
+    id: 'p4_q6',
+    pert: 'P4',
+    level: 'mudah',
+    isUts: true,
+    type: 'single',
+    q: '6. Manakah pernyataan operasi IMPLIKASI (→) berikut yang bernilai SALAH (F)?',
+    opts: ['T → T', 'T → F', 'F → T', 'F → F'],
+    ans: [1],
+    exp: 'Kasus tunggal di mana implikasi bernilai Salah (F) adalah saat anteseden Benar dan konsekuen Salah: T → F = F (Slide P4 Slide 12).'
+  },
+  {
+    id: 'p4_q7',
+    pert: 'P4',
+    level: 'mudah',
+    isUts: false,
+    type: 'single',
+    q: '7. Manakah pernyataan operasi BIIMPLIKASI (↔) berikut yang bernilai BENAR (T)?',
+    opts: ['T ↔ T', 'T ↔ F', 'F ↔ T', 'T ∧ F'],
+    ans: [0],
+    exp: 'Biimplikasi (↔) bernilai Benar jika kedua operannya memiliki nilai kebenaran yang SAMA: T ↔ T = T dan F ↔ F = T.'
+  },
+  {
+    id: 'p4_q8',
+    pert: 'P4',
+    level: 'mudah',
+    isUts: false,
+    type: 'single',
+    q: '8. Manakah pernyataan operasi BIIMPLIKASI (↔) berikut yang bernilai SALAH (F)?',
+    opts: ['T ↔ T', 'T ↔ F', 'F ↔ F', '¬F ↔ T'],
+    ans: [1],
+    exp: 'Biimplikasi bernilai Salah jika kedua operannya berbeda nilai kebenaran: T ↔ F = F dan F ↔ T = F.'
+  },
+  {
+    id: 'p4_q9',
+    pert: 'P4',
+    level: 'mudah',
+    isUts: false,
+    type: 'single',
+    q: '9. Manakah kombinasi yang bernilai BENAR (T)?',
+    opts: ['¬F', '¬T', 'T ∧ F', 'F ∨ F'],
+    ans: [0],
+    exp: 'Negasi dari False adalah True: ¬F = T.'
+  },
+  {
+    id: 'p4_q10',
+    pert: 'P4',
+    level: 'mudah',
+    isUts: false,
+    type: 'single',
+    q: '10. Manakah kombinasi yang bernilai SALAH (F)?',
+    opts: ['¬F', 'T ∨ F', 'F → T', 'T → F'],
+    ans: [3],
+    exp: 'T → F bernilai Salah (F), sedangkan opsi lainnya bernilai True.'
+  },
+  {
+    id: 'p4_q11',
+    pert: 'P4',
+    level: 'sedang',
+    isUts: false,
+    type: 'multi',
+    q: '11. <strong>[Multi-Select]</strong> Centang semua kombinasi yang bernilai BENAR (T):',
+    opts: ['T ∨ F', 'F → T', 'T ↔ T', 'T ∧ F'],
+    ans: [0, 1, 2],
+    exp: 'T ∨ F = T (Benar); F → T = T (Benar); T ↔ T = T (Benar); sedangkan T ∧ F = F (Salah). Maka opsi A, B, dan C harus dicentang!'
+  },
+  {
+    id: 'p4_q12',
+    pert: 'P4',
+    level: 'sedang',
+    isUts: false,
+    type: 'multi',
+    q: '12. <strong>[Multi-Select]</strong> Centang semua kombinasi yang bernilai SALAH (F):',
+    opts: ['F ∧ F', 'T → F', 'T ↔ F', 'F → F'],
+    ans: [0, 1, 2],
+    exp: 'F ∧ F = F (Salah); T → F = F (Salah); T ↔ F = F (Salah); sedangkan F → F = T (Benar). Maka opsi A, B, dan C harus dicentang!'
+  },
+  {
+    id: 'p4_q13',
+    pert: 'P4',
+    level: 'sedang',
+    isUts: false,
+    type: 'single',
+    q: '13. Manakah hasil negasi berikut yang bernilai BENAR (T)?',
+    opts: ['¬(T ∧ F)', '¬(T ∨ T)', '¬(F → F)', '¬(F ↔ F)'],
+    ans: [0],
+    exp: 'T ∧ F = F, sehingga negasinya ¬(F) = T. Opsi lainnya menghasilkan negasi dari True yaitu False.'
+  },
+  {
+    id: 'p4_q14',
+    pert: 'P4',
+    level: 'sedang',
+    isUts: false,
+    type: 'single',
+    q: '14. Manakah hasil negasi berikut yang bernilai SALAH (F)?',
+    opts: ['¬(T ∧ T)', '¬(F ∨ F)', '¬(T → F)', '¬(T ↔ F)'],
+    ans: [0],
+    exp: 'T ∧ T = T, sehingga negasinya ¬(T) = F. Opsi lainnya bernilai ¬(F) = T.'
+  },
+  {
+    id: 'p4_q15',
+    pert: 'P4',
+    level: 'sedang',
+    isUts: true,
+    type: 'single',
+    q: '15. Jika A = T dan B = F, manakah operasi yang bernilai BENAR (T)?',
+    opts: ['A ∧ B', 'A ↔ B', 'A ∨ B', 'A → B'],
+    ans: [2],
+    exp: 'Substitusi nilai: A ∨ B = T ∨ F = T. (Periksa: A → B = T → F = F; A ∧ B = F; A ↔ B = F).'
+  },
+  {
+    id: 'p4_q16',
+    pert: 'P4',
+    level: 'sedang',
+    isUts: false,
+    type: 'single',
+    q: '16. Jika A = F dan B = F, manakah operasi yang bernilai BENAR (T)?',
+    opts: ['A ∧ B', 'A ∨ B', '¬(A → B)', 'A ↔ B'],
+    ans: [3],
+    exp: 'Karena A dan B sama-sama bernilai F, maka biimplikasi A ↔ B bernilai F ↔ F = T.'
+  },
+  {
+    id: 'p4_q17',
+    pert: 'P4',
+    level: 'sedang',
+    isUts: false,
+    type: 'single',
+    q: '17. Jika A = T dan B = T, manakah operasi berikut yang bernilai SALAH (F)?',
+    opts: ['A ∧ B', 'A ∨ B', 'A → B', 'A ↔ ¬B'],
+    ans: [3],
+    exp: '¬B = ¬T = F. Maka A ↔ ¬B = T ↔ F = F. Opsi lainnya semuanya bernilai True.'
+  },
+  {
+    id: 'p4_q18',
+    pert: 'P4',
+    level: 'sedang',
+    isUts: true,
+    type: 'single',
+    q: '18. Manakah pasangan operasi logika yang bernilai SAMA?',
+    opts: [
+      '(T ∧ T) dan (T ∨ F)',
+      '(T → F) dan (T ∨ T)',
+      '(F ∧ F) dan (T ↔ T)',
+      '(T ↔ F) dan (F → F)'
+    ],
+    ans: [0],
+    exp: 'T ∧ T = T dan T ∨ F = T (keduanya sama-sama bernilai True). Pasangan lainnya memiliki nilai berlawanan.'
+  },
+  {
+    id: 'p4_q19',
+    pert: 'P4',
+    level: 'sedang',
+    isUts: false,
+    type: 'single',
+    q: '19. Manakah operasi logika dengan dua input berbeda (T dan F) yang bernilai BENAR (T)?',
+    opts: ['T ∧ F', 'T ↔ F', 'T → F', 'T ∨ F'],
+    ans: [3],
+    exp: 'T ∨ F = T. Sementara T ∧ F = F, T ↔ F = F, dan T → F = F.'
+  },
+  {
+    id: 'p4_q20',
+    pert: 'P4',
+    level: 'sukar',
+    isUts: true,
+    type: 'single',
+    q: '20. Manakah Kontraposisi yang sah dan ekuivalen dari implikasi: <code>¬p → q</code>?',
+    opts: ['q → ¬p', 'p → ¬q', '¬q → p', '¬q → ¬p'],
+    ans: [2],
+    exp: 'Kaidah Kontraposisi: Tukar posisi anteseden dan konsekuen lalu negasikan keduanya: ¬(q) → ¬(¬p) ≡ ¬q → p (Slide P4 Halaman 15).'
+  },
+  {
+    id: 'p4_q21',
+    pert: 'P4',
+    level: 'sukar',
+    isUts: true,
+    type: 'single',
+    q: '21. Pada implikasi "Rizky lulus ujian (p) HANYA JIKA ia belajar semalaman (q)", peran proposisi q adalah sebagai:',
+    opts: [
+      'Kondisi Cukup (Sufficient Condition)',
+      'Kondisi Perlu (Necessary Condition)',
+      'Konklusi Mutlak Bebas',
+      'Premis yang tidak relevan'
+    ],
+    ans: [1],
+    exp: 'Frasa "p hanya jika q" diformulasikan sebagai p → q. Dalam relasi ini, p adalah kondisi cukup dan q adalah kondisi mutlak/perlu (necessary condition) (Slide P4 Halaman 16).'
+  },
+
+  // --- PERTEMUAN 5 ---
+  {
+    id: 'p5_q1',
+    pert: 'P5',
+    level: 'mudah',
+    isUts: true,
+    type: 'single',
+    q: 'Suatu proposisi majemuk yang selalu bernilai BENAR (T) untuk seluruh kemungkinan nilai kebenaran variabel penyusunnya disebut:',
+    opts: ['Kontradiksi', 'Kontingensi', 'Tautologi', 'Falasi'],
+    ans: [2],
+    exp: 'Tautologi adalah proposisi majemuk yang seluruh baris pada kolom hasil akhirnya bernilai T (Slide P5 Halaman 3).'
+  },
+  {
+    id: 'p5_q2',
+    pert: 'P5',
+    level: 'sedang',
+    isUts: true,
+    type: 'single',
+    q: 'Kaidah inferensi MODUS PONENS menyatakan bahwa dari premis (p → q) dan premis p, dapat ditarik konklusi yang sah yaitu:',
+    opts: ['¬p', 'q', '¬q', 'p ∧ q'],
+    ans: [1],
+    exp: 'Modus Ponens (Kaidah Penegasan Anteseden): ((p → q) ∧ p) ⊢ q (Slide P5 Halaman 8).'
+  },
+  {
+    id: 'p5_q3',
+    pert: 'P5',
+    level: 'sedang',
+    isUts: false,
+    type: 'single',
+    q: 'Kaidah inferensi MODUS TOLLENS menyatakan bahwa dari premis (p → q) dan premis ¬q, dapat ditarik konklusi sah yaitu:',
+    opts: ['p', '¬p', 'q', 'q → p'],
+    ans: [1],
+    exp: 'Modus Tollens (Kaidah Penyangkalan Konsekuen): ((p → q) ∧ ¬q) ⊢ ¬p (Slide P5 Halaman 10).'
+  },
+  {
+    id: 'p5_q4',
+    pert: 'P5',
+    level: 'sukar',
+    isUts: true,
+    type: 'single',
+    q: 'Perhatikan penalaran: "Jika hujan lebat (p) maka jalanan basah (q). Jalanan basah (q). Maka tadi pasti hujan lebat (p)". Penalaran ini tergolong ke dalam falasi formal jenis:',
+    opts: [
+      'Fallacy of Affirming the Consequent (Menegaskan Konsekuen)',
+      'Fallacy of Denying the Antecedent (Menyangkal Anteseden)',
+      'Modus Tollens Tidak Lengkap',
+      'Silogisme Disjungtif Palsu'
+    ],
+    ans: [0],
+    exp: 'Penalaran ((p → q) ∧ q) → p BUKAN tautologi melainkan Fallacy of Affirming the Consequent. Jalanan basah bisa disebabkan oleh hal lain (disiram, pipa bocor), sehingga penegasan konsekuen tidak menjamin anteseden (Slide P5 Halaman 15).'
+  },
+  {
+    id: 'p5_q5',
+    pert: 'P5',
+    level: 'sukar',
+    isUts: true,
+    type: 'single',
+    q: 'Bentuk penalaran <code>((p → q) ∧ ¬p) → ¬q</code> dinyatakan TIDAK VALID karena merupakan falasi formal jenis:',
+    opts: [
+      'Modus Tollens',
+      'Fallacy of Denying the Antecedent (Menyangkal Anteseden)',
+      'Tautologi Mutlak',
+      'Ekuivalensi Kontraposisi'
+    ],
+    ans: [1],
+    exp: 'Menyangkal anteseden ¬p tidak dapat dijadikan dasar untuk menyimpulkan bahwa konsekuen pasti bernilai ¬q. Ini adalah Fallacy of Denying the Antecedent (Slide P5 Halaman 16).'
+  }
+];
+
+// STATE MANAGEMENT
+let activeQuizTab = 'uts';
+let activeQuizLevel = 'all';
+const quizUserAnswers = {};
+const quizCheckedStates = {};
+const quizRevealedStates = {};
+
+// UTS TIMER STATE
+let utsTimerSec = 30 * 60;
+let utsTimerInterval = null;
+let utsTimerRunning = false;
+
+function formatTime(s) {
+  const m = Math.floor(s / 60);
+  const sec = s % 60;
+  return `${m < 10 ? '0' + m : m}:${sec < 10 ? '0' + sec : sec}`;
+}
+
+function updateUtsTimerDisplay() {
+  const el = document.getElementById('utsTimerDisplay');
+  if (el) el.textContent = formatTime(utsTimerSec);
+}
+
+function startUtsTimer() {
+  if (utsTimerInterval) clearInterval(utsTimerInterval);
+  utsTimerRunning = true;
+  const btn = document.getElementById('btnUtsTimerToggle');
+  if (btn) btn.textContent = 'Pause';
+  utsTimerInterval = setInterval(() => {
+    if (utsTimerSec > 0) {
+      utsTimerSec--;
+      updateUtsTimerDisplay();
+    } else {
+      clearInterval(utsTimerInterval);
+      utsTimerRunning = false;
+      alert('Waktu Simulasi UTS telah habis! Sistem akan merekap nilai otomatis.');
+      finishUtsExam();
+    }
+  }, 1000);
+}
+
+function toggleUtsTimer() {
+  const btn = document.getElementById('btnUtsTimerToggle');
+  if (utsTimerRunning) {
+    clearInterval(utsTimerInterval);
+    utsTimerRunning = false;
+    if (btn) btn.textContent = 'Lanjutkan';
+  } else {
+    startUtsTimer();
+  }
+}
+
+// RENDER FUNCTION
+function renderQuizCards() {
+  const container = document.getElementById('quizContainer');
+  if (!container) return;
+
+  // Filter by Tab
+  let list = quizData;
+  if (activeQuizTab === 'uts') {
+    list = quizData.filter(q => q.isUts);
+  } else if (activeQuizTab === 'all') {
+    list = quizData;
+  } else {
+    list = quizData.filter(q => q.pert.toLowerCase() === activeQuizTab);
+  }
+
+  // Filter by Level
+  if (activeQuizLevel !== 'all') {
+    list = list.filter(q => q.level === activeQuizLevel);
+  }
+
+  // Toggle UTS control panel visibility
+  const utsPanel = document.getElementById('utsControlPanel');
+  if (utsPanel) {
+    utsPanel.style.display = (activeQuizTab === 'uts') ? 'flex' : 'none';
+  }
+
+  if (list.length === 0) {
+    container.innerHTML = `
+      <div style="text-align:center;padding:40px;color:var(--text-muted);border:1px dashed var(--border);border-radius:var(--radius-md)">
+        Tidak ada soal yang sesuai dengan filter tingkat kesulitan terpilih.
+      </div>
+    `;
+    updateScoreDisplay();
+    return;
+  }
+
+  const letters = ['A', 'B', 'C', 'D', 'E'];
+  container.innerHTML = list.map((item, idx) => {
+    const userSel = quizUserAnswers[item.id] || [];
+    const isChecked = quizCheckedStates[item.id] || false;
+    const isRevealed = quizRevealedStates[item.id] || false;
+    const isMulti = item.type === 'multi';
+
+    const optsHtml = item.opts.map((optText, oIdx) => {
+      let extraClass = '';
+      if (userSel.includes(oIdx)) extraClass += ' selected';
+      if (isChecked || isRevealed) {
+        if (item.ans.includes(oIdx)) {
+          extraClass += ' correct-target';
+        } else if (userSel.includes(oIdx)) {
+          extraClass += ' wrong-selected';
+        }
+      }
+
+      return `
+        <div class="quiz-opt-item ${extraClass}" onclick="selectQuizOpt('${item.id}', ${oIdx}, ${isMulti})">
+          <span class="quiz-opt-letter">${letters[oIdx]}</span>
+          <span class="quiz-opt-text">${optText}</span>
+        </div>
+      `;
+    }).join('');
+
+    const levelBadgeText = item.level === 'mudah' ? '🟢 Fondasi' : (item.level === 'sedang' ? '🟡 Analisis' : '🔴 HOTS');
+    const utsBadge = item.isUts ? `<span class="tag-uts-badge">★ Masuk UTS</span>` : '';
+
+    let fbStyle = 'display:none;';
+    let fbClass = 'quiz-feedback-box';
+    let fbContent = '';
+
+    if (isChecked) {
+      const correctSel = item.ans.slice().sort();
+      const curSel = userSel.slice().sort();
+      const isCorrect = curSel.length === correctSel.length && curSel.every((val, i) => val === correctSel[i]);
+      fbStyle = 'display:block;';
+      fbClass = 'quiz-feedback-box ' + (isCorrect ? 'correct' : 'incorrect');
+      fbContent = `
+        <div class="feedback-status ${isCorrect ? 'correct' : 'incorrect'}">
+          ${isCorrect ? '✓ JAWABAN BENAR' : '✗ JAWABAN BELUM TEPAT'}
+        </div>
+        <div class="feedback-explanation">
+          ${item.exp}
+        </div>
+      `;
+    } else if (isRevealed) {
+      fbStyle = 'display:block;';
+      fbClass = 'quiz-feedback-box correct';
+      fbContent = `
+        <div class="feedback-status revealed" style="color:var(--navy)">
+          👁️ KUNCI JAWABAN &amp; PEMBAHASAN RESMI
+        </div>
+        <div class="feedback-explanation">
+          <strong>Kunci Benar:</strong> ${item.ans.map(i => letters[i] + '. ' + item.opts[i]).join(', ')}<br>
+          ${item.exp}
+        </div>
+      `;
+    }
+
+    return `
+      <div class="quiz-card" id="card_${item.id}">
+        <div class="quiz-card-head">
+          <div class="quiz-meta-tags">
+            <span class="tag-num">#${idx + 1}</span>
+            <span class="tag-pert">${item.pert}</span>
+            <span class="tag-level ${item.level}">${levelBadgeText}</span>
+            ${utsBadge}
+          </div>
+          <span style="font-size:12px;color:var(--text-muted)">
+            ${isMulti ? 'Pilih semua yang benar' : 'Pilihan Tunggal'}
+          </span>
+        </div>
+
+        <div class="quiz-question-text">
+          ${item.q}
+        </div>
+
+        <div class="quiz-options-list">
+          ${optsHtml}
+        </div>
+
+        <div class="quiz-actions-row">
+          <div style="display:flex;gap:8px">
+            <button class="btn-quiz-check" onclick="checkQuizQuestion('${item.id}')">Periksa Jawaban</button>
+            <button class="btn-quiz-reveal" onclick="toggleQuizReveal('${item.id}')">
+              ${isRevealed ? 'Sembunyikan Kunci' : '👁️ Lihat Kunci &amp; Penjelasan'}
+            </button>
+          </div>
+          <span style="font-size:12px;color:var(--text-muted)">
+            ID: <code>${item.id}</code>
+          </span>
+        </div>
+
+        <div class="${fbClass}" id="fb_${item.id}" style="${fbStyle}">
+          ${fbContent}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  updateScoreDisplay();
+}
+
+// SELECT OPTION
+function selectQuizOpt(qid, optIndex, isMulti) {
+  if (quizCheckedStates[qid]) return; // locked once checked until reset
+
+  if (isMulti) {
+    if (!quizUserAnswers[qid]) quizUserAnswers[qid] = [];
+    const idx = quizUserAnswers[qid].indexOf(optIndex);
+    if (idx > -1) {
+      quizUserAnswers[qid].splice(idx, 1);
+    } else {
+      quizUserAnswers[qid].push(optIndex);
+    }
+  } else {
+    quizUserAnswers[qid] = [optIndex];
+  }
+
+  const card = document.getElementById('card_' + qid);
+  if (card) {
+    const optElems = card.querySelectorAll('.quiz-opt-item');
+    optElems.forEach((el, i) => {
+      const isSel = (quizUserAnswers[qid] || []).includes(i);
+      el.classList.toggle('selected', isSel);
+    });
+  }
+  updateScoreDisplay();
+}
+
+// CHECK QUESTION
+function checkQuizQuestion(qid) {
+  const item = quizData.find(x => x.id === qid);
+  if (!item) return;
+
+  const userSel = (quizUserAnswers[qid] || []).slice().sort();
+  if (userSel.length === 0) {
+    alert('Pilih salah satu jawaban terlebih dahulu sebelum memeriksa!');
+    return;
+  }
+
+  quizCheckedStates[qid] = true;
+  const correctSel = item.ans.slice().sort();
+  const isCorrect = userSel.length === correctSel.length && userSel.every((val, i) => val === correctSel[i]);
+
+  const card = document.getElementById('card_' + qid);
+  if (card) {
+    const optElems = card.querySelectorAll('.quiz-opt-item');
+    optElems.forEach((el, i) => {
+      el.classList.remove('correct-target', 'wrong-selected');
+      if (correctSel.includes(i)) {
+        el.classList.add('correct-target');
+      } else if (userSel.includes(i)) {
+        el.classList.add('wrong-selected');
+      }
+    });
+
+    const fbBox = document.getElementById('fb_' + qid);
+    if (fbBox) {
+      fbBox.style.display = 'block';
+      fbBox.className = 'quiz-feedback-box ' + (isCorrect ? 'correct' : 'incorrect');
+      fbBox.innerHTML = `
+        <div class="feedback-status ${isCorrect ? 'correct' : 'incorrect'}">
+          ${isCorrect ? '✓ JAWABAN BENAR' : '✗ JAWABAN BELUM TEPAT'}
+        </div>
+        <div class="feedback-explanation">
+          ${item.exp}
+        </div>
+      `;
+    }
+  }
+  updateScoreDisplay();
+}
+
+// TOGGLE REVEAL
+function toggleQuizReveal(qid) {
+  const item = quizData.find(x => x.id === qid);
+  if (!item) return;
+
+  quizRevealedStates[qid] = !quizRevealedStates[qid];
+  const isRev = quizRevealedStates[qid];
+
+  const card = document.getElementById('card_' + qid);
+  if (card) {
+    const optElems = card.querySelectorAll('.quiz-opt-item');
+    optElems.forEach((el, i) => {
+      if (isRev && item.ans.includes(i)) {
+        el.classList.add('correct-target');
+      } else if (!quizCheckedStates[qid]) {
+        el.classList.remove('correct-target', 'wrong-selected');
+      }
+    });
+
+    const fbBox = document.getElementById('fb_' + qid);
+    if (fbBox) {
+      fbBox.style.display = isRev ? 'block' : (quizCheckedStates[qid] ? 'block' : 'none');
+      if (isRev) {
+        fbBox.className = 'quiz-feedback-box correct';
+        const letters = ['A', 'B', 'C', 'D'];
+        fbBox.innerHTML = `
+          <div class="feedback-status revealed" style="color:var(--navy)">
+            👁️ KUNCI JAWABAN &amp; PEMBAHASAN RESMI
+          </div>
+          <div class="feedback-explanation">
+            <strong>Kunci Benar:</strong> ${item.ans.map(i => letters[i] + '. ' + item.opts[i]).join(', ')}<br>
+            ${item.exp}
+          </div>
+        `;
+      }
+    }
+  }
+}
+
+// REVEAL ALL IN ACTIVE TAB
+function revealAllAnswersInTab() {
+  let list = quizData;
+  if (activeQuizTab === 'uts') list = quizData.filter(q => q.isUts);
+  else if (activeQuizTab !== 'all') list = quizData.filter(q => q.pert.toLowerCase() === activeQuizTab);
+  if (activeQuizLevel !== 'all') list = list.filter(q => q.level === activeQuizLevel);
+
+  list.forEach(q => {
+    quizRevealedStates[q.id] = true;
+  });
+  renderQuizCards();
+}
+
+// RESET ACTIVE QUIZ
+function resetActiveQuiz() {
+  let list = quizData;
+  if (activeQuizTab === 'uts') list = quizData.filter(q => q.isUts);
+  else if (activeQuizTab !== 'all') list = quizData.filter(q => q.pert.toLowerCase() === activeQuizTab);
+
+  list.forEach(q => {
+    delete quizUserAnswers[q.id];
+    delete quizCheckedStates[q.id];
+    delete quizRevealedStates[q.id];
+  });
+
+  const sumCard = document.getElementById('utsSummaryCard');
+  if (sumCard) sumCard.style.display = 'none';
+
+  renderQuizCards();
+}
+
+// TAB SWITCHER
+function switchQuizTab(tabId) {
+  activeQuizTab = tabId;
+  activeQuizLevel = 'all';
+
+  document.querySelectorAll('#quizNavTabs .quiz-tab-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-tab') === tabId);
+  });
+
+  document.querySelectorAll('.quiz-level-group .level-pill').forEach(pill => {
+    pill.classList.toggle('active', pill.getAttribute('data-lvl') === 'all');
+  });
+
+  if (tabId === 'uts' && !utsTimerRunning) {
+    startUtsTimer();
+  }
+
+  renderQuizCards();
+}
+
+// LEVEL FILTER
+function filterQuizLevel(lvl) {
+  activeQuizLevel = lvl;
+  document.querySelectorAll('.quiz-level-group .level-pill').forEach(pill => {
+    pill.classList.toggle('active', pill.getAttribute('data-lvl') === lvl);
+  });
+  renderQuizCards();
+}
+
+// SCORE & STATS DISPLAY
+function updateScoreDisplay() {
+  const display = document.getElementById('quizScoreDisplay');
+  if (!display) return;
+
+  let list = quizData;
+  if (activeQuizTab === 'uts') list = quizData.filter(q => q.isUts);
+  else if (activeQuizTab !== 'all') list = quizData.filter(q => q.pert.toLowerCase() === activeQuizTab);
+  if (activeQuizLevel !== 'all') list = list.filter(q => q.level === activeQuizLevel);
+
+  const total = list.length;
+  let answered = 0;
+  let correct = 0;
+
+  list.forEach(q => {
+    if (quizCheckedStates[q.id]) {
+      answered++;
+      const userSel = (quizUserAnswers[q.id] || []).slice().sort();
+      const correctSel = q.ans.slice().sort();
+      if (userSel.length === correctSel.length && userSel.every((v, i) => v === correctSel[i])) {
+        correct++;
+      }
+    }
+  });
+
+  display.textContent = `Terjawab: ${answered} / ${total} | Benar: ${correct}`;
+}
+
+// FINISH UTS EXAM
+function finishUtsExam() {
+  const utsQuestions = quizData.filter(q => q.isUts);
+  let correctCount = 0;
+  const topicStats = {
+    P1: { total: 0, correct: 0, title: 'P1: Pengantar & Proposisi' },
+    P2: { total: 0, correct: 0, title: 'P2: Majemuk & De Morgan' },
+    P3: { total: 0, correct: 0, title: 'P3: Tabel & Trees' },
+    P4: { total: 0, correct: 0, title: 'P4: Implikasi & Biimplikasi' },
+    P5: { total: 0, correct: 0, title: 'P5: Inferensi & Falasi' }
+  };
+
+  utsQuestions.forEach(q => {
+    if (topicStats[q.pert]) topicStats[q.pert].total++;
+    const userSel = (quizUserAnswers[q.id] || []).slice().sort();
+    const correctSel = q.ans.slice().sort();
+    const isCorrect = userSel.length === correctSel.length && userSel.every((val, i) => val === correctSel[i]);
+    if (isCorrect) {
+      correctCount++;
+      if (topicStats[q.pert]) topicStats[q.pert].correct++;
+    }
+    // Auto check
+    quizCheckedStates[q.id] = true;
+  });
+
+  renderQuizCards();
+
+  const finalScore = Math.round((correctCount / utsQuestions.length) * 100);
+  const scoreBig = document.getElementById('utsFinalScore');
+  const statsText = document.getElementById('utsStatsText');
+  if (scoreBig) scoreBig.textContent = `${finalScore} / 100`;
+  if (statsText) statsText.textContent = `Benar: ${correctCount} | Salah: ${utsQuestions.length - correctCount} | Total: ${utsQuestions.length} Soal`;
+
+  let gradeStr = 'E (Tidak Lulus / Remedial)';
+  let gradeColor = 'var(--rose)';
+  if (finalScore >= 80) { gradeStr = 'Nilai: A (Istimewa - Sangat Memuaskan)'; gradeColor = 'var(--teal-dark)'; }
+  else if (finalScore >= 75) { gradeStr = 'Nilai: AB (Sangat Baik)'; gradeColor = 'var(--teal-dark)'; }
+  else if (finalScore >= 65) { gradeStr = 'Nilai: B (Baik)'; gradeColor = '#1D4ED8'; }
+  else if (finalScore >= 60) { gradeStr = 'Nilai: BC (Cukup Baik)'; gradeColor = 'var(--gold-dark)'; }
+  else if (finalScore >= 50) { gradeStr = 'Nilai: C (Cukup / Lulus Minimal)'; gradeColor = 'var(--gold-dark)'; }
+
+  const gradeBadge = document.getElementById('utsFinalGrade');
+  if (gradeBadge) {
+    gradeBadge.textContent = gradeStr;
+    gradeBadge.style.color = gradeColor;
+  }
+
+  const diagGrid = document.getElementById('utsDiagnosticsGrid');
+  if (diagGrid) {
+    diagGrid.innerHTML = '';
+    Object.keys(topicStats).forEach(key => {
+      const st = topicStats[key];
+      const pct = st.total > 0 ? Math.round((st.correct / st.total) * 100) : 0;
+      const isGood = pct >= 70;
+      const isMid = pct >= 50 && pct < 70;
+      const card = document.createElement('div');
+      card.className = 'diag-card';
+      card.innerHTML = `
+        <div class="diag-title">${st.title}</div>
+        <div class="diag-score" style="color:${isGood ? 'var(--teal-dark)' : (isMid ? 'var(--gold-dark)' : 'var(--rose)')}">
+          ${st.correct} / ${st.total} (${pct}%)
+        </div>
+        <div style="font-size:11px;font-weight:600;margin-top:2px;color:${isGood ? 'var(--teal-dark)' : (isMid ? 'var(--gold-dark)' : 'var(--rose)')}">
+          ${isGood ? '✓ Menguasai Baik' : (isMid ? '▲ Cukup, Perlu Asah' : '⚠ Perlu Dipelajari Ulang')}
+        </div>
+      `;
+      diagGrid.appendChild(card);
+    });
+  }
+
+  const summaryCard = document.getElementById('utsSummaryCard');
+  if (summaryCard) {
+    summaryCard.style.display = 'block';
+    summaryCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  // Stop timer
+  clearInterval(utsTimerInterval);
+  utsTimerRunning = false;
+  const btnTimer = document.getElementById('btnUtsTimerToggle');
+  if (btnTimer) btnTimer.textContent = 'Mulai Lagi';
+}
+
+function retryUts() {
+  resetActiveQuiz();
+  utsTimerSec = 30 * 60;
+  updateUtsTimerDisplay();
+  startUtsTimer();
+}
+
+function reviewUtsErrors() {
+  const utsQuestions = quizData.filter(q => q.isUts);
+  utsQuestions.forEach(q => {
+    const userSel = (quizUserAnswers[q.id] || []).slice().sort();
+    const correctSel = q.ans.slice().sort();
+    const isCorrect = userSel.length === correctSel.length && userSel.every((val, i) => val === correctSel[i]);
+    const card = document.getElementById('card_' + q.id);
+    if (card) {
+      card.style.display = isCorrect ? 'none' : 'block';
+    }
+  });
+}
+
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+  runInteractiveEval();
+  calcQuickLogic();
+  renderQuizCards();
+  startUtsTimer();
+});
+</script>
+</body>
+</html>
