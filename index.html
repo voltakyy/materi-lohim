@@ -1882,6 +1882,147 @@ a:hover {
   flex-wrap: wrap;
 }
 
+
+/* ==========================================================================
+   QUIZ LOBBY & PAUSE CONTROL (Zero Auto-Start)
+   ========================================================================== */
+.qp-lobby-card {
+  background: #FFFFFF !important;
+  border: 1.5px solid var(--border-warm) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 36px 32px !important;
+  box-shadow: var(--shadow-card) !important;
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+}
+@media (max-width: 640px) {
+  .qp-lobby-card {
+    padding: 24px 18px !important;
+  }
+}
+.qp-lobby-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--mint-soft);
+  color: var(--mint-dark);
+  border: 1px solid var(--mint-border);
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.qp-lobby-title {
+  font-family: var(--font-heading) !important;
+  font-size: 22px !important;
+  font-weight: 800 !important;
+  color: var(--navy) !important;
+  margin-bottom: 12px !important;
+  line-height: 1.3 !important;
+}
+.article-section .qp-lobby-card p,
+.qp-lobby-desc {
+  font-size: 14.5px !important;
+  color: var(--text-body) !important;
+  line-height: 1.65 !important;
+  max-width: 540px;
+  margin: 0 auto 24px auto !important;
+}
+.qp-lobby-features {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  margin-bottom: 28px;
+  padding: 14px 16px;
+  background: #F8FAFC;
+  border: 1px solid var(--border-warm);
+  border-radius: var(--radius-sm);
+}
+.qp-lobby-feat-item {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-qp-start {
+  background: var(--mint) !important;
+  color: #FFFFFF !important;
+  font-family: var(--font-heading) !important;
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  padding: 14px 36px !important;
+  border-radius: var(--radius-sm) !important;
+  border: none !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 14px var(--mint-glow) !important;
+  transition: all 150ms ease !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.btn-qp-start:hover {
+  background: var(--mint-dark) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 18px rgba(13, 148, 136, 0.25) !important;
+}
+
+/* Pause Button in HUD */
+.btn-qp-pause {
+  background: #FFFFFF;
+  border: 1px solid var(--border-warm);
+  color: var(--text-muted);
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  transition: all 120ms ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.btn-qp-pause:hover {
+  border-color: var(--navy);
+  color: var(--navy);
+}
+
+/* Pause Overlay */
+.qp-pause-overlay {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(4px);
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 24px;
+  text-align: center;
+  border-radius: var(--radius-md);
+}
+.qp-pause-title {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.qp-pause-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
 </style>
 </head>
 <body>
@@ -2617,9 +2758,40 @@ a:hover {
         </div>
 
         <!-- LIVE QUIZ ARENA PLAYER -->
+        
+        <!-- LIVE QUIZ ARENA PLAYER -->
         <div class="quiz-arena-wrap">
-          <!-- MAIN PLAYER CARD -->
-          <div class="quiz-player-card" id="quizPlayerCard">
+
+          <!-- LOBBY CARD (Shown before user starts - ZERO AUTO START) -->
+          <div class="qp-lobby-card" id="qpLobbyCard">
+            <span class="qp-lobby-badge">Siap Menguji Pemahaman?</span>
+            <h3 class="qp-lobby-title" id="qpLobbyTitle">Simulasi UTS: Logika dan Himpunan</h3>
+            <p class="qp-lobby-desc" id="qpLobbyDesc">
+              Uji penguasaan konsep Pertemuan 1 sampai Pertemuan 5 dengan 15 soal pilihan terbaik. Dilengkapi umpan balik instan, skor kecepatan, dan pembahasan matematis resmi.
+            </p>
+            <div class="qp-lobby-features">
+              <div class="qp-lobby-feat-item">⏱️ Timer hanya jalan saat Anda siap</div>
+              <div class="qp-lobby-feat-item">💡 Penjelasan instan tiap klik opsi</div>
+              <div class="qp-lobby-feat-item">🏆 Akumulasi skor & rekapan nilai</div>
+            </div>
+            <div>
+              <button class="btn-qp-start" id="btnQpStart" onclick="startQuizSession()">
+                ▶️ Mulai Kuis Sekarang
+              </button>
+            </div>
+          </div>
+
+          <!-- MAIN PLAYER CARD (Hidden until user clicks Mulai Kuis) -->
+          <div class="quiz-player-card" id="quizPlayerCard" style="display:none;position:relative">
+            <!-- Pause Overlay -->
+            <div class="qp-pause-overlay" id="qpPauseOverlay">
+              <div class="qp-pause-title">⏸️ Kuis Dijeda</div>
+              <div class="qp-pause-desc">Waktu dihentikan sementara. Klik tombol di bawah untuk melanjutkan.</div>
+              <button class="btn-qp-start" onclick="togglePauseQuiz()">
+                ▶️ Lanjutkan Pengerjaan
+              </button>
+            </div>
+
             <!-- Progress Fill Top -->
             <div class="qp-progress-track">
               <div class="qp-progress-fill" id="qpProgressFill"></div>
@@ -2637,6 +2809,7 @@ a:hover {
                   <span>⏱️</span>
                   <span id="qpTimerVal">0.0s</span>
                 </div>
+                <button class="btn-qp-pause" id="btnQpPause" onclick="togglePauseQuiz()">⏸️ Jeda</button>
               </div>
 
               <div class="qp-hud-col">
@@ -2714,6 +2887,7 @@ a:hover {
             </div>
           </div>
         </div>
+
       </article>
 
 
@@ -3250,6 +3424,7 @@ const quizData = [
   }
 ];
 
+// Quiz State
 let activeQuizTab = 'uts';
 let activeQuestionList = [];
 let currentQIndex = 0;
@@ -3260,10 +3435,53 @@ let totalScore = 0;
 let currentStreak = 0;
 let maxStreak = 0;
 let isCurrentAnswered = false;
+let isQuizPaused = false;
+let isQuizRunning = false; // MUST BE FALSE ON PAGE LOAD!
 
 let qTimerStartTime = 0;
+let qTimerElapsedBeforePause = 0;
 let qTimerInterval = null;
 
+// Metadata for Lobby
+const categoryMeta = {
+  uts: {
+    title: 'Simulasi UTS: Logika dan Himpunan',
+    desc: 'Uji penguasaan konsep komprehensif Pertemuan 1 sampai Pertemuan 5 dengan 15 soal berbobot (Mudah, Sedang, dan Sukar). Lengkap dengan skor kecepatan dan pembahasan resmi pengampu.',
+    count: 15
+  },
+  all: {
+    title: 'Semua Bank Soal (24 Soal Pilihan)',
+    desc: 'Latih seluruh kumpulan soal terlengkap dari seluruh pertemuan (P1 s.d. P5) tanpa batasan materi untuk persiapan ujian maksimal.',
+    count: 24
+  },
+  p1: {
+    title: 'Pertemuan 1: Pengenalan Logika & Proposisi',
+    desc: 'Kuis fokus 4 soal untuk menguji pemahaman definisi proposisi deklaratif, nilai kebenaran, kalimat terbuka, dan paradoks logika.',
+    count: 4
+  },
+  p2: {
+    title: 'Pertemuan 2: Proposisi Majemuk & De Morgan',
+    desc: 'Kuis 4 soal menguji perangkai konjungsi, disjungsi inklusif, hukum involusi, dan penerapan praktis Hukum De Morgan.',
+    count: 4
+  },
+  p3: {
+    title: 'Pertemuan 3: Tabel Kebenaran & Parse Tree',
+    desc: 'Kuis 4 soal mengenai perhitungan baris 2ⁿ, pola baku T-First, presedensi operator, dan simpul akar (root node) pohon sintaks.',
+    count: 4
+  },
+  p4: {
+    title: 'Pertemuan 4: Implikasi, Variasi & Biimplikasi',
+    desc: 'Kuis 7 soal mendalam seputar implikasi material (T → F = F), konvers, invers, kontraposisi, syarat cukup vs perlu, dan biimplikasi.',
+    count: 7
+  },
+  p5: {
+    title: 'Pertemuan 5: Tautologi, Kontradiksi & Inferensi',
+    desc: 'Kuis 5 soal menguji pembuktian tautologi, contingent, aturan inferensi Modus Ponens/Tollens, serta identifikasi falasi formal.',
+    count: 5
+  }
+};
+
+// Tab Switcher (Updates Lobby - DOES NOT START QUIZ!)
 function selectQuizCategory(catId) {
   activeQuizTab = catId;
   document.querySelectorAll('#quizNavTabs .quiz-tab-btn').forEach(btn => {
@@ -3278,6 +3496,31 @@ function selectQuizCategory(catId) {
     activeQuestionList = quizData.filter(q => q.pert.toLowerCase() === catId);
   }
 
+  // Stop any running timer completely
+  stopQTimer();
+  isQuizRunning = false;
+  isQuizPaused = false;
+
+  // Show Lobby, Hide Player & Summary
+  const lobby = document.getElementById('qpLobbyCard');
+  const card = document.getElementById('quizPlayerCard');
+  const sumView = document.getElementById('qpSummaryView');
+  if (lobby) lobby.style.display = 'block';
+  if (card) card.style.display = 'none';
+  if (sumView) sumView.style.display = 'none';
+
+  // Update Lobby Text
+  const meta = categoryMeta[catId] || categoryMeta.uts;
+  const lTitle = document.getElementById('qpLobbyTitle');
+  const lDesc = document.getElementById('qpLobbyDesc');
+  if (lTitle) lTitle.textContent = meta.title;
+  if (lDesc) lDesc.textContent = meta.desc;
+}
+
+// User EXPLICITLY clicks "Mulai Kuis Sekarang"
+function startQuizSession() {
+  isQuizRunning = true;
+  isQuizPaused = false;
   currentQIndex = 0;
   userAnswers = {};
   questionTimes = {};
@@ -3287,12 +3530,43 @@ function selectQuizCategory(catId) {
   maxStreak = 0;
   isCurrentAnswered = false;
 
+  const lobby = document.getElementById('qpLobbyCard');
   const card = document.getElementById('quizPlayerCard');
   const sumView = document.getElementById('qpSummaryView');
+  if (lobby) lobby.style.display = 'none';
   if (card) card.style.display = 'block';
   if (sumView) sumView.style.display = 'none';
 
   renderCurrentQuestion();
+}
+
+// Pause / Resume Toggle
+function togglePauseQuiz() {
+  if (!isQuizRunning) return;
+  const overlay = document.getElementById('qpPauseOverlay');
+  const btnPause = document.getElementById('btnQpPause');
+
+  if (!isQuizPaused) {
+    // Pause
+    isQuizPaused = true;
+    clearInterval(qTimerInterval);
+    qTimerElapsedBeforePause += (Date.now() - qTimerStartTime) / 1000;
+    if (overlay) overlay.style.display = 'flex';
+    if (btnPause) btnPause.textContent = '▶️ Lanjut';
+  } else {
+    // Resume
+    isQuizPaused = false;
+    qTimerStartTime = Date.now();
+    if (overlay) overlay.style.display = 'none';
+    if (btnPause) btnPause.textContent = '⏸️ Jeda';
+    
+    // Resume ticking
+    qTimerInterval = setInterval(() => {
+      const elapsedSec = qTimerElapsedBeforePause + ((Date.now() - qTimerStartTime) / 1000);
+      const timerDisplay = document.getElementById('qpTimerVal');
+      if (timerDisplay) timerDisplay.textContent = elapsedSec.toFixed(1) + 's';
+    }, 100);
+  }
 }
 
 function renderCurrentQuestion() {
@@ -3415,14 +3689,17 @@ function renderCurrentQuestion() {
   }
 }
 
+
 function startQTimer() {
   clearInterval(qTimerInterval);
+  qTimerElapsedBeforePause = 0;
   qTimerStartTime = Date.now();
   const timerDisplay = document.getElementById('qpTimerVal');
   if (timerDisplay) timerDisplay.textContent = '0.0s';
 
   qTimerInterval = setInterval(() => {
-    const elapsedSec = (Date.now() - qTimerStartTime) / 1000;
+    if (isQuizPaused) return;
+    const elapsedSec = qTimerElapsedBeforePause + ((Date.now() - qTimerStartTime) / 1000);
     if (timerDisplay) timerDisplay.textContent = elapsedSec.toFixed(1) + 's';
   }, 100);
 }
@@ -3430,7 +3707,8 @@ function startQTimer() {
 function stopQTimer() {
   clearInterval(qTimerInterval);
   if (qTimerStartTime === 0) return 0;
-  return (Date.now() - qTimerStartTime) / 1000;
+  const totalElapsed = qTimerElapsedBeforePause + ((Date.now() - qTimerStartTime) / 1000);
+  return totalElapsed;
 }
 
 function onSelectOptionInstant(optIndex) {
