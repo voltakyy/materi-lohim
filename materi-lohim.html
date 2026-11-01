@@ -186,7 +186,7 @@ body {
 }
 
 .brand-info p {
-  font-size: 11px;
+  font-size: 11.5px;
   color: var(--text-muted);
   white-space: nowrap;
 }
@@ -198,7 +198,7 @@ body {
   position: relative;
   min-width: 0;
   flex: 1;
-  max-width: 780px;
+  max-width: 860px;
 }
 
 .nav-tabs {
@@ -386,58 +386,16 @@ body {
   margin-bottom: 12px;
 }
 
-.article-card h1 {
-  font-size: 22px;
-}
+.article-card h1 { font-size: 22px; }
+.article-card h2 { font-size: 18px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; margin-top: 20px; }
+.article-card h3 { font-family: var(--font-heading); font-size: 16px; color: var(--primary); margin: 18px 0 10px; }
+.article-card h4 { font-family: var(--font-sans); font-size: 14px; color: var(--text-main); margin: 14px 0 6px; }
+.article-card p { margin-bottom: 12px; color: var(--text-body); font-size: 14px; }
+.article-card ul, .article-card ol { margin: 0 0 16px 20px; }
+.article-card li { margin-bottom: 5px; font-size: 14px; }
+.article-card code { font-family: var(--font-mono); background: var(--bg-surface-elevated); padding: 2px 5px; border-radius: 4px; color: var(--accent-cyan); font-size: 0.9em; border: 1px solid var(--border-color); overflow-wrap: break-word; }
 
-.article-card h2 {
-  font-size: 18px;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 8px;
-  margin-top: 20px;
-}
-
-.article-card h3 {
-  font-family: var(--font-heading);
-  font-size: 16px;
-  color: var(--primary);
-  margin: 18px 0 10px;
-}
-
-.article-card h4 {
-  font-family: var(--font-sans);
-  font-size: 14px;
-  color: var(--text-main);
-  margin: 14px 0 6px;
-}
-
-.article-card p {
-  margin-bottom: 12px;
-  color: var(--text-body);
-  font-size: 14px;
-}
-
-.article-card ul, .article-card ol {
-  margin: 0 0 16px 20px;
-}
-
-.article-card li {
-  margin-bottom: 5px;
-  font-size: 14px;
-}
-
-.article-card code {
-  font-family: var(--font-mono);
-  background: var(--bg-surface-elevated);
-  padding: 2px 5px;
-  border-radius: 4px;
-  color: var(--accent-cyan);
-  font-size: 0.9em;
-  border: 1px solid var(--border-color);
-  overflow-wrap: break-word;
-}
-
-/* =================== TABLE OVERFLOW SOLUTION =================== */
+/* Table safe scroll wrapper */
 .table-scroll-wrap {
   width: 100%;
   max-width: 100%;
@@ -487,31 +445,12 @@ body {
   font-size: 13.5px;
 }
 
-.callout-info {
-  background: var(--primary-light);
-  border-color: var(--primary);
-  color: var(--text-body);
-}
-
-.callout-warning {
-  background: var(--amber-bg);
-  border-color: var(--accent-amber);
-  color: var(--text-body);
-}
-
-.callout-success {
-  background: var(--emerald-bg);
-  border-color: var(--accent-emerald);
-  color: var(--text-body);
-}
+.callout-info { background: var(--primary-light); border-color: var(--primary); color: var(--text-body); }
+.callout-warning { background: var(--amber-bg); border-color: var(--accent-amber); color: var(--text-body); }
+.callout-success { background: var(--emerald-bg); border-color: var(--accent-emerald); color: var(--text-body); }
 
 /* =================== TAB 2: TRUTH TABLE DRILL =================== */
-.drill-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
+.drill-container { display: flex; flex-direction: column; gap: 20px; }
 .section-hero {
   background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(6, 182, 212, 0.08));
   border: 1px solid var(--primary-border);
@@ -523,28 +462,10 @@ body {
   flex-wrap: wrap;
   gap: 14px;
 }
+.hero-text h2 { font-family: var(--font-heading); font-size: 20px; color: var(--text-main); margin-bottom: 4px; }
+.hero-text p { color: var(--text-muted); font-size: 13.5px; }
 
-.hero-text h2 {
-  font-family: var(--font-heading);
-  font-size: 20px;
-  color: var(--text-main);
-  margin-bottom: 4px;
-}
-
-.hero-text p {
-  color: var(--text-muted);
-  font-size: 13.5px;
-}
-
-.drill-selector {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 4px;
-  max-width: 100%;
-}
-
+.drill-selector { display: flex; gap: 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; max-width: 100%; }
 .drill-btn {
   background: var(--bg-surface);
   border: 1px solid var(--border-color);
@@ -558,12 +479,7 @@ body {
   white-space: nowrap;
   flex-shrink: 0;
 }
-
-.drill-btn.active, .drill-btn:hover {
-  background: var(--primary);
-  color: #fff;
-  border-color: var(--primary);
-}
+.drill-btn.active, .drill-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
 
 .drill-card {
   background: var(--bg-surface-card);
@@ -585,40 +501,13 @@ body {
   flex-wrap: wrap;
   gap: 10px;
 }
+.formula-display { font-family: var(--font-mono); font-size: 17px; color: var(--text-main); font-weight: 700; }
 
-.formula-display {
-  font-family: var(--font-mono);
-  font-size: 17px;
-  color: var(--text-main);
-  font-weight: 700;
-}
+.drill-matrix-table { width: 100%; border-collapse: collapse; }
+.drill-matrix-table th, .drill-matrix-table td { padding: 10px 12px; text-align: center; border: 1px solid var(--border-color); }
+.drill-matrix-table th { background: var(--bg-surface-elevated); font-family: var(--font-mono); font-size: 13px; color: var(--text-main); }
+.drill-matrix-table .input-cell-var { background: var(--bg-page); font-weight: 700; font-family: var(--font-mono); color: var(--text-muted); }
 
-.drill-matrix-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.drill-matrix-table th, .drill-matrix-table td {
-  padding: 10px 12px;
-  text-align: center;
-  border: 1px solid var(--border-color);
-}
-
-.drill-matrix-table th {
-  background: var(--bg-surface-elevated);
-  font-family: var(--font-mono);
-  font-size: 13px;
-  color: var(--text-main);
-}
-
-.drill-matrix-table .input-cell-var {
-  background: var(--bg-page);
-  font-weight: 700;
-  font-family: var(--font-mono);
-  color: var(--text-muted);
-}
-
-/* Toggle Cell Pill */
 .toggle-cell-btn {
   background: var(--bg-surface-elevated);
   border: 1px solid var(--border-color);
@@ -633,42 +522,14 @@ body {
   min-width: 48px;
   min-height: 36px;
 }
+.toggle-cell-btn.val-T { background: var(--emerald-bg); color: var(--accent-emerald); border-color: var(--emerald-border); }
+.toggle-cell-btn.val-F { background: var(--rose-bg); color: var(--accent-rose); border-color: var(--rose-border); }
+.toggle-cell-btn.is-correct { outline: 2px solid var(--accent-emerald); box-shadow: 0 0 8px rgba(16, 185, 129, 0.4); }
+.toggle-cell-btn.is-wrong { outline: 2px solid var(--accent-rose); animation: shake 0.3s; }
 
-.toggle-cell-btn.val-T {
-  background: var(--emerald-bg);
-  color: var(--accent-emerald);
-  border-color: var(--emerald-border);
-}
+@keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
 
-.toggle-cell-btn.val-F {
-  background: var(--rose-bg);
-  color: var(--accent-rose);
-  border-color: var(--rose-border);
-}
-
-.toggle-cell-btn.is-correct {
-  outline: 2px solid var(--accent-emerald);
-  box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
-}
-
-.toggle-cell-btn.is-wrong {
-  outline: 2px solid var(--accent-rose);
-  animation: shake 0.3s;
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-4px); }
-  75% { transform: translateX(4px); }
-}
-
-.drill-actions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  flex-wrap: wrap;
-}
+.drill-actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
 
 .btn-primary {
   background: var(--primary);
@@ -688,11 +549,7 @@ body {
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
   min-height: 42px;
 }
-
-.btn-primary:hover {
-  background: var(--primary-hover);
-  transform: translateY(-1px);
-}
+.btn-primary:hover { background: var(--primary-hover); transform: translateY(-1px); }
 
 .btn-secondary {
   background: var(--bg-surface-elevated);
@@ -709,545 +566,160 @@ body {
   align-items: center;
   justify-content: center;
 }
-
-.btn-secondary:hover {
-  background: var(--bg-hover);
-  color: var(--text-main);
-}
-
-.drill-feedback-box {
-  margin-top: 16px;
-  padding: 14px 16px;
-  border-radius: var(--radius-sm);
-  display: none;
-}
+.btn-secondary:hover { background: var(--bg-hover); color: var(--text-main); }
+.drill-feedback-box { margin-top: 16px; padding: 14px 16px; border-radius: var(--radius-sm); display: none; }
 
 /* =================== TAB 3: PARSE TREE STUDIO =================== */
-.tree-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
+.tree-container { display: flex; flex-direction: column; gap: 20px; }
+.tree-card { background: var(--bg-surface-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; text-align: center; }
+.tree-display-svg { width: 100%; max-width: 650px; height: auto; aspect-ratio: 600 / 320; margin: 14px auto; display: block; }
+.tree-legend { display: flex; justify-content: center; gap: 14px; margin-top: 14px; font-size: 12px; color: var(--text-muted); flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
 
-.tree-card {
+/* =================== TAB 4: FLASHCARDS =================== */
+.flashcards-container { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; width: 100%; }
+.fc-meta-bar { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-full); }
+.flashcard-3d-wrapper { perspective: 1000px; min-height: 320px; cursor: pointer; width: 100%; }
+.flashcard-inner { position: relative; width: 100%; height: 100%; min-height: 320px; text-align: center; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); transform-style: preserve-3d; border-radius: var(--radius-md); }
+.flashcard-inner.flipped { transform: rotateY(180deg); }
+.flashcard-front, .flashcard-back {
+  position: absolute; width: 100%; height: 100%; min-height: 320px; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: var(--radius-md); padding: 28px 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid var(--border-color); box-shadow: var(--shadow-md); overflow-y: auto;
+}
+.flashcard-front { background: linear-gradient(135deg, var(--bg-surface), var(--bg-surface-elevated)); }
+.flashcard-back { background: linear-gradient(135deg, var(--bg-surface-elevated), var(--bg-surface-card)); transform: rotateY(180deg); border-color: var(--primary-border); }
+.fc-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--primary); margin-bottom: 12px; }
+.fc-question { font-family: var(--font-heading); font-size: 17px; font-weight: 700; color: var(--text-main); line-height: 1.4; }
+.fc-answer { font-size: 13.5px; color: var(--text-body); line-height: 1.55; text-align: left; }
+.fc-controls { display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+/* =================== TAB 5: UTS EXAM ARENA =================== */
+.arena-container { display: flex; flex-direction: column; gap: 16px; }
+.arena-topbar { display: flex; justify-content: space-between; align-items: center; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 12px 16px; flex-wrap: wrap; gap: 12px; }
+.arena-stats { display: flex; gap: 16px; }
+.stat-chip { display: flex; flex-direction: column; }
+.stat-label { font-size: 10.5px; text-transform: uppercase; color: var(--text-subtle); font-weight: 600; }
+.stat-val { font-family: var(--font-mono); font-size: 17px; font-weight: 700; color: var(--text-main); }
+.arena-question-card { background: var(--bg-surface-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 22px 18px; box-shadow: var(--shadow-sm); }
+.q-badge-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 6px; }
+.q-pert-pill { background: var(--primary-light); color: var(--primary); padding: 3px 10px; border-radius: var(--radius-full); font-size: 11.5px; font-weight: 700; }
+.q-text { font-family: var(--font-heading); font-size: 16px; font-weight: 600; color: var(--text-main); line-height: 1.5; margin-bottom: 18px; }
+.q-options-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
+.q-opt-btn { background: var(--bg-surface-elevated); border: 1px solid var(--border-color); padding: 12px 16px; border-radius: var(--radius-sm); color: var(--text-body); text-align: left; font-size: 13.5px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 10px; min-height: 44px; }
+.q-opt-btn:hover { background: var(--bg-hover); border-color: var(--primary); color: var(--text-main); }
+.opt-letter { width: 26px; height: 26px; border-radius: 50%; background: var(--bg-page); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; flex-shrink: 0; }
+.q-opt-btn.correct { background: var(--emerald-bg); border-color: var(--accent-emerald); color: var(--accent-emerald); }
+.q-opt-btn.wrong { background: var(--rose-bg); border-color: var(--accent-rose); color: var(--accent-rose); }
+.q-explanation-drawer { margin-top: 18px; padding: 16px; border-radius: var(--radius-sm); background: var(--bg-surface-elevated); border: 1px solid var(--border-color); display: none; font-size: 13.5px; }
+.jump-bar { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-color); }
+.jump-btn { width: 32px; height: 32px; border-radius: var(--radius-sm); background: var(--bg-surface-elevated); border: 1px solid var(--border-color); color: var(--text-muted); font-family: var(--font-mono); font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+.jump-btn.current { border-color: var(--primary); color: var(--primary); font-weight: 700; }
+.jump-btn.done-correct { background: var(--emerald-bg); color: var(--accent-emerald); border-color: var(--emerald-border); }
+.jump-btn.done-wrong { background: var(--rose-bg); color: var(--accent-rose); border-color: var(--rose-border); }
+
+/* =================== TAB 6: LOGIC SANDBOX =================== */
+.sandbox-card { background: var(--bg-surface-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; width: 100%; }
+.sandbox-input-row { display: flex; gap: 10px; margin-bottom: 14px; width: 100%; }
+.sandbox-input { flex: 1; min-width: 0; background: var(--bg-surface-elevated); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 10px 14px; color: var(--text-main); font-family: var(--font-mono); font-size: 15px; min-height: 44px; }
+.btn-generate { flex-shrink: 0; white-space: nowrap; padding: 0 20px; min-height: 44px; }
+.virtual-keys-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 18px; width: 100%; }
+.v-key { display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--bg-surface-elevated); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 6px 2px; min-height: 46px; cursor: pointer; transition: all 0.15s; user-select: none; -webkit-tap-highlight-color: transparent; }
+.v-key:hover, .v-key:active { background: var(--primary); border-color: var(--primary); }
+.v-key:hover .v-key-symbol, .v-key:active .v-key-symbol, .v-key:hover .v-key-sub, .v-key:active .v-key-sub { color: #ffffff; }
+.v-key-symbol { font-family: var(--font-mono); font-size: 15px; font-weight: 700; color: var(--text-main); }
+.v-key-sub { font-size: 8.5px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.03em; margin-top: 1px; }
+
+.classification-banner { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px; border-radius: var(--radius-sm); margin: 16px 0 12px; border: 1px solid var(--border-color); background: var(--bg-surface-elevated); flex-wrap: wrap; }
+.classification-label { font-size: 13px; font-weight: 600; color: var(--text-muted); }
+.status-badge-box { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 6px; font-size: 12.5px; font-weight: 700; letter-spacing: 0.02em; }
+.status-badge-box.tautology { background: var(--emerald-bg); color: var(--accent-emerald); border: 1px solid var(--emerald-border); }
+.status-badge-box.contradiction { background: var(--rose-bg); color: var(--accent-rose); border: 1px solid var(--rose-border); }
+.status-badge-box.contingent { background: var(--amber-bg); color: var(--accent-amber); border: 1px solid var(--amber-border); }
+
+/* =================== TAB 7: GENERATOR SOAL TABEL KEBENARAN (NEW FEATURE) =================== */
+.gen-problem-card {
   background: var(--bg-surface-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  padding: 24px;
-  text-align: center;
+  padding: 24px 20px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 20px;
 }
-
-.tree-display-svg {
-  width: 100%;
-  max-width: 650px;
-  height: auto;
-  aspect-ratio: 600 / 320;
-  margin: 14px auto;
-  display: block;
-}
-
-.tree-legend {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  margin-top: 14px;
-  font-size: 12px;
-  color: var(--text-muted);
-  flex-wrap: wrap;
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.legend-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-/* =================== TAB 4: FLASHCARDS =================== */
-.flashcards-container {
-  max-width: 720px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  width: 100%;
-}
-
-.fc-meta-bar {
+.gen-target-box {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--primary-border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  margin: 16px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 16px;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-full);
-}
-
-.flashcard-3d-wrapper {
-  perspective: 1000px;
-  min-height: 320px;
-  cursor: pointer;
-  width: 100%;
-}
-
-.flashcard-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 320px;
-  text-align: center;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  transform-style: preserve-3d;
-  border-radius: var(--radius-md);
-}
-
-.flashcard-inner.flipped {
-  transform: rotateY(180deg);
-}
-
-.flashcard-front, .flashcard-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  min-height: 320px;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  border-radius: var(--radius-md);
-  padding: 28px 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-md);
-  overflow-y: auto;
-}
-
-.flashcard-front {
-  background: linear-gradient(135deg, var(--bg-surface), var(--bg-surface-elevated));
-}
-
-.flashcard-back {
-  background: linear-gradient(135deg, var(--bg-surface-elevated), var(--bg-surface-card));
-  transform: rotateY(180deg);
-  border-color: var(--primary-border);
-}
-
-.fc-tag {
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--primary);
-  margin-bottom: 12px;
-}
-
-.fc-question {
-  font-family: var(--font-heading);
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--text-main);
-  line-height: 1.4;
-}
-
-.fc-answer {
-  font-size: 13.5px;
-  color: var(--text-body);
-  line-height: 1.55;
-  text-align: left;
-}
-
-.fc-controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-/* =================== TAB 5: UTS EXAM ARENA =================== */
-.arena-container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.arena-topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 12px 16px;
   flex-wrap: wrap;
   gap: 12px;
 }
-
-.arena-stats {
-  display: flex;
-  gap: 16px;
-}
-
-.stat-chip {
-  display: flex;
-  flex-direction: column;
-}
-
-.stat-label {
-  font-size: 10.5px;
-  text-transform: uppercase;
-  color: var(--text-subtle);
-  font-weight: 600;
-}
-
-.stat-val {
+.gen-formula-title {
   font-family: var(--font-mono);
-  font-size: 17px;
+  font-size: 20px;
   font-weight: 700;
-  color: var(--text-main);
-}
-
-.arena-question-card {
-  background: var(--bg-surface-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 22px 18px;
-  box-shadow: var(--shadow-sm);
-}
-
-.q-badge-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 14px;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.q-pert-pill {
-  background: var(--primary-light);
   color: var(--primary);
-  padding: 3px 10px;
-  border-radius: var(--radius-full);
-  font-size: 11.5px;
-  font-weight: 700;
+  letter-spacing: 0.02em;
 }
-
-.q-text {
-  font-family: var(--font-heading);
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--text-main);
-  line-height: 1.5;
-  margin-bottom: 18px;
+.gen-controls-bar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 16px;
 }
-
-.q-options-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 8px;
+.answer-key-drawer {
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--emerald-border);
+  display: none;
+  animation: fadeIn 0.25s ease;
 }
-
-.q-opt-btn {
+.key-toggle-btn {
   background: var(--bg-surface-elevated);
   border: 1px solid var(--border-color);
-  padding: 12px 16px;
+  color: var(--text-main);
+  padding: 10px 18px;
   border-radius: var(--radius-sm);
-  color: var(--text-body);
-  text-align: left;
+  font-weight: 600;
   font-size: 13.5px;
   cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
-  min-height: 44px;
+  gap: 8px;
+  transition: all 0.2s;
+  min-height: 42px;
 }
-
-.q-opt-btn:hover {
+.key-toggle-btn:hover {
   background: var(--bg-hover);
   border-color: var(--primary);
-  color: var(--text-main);
 }
-
-.opt-letter {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: var(--bg-page);
-  border: 1px solid var(--border-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 12px;
-  flex-shrink: 0;
-}
-
-.q-opt-btn.correct {
+.key-toggle-btn.open {
   background: var(--emerald-bg);
   border-color: var(--accent-emerald);
   color: var(--accent-emerald);
-}
-
-.q-opt-btn.wrong {
-  background: var(--rose-bg);
-  border-color: var(--accent-rose);
-  color: var(--accent-rose);
-}
-
-.q-explanation-drawer {
-  margin-top: 18px;
-  padding: 16px;
-  border-radius: var(--radius-sm);
-  background: var(--bg-surface-elevated);
-  border: 1px solid var(--border-color);
-  display: none;
-  font-size: 13.5px;
-}
-
-.jump-bar {
-  display: flex;
-  gap: 5px;
-  flex-wrap: wrap;
-  margin-top: 18px;
-  padding-top: 14px;
-  border-top: 1px solid var(--border-color);
-}
-
-.jump-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-sm);
-  background: var(--bg-surface-elevated);
-  border: 1px solid var(--border-color);
-  color: var(--text-muted);
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-
-.jump-btn.current {
-  border-color: var(--primary);
-  color: var(--primary);
-  font-weight: 700;
-}
-
-.jump-btn.done-correct {
-  background: var(--emerald-bg);
-  color: var(--accent-emerald);
-  border-color: var(--emerald-border);
-}
-
-.jump-btn.done-wrong {
-  background: var(--rose-bg);
-  color: var(--accent-rose);
-  border-color: var(--rose-border);
-}
-
-/* =================== TAB 6: LOGIC SANDBOX =================== */
-.sandbox-card {
-  background: var(--bg-surface-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 24px;
-  width: 100%;
-}
-
-.sandbox-input-row {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 14px;
-  width: 100%;
-}
-
-.sandbox-input {
-  flex: 1;
-  min-width: 0;
-  background: var(--bg-surface-elevated);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-sm);
-  padding: 10px 14px;
-  color: var(--text-main);
-  font-family: var(--font-mono);
-  font-size: 15px;
-  min-height: 44px;
-}
-
-.btn-generate {
-  flex-shrink: 0;
-  white-space: nowrap;
-  padding: 0 20px;
-  min-height: 44px;
-}
-
-.virtual-keys-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 6px;
-  margin-bottom: 18px;
-  width: 100%;
-}
-
-.v-key {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: var(--bg-surface-elevated);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-sm);
-  padding: 6px 2px;
-  min-height: 46px;
-  cursor: pointer;
-  transition: all 0.15s;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.v-key:hover, .v-key:active {
-  background: var(--primary);
-  border-color: var(--primary);
-}
-
-.v-key:hover .v-key-symbol, .v-key:active .v-key-symbol,
-.v-key:hover .v-key-sub, .v-key:active .v-key-sub {
-  color: #ffffff;
-}
-
-.v-key-symbol {
-  font-family: var(--font-mono);
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text-main);
-}
-
-.v-key-sub {
-  font-size: 8.5px;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  margin-top: 1px;
-}
-
-.classification-banner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 12px 14px;
-  border-radius: var(--radius-sm);
-  margin: 16px 0 12px;
-  border: 1px solid var(--border-color);
-  background: var(--bg-surface-elevated);
-  flex-wrap: wrap;
-}
-
-.classification-label {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-muted);
-}
-
-.status-badge-box {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 12.5px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
-
-.status-badge-box.tautology {
-  background: var(--emerald-bg);
-  color: var(--accent-emerald);
-  border: 1px solid var(--emerald-border);
-}
-
-.status-badge-box.contradiction {
-  background: var(--rose-bg);
-  color: var(--accent-rose);
-  border: 1px solid var(--rose-border);
-}
-
-.status-badge-box.contingent {
-  background: var(--amber-bg);
-  color: var(--accent-amber);
-  border: 1px solid var(--amber-border);
 }
 
 /* ==========================================================================
    MOBILE RESPONSIVE OVERHAUL (< 768px) - NO HORIZONTAL OVERFLOW & COMPACT TEXT
    ========================================================================== */
 @media (max-width: 768px) {
-  body {
-    font-size: 13px;
-  }
-
-  .header-inner {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 8px 12px;
-    gap: 8px;
-  }
-
-  .header-brand-row {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .brand-info p {
-    display: none;
-  }
-
-  .nav-scroll-container {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .nav-tabs {
-    padding: 2px;
-    gap: 3px;
-  }
-
-  .nav-tab-btn {
-    font-size: 12px;
-    padding: 6px 11px;
-    min-height: 34px;
-  }
-
-  .main-content {
-    padding: 10px 8px 40px !important;
-  }
-
-  .diktat-layout {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-
-  .diktat-sidebar {
-    display: none;
-  }
-
-  .article-card {
-    padding: 14px 10px !important;
-    border-radius: var(--radius-sm) !important;
-  }
-
+  body { font-size: 13px; }
+  .header-inner { flex-direction: column; align-items: stretch; padding: 8px 12px; gap: 8px; }
+  .header-brand-row { width: 100%; display: flex; justify-content: space-between; align-items: center; }
+  .brand-info p { display: none; }
+  .nav-scroll-container { width: 100%; max-width: 100%; }
+  .nav-tabs { padding: 2px; gap: 3px; }
+  .nav-tab-btn { font-size: 12px; padding: 6px 11px; min-height: 34px; }
+  .main-content { padding: 10px 8px 40px !important; }
+  .diktat-layout { grid-template-columns: 1fr; gap: 14px; }
+  .diktat-sidebar { display: none; }
+  .article-card { padding: 14px 10px !important; border-radius: var(--radius-sm) !important; }
   .article-card h1 { font-size: 18px !important; }
   .article-card h2 { font-size: 15.5px !important; padding-bottom: 5px !important; margin-top: 14px !important; }
   .article-card h3 { font-size: 14px !important; margin: 12px 0 6px !important; }
@@ -1256,127 +728,39 @@ body {
   .article-card ul, .article-card ol { margin: 0 0 10px 16px !important; }
 
   /* COMPACT TABLES - FIT ON MOBILE WITHOUT NEEDING HORIZONTAL SCROLL */
-  .table-scroll-wrap {
-    margin: 8px 0 !important;
-    border-radius: 6px !important;
-    max-width: 100% !important;
-  }
+  .table-scroll-wrap { margin: 8px 0 !important; border-radius: 6px !important; max-width: 100% !important; }
+  .article-card table, .academic-table { min-width: 0 !important; width: 100% !important; font-size: 11px !important; table-layout: auto !important; }
+  .article-card th, .academic-table th { padding: 6px 4px !important; font-size: 10px !important; letter-spacing: 0 !important; word-break: break-word !important; white-space: normal !important; line-height: 1.2 !important; }
+  .article-card td, .academic-table td { padding: 6px 4px !important; font-size: 11px !important; line-height: 1.3 !important; word-break: break-word !important; white-space: normal !important; }
 
-  .article-card table, .academic-table {
-    min-width: 0 !important;
-    width: 100% !important;
-    font-size: 11px !important;
-    table-layout: auto !important;
-  }
-
-  .article-card th, .academic-table th {
-    padding: 6px 4px !important;
-    font-size: 10px !important;
-    letter-spacing: 0 !important;
-    word-break: break-word !important;
-    white-space: normal !important;
-    line-height: 1.2 !important;
-  }
-
-  .article-card td, .academic-table td {
-    padding: 6px 4px !important;
-    font-size: 11px !important;
-    line-height: 1.3 !important;
-    word-break: break-word !important;
-    white-space: normal !important;
-  }
-
-  .drill-card, .tree-card, .arena-question-card, .sandbox-card {
-    padding: 14px 10px !important;
-    border-radius: var(--radius-sm) !important;
-  }
-
-  .formula-display {
-    font-size: 15px !important;
-  }
-
-  .section-hero {
-    padding: 14px 10px !important;
-  }
-
-  .hero-text h2 {
-    font-size: 16px !important;
-  }
-
-  .flashcard-3d-wrapper, .flashcard-inner, .flashcard-front, .flashcard-back {
-    min-height: 330px !important;
-  }
-
-  .fc-question {
-    font-size: 15px !important;
-  }
-
-  .btn-primary, .btn-secondary {
-    width: 100% !important;
-  }
-
-  .drill-actions, .fc-controls {
-    flex-direction: column !important;
-    width: 100% !important;
-  }
+  .drill-card, .tree-card, .arena-question-card, .sandbox-card, .gen-problem-card { padding: 14px 10px !important; border-radius: var(--radius-sm) !important; }
+  .formula-display { font-size: 15px !important; }
+  .section-hero { padding: 14px 10px !important; }
+  .hero-text h2 { font-size: 16px !important; }
+  .flashcard-3d-wrapper, .flashcard-inner, .flashcard-front, .flashcard-back { min-height: 330px !important; }
+  .fc-question { font-size: 15px !important; }
+  .btn-primary, .btn-secondary, .key-toggle-btn { width: 100% !important; }
+  .drill-actions, .fc-controls { flex-direction: column !important; width: 100% !important; }
 
   /* Matrix table in Drills and Sandbox */
-  .drill-matrix-table {
-    min-width: 0 !important;
-    width: 100% !important;
-  }
-  .drill-matrix-table th {
-    padding: 6px 3px !important;
-    font-size: 10.5px !important;
-  }
-  .drill-matrix-table td {
-    padding: 4px 2px !important;
-    font-size: 10.5px !important;
-  }
-  .toggle-cell-btn {
-    min-width: 34px !important;
-    min-height: 30px !important;
-    padding: 3px 5px !important;
-    font-size: 11px !important;
-  }
+  .drill-matrix-table { min-width: 0 !important; width: 100% !important; }
+  .drill-matrix-table th { padding: 6px 3px !important; font-size: 10.5px !important; }
+  .drill-matrix-table td { padding: 4px 2px !important; font-size: 10.5px !important; }
+  .toggle-cell-btn { min-width: 34px !important; min-height: 30px !important; padding: 3px 5px !important; font-size: 11px !important; }
 
   /* Sandbox Mobile Specific */
-  .sandbox-input-row {
-    flex-direction: column !important;
-    gap: 8px !important;
-  }
+  .sandbox-input-row { flex-direction: column !important; gap: 8px !important; }
+  .btn-generate { width: 100% !important; }
+  .virtual-keys-grid { gap: 5px !important; }
+  .v-key { min-height: 42px !important; padding: 4px 2px !important; }
+  .v-key-symbol { font-size: 14px !important; }
+  .v-key-sub { font-size: 8px !important; }
+  .classification-banner { flex-direction: column !important; align-items: flex-start !important; gap: 6px !important; }
+  .status-badge-box { width: 100% !important; justify-content: center !important; }
 
-  .btn-generate {
-    width: 100% !important;
-  }
-
-  .virtual-keys-grid {
-    gap: 5px !important;
-  }
-
-  .v-key {
-    min-height: 42px !important;
-    padding: 4px 2px !important;
-  }
-
-  .v-key-symbol {
-    font-size: 14px !important;
-  }
-
-  .v-key-sub {
-    font-size: 8px !important;
-  }
-
-  .classification-banner {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 6px !important;
-  }
-
-  .status-badge-box {
-    width: 100% !important;
-    justify-content: center !important;
-  }
+  .gen-controls-bar { flex-direction: column !important; width: 100% !important; }
+  .gen-controls-bar button, .gen-controls-bar select { width: 100% !important; }
+  .gen-formula-title { font-size: 17px !important; }
 }
 </style>
 </head>
@@ -1405,6 +789,7 @@ body {
     <div class="nav-scroll-container">
       <nav class="nav-tabs" role="tablist" id="mainNavTabs">
         <button class="nav-tab-btn active" onclick="switchTab('diktat')" id="tabBtn-diktat">📖 Diktat Kuliah</button>
+        <button class="nav-tab-btn" onclick="switchTab('generator')" id="tabBtn-generator">🎲 Buat Soal Tabel</button>
         <button class="nav-tab-btn" onclick="switchTab('drill')" id="tabBtn-drill">⚡ Truth Table Drill</button>
         <button class="nav-tab-btn" onclick="switchTab('tree')" id="tabBtn-tree">🌲 Parse Tree</button>
         <button class="nav-tab-btn" onclick="switchTab('flashcards')" id="tabBtn-flashcards">🗂️ Flashcards</button>
@@ -1936,7 +1321,99 @@ body {
     </div>
   </div>
 
-  <!-- ==================== TAB 2: TRUTH TABLE DRILL LAB ==================== -->
+  <!-- ==================== TAB 2: GENERATOR SOAL TABEL KEBENARAN (NEW PAGE) ==================== -->
+  <div id="tab-generator" class="tab-pane">
+    <div class="drill-container">
+      <div class="section-hero">
+        <div class="hero-text">
+          <h2>🎲 Generator Soal Tabel Kebenaran</h2>
+          <p>Dapatkan soal latihan membuat tabel kebenaran lengkap secara acak. Kerjakan di lembar kerja atau kertas, lalu buka kunci jawaban untuk memeriksa langkah demi langkah.</p>
+        </div>
+      </div>
+
+      <div class="gen-problem-card">
+        <!-- Controls Bar -->
+        <div class="gen-controls-bar">
+          <button class="btn-primary" onclick="randomNewProblem()">
+            <span>🎲</span> Acak Soal Baru
+          </button>
+          <select id="genVarFilter" class="btn-secondary" onchange="randomNewProblem()" style="min-height:42px;">
+            <option value="ALL">Semua Tingkat (2 & 3 Variabel)</option>
+            <option value="2">Khusus 2 Variabel (4 Baris)</option>
+            <option value="3">Khusus 3 Variabel (8 Baris)</option>
+          </select>
+        </div>
+
+        <!-- Soal Box -->
+        <div class="gen-target-box">
+          <div>
+            <span style="font-size:11.5px;text-transform:uppercase;color:var(--text-muted);font-weight:700;">Instruksi Soal:</span>
+            <div style="font-size:14px;color:var(--text-body);margin-top:2px;">
+              Buatlah tabel kebenaran lengkap dengan urutan baku <strong>T-First</strong> untuk formula proposisi berikut:
+            </div>
+            <div class="gen-formula-title" id="genFormulaDisplay">(p ∧ ¬q) → p</div>
+          </div>
+          <div id="genVarBadge" style="font-size:12px;background:var(--primary-light);color:var(--primary);padding:4px 12px;border-radius:9999px;font-weight:700;">
+            2 Variabel • 4 Baris
+          </div>
+        </div>
+
+        <div id="genProblemNotes" class="callout callout-info" style="margin:12px 0;"></div>
+
+        <!-- Interactive Practice Area -->
+        <div style="margin:18px 0;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
+            <span style="font-size:13px;font-weight:700;color:var(--text-main);">📝 Lembar Kerja Latihan Mandiri (Isi Tabel):</span>
+            <span style="font-size:11.5px;color:var(--text-subtle);">Klik tombol T / F pada setiap sel</span>
+          </div>
+          <div class="table-scroll-wrap">
+            <table class="drill-matrix-table" id="genPracticeTable">
+              <!-- Rendered by JS -->
+            </table>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;">
+            <button class="btn-secondary" onclick="checkGenPractice()">
+              <span>✅</span> Cek Isian Latihan Saya
+            </button>
+            <button class="btn-secondary" onclick="resetGenPractice()">
+              <span>🔄</span> Reset Isian
+            </button>
+          </div>
+          <div id="genPracticeFeedback" class="callout" style="display:none;margin-top:10px;"></div>
+        </div>
+
+        <!-- KUNCI JAWABAN BUKA TUTUP -->
+        <div style="margin-top:24px;border-top:1px solid var(--border-color);padding-top:16px;">
+          <button class="key-toggle-btn" id="btnToggleKey" onclick="toggleAnswerKey()">
+            <span id="keyIcon">👁️</span> <span id="keyBtnText">Buka Kunci Jawaban & Pembahasan Lengkap</span>
+          </button>
+
+          <!-- Drawer Kunci Jawaban -->
+          <div class="answer-key-drawer" id="answerKeyDrawer">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+              <span style="font-size:14px;font-weight:700;color:var(--accent-emerald);">
+                🔑 Kunci Jawaban Resmi (Langkah demi Langkah):
+              </span>
+              <div id="keyClassificationBadge"></div>
+            </div>
+
+            <div class="table-scroll-wrap">
+              <table class="drill-matrix-table" id="genKeyTable">
+                <!-- Rendered by JS -->
+              </table>
+            </div>
+
+            <div style="margin-top:12px;font-size:12.5px;color:var(--text-muted);line-height:1.5;">
+              <strong>💡 Catatan Dosen:</strong> Evaluasi selalu diawali dari sub-ekspresi dalam kurung terdalam, kemudian operator negasi, konjungsi/disjungsi, dan diakhiri dengan operator utama di akar formula.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TAB 3: TRUTH TABLE DRILL LAB ==================== -->
   <div id="tab-drill" class="tab-pane">
     <div class="drill-container">
       <div class="section-hero">
@@ -1981,7 +1458,7 @@ body {
     </div>
   </div>
 
-  <!-- ==================== TAB 3: PARSE TREE STUDIO ==================== -->
+  <!-- ==================== TAB 4: PARSE TREE STUDIO ==================== -->
   <div id="tab-tree" class="tab-pane">
     <div class="tree-container">
       <div class="section-hero">
@@ -2014,7 +1491,7 @@ body {
     </div>
   </div>
 
-  <!-- ==================== TAB 4: ACTIVE RECALL FLASHCARDS ==================== -->
+  <!-- ==================== TAB 5: ACTIVE RECALL FLASHCARDS ==================== -->
   <div id="tab-flashcards" class="tab-pane">
     <div class="flashcards-container">
       <div class="fc-meta-bar">
@@ -2053,7 +1530,7 @@ body {
     </div>
   </div>
 
-  <!-- ==================== TAB 5: UTS EXAM ARENA ==================== -->
+  <!-- ==================== TAB 6: UTS EXAM ARENA ==================== -->
   <div id="tab-arena" class="tab-pane">
     <div class="arena-container">
       <div class="arena-topbar">
@@ -2112,7 +1589,7 @@ body {
     </div>
   </div>
 
-  <!-- ==================== TAB 6: LOGIC SANDBOX ==================== -->
+  <!-- ==================== TAB 7: LOGIC SANDBOX ==================== -->
   <div id="tab-sandbox" class="tab-pane">
     <div class="sandbox-card">
       <h2 style="font-family:var(--font-heading);font-size:19px;color:var(--text-main);margin-bottom:6px;">
@@ -2183,6 +1660,7 @@ body {
 const QUIZ_DATA = [{"id":"p1_q1","pert":"P1","level":"mudah","isUts":false,"q":"Manakah di antara kalimat berikut yang merupakan <code>PROPOSISI DEKLARATIF</code> yang sah dalam logika matematika?","opts":["Tolong tutup pintu laboratorium informatika itu!","Berapakah hasil perkalian dari 15 × 12?","Surakarta adalah salah satu kota di provinsi Jawa Tengah.","Semoga Anda lulus mata kuliah Logika dengan nilai A!"],"ans":2,"exp":"<strong>Jawaban Benar: C</strong><br>Proposisi adalah kalimat deklaratif (pernyataan) yang bernilai <em>Benar</em> atau <em>Salah</em>, tetapi tidak keduanya sekaligus (Slide P1 Halaman 8). Kalimat perintah (A), pertanyaan (B), dan harapan/doa (D) bukan merupakan proposisi."},{"id":"p1_q2","pert":"P1","level":"mudah","isUts":true,"q":"Pernyataan <code>\"17 adalah bilangan genap\"</code> digolongkan sebagai:","opts":["Bukan proposisi karena pernyataannya tidak benar","Proposisi deklaratif dengan nilai kebenaran Salah (F)","Kalimat terbuka karena memuat bilangan","Paradoks logika"],"ans":1,"exp":"<strong>Jawaban Benar: B</strong><br>Sebuah kalimat tidak harus selalu benar untuk menjadi proposisi! Syarat proposisi adalah memiliki nilai kebenaran yang pasti. Pernyataan \"17 adalah bilangan genap\" merupakan proposisi yang bernilai SALAH (F) karena 17 adalah bilangan ganjil (Slide P1 Halaman 9)."},{"id":"p1_q3","pert":"P1","level":"sedang","isUts":true,"q":"Mengapa ekspresi matematika <code>\"2x + 7 = 19\"</code> BUKAN merupakan proposisi dalam logika dasar?","opts":["Karena memuat simbol aritmatika tambah (+) dan sama dengan (=)","Karena nilai kebenarannya belum dapat ditentukan sebelum variabel bebas x diberi nilai tertentu (Kalimat Terbuka)","Karena ekspresi tersebut selalu bernilai Salah untuk semua x","Karena tidak ditulis dalam huruf kapital"],"ans":1,"exp":"<strong>Jawaban Benar: B</strong><br>Ekspresi ini adalah <em>Kalimat Terbuka</em> (Open Sentence). Jika x = 6 bernilai Benar, jika x = 0 bernilai Salah. Karena nilainya bergantung pada nilai substitusi variabel bebas x, maka ia bukan proposisi sebelum variabelnya dikuantifikasi (Slide P1 Halaman 10)."},{"id":"p1_q4","pert":"P1","level":"sukar","isUts":true,"q":"Pernyataan <code>\"Kalimat di dalam tanda petik ini adalah bohong\"</code> digolongkan sebagai:","opts":["Proposisi bernilai Benar (T)","Proposisi bernilai Salah (F)","Bukan Proposisi (Paradoks Pembohong / Liar Paradox yang melanggar Hukum Ketiga Ditiadakan)","Tautologi Absolut"],"ans":2,"exp":"<strong>Jawaban Benar: C</strong><br>Ini adalah paradoks klasik (Liar Paradox). Jika dianggap Benar, artinya kalimat itu bohong (berarti Salah). Jika dianggap Salah, artinya kalimat itu tidak bohong (berarti Benar). Terjadi kontradiksi diri yang melanggar <em>Law of Excluded Middle</em>, sehingga bukan merupakan proposisi (Slide P1 Halaman 12)."},{"id":"p2_q1","pert":"P2","level":"mudah","isUts":true,"q":"Operasi DISJUNGSI INKLUSIF (p ∨ q) bernilai <code>SALAH (F)</code> HANYA JIKA:","opts":["p = T dan q = F","p = F dan q = T","Kedua operan p dan q bernilai Salah (F ∨ F = F)","Salah satu operan bernilai Benar"],"ans":2,"exp":"<strong>Jawaban Benar: C</strong><br>Disjungsi inklusif bernilai Benar jika minimal salah satu operannya Benar. Kondisi tunggal bernilai False terjadi saat kedua operan bernilai False: <code>F ∨ F = F</code> (Slide P2 Halaman 14)."},{"id":"p2_q2","pert":"P2","level":"mudah","isUts":false,"q":"Berdasarkan Hukum Negasi Ganda (Involusi), formula <code>¬(¬p)</code> secara logis ekuivalen (≡) dengan:","opts":["¬p","p","Tautologi (T)","Kontradiksi (F)"],"ans":1,"exp":"<strong>Jawaban Benar: B</strong><br>Hukum Involusi menyatakan bahwa penyangkalan terhadap suatu negasi akan mengembalikan nilai proposisi aslinya: <code>¬(¬p) ≡ p</code> (Slide P2 Halaman 16)."},{"id":"p2_q3","pert":"P2","level":"sedang","isUts":true,"q":"Diberikan p: \"Mahasiswa belajar giat\", q: \"Mahasiswa lulus ujian\". Bentuk simbolik formal dari pernyataan: <em>\"Meskipun mahasiswa belajar giat, ia tidak lulus ujian\"</em> adalah:","opts":["p → ¬q","p ∧ ¬q","¬(p ∧ q)","p ∨ ¬q"],"ans":1,"exp":"<strong>Jawaban Benar: B</strong><br>Dalam logika proposisional, kata hubung bahasa alami seperti \"meskipun\", \"tetapi\", \"namun\", dan \"walaupun\" secara logis berfungsi sebagai perangkai <strong>Konjungsi (∧)</strong> yang menghubungkan dua fakta yang terjadi sekaligus (Slide P2 Contoh 2.4)."},{"id":"p2_q4","pert":"P2","level":"sukar","isUts":true,"q":"Berdasarkan Hukum De Morgan, bentuk negasi yang setara dari kalimat: <em>\"Server database aktif dan koneksi jaringan lancar\"</em> adalah:","opts":["Server database tidak aktif dan koneksi jaringan tidak lancar","Server database tidak aktif atau koneksi jaringan tidak lancar","Jika server database aktif maka koneksi jaringan tidak lancar","Server database aktif tetapi koneksi jaringan terputus"],"ans":1,"exp":"<strong>Jawaban Benar: B</strong><br>Hukum De Morgan menyatakan: <code>¬(p ∧ q) ≡ ¬p ∨ ¬q</code>. Negasi dari \"p DAN q\" adalah \"BUKAN p ATAU BUKAN q\". Maka: \"Server database tidak aktif ATAU koneksi jaringan tidak lancar\" (Slide P2 Halaman 20)."},{"id":"p3_q1","pert":"P3","level":"mudah","isUts":false,"q":"Sebuah formula proposisi memuat 4 variabel atomik berbeda: <code>p, q, r, s</code>. Berapakah jumlah baris pada tabel kebenarannya?","opts":["8 baris","12 baris","16 baris","32 baris"],"ans":2,"exp":"<strong>Jawaban Benar: C</strong><br>Rumus jumlah baris tabel kebenaran adalah <strong>2ⁿ</strong>, di mana n adalah jumlah variabel proposisional unik. Untuk 4 variabel: 2⁴ = <strong>16 baris</strong> (Slide P3 Halaman 6)."},{"id":"p3_q2","pert":"P3","level":"mudah","isUts":true,"q":"Sesuai urutan baku perkuliahan dosen pengampu Reinal Ariyuda (T-First), urutan kombinasi nilai kebenaran untuk 2 variabel (p, q) adalah:","opts":["TT, TF, FT, FF","FF, FT, TF, TT","TF, FT, TT, FF","FT, FF, TT, TF"],"ans":0,"exp":"<strong>Jawaban Benar: A</strong><br>Standar akademik baku yang diterapkan pada perkuliahan ini adalah <strong>T-First (True First)</strong> secara biner terbalik: Baris 1: TT, Baris 2: TF, Baris 3: FT, Baris 4: FF (Slide P3 Halaman 8)."},{"id":"p3_q3","pert":"P3","level":"sedang","isUts":true,"q":"Manakah urutan pengerjaan operator logika (Presedensi) dari prioritas TERTINGGI ke TERENDAH jika tanpa tanda kurung?","opts":["¬ (Negasi) → ∧ (Konjungsi) → ∨ (Disjungsi) → → (Implikasi) → ↔ (Biimplikasi)","∧ (Konjungsi) → ∨ (Disjungsi) → ¬ (Negasi) → ↔ (Biimplikasi) → → (Implikasi)","→ (Implikasi) → ↔ (Biimplikasi) → ∧ (Konjungsi) → ∨ (Disjungsi) → ¬ (Negasi)","Semua operator memiliki derajat prioritas yang sama dari kiri ke kanan"],"ans":0,"exp":"<strong>Jawaban Benar: A</strong><br>Tingkat presedensi operator logika standar: 1. Negasi (¬), 2. Konjungsi (∧), 3. Disjungsi (∨), 4. Implikasi (→), 5. Biimplikasi (↔) (Slide P3 Halaman 15)."},{"id":"p3_q4","pert":"P3","level":"sukar","isUts":true,"q":"Pada pohon sintaks (parse tree) dari formula: <code>((p ∧ q) ∨ ¬r) → (s ↔ t)</code>, simpul yang bertindak sebagai Simpul Akar (Root Node / Main Operator) adalah:","opts":["∧ (Konjungsi)","∨ (Disjungsi)","→ (Implikasi)","↔ (Biimplikasi)"],"ans":2,"exp":"<strong>Jawaban Benar: C</strong><br>Root Node pada parse tree adalah operator utama yang dievaluasi paling akhir karena menghubungkan sub-pohon kiri <code>((p ∧ q) ∨ ¬r)</code> dan sub-pohon kanan <code>(s ↔ t)</code>. Operator tersebut adalah <strong>Implikasi (→)</strong> (Slide P3 Halaman 22)."},{"id":"p4_q1","pert":"P4","level":"mudah","isUts":true,"q":"Operasi IMPLIKASI MATERIAL (p → q) bernilai <code>SALAH (F)</code> HANYA JIKA:","opts":["p = T dan q = T","p = T dan q = F (Anteseden Benar, Konsekuen Salah)","p = F dan q = T","p = F dan q = F"],"ans":1,"exp":"<strong>Jawaban Benar: B</strong><br>Ciri khas utama implikasi: bernilai SALAH HANYA pada satu kondisi tunggal, yaitu ketika <strong>Anteseden (syarat) bernilai Benar tetapi Konsekuen (akibat) bernilai Salah (T → F = F)</strong>. Pada kondisi p = F, implikasi selalu bernilai Benar secara vakuus (Slide P4 Halaman 6)."},{"id":"p4_q2","pert":"P4","level":"sedang","isUts":true,"q":"Manakah operasi logika dengan dua input berbeda (T dan F) berikut yang menghasilkan nilai <code>BENAR (T)</code>?","opts":["T ∧ F","T ↔ F","F → T","T → F"],"ans":2,"exp":"<strong>Jawaban Benar: C</strong><br>Mari kita evaluasi seluruh opsi:<br>• <strong>F → T = T</strong> (Anteseden False selalu menghasilkan implikasi True!).<br>• T ∧ F = F (Konjungsi butuh keduanya True).<br>• T ↔ F = F (Biimplikasi butuh kedua operan bernilai sama).<br>• T → F = F (Kondisi tunggal implikasi bernilai False).<br><em>Rujukan: Slide P4 Halaman 8 & 14.</em>"},{"id":"p4_q3","pert":"P4","level":"sedang","isUts":true,"q":"Diberikan implikasi: <em>\"Jika hari hujan (p), maka jalanan basah (q)\"</em>. Pernyataan <em>\"Jika jalanan tidak basah (¬q), maka hari tidak hujan (¬p)\"</em> merupakan variasi bentuk:","opts":["Konvers (Converse)","Invers (Inverse)","Kontraposisi (Contrapositive)","Biimplikasi"],"ans":2,"exp":"<strong>Jawaban Benar: C</strong><br>Variasi dari <code>p → q</code>:<br>• Konvers: <code>q → p</code><br>• Invers: <code>¬p → ¬q</code><br>• <strong>Kontraposisi: <code>¬q → ¬p</code></strong>. Kontraposisi adalah satu-satunya variasi yang terbukti secara logis ekuivalen (≡) dengan implikasi aslinya (Slide P4 Halaman 18)."},{"id":"p4_q4","pert":"P4","level":"sedang","isUts":false,"q":"Manakah bentuk ekuivalensi hukum logika dari implikasi <code>p → q</code> menggunakan operator negasi dan disjungsi?","opts":["¬p ∧ q","¬p ∨ q","p ∧ ¬q","¬(p ∨ q)"],"ans":1,"exp":"<strong>Jawaban Benar: B</strong><br>Hukum Ekuivalensi Implikasi menyatakan bahwa: <code>p → q ≡ ¬p ∨ q</code>. Tabel kebenaran keduanya identik pada seluruh 4 baris: T, F, T, T (Slide P4 Halaman 20)."},{"id":"p4_q5","pert":"P4","level":"sukar","isUts":true,"q":"Pada pernyataan <em>\"Mahasiswa diizinkan ikut ujian (p) HANYA JIKA presensi minimal 75% (q)\"</em>, relasi implikasi formal yang benar adalah:","opts":["q → p (q syarat cukup bagi p)","p → q (q syarat perlu / necessary condition bagi p)","p ↔ q (p dan q saling bebas)","¬p → q"],"ans":1,"exp":"<strong>Jawaban Benar: B</strong><br>Frasa <strong>\"p HANYA JIKA q\"</strong> diterjemahkan secara formal sebagai <code>p → q</code>. Artinya, q (presensi 75%) adalah <em>syarat perlu (necessary condition)</em> untuk p. Tanpa q, p tidak dapat terjadi (Slide P4 Halaman 12)."},{"id":"p4_q6","pert":"P4","level":"sukar","isUts":true,"q":"Diberikan nilai kebenaran variabel: A = T, B = F, C = T. Berapakah nilai kebenaran akhir dari ekspresi: <code>(A ∧ ¬B) → ¬C</code>?","opts":["Benar (T)","Salah (F)","Tidak dapat ditentukan","Tautologi"],"ans":1,"exp":"<strong>Jawaban Benar: B</strong><br>Mari kita evaluasi langkah demi langkah:<br>1. ¬B = ¬F = T<br>2. A ∧ ¬B = T ∧ T = <strong>T</strong> (Anteseden bernilai T)<br>3. ¬C = ¬T = <strong>F</strong> (Konsekuen bernilai F)<br>4. Evaluasi implikasi: T → F = <strong>F</strong>!<br><em>Rujukan: Contoh 5.1 Slide P4 & P5 Halaman 6.</em>"},{"id":"p4_q7","pert":"P4","level":"sedang","isUts":false,"q":"BIIMPLIKASI (p ↔ q) bernilai <code>BENAR (T)</code> HANYA JIKA:","opts":["p bernilai Benar dan q bernilai Salah","Kedua proposisi p dan q memiliki nilai kebenaran yang sama (keduanya T atau keduanya F)","Salah satu proposisi bernilai Benar","Anteseden bernilai Salah"],"ans":1,"exp":"<strong>Jawaban Benar: B</strong><br>Biimplikasi / Ekuivalensi bernilai Benar jika kedua operan memiliki nilai yang seragam: <code>T ↔ T = T</code> dan <code>F ↔ F = T</code>. Jika nilainya berlawanan, bernilai False (Slide P4 Halaman 24)."},{"id":"p5_q1","pert":"P5","level":"mudah","isUts":true,"q":"Suatu formula proposisi majemuk yang SELALU bernilai <code>BENAR (T)</code> pada seluruh baris tabel kebenarannya disebut:","opts":["Kontradiksi","Tautologi","Contingent","Falasi"],"ans":1,"exp":"<strong>Jawaban Benar: B</strong><br>Tautologi adalah proposisi majemuk yang selalu bernilai True apapun nilai kebenaran dari variabel-variabel penyusunnya (Slide P5 Halaman 15). Menandakan argumen yang valid dan logis."},{"id":"p5_q2","pert":"P5","level":"sedang","isUts":true,"q":"Kaidah inferensi sah <code>MODUS PONENS</code> menyatakan bahwa dari dua premis: <code>p → q</code> dan <code>p</code>, dapat ditarik konklusi yang sah yaitu:","opts":["¬p","q","¬q","p ∧ q"],"ans":1,"exp":"<strong>Jawaban Benar: B</strong><br>Modus Ponens (Metode Penegasan Anteseden):<br>Premis 1: p → q<br>Premis 2: p<br><strong>Konklusi: q</strong> (Slide P5 Halaman 18)."},{"id":"p5_q3","pert":"P5","level":"sedang","isUts":true,"q":"Kaidah inferensi sah <code>MODUS TOLLENS</code> menyatakan bahwa dari dua premis: <code>p → q</code> dan <code>¬q</code>, dapat ditarik konklusi sah yaitu:","opts":["p","q","¬p","¬p ∨ q"],"ans":2,"exp":"<strong>Jawaban Benar: C</strong><br>Modus Tollens (Metode Penyangkalan Konsekuen):<br>Premis 1: p → q<br>Premis 2: ¬q<br><strong>Konklusi: ¬p</strong> (Slide P5 Halaman 20)."},{"id":"p5_q4","pert":"P5","level":"sukar","isUts":true,"q":"Perhatikan penalaran berikut: <em>\"Jika seseorang belajar giat (p), maka ia lulus (q). Ternyata Budi lulus (q). Oleh karena itu, Budi pasti belajar giat (p).\"</em> Penalaran ini tergolong ke dalam kesesatan berpikir (falasi formal) jenis:","opts":["Modus Ponens yang Sah","Menyangkal Anteseden (Denying the Antecedent)","Mengafirmasi Konsekuen (Affirming the Consequent)","Silogisme Disjungtif"],"ans":2,"exp":"<strong>Jawaban Benar: C</strong><br>Bentuk argumen: <code>((p → q) ∧ q) → p</code> merupakan <strong>Falasi Mengafirmasi Konsekuen (Affirming the Consequent)</strong>. Seseorang bisa saja lulus ujian karena faktor lain meskipun tidak belajar giat (Slide P5 Halaman 23)."},{"id":"p5_q5","pert":"P5","level":"sukar","isUts":true,"q":"Sebuah formula logika yang memuat hasil evaluasi campuran (terdapat baris bernilai Benar dan terdapat baris bernilai Salah) diklasifikasikan sebagai:","opts":["Tautologi","Kontradiksi","Contingent (Kontingensi)","Ekuivalen"],"ans":2,"exp":"<strong>Jawaban Benar: C</strong><br>Formula logika yang bukan merupakan tautologi (tidak selalu True) dan bukan pula kontradiksi (tidak selalu False) disebut <strong>Contingent</strong> (Slide P5 Halaman 25)."}];
 const CLIENT_DRILLS = [{"id":"drill1","title":"Drill 1: Negasi & Konjungsi","formula":"p ∧ ¬q","vars":["p","q"],"colNames":["¬q","p ∧ ¬q"],"hint":"Ingat: ¬q membalik nilai q. Kemudian p ∧ ¬q hanya bernilai T jika KEDUA p dan ¬q bernilai T.","rows":[{"inputs":{"p":true,"q":true},"expected":[false,false]},{"inputs":{"p":true,"q":false},"expected":[true,true]},{"inputs":{"p":false,"q":true},"expected":[false,false]},{"inputs":{"p":false,"q":false},"expected":[true,false]}]},{"id":"drill2","title":"Drill 2: Implikasi Material & Disjungsi","formula":"(p → q) ∨ ¬p","vars":["p","q"],"colNames":["p → q","¬p","(p → q) ∨ ¬p"],"hint":"Ingat: p → q hanya salah saat T → F. Disjungsi ∨ bernilai T jika minimal salah satu bernilai T.","rows":[{"inputs":{"p":true,"q":true},"expected":[true,false,true]},{"inputs":{"p":true,"q":false},"expected":[false,false,false]},{"inputs":{"p":false,"q":true},"expected":[true,true,true]},{"inputs":{"p":false,"q":false},"expected":[true,true,true]}]},{"id":"drill3","title":"Drill 3: Pembuktian Hukum De Morgan","formula":"¬(p ∨ q) ↔ (¬p ∧ ¬q)","vars":["p","q"],"colNames":["p ∨ q","¬(p ∨ q)","¬p ∧ ¬q","Hasil Ekuivalensi (↔)"],"hint":"Periksa apakah kolom ¬(p ∨ q) bernilai identik dengan ¬p ∧ ¬q di setiap baris. Jika identik, biimplikasi menghasilkan Tautologi!","rows":[{"inputs":{"p":true,"q":true},"expected":[true,false,false,true]},{"inputs":{"p":true,"q":false},"expected":[true,false,false,true]},{"inputs":{"p":false,"q":true},"expected":[true,false,false,true]},{"inputs":{"p":false,"q":false},"expected":[false,true,true,true]}]},{"id":"drill4","title":"Drill 4: 3-Variabel UTS Challenge","formula":"(p ∧ q) → r","vars":["p","q","r"],"colNames":["p ∧ q","(p ∧ q) → r"],"hint":"8 Baris pola T-First! Perhatikan bahwa (p ∧ q) hanya bernilai T pada baris 1 dan baris 2. Implikasi hanya salah saat anteseden T dan konsekuen F.","rows":[{"inputs":{"p":true,"q":true,"r":true},"expected":[true,true]},{"inputs":{"p":true,"q":true,"r":false},"expected":[true,false]},{"inputs":{"p":true,"q":false,"r":true},"expected":[false,true]},{"inputs":{"p":true,"q":false,"r":false},"expected":[false,true]},{"inputs":{"p":false,"q":true,"r":true},"expected":[false,true]},{"inputs":{"p":false,"q":true,"r":false},"expected":[false,true]},{"inputs":{"p":false,"q":false,"r":true},"expected":[false,true]},{"inputs":{"p":false,"q":false,"r":false},"expected":[false,true]}]}];
 const FLASHCARDS = [{"topic":"P1: Konsep Dasar","q":"Apa definisi dari Proposisi Deklaratif dan apa syarat utamanya?","a":"Proposisi adalah pernyataan deklaratif yang memiliki nilai kebenaran PASTI: <strong>Benar (T)</strong> saja atau <strong>Salah (F)</strong> saja, tetapi tidak keduanya sekaligus.<br><br><em>Bukan Proposisi:</em> Kalimat tanya, perintah, seruan, harapan/doa, dan kalimat terbuka berpeubah bebas (misal: 2x + 5 = 11)."},{"topic":"P1: Penalaran","q":"Apa perbedaan mendasar antara Penalaran Deduktif dan Induktif?","a":"<strong>Deduktif:</strong> Bergerak dari premis umum ke kesimpulan khusus. Jika premis benar dan bentuk valid, kesimpulan <em>pasti mutlak benar 100%</em>.<br><br><strong>Induktif:</strong> Bergerak dari pengamatan khusus ke perampatan umum. Bersifat <em>probabilistik</em> (dapat runtuh jika ditemukan kontra-contoh)."},{"topic":"P2: Proposisi Majemuk","q":"Kapan operasi DISJUNGSI INKLUSIF (p ∨ q) bernilai SALAH (F)?","a":"Disjungsi inklusif bernilai <strong>SALAH HANYA JIKA kedua operannya bernilai SALAH (F ∨ F = F)</strong>.<br><br>Jika minimal salah satu operan bernilai Benar (T), maka hasilnya otomatis Benar."},{"topic":"P3: Implikasi Material","q":"Kapan operasi IMPLIKASI (p → q) bernilai SALAH (F)?","a":"Implikasi p → q bernilai <strong>SALAH HANYA JIKA Anteseden Benar dan Konsekuen Salah (T → F = F)</strong>.<br><br>Jika anteseden bernilai Salah (F → T atau F → F), nilai implikasinya otomatis <strong>BENAR (T)</strong> secara vakus."},{"topic":"P3: Biimplikasi","q":"Kapan operasi BIIMPLIKASI (p ↔ q) bernilai BENAR (T)?","a":"Biimplikasi bernilai <strong>BENAR HANYA JIKA kedua proposisi memiliki nilai kebenaran yang SAMA</strong>:<br>• T ↔ T = T<br>• F ↔ F = T<br>Jika nilai keduanya berlawanan (T ↔ F atau F ↔ T), hasilnya Salah (F)."},{"topic":"P3: Hukum Logika","q":"Sebutkan dua bentuk Hukum De Morgan untuk Negasi Konjungsi dan Disjungsi!","a":"1. <strong>¬(p ∧ q) ≡ ¬p ∨ ¬q</strong><br><em>(Negasi konjungsi berubah menjadi disjungsi dari negasi-negasinya)</em><br><br>2. <strong>¬(p ∨ q) ≡ ¬p ∧ ¬q</strong><br><em>(Negasi disjungsi berubah menjadi konjungsi dari negasi-negasinya)</em>"},{"topic":"P3: Ekuivalensi Implikasi","q":"Tuliskan bentuk ekuivalensi disjungsi dan kontraposisi dari implikasi p → q!","a":"• Ekuivalensi Disjungsi: <strong>p → q ≡ ¬p ∨ q</strong><br>• Kontraposisi: <strong>p → q ≡ ¬q → ¬p</strong><br><br><em>Peringatan:</em> Konvers (q → p) dan Invers (¬p → ¬q) <strong>TIDAK ekuivalen</strong> dengan p → q!"},{"topic":"P4: Presedensi Operator","q":"Bagaimana urutan hierarki pengerjaan operator logika dari prioritas tertinggi?","a":"1. <strong>Tanda Kurung ( )</strong><br>2. <strong>Negasi (¬)</strong><br>3. <strong>Konjungsi (∧)</strong><br>4. <strong>Disjungsi (∨)</strong><br>5. <strong>Implikasi (→)</strong><br>6. <strong>Biimplikasi (↔)</strong>"},{"topic":"P4: Parse Tree","q":"Pada Parse Tree (Pohon Sintaks), di manakah letak operator logika utama?","a":"Operator logika utama (yang dievaluasi paling terakhir) selalu terletak di <strong>AKAR (ROOT)</strong> pohon paling atas.<br><br>Daun-daun (Leaves) di dasar pohon mewakili variabel proposisi atomik (p, q, r)."},{"topic":"P5: Rumus Tabel Kebenaran","q":"Berapa rumus jumlah baris tabel kebenaran untuk n variabel dan bagaimana urutan T-First untuk 3 variabel?","a":"Rumus: <strong>2ⁿ baris</strong> (3 variabel = 2³ = 8 baris).<br><br><strong>Pola T-First Baku Dosen:</strong><br>• Kolom p: 4 True, 4 False (TTTTFFFF)<br>• Kolom q: 2 True berulang (TTFFTTFF)<br>• Kolom r: 1 True berselang-seling (TFTFTFTF)"},{"topic":"P5: Kategori Evaluasi","q":"Apa perbedaan antara Tautologi, Kontradiksi, dan Contingent?","a":"• <strong>Tautologi:</strong> Formula yang SELALU bernilai Benar (T) pada semua baris.<br>• <strong>Kontradiksi:</strong> Formula yang SELALU bernilai Salah (F) pada semua baris.<br>• <strong>Contingent (Kontingensi):</strong> Formula yang nilai kebenarannya CAMPURAN (ada minimal satu T dan satu F)."},{"topic":"P5: Kaidah Inferensi","q":"Jelaskan kaidah inferensi Modus Ponens dan Modus Tollens!","a":"• <strong>Modus Ponens:</strong> Dari premis (p → q) dan (p), kesimpulan sah adalah <strong>q</strong>.<br>• <strong>Modus Tollens:</strong> Dari premis (p → q) dan (¬q), kesimpulan sah adalah <strong>¬p</strong>.<br><br><em>Fallacy umum:</em> Mengafirmasi Konsekuen [(p → q) dan (q) ⊢ p] adalah penalaran SALAH!"}];
+const TRUTH_TABLE_PROBLEMS = [{"id":"tt_p1","vars":["p","q"],"formula":"(p ∧ ¬q) → p","steps":["¬q","p ∧ ¬q","(p ∧ ¬q) → p"],"notes":"Evaluasi kolom perantara ¬q terlebih dahulu, lalu konjungsi (p ∧ ¬q), dan terakhir implikasikan ke p."},{"id":"tt_p2","vars":["p","q"],"formula":"¬(p ∨ q) ↔ (¬p ∧ ¬q)","steps":["p ∨ q","¬(p ∨ q)","¬p","¬q","¬p ∧ ¬q","¬(p ∨ q) ↔ (¬p ∧ ¬q)"],"notes":"Pembuktian Hukum De Morgan 1. Periksa apakah kolom ¬(p ∨ q) identik dengan kolom (¬p ∧ ¬q)."},{"id":"tt_p3","vars":["p","q"],"formula":"(p → q) ↔ (¬p ∨ q)","steps":["p → q","¬p","¬p ∨ q","(p → q) ↔ (¬p ∨ q)"],"notes":"Ekuivalensi hukum implikasi material. Hasil akhir berupa Tautologi (semua T)."},{"id":"tt_p4","vars":["p","q"],"formula":"((p ∨ q) ∧ ¬p) → q","steps":["p ∨ q","¬p","(p ∨ q) ∧ ¬p","((p ∨ q) ∧ ¬p) → q"],"notes":"Kaidah Silogisme Disjungtif. Buktikan bahwa argumen ini sah (tautologi)."},{"id":"tt_p5","vars":["p","q","r"],"formula":"(p ∧ q) → (p ∨ r)","steps":["p ∧ q","p ∨ r","(p ∧ q) → (p ∨ r)"],"notes":"Soal 3 variabel (8 baris pola T-First). Tentukan apakah hasilnya Tautologi atau Contingent."},{"id":"tt_p6","vars":["p","q","r"],"formula":"((p → q) ∧ (q → r)) → (p → r)","steps":["p → q","q → r","p → r","(p → q) ∧ (q → r)","((p → q) ∧ (q → r)) → (p → r)"],"notes":"Silogisme Hipotetis (Transitivitas Implikasi). 8 baris pembuktian inferensi sah."},{"id":"tt_p7","vars":["p","q"],"formula":"((p → q) ∧ ¬q) → ¬p","steps":["p → q","¬q","¬p","(p → q) ∧ ¬q","((p → q) ∧ ¬q) → ¬p"],"notes":"Kaidah Modus Tollens. Jika p → q dan q salah, maka p harus salah."},{"id":"tt_p8","vars":["p","q"],"formula":"¬(p ∧ q) ↔ (¬p ∨ ¬q)","steps":["p ∧ q","¬(p ∧ q)","¬p","¬q","¬p ∨ ¬q","¬(p ∧ q) ↔ (¬p ∨ ¬q)"],"notes":"Pembuktian Hukum De Morgan 2 (Negasi Konjungsi)."},{"id":"tt_p9","vars":["p","q"],"formula":"(p ↔ q) ∧ (p ∧ ¬q)","steps":["p ↔ q","¬q","p ∧ ¬q","(p ↔ q) ∧ (p ∧ ¬q)"],"notes":"Uji formula Kontradiksi. Perhatikan bahwa p ↔ q dan p ∧ ¬q tidak pernah bernilai Benar bersamaan."},{"id":"tt_p10","vars":["p","q","r"],"formula":"(p ∧ ¬r) → (q ∨ r)","steps":["¬r","p ∧ ¬r","q ∨ r","(p ∧ ¬r) → (q ∨ r)"],"notes":"Soal variasi UTS 3 variabel. Implikasi hanya bernilai F saat anteseden T dan konsekuen F."},{"id":"tt_p11","vars":["p","q"],"formula":"¬(p → q) ↔ (p ∧ ¬q)","steps":["p → q","¬(p → q)","¬q","p ∧ ¬q","¬(p → q) ↔ (p ∧ ¬q)"],"notes":"Negasi dari Implikasi Material: ingkaran dari 'jika p maka q' adalah 'p terjadi dan q tidak terjadi'."},{"id":"tt_p12","vars":["p","q","r"],"formula":"(p → (q → r)) ↔ ((p ∧ q) → r)","steps":["q → r","p → (q → r)","p ∧ q","(p ∧ q) → r","(p → (q → r)) ↔ ((p ∧ q) → r)"],"notes":"Hukum Ekspor (Exportation Law). Salah satu formula pembuktian ekuivalensi 3 variabel favorit UTS."}];
 
 // Tab Switching with Smooth Auto-Centering on Mobile
 function switchTab(tabId) {
@@ -2210,14 +1688,362 @@ function toggleTheme() {
   localStorage.setItem('lohim_theme', next);
 }
 
-// Restore saved theme
 const savedTheme = localStorage.getItem('lohim_theme');
 if (savedTheme) {
   document.documentElement.setAttribute('data-theme', savedTheme);
 }
 
 // ==========================================
-// 1. TRUTH TABLE DRILL ENGINE
+// BULLETPROOF PROPOSITIONAL LOGIC PARSER
+// ==========================================
+function parseAndEvalLogic(expr, vars) {
+  const s = expr.trim();
+  const tokens = [];
+  let i = 0;
+
+  while (i < s.length) {
+    const ch = s[i];
+    if (/\s/.test(ch)) {
+      i++;
+      continue;
+    }
+    if (ch === '(' || ch === ')') {
+      tokens.push(ch);
+      i++;
+    } else if (ch === '¬' || ch === '~' || ch === '!') {
+      tokens.push('NOT');
+      i++;
+    } else if (ch === '∧' || ch === '&') {
+      tokens.push('AND');
+      i++;
+    } else if (ch === '∨' || ch === '|') {
+      tokens.push('OR');
+      i++;
+    } else if (s.slice(i, i + 3) === '<->' || s.slice(i, i + 3) === '<=>' || ch === '↔') {
+      tokens.push('IFF');
+      i += (ch === '↔' ? 1 : 3);
+    } else if (s.slice(i, i + 2) === '->' || s.slice(i, i + 2) === '=>' || ch === '→') {
+      tokens.push('IMP');
+      i += (ch === '→' ? 1 : 2);
+    } else if (/[a-zA-Z]/.test(ch)) {
+      tokens.push(ch.toLowerCase());
+      i++;
+    } else {
+      i++;
+    }
+  }
+
+  let pos = 0;
+
+  function parseIff() {
+    let left = parseImp();
+    while (pos < tokens.length && tokens[pos] === 'IFF') {
+      pos++;
+      let right = parseImp();
+      left = (left === right);
+    }
+    return left;
+  }
+
+  function parseImp() {
+    let left = parseOr();
+    if (pos < tokens.length && tokens[pos] === 'IMP') {
+      pos++;
+      let right = parseImp();
+      left = (!left || right);
+    }
+    return left;
+  }
+
+  function parseOr() {
+    let left = parseAnd();
+    while (pos < tokens.length && tokens[pos] === 'OR') {
+      pos++;
+      let right = parseAnd();
+      left = (left || right);
+    }
+    return left;
+  }
+
+  function parseAnd() {
+    let left = parseNot();
+    while (pos < tokens.length && tokens[pos] === 'AND') {
+      pos++;
+      let right = parseNot();
+      left = (left && right);
+    }
+    return left;
+  }
+
+  function parseNot() {
+    if (pos < tokens.length && tokens[pos] === 'NOT') {
+      pos++;
+      return !parseNot();
+    }
+    return parsePrimary();
+  }
+
+  function parsePrimary() {
+    if (pos >= tokens.length) throw new Error('Format formula belum lengkap.');
+    const t = tokens[pos];
+    if (t === '(') {
+      pos++;
+      const val = parseIff();
+      if (pos >= tokens.length || tokens[pos] !== ')') {
+        throw new Error('Kurung tutup ) tidak ditemukan.');
+      }
+      pos++;
+      return val;
+    }
+    if (t in vars) {
+      pos++;
+      return !!vars[t];
+    }
+    if (t === 'true' || t === 't' || t === '1') {
+      pos++;
+      return true;
+    }
+    if (t === 'false' || t === 'f' || t === '0') {
+      pos++;
+      return false;
+    }
+    throw new Error('Simbol tidak dikenali: ' + t);
+  }
+
+  const result = parseIff();
+  if (pos < tokens.length) {
+    throw new Error('Kelebihan simbol setelah formula: ' + tokens[pos]);
+  }
+  return result;
+}
+
+// =======================================================
+// NEW FEATURE: GENERATOR SOAL TABEL KEBENARAN + KUNCI JAWABAN
+// =======================================================
+let currentProblem = null;
+let currentGenRows = [];
+let userPracticeAnswers = {}; // key: "r-c" -> "T"|"F"
+let isKeyOpen = false;
+
+function initProblemGenerator() {
+  randomNewProblem();
+}
+
+function randomNewProblem() {
+  const filter = document.getElementById('genVarFilter').value;
+  let pool = TRUTH_TABLE_PROBLEMS;
+  if (filter === '2') {
+    pool = TRUTH_TABLE_PROBLEMS.filter(p => p.vars.length === 2);
+  } else if (filter === '3') {
+    pool = TRUTH_TABLE_PROBLEMS.filter(p => p.vars.length === 3);
+  }
+
+  // pick random that is different from current
+  let next = pool[Math.floor(Math.random() * pool.length)];
+  if (currentProblem && pool.length > 1 && next.id === currentProblem.id) {
+    next = pool[(pool.indexOf(next) + 1) % pool.length];
+  }
+  currentProblem = next;
+  userPracticeAnswers = {};
+
+  // Close key drawer on new problem
+  isKeyOpen = false;
+  document.getElementById('answerKeyDrawer').style.display = 'none';
+  document.getElementById('btnToggleKey').classList.remove('open');
+  document.getElementById('keyIcon').textContent = '👁️';
+  document.getElementById('keyBtnText').textContent = 'Buka Kunci Jawaban & Pembahasan Lengkap';
+  document.getElementById('genPracticeFeedback').style.display = 'none';
+
+  renderCurrentProblemUI();
+}
+
+function renderCurrentProblemUI() {
+  const p = currentProblem;
+  document.getElementById('genFormulaDisplay').textContent = p.formula;
+  document.getElementById('genVarBadge').textContent = `${p.vars.length} Variabel • ${Math.pow(2, p.vars.length)} Baris`;
+  document.getElementById('genProblemNotes').innerHTML = `<strong>📌 Petunjuk Langkah:</strong> ${p.notes}`;
+
+  // Pre-calculate full truth table rows in standard T-First order
+  const totalRows = Math.pow(2, p.vars.length);
+  const rows = [];
+  for (let i = 0; i < totalRows; i++) {
+    const rowObj = { inputs: {}, stepResults: [] };
+    p.vars.forEach((v, vIdx) => {
+      const half = totalRows / Math.pow(2, vIdx + 1);
+      const isTrue = Math.floor(i / half) % 2 === 0;
+      rowObj.inputs[v] = isTrue;
+    });
+
+    p.steps.forEach(stepFormula => {
+      const res = parseAndEvalLogic(stepFormula, rowObj.inputs);
+      rowObj.stepResults.push(res);
+    });
+
+    rows.push(rowObj);
+  }
+  currentGenRows = rows;
+
+  // Render Interactive Practice Table
+  renderPracticeTable(p, rows);
+
+  // Render Key Table
+  renderKeyTable(p, rows);
+}
+
+function renderPracticeTable(p, rows) {
+  const table = document.getElementById('genPracticeTable');
+  let headerHtml = '<tr>' + p.vars.map(v => `<th>${v}</th>`).join('') + p.steps.map(s => `<th>${s}</th>`).join('') + '</tr>';
+
+  let bodyHtml = rows.map((r, rIdx) => {
+    let rowHtml = '<tr>';
+    p.vars.forEach(v => {
+      rowHtml += `<td class="input-cell-var">${r.inputs[v] ? 'T' : 'F'}</td>`;
+    });
+
+    p.steps.forEach((s, cIdx) => {
+      const key = `${rIdx}-${cIdx}`;
+      const cur = userPracticeAnswers[key] || '?';
+      rowHtml += `
+        <td>
+          <button class="toggle-cell-btn val-${cur}" id="genCell-${key}" onclick="toggleGenCell('${key}')">${cur}</button>
+        </td>
+      `;
+    });
+    rowHtml += '</tr>';
+    return rowHtml;
+  }).join('');
+
+  table.innerHTML = headerHtml + bodyHtml;
+}
+
+function toggleGenCell(key) {
+  const cur = userPracticeAnswers[key] || '?';
+  let next = 'T';
+  if (cur === '?') next = 'T';
+  else if (cur === 'T') next = 'F';
+  else if (cur === 'F') next = 'T';
+
+  userPracticeAnswers[key] = next;
+  const btn = document.getElementById('genCell-' + key);
+  btn.textContent = next;
+  btn.className = 'toggle-cell-btn val-' + next;
+}
+
+function checkGenPractice() {
+  const p = currentProblem;
+  let allCorrect = true;
+  let missing = false;
+
+  currentGenRows.forEach((r, rIdx) => {
+    p.steps.forEach((s, cIdx) => {
+      const key = `${rIdx}-${cIdx}`;
+      const userVal = userPracticeAnswers[key];
+      const btn = document.getElementById('genCell-' + key);
+      btn.classList.remove('is-correct', 'is-wrong');
+
+      if (!userVal || userVal === '?') {
+        missing = true;
+        allCorrect = false;
+        btn.classList.add('is-wrong');
+      } else {
+        const expected = r.stepResults[cIdx] ? 'T' : 'F';
+        if (userVal === expected) {
+          btn.classList.add('is-correct');
+        } else {
+          allCorrect = false;
+          btn.classList.add('is-wrong');
+        }
+      }
+    });
+  });
+
+  const fb = document.getElementById('genPracticeFeedback');
+  fb.style.display = 'block';
+
+  if (allCorrect) {
+    fb.className = 'callout callout-success';
+    fb.innerHTML = '<strong>🎉 Hebat! Seluruh tabel kebenaran Anda BENAR 100%!</strong> Anda sudah menguasai langkah inferensi untuk formula ini.';
+  } else if (missing) {
+    fb.className = 'callout callout-warning';
+    fb.innerHTML = '<strong>⚠️ Masih ada sel kosong:</strong> Silakan isi semua sel dengan nilai T atau F sebelum memeriksa.';
+  } else {
+    fb.className = 'callout callout-warning';
+    fb.innerHTML = '<strong>❌ Masih ada sel yang keliru:</strong> Periksa sel yang bergaris merah, atau klik tombol <em>Buka Kunci Jawaban</em> di bawah untuk mencocokkan.';
+  }
+}
+
+function resetGenPractice() {
+  userPracticeAnswers = {};
+  renderPracticeTable(currentProblem, currentGenRows);
+  document.getElementById('genPracticeFeedback').style.display = 'none';
+}
+
+function renderKeyTable(p, rows) {
+  const table = document.getElementById('genKeyTable');
+  let headerHtml = '<tr>' + p.vars.map(v => `<th>${v}</th>`).join('') + p.steps.map((s, idx) => {
+    const isFinal = idx === p.steps.length - 1;
+    return `<th style="${isFinal ? 'background:var(--primary-light);color:var(--primary);font-weight:700;' : ''}">${s}</th>`;
+  }).join('') + '</tr>';
+
+  let bodyHtml = rows.map(r => {
+    let rowHtml = '<tr>';
+    p.vars.forEach(v => {
+      rowHtml += `<td class="input-cell-var">${r.inputs[v] ? 'T' : 'F'}</td>`;
+    });
+
+    r.stepResults.forEach((val, idx) => {
+      const isFinal = idx === r.stepResults.length - 1;
+      const color = val ? 'var(--accent-emerald)' : 'var(--accent-rose)';
+      rowHtml += `
+        <td style="font-family:var(--font-mono);font-weight:${isFinal ? '800' : '600'};color:${color};background:${isFinal ? 'var(--bg-surface)' : 'transparent'}">
+          ${val ? 'T' : 'F'}
+        </td>
+      `;
+    });
+    rowHtml += '</tr>';
+    return rowHtml;
+  }).join('');
+
+  table.innerHTML = headerHtml + bodyHtml;
+
+  // Evaluate final column classification
+  const finalVals = rows.map(r => r.stepResults[r.stepResults.length - 1]);
+  const isTautology = finalVals.every(v => v === true);
+  const isContradiction = finalVals.every(v => v === false);
+
+  let badge = '';
+  if (isTautology) {
+    badge = '<span class="status-badge-box tautology">🟢 TAUTOLOGI (Selalu Benar)</span>';
+  } else if (isContradiction) {
+    badge = '<span class="status-badge-box contradiction">🔴 KONTRADIKSI (Selalu Salah)</span>';
+  } else {
+    badge = '<span class="status-badge-box contingent">🟡 CONTINGENT (Campuran T & F)</span>';
+  }
+  document.getElementById('keyClassificationBadge').innerHTML = badge;
+}
+
+function toggleAnswerKey() {
+  isKeyOpen = !isKeyOpen;
+  const drawer = document.getElementById('answerKeyDrawer');
+  const btn = document.getElementById('btnToggleKey');
+  const icon = document.getElementById('keyIcon');
+  const text = document.getElementById('keyBtnText');
+
+  if (isKeyOpen) {
+    drawer.style.display = 'block';
+    btn.classList.add('open');
+    icon.textContent = '🙈';
+    text.textContent = 'Tutup Kunci Jawaban';
+  } else {
+    drawer.style.display = 'none';
+    btn.classList.remove('open');
+    icon.textContent = '👁️';
+    text.textContent = 'Buka Kunci Jawaban & Pembahasan Lengkap';
+  }
+}
+
+// ==========================================
+// 2. TRUTH TABLE DRILL ENGINE
 // ==========================================
 let currentDrillIdx = 0;
 let drillUserAnswers = {};
@@ -2337,7 +2163,7 @@ function resetCurrentDrill() {
 }
 
 // ==========================================
-// 2. PARSE TREE STUDIO
+// 3. PARSE TREE STUDIO
 // ==========================================
 const TREE_DATA = [
   {
@@ -2463,7 +2289,7 @@ function loadTree(idx) {
 }
 
 // ==========================================
-// 3. FLASHCARDS ENGINE
+// 4. FLASHCARDS ENGINE
 // ==========================================
 let currentFcIdx = 0;
 let masteredCards = new Set();
@@ -2503,7 +2329,6 @@ function markMastered() {
   nextFlashcard();
 }
 
-// Keyboard spacebar to flip
 document.addEventListener('keydown', (e) => {
   if (e.code === 'Space' && document.getElementById('tab-flashcards').classList.contains('active')) {
     e.preventDefault();
@@ -2512,7 +2337,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ==========================================
-// 4. UTS EXAM ARENA ENGINE (24 QUESTIONS)
+// 5. UTS EXAM ARENA ENGINE (24 QUESTIONS)
 // ==========================================
 let activeQuestions = [...QUIZ_DATA];
 let currentQIdx = 0;
@@ -2642,133 +2467,12 @@ function jumpToQ(idx) {
 }
 
 // ==========================================
-// 5. BULLETPROOF PROPOSITIONAL LOGIC PARSER (SANDBOX)
+// 6. LOGIC SANDBOX
 // ==========================================
 function insertKey(k) {
   const input = document.getElementById('sandboxExprInput');
   input.value += k;
   input.focus();
-}
-
-function parseAndEvalLogic(expr, vars) {
-  const s = expr.trim();
-  const tokens = [];
-  let i = 0;
-
-  while (i < s.length) {
-    const ch = s[i];
-    if (/\s/.test(ch)) {
-      i++;
-      continue;
-    }
-    if (ch === '(' || ch === ')') {
-      tokens.push(ch);
-      i++;
-    } else if (ch === '¬' || ch === '~' || ch === '!') {
-      tokens.push('NOT');
-      i++;
-    } else if (ch === '∧' || ch === '&') {
-      tokens.push('AND');
-      i++;
-    } else if (ch === '∨' || ch === '|') {
-      tokens.push('OR');
-      i++;
-    } else if (s.slice(i, i + 3) === '<->' || s.slice(i, i + 3) === '<=>' || ch === '↔') {
-      tokens.push('IFF');
-      i += (ch === '↔' ? 1 : 3);
-    } else if (s.slice(i, i + 2) === '->' || s.slice(i, i + 2) === '=>' || ch === '→') {
-      tokens.push('IMP');
-      i += (ch === '→' ? 1 : 2);
-    } else if (/[a-zA-Z]/.test(ch)) {
-      tokens.push(ch.toLowerCase());
-      i++;
-    } else {
-      i++;
-    }
-  }
-
-  let pos = 0;
-
-  function parseIff() {
-    let left = parseImp();
-    while (pos < tokens.length && tokens[pos] === 'IFF') {
-      pos++;
-      let right = parseImp();
-      left = (left === right);
-    }
-    return left;
-  }
-
-  function parseImp() {
-    let left = parseOr();
-    if (pos < tokens.length && tokens[pos] === 'IMP') {
-      pos++;
-      let right = parseImp();
-      left = (!left || right);
-    }
-    return left;
-  }
-
-  function parseOr() {
-    let left = parseAnd();
-    while (pos < tokens.length && tokens[pos] === 'OR') {
-      pos++;
-      let right = parseAnd();
-      left = (left || right);
-    }
-    return left;
-  }
-
-  function parseAnd() {
-    let left = parseNot();
-    while (pos < tokens.length && tokens[pos] === 'AND') {
-      pos++;
-      let right = parseNot();
-      left = (left && right);
-    }
-    return left;
-  }
-
-  function parseNot() {
-    if (pos < tokens.length && tokens[pos] === 'NOT') {
-      pos++;
-      return !parseNot();
-    }
-    return parsePrimary();
-  }
-
-  function parsePrimary() {
-    if (pos >= tokens.length) throw new Error('Format formula belum lengkap.');
-    const t = tokens[pos];
-    if (t === '(') {
-      pos++;
-      const val = parseIff();
-      if (pos >= tokens.length || tokens[pos] !== ')') {
-        throw new Error('Kurung tutup ) tidak ditemukan.');
-      }
-      pos++;
-      return val;
-    }
-    if (t in vars) {
-      pos++;
-      return !!vars[t];
-    }
-    if (t === 'true' || t === 't' || t === '1') {
-      pos++;
-      return true;
-    }
-    if (t === 'false' || t === 'f' || t === '0') {
-      pos++;
-      return false;
-    }
-    throw new Error('Simbol tidak dikenali: ' + t);
-  }
-
-  const result = parseIff();
-  if (pos < tokens.length) {
-    throw new Error('Kelebihan simbol setelah formula: ' + tokens[pos]);
-  }
-  return result;
 }
 
 function generateSandboxTable() {
@@ -2865,6 +2569,7 @@ function generateSandboxTable() {
 
 // Initializations
 window.addEventListener('DOMContentLoaded', () => {
+  initProblemGenerator();
   initDrills();
   loadTree(0);
   initFlashcards();
