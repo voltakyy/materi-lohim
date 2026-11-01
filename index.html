@@ -1344,6 +1344,56 @@ body {
           </select>
         </div>
 
+        <!-- Custom Formula Input for Truth Table (Sama Seperti Parse Tree) -->
+        <div style="margin: 14px 0 16px; border-top: 1px solid var(--border-color); padding-top: 14px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:6px;">
+            <label style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;">
+              Atau Buat Soal dari Formula Kustom Sendiri:
+            </label>
+            <span style="font-size:11.5px;color:var(--text-subtle);">Mendukung semua variabel & perangkai bebas</span>
+          </div>
+          <div class="sandbox-input-row">
+            <input type="text" id="customProblemInput" class="sandbox-input" value="(p → q) ∧ (q → r)" placeholder="Ketik formula misal: (p ∧ q) → (r ∨ s)" onkeyup="if(event.key==='Enter') generateCustomProblem()">
+            <button class="btn-primary btn-generate" onclick="generateCustomProblem()">⚡ Buat Tabel Kustom</button>
+          </div>
+
+          <!-- 5-Column Responsive Keypad for Custom Truth Table Problem -->
+          <div class="virtual-keys-grid" style="margin-top:8px;">
+            <button class="v-key" onclick="insertGenKey('¬')">
+              <span class="v-key-symbol">¬</span>
+              <span class="v-key-sub">NOT</span>
+            </button>
+            <button class="v-key" onclick="insertGenKey(' ∧ ')">
+              <span class="v-key-symbol">∧</span>
+              <span class="v-key-sub">AND</span>
+            </button>
+            <button class="v-key" onclick="insertGenKey(' ∨ ')">
+              <span class="v-key-symbol">∨</span>
+              <span class="v-key-sub">OR</span>
+            </button>
+            <button class="v-key" onclick="insertGenKey(' → ')">
+              <span class="v-key-symbol">→</span>
+              <span class="v-key-sub">IMP</span>
+            </button>
+            <button class="v-key" onclick="insertGenKey(' ↔ ')">
+              <span class="v-key-symbol">↔</span>
+              <span class="v-key-sub">IFF</span>
+            </button>
+            <button class="v-key" onclick="insertGenKey('(')"><span class="v-key-symbol">(</span><span class="v-key-sub">Open</span></button>
+            <button class="v-key" onclick="insertGenKey(')')"><span class="v-key-symbol">)</span><span class="v-key-sub">Close</span></button>
+            <button class="v-key" onclick="insertGenKey('p')"><span class="v-key-symbol">p</span><span class="v-key-sub">Var</span></button>
+            <button class="v-key" onclick="insertGenKey('q')"><span class="v-key-symbol">q</span><span class="v-key-sub">Var</span></button>
+            <button class="v-key" onclick="insertGenKey('r')"><span class="v-key-symbol">r</span><span class="v-key-sub">Var</span></button>
+            <button class="v-key" onclick="insertGenKey('s')"><span class="v-key-symbol">s</span><span class="v-key-sub">Var</span></button>
+            <button class="v-key" onclick="insertGenKey('t')"><span class="v-key-symbol">t</span><span class="v-key-sub">Var</span></button>
+            <button class="v-key" onclick="insertGenKey('u')"><span class="v-key-symbol">u</span><span class="v-key-sub">Var</span></button>
+            <button class="v-key" onclick="backspaceGenKey()"><span class="v-key-symbol">⌫</span><span class="v-key-sub">DEL</span></button>
+            <button class="v-key" onclick="clearGenKey()"><span class="v-key-symbol">🗑️</span><span class="v-key-sub">Clear</span></button>
+          </div>
+
+          <div id="customProblemError" style="display:none;margin-top:10px;" class="drill-feedback-box error"></div>
+        </div>
+
         <!-- Soal Box -->
         <div class="gen-target-box">
           <div>
@@ -1927,6 +1977,120 @@ let currentGenRows = [];
 let userPracticeAnswers = {}; // key: "r-c" -> "T"|"F"
 let isKeyOpen = false;
 
+function insertGenKey(k) {
+  const input = document.getElementById('customProblemInput');
+  const start = input.selectionStart || input.value.length;
+  const end = input.selectionEnd || input.value.length;
+  input.value = input.value.substring(0, start) + k + input.value.substring(end);
+  input.selectionStart = input.selectionEnd = start + k.length;
+  input.focus();
+}
+
+function backspaceGenKey() {
+  const input = document.getElementById('customProblemInput');
+  const start = input.selectionStart || input.value.length;
+  const end = input.selectionEnd || input.value.length;
+  if (start === end && start > 0) {
+    input.value = input.value.substring(0, start - 1) + input.value.substring(end);
+    input.selectionStart = input.selectionEnd = start - 1;
+  } else if (start !== end) {
+    input.value = input.value.substring(0, start) + input.value.substring(end);
+    input.selectionStart = input.selectionEnd = start;
+  }
+  input.focus();
+}
+
+function clearGenKey() {
+  const input = document.getElementById('customProblemInput');
+  input.value = '';
+  input.focus();
+}
+
+function extractTableStepsFromAST(ast, rawFormula) {
+  const steps = [];
+  const seen = new Set();
+
+  function walk(node) {
+    if (!node || node.type === 'var') return;
+    if (node.left) walk(node.left);
+    if (node.right) walk(node.right);
+    const str = astToExpr(node);
+    if (!seen.has(str)) {
+      seen.add(str);
+      steps.push(str);
+    }
+  }
+
+  walk(ast);
+
+  let finalSteps = steps;
+  if (finalSteps.length > 5) {
+    finalSteps = [
+      finalSteps[0],
+      finalSteps[1],
+      finalSteps[Math.floor(finalSteps.length / 2)],
+      finalSteps[finalSteps.length - 2],
+      finalSteps[finalSteps.length - 1]
+    ];
+  }
+
+  if (!finalSteps.includes(rawFormula) && finalSteps.length > 0) {
+    finalSteps[finalSteps.length - 1] = rawFormula;
+  }
+
+  return Array.from(new Set(finalSteps));
+}
+
+function generateCustomProblem() {
+  const inputEl = document.getElementById('customProblemInput');
+  const formula = inputEl.value.trim();
+  const errBox = document.getElementById('customProblemError');
+
+  if (!formula) {
+    errBox.style.display = 'block';
+    errBox.innerHTML = '<strong>⚠️ Perhatian:</strong> Masukkan formula logika terlebih dahulu.';
+    return;
+  }
+
+  try {
+    const vars = extractVariablesFromExpr(formula);
+    if (vars.length === 0) {
+      throw new Error('Gunakan minimal 1 variabel proposisi (misal: p, q, r, s, t, u).');
+    }
+    if (vars.length > 5) {
+      throw new Error('Variabel terlalu banyak (' + vars.length + ' variabel = ' + Math.pow(2, vars.length) + ' baris). Untuk lembar latihan tabel interaktif, disarankan maksimal 4 variabel (16 baris).');
+    }
+
+    const ast = parseTreeAST(formula);
+    const steps = extractTableStepsFromAST(ast, formula);
+
+    errBox.style.display = 'none';
+
+    currentProblem = {
+      id: 'custom_' + Date.now(),
+      vars: vars,
+      formula: formula,
+      steps: steps,
+      notes: 'Formula Kustom Pengguna: Selesaikan langkah sub-ekspresi kolom dari kiri ke kanan sebelum menentukan nilai kebenaran kolom akhir.'
+    };
+
+    userPracticeAnswers = {};
+    isKeyOpen = false;
+    document.getElementById('answerKeyDrawer').style.display = 'none';
+    document.getElementById('btnToggleKey').classList.remove('open');
+    document.getElementById('keyIcon').textContent = '👁️';
+    document.getElementById('keyBtnText').textContent = 'Buka Kunci Jawaban & Pembahasan Lengkap';
+    document.getElementById('genPracticeFeedback').style.display = 'none';
+
+    renderCurrentProblemUI();
+
+    document.getElementById('genFormulaDisplay').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  } catch (err) {
+    errBox.style.display = 'block';
+    errBox.innerHTML = '<strong>⚠️ Format Formula Tidak Valid:</strong> ' + err.message + '<br><span style="font-size:11.5px;color:var(--text-muted);">Gunakan perangkai: ¬ (NOT), ∧ (AND), ∨ (OR), → (IF), ↔ (IFF) dan variabel huruf bebas (p, q, r, s, t, u, dll.). Pastikan tanda kurung seimbang.</span>';
+  }
+}
+
 function initProblemGenerator() {
   randomNewProblem();
 }
@@ -1947,6 +2111,9 @@ function randomNewProblem() {
   }
   currentProblem = next;
   userPracticeAnswers = {};
+  if (document.getElementById('customProblemInput')) {
+    document.getElementById('customProblemInput').value = next.formula;
+  }
 
   // Close key drawer on new problem
   isKeyOpen = false;
