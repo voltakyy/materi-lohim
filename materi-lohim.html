@@ -115,7 +115,7 @@ body {
   font-family: var(--font-sans);
   background-color: var(--bg-page);
   color: var(--text-body);
-  line-height: 1.6;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
   display: flex;
@@ -138,32 +138,32 @@ body {
 .header-inner {
   max-width: 1300px;
   margin: 0 auto;
-  padding: 12px 20px;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
 }
 
 .header-brand-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
 }
 
 .brand-group {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   cursor: pointer;
   text-decoration: none;
 }
 
 .brand-badge {
-  width: 38px;
-  height: 38px;
-  border-radius: var(--radius-md);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
   background: linear-gradient(135deg, #6366f1, #06b6d4);
   display: flex;
   align-items: center;
@@ -171,13 +171,13 @@ body {
   color: #fff;
   font-weight: 800;
   font-family: var(--font-heading);
-  font-size: 18px;
+  font-size: 17px;
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
   flex-shrink: 0;
 }
 
 .brand-info h1 {
-  font-size: 16px;
+  font-size: 15px;
   font-family: var(--font-heading);
   font-weight: 700;
   color: var(--text-main);
@@ -186,7 +186,7 @@ body {
 }
 
 .brand-info p {
-  font-size: 11.5px;
+  font-size: 11px;
   color: var(--text-muted);
   white-space: nowrap;
 }
@@ -204,9 +204,9 @@ body {
 .nav-tabs {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   background: var(--bg-page);
-  padding: 4px;
+  padding: 3px;
   border-radius: var(--radius-full);
   border: 1px solid var(--border-color);
   overflow-x: auto;
@@ -227,20 +227,20 @@ body {
   border: none;
   color: var(--text-muted);
   font-family: var(--font-sans);
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
-  padding: 8px 16px;
+  padding: 7px 14px;
   border-radius: var(--radius-full);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   white-space: nowrap;
   transition: all 0.2s ease;
   flex-shrink: 0;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  min-height: 38px;
+  min-height: 36px;
 }
 
 .nav-tab-btn:hover {
@@ -257,7 +257,7 @@ body {
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   flex-shrink: 0;
 }
 
@@ -265,16 +265,16 @@ body {
   background: var(--bg-page);
   border: 1px solid var(--border-color);
   color: var(--text-muted);
-  width: 38px;
-  height: 38px;
-  border-radius: var(--radius-md);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s;
   flex-shrink: 0;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .theme-toggle-btn:hover {
@@ -288,12 +288,12 @@ body {
   max-width: 1300px;
   width: 100%;
   margin: 0 auto;
-  padding: 24px 20px 60px;
+  padding: 20px 16px 50px;
 }
 
 .tab-pane {
   display: none;
-  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .tab-pane.active {
@@ -301,54 +301,54 @@ body {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
+  from { opacity: 0; transform: translateY(4px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 /* =================== TAB 1: DIKTAT KULIAH =================== */
 .diktat-layout {
   display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 32px;
+  grid-template-columns: 260px 1fr;
+  gap: 24px;
   align-items: start;
 }
 
 .diktat-sidebar {
   position: sticky;
-  top: 90px;
+  top: 86px;
   background: var(--bg-surface);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 20px;
+  border-radius: var(--radius-md);
+  padding: 16px;
   box-shadow: var(--shadow-sm);
 }
 
 .sidebar-title {
   font-family: var(--font-heading);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--text-subtle);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .toc-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 
 .toc-link {
   display: block;
-  padding: 8px 12px;
+  padding: 7px 10px;
   border-radius: var(--radius-sm);
   color: var(--text-muted);
-  font-size: 13.5px;
+  font-size: 13px;
   text-decoration: none;
   transition: all 0.2s;
   border-left: 2px solid transparent;
@@ -364,17 +364,17 @@ body {
 .diktat-body {
   display: flex;
   flex-direction: column;
-  gap: 36px;
+  gap: 28px;
   min-width: 0;
 }
 
 .article-card {
   background: var(--bg-surface-card);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 32px;
+  border-radius: var(--radius-md);
+  padding: 24px 20px;
   box-shadow: var(--shadow-sm);
-  scroll-margin-top: 100px;
+  scroll-margin-top: 90px;
   overflow-wrap: break-word;
   word-break: break-word;
 }
@@ -382,48 +382,54 @@ body {
 .article-card h1, .article-card h2 {
   font-family: var(--font-heading);
   color: var(--text-main);
-  letter-spacing: -0.02em;
-  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+  margin-bottom: 12px;
+}
+
+.article-card h1 {
+  font-size: 22px;
 }
 
 .article-card h2 {
-  font-size: 24px;
+  font-size: 18px;
   border-bottom: 1px solid var(--border-color);
-  padding-bottom: 12px;
-  margin-top: 24px;
+  padding-bottom: 8px;
+  margin-top: 20px;
 }
 
 .article-card h3 {
   font-family: var(--font-heading);
-  font-size: 18px;
+  font-size: 16px;
   color: var(--primary);
-  margin: 24px 0 12px;
+  margin: 18px 0 10px;
 }
 
 .article-card h4 {
   font-family: var(--font-sans);
-  font-size: 15px;
+  font-size: 14px;
   color: var(--text-main);
-  margin: 16px 0 8px;
+  margin: 14px 0 6px;
 }
 
 .article-card p {
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   color: var(--text-body);
+  font-size: 14px;
 }
 
 .article-card ul, .article-card ol {
-  margin: 0 0 18px 24px;
+  margin: 0 0 16px 20px;
 }
 
 .article-card li {
-  margin-bottom: 6px;
+  margin-bottom: 5px;
+  font-size: 14px;
 }
 
 .article-card code {
   font-family: var(--font-mono);
   background: var(--bg-surface-elevated);
-  padding: 2px 6px;
+  padding: 2px 5px;
   border-radius: 4px;
   color: var(--accent-cyan);
   font-size: 0.9em;
@@ -431,34 +437,41 @@ body {
   overflow-wrap: break-word;
 }
 
+/* =================== TABLE OVERFLOW SOLUTION =================== */
 .table-scroll-wrap {
   width: 100%;
+  max-width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  margin: 20px 0;
-  border-radius: var(--radius-md);
+  margin: 14px 0;
+  border-radius: var(--radius-sm);
   border: 1px solid var(--border-color);
+  background: var(--bg-surface);
 }
 
-.article-card table {
+.article-card table, .academic-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 500px;
+  font-size: 13px;
 }
 
-.article-card th, .article-card td {
-  padding: 12px 16px;
+.article-card th, .academic-table th {
+  background: var(--bg-surface-elevated);
+  color: var(--text-main);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 10px 12px;
   text-align: left;
   border-bottom: 1px solid var(--border-color);
 }
 
-.article-card th {
-  background: var(--bg-surface-elevated);
-  color: var(--text-main);
-  font-weight: 600;
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+.article-card td, .academic-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-body);
 }
 
 .article-card tr:hover td {
@@ -467,10 +480,11 @@ body {
 
 /* Callout Box styling */
 .callout {
-  padding: 16px 20px;
-  border-radius: var(--radius-md);
-  margin: 20px 0;
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  margin: 16px 0;
   border-left: 4px solid;
+  font-size: 13.5px;
 }
 
 .callout-info {
@@ -495,31 +509,31 @@ body {
 .drill-container {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
 .section-hero {
   background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(6, 182, 212, 0.08));
   border: 1px solid var(--primary-border);
-  border-radius: var(--radius-lg);
-  padding: 24px;
+  border-radius: var(--radius-md);
+  padding: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 14px;
 }
 
 .hero-text h2 {
   font-family: var(--font-heading);
-  font-size: 22px;
+  font-size: 20px;
   color: var(--text-main);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .hero-text p {
   color: var(--text-muted);
-  font-size: 14px;
+  font-size: 13.5px;
 }
 
 .drill-selector {
@@ -535,9 +549,9 @@ body {
   background: var(--bg-surface);
   border: 1px solid var(--border-color);
   color: var(--text-body);
-  padding: 8px 14px;
+  padding: 7px 12px;
   border-radius: var(--radius-sm);
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
@@ -554,8 +568,8 @@ body {
 .drill-card {
   background: var(--bg-surface-card);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 28px;
+  border-radius: var(--radius-md);
+  padding: 20px;
   box-shadow: var(--shadow-sm);
 }
 
@@ -563,18 +577,18 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 18px;
+  padding: 12px 16px;
   background: var(--bg-surface-elevated);
-  border-radius: var(--radius-md);
-  margin-bottom: 20px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
   border: 1px solid var(--border-color);
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
 }
 
 .formula-display {
   font-family: var(--font-mono);
-  font-size: 18px;
+  font-size: 17px;
   color: var(--text-main);
   font-weight: 700;
 }
@@ -582,11 +596,10 @@ body {
 .drill-matrix-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 480px;
 }
 
 .drill-matrix-table th, .drill-matrix-table td {
-  padding: 12px 14px;
+  padding: 10px 12px;
   text-align: center;
   border: 1px solid var(--border-color);
 }
@@ -594,7 +607,7 @@ body {
 .drill-matrix-table th {
   background: var(--bg-surface-elevated);
   font-family: var(--font-mono);
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-main);
 }
 
@@ -612,13 +625,13 @@ body {
   color: var(--text-muted);
   font-family: var(--font-mono);
   font-weight: 700;
-  font-size: 15px;
-  padding: 6px 16px;
+  font-size: 14px;
+  padding: 5px 14px;
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all 0.15s;
-  min-width: 52px;
-  min-height: 38px;
+  min-width: 48px;
+  min-height: 36px;
 }
 
 .toggle-cell-btn.val-T {
@@ -635,7 +648,7 @@ body {
 
 .toggle-cell-btn.is-correct {
   outline: 2px solid var(--accent-emerald);
-  box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
 }
 
 .toggle-cell-btn.is-wrong {
@@ -653,7 +666,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
@@ -662,18 +675,18 @@ body {
   color: #fff;
   border: none;
   font-family: var(--font-sans);
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 600;
-  padding: 10px 20px;
-  border-radius: var(--radius-md);
+  padding: 9px 18px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   transition: all 0.2s;
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
-  min-height: 44px;
+  min-height: 42px;
 }
 
 .btn-primary:hover {
@@ -685,13 +698,13 @@ body {
   background: var(--bg-surface-elevated);
   border: 1px solid var(--border-color);
   color: var(--text-body);
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 600;
-  padding: 10px 18px;
-  border-radius: var(--radius-md);
+  padding: 9px 16px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all 0.2s;
-  min-height: 44px;
+  min-height: 42px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -703,9 +716,9 @@ body {
 }
 
 .drill-feedback-box {
-  margin-top: 20px;
-  padding: 16px 20px;
-  border-radius: var(--radius-md);
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
   display: none;
 }
 
@@ -713,14 +726,14 @@ body {
 .tree-container {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
 .tree-card {
   background: var(--bg-surface-card);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 28px;
+  border-radius: var(--radius-md);
+  padding: 24px;
   text-align: center;
 }
 
@@ -729,15 +742,15 @@ body {
   max-width: 650px;
   height: auto;
   aspect-ratio: 600 / 320;
-  margin: 16px auto;
+  margin: 14px auto;
   display: block;
 }
 
 .tree-legend {
   display: flex;
   justify-content: center;
-  gap: 16px;
-  margin-top: 16px;
+  gap: 14px;
+  margin-top: 14px;
   font-size: 12px;
   color: var(--text-muted);
   flex-wrap: wrap;
@@ -750,8 +763,8 @@ body {
 }
 
 .legend-dot {
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -762,7 +775,7 @@ body {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
   width: 100%;
 }
 
@@ -770,7 +783,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 18px;
+  padding: 8px 16px;
   background: var(--bg-surface);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-full);
@@ -778,7 +791,7 @@ body {
 
 .flashcard-3d-wrapper {
   perspective: 1000px;
-  min-height: 360px;
+  min-height: 320px;
   cursor: pointer;
   width: 100%;
 }
@@ -787,11 +800,11 @@ body {
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 360px;
+  min-height: 320px;
   text-align: center;
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   transform-style: preserve-3d;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
 }
 
 .flashcard-inner.flipped {
@@ -802,11 +815,11 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
-  min-height: 360px;
+  min-height: 320px;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  border-radius: var(--radius-lg);
-  padding: 32px 24px;
+  border-radius: var(--radius-md);
+  padding: 28px 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -832,21 +845,21 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--primary);
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .fc-question {
   font-family: var(--font-heading);
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
   color: var(--text-main);
   line-height: 1.4;
 }
 
 .fc-answer {
-  font-size: 14px;
+  font-size: 13.5px;
   color: var(--text-body);
-  line-height: 1.6;
+  line-height: 1.55;
   text-align: left;
 }
 
@@ -854,7 +867,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
@@ -862,7 +875,7 @@ body {
 .arena-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
 .arena-topbar {
@@ -871,15 +884,15 @@ body {
   align-items: center;
   background: var(--bg-surface);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
   flex-wrap: wrap;
-  gap: 14px;
+  gap: 12px;
 }
 
 .arena-stats {
   display: flex;
-  gap: 18px;
+  gap: 16px;
 }
 
 .stat-chip {
@@ -888,7 +901,7 @@ body {
 }
 
 .stat-label {
-  font-size: 11px;
+  font-size: 10.5px;
   text-transform: uppercase;
   color: var(--text-subtle);
   font-weight: 600;
@@ -896,7 +909,7 @@ body {
 
 .stat-val {
   font-family: var(--font-mono);
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
   color: var(--text-main);
 }
@@ -904,8 +917,8 @@ body {
 .arena-question-card {
   background: var(--bg-surface-card);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 28px;
+  border-radius: var(--radius-md);
+  padding: 22px 18px;
   box-shadow: var(--shadow-sm);
 }
 
@@ -913,49 +926,49 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
 }
 
 .q-pert-pill {
   background: var(--primary-light);
   color: var(--primary);
-  padding: 4px 12px;
+  padding: 3px 10px;
   border-radius: var(--radius-full);
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 700;
 }
 
 .q-text {
   font-family: var(--font-heading);
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--text-main);
   line-height: 1.5;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .q-options-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 10px;
+  gap: 8px;
 }
 
 .q-opt-btn {
   background: var(--bg-surface-elevated);
   border: 1px solid var(--border-color);
-  padding: 14px 18px;
-  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
   color: var(--text-body);
   text-align: left;
-  font-size: 14.5px;
+  font-size: 13.5px;
   cursor: pointer;
   transition: all 0.2s;
   display: flex;
   align-items: center;
-  gap: 12px;
-  min-height: 48px;
+  gap: 10px;
+  min-height: 44px;
 }
 
 .q-opt-btn:hover {
@@ -965,8 +978,8 @@ body {
 }
 
 .opt-letter {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   background: var(--bg-page);
   border: 1px solid var(--border-color);
@@ -974,7 +987,7 @@ body {
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 13px;
+  font-size: 12px;
   flex-shrink: 0;
 }
 
@@ -991,33 +1004,33 @@ body {
 }
 
 .q-explanation-drawer {
-  margin-top: 20px;
-  padding: 18px;
-  border-radius: var(--radius-md);
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: var(--radius-sm);
   background: var(--bg-surface-elevated);
   border: 1px solid var(--border-color);
   display: none;
-  font-size: 14px;
+  font-size: 13.5px;
 }
 
 .jump-bar {
   display: flex;
-  gap: 6px;
+  gap: 5px;
   flex-wrap: wrap;
-  margin-top: 20px;
-  padding-top: 16px;
+  margin-top: 18px;
+  padding-top: 14px;
   border-top: 1px solid var(--border-color);
 }
 
 .jump-btn {
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   border-radius: var(--radius-sm);
   background: var(--bg-surface-elevated);
   border: 1px solid var(--border-color);
   color: var(--text-muted);
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.15s;
@@ -1041,49 +1054,47 @@ body {
   border-color: var(--rose-border);
 }
 
-/* =================== TAB 6: LOGIC SANDBOX (OVERHAULED) =================== */
+/* =================== TAB 6: LOGIC SANDBOX =================== */
 .sandbox-card {
   background: var(--bg-surface-card);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 28px;
+  border-radius: var(--radius-md);
+  padding: 24px;
   width: 100%;
 }
 
 .sandbox-input-row {
   display: flex;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: 10px;
+  margin-bottom: 14px;
   width: 100%;
-  align-items: stretch;
 }
 
 .sandbox-input {
   flex: 1;
-  min-width: 0; /* Prevents overflow in flexbox! */
+  min-width: 0;
   background: var(--bg-surface-elevated);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
   color: var(--text-main);
   font-family: var(--font-mono);
-  font-size: 16px;
-  min-height: 48px;
+  font-size: 15px;
+  min-height: 44px;
 }
 
 .btn-generate {
   flex-shrink: 0;
   white-space: nowrap;
-  padding: 0 24px;
-  min-height: 48px;
+  padding: 0 20px;
+  min-height: 44px;
 }
 
-/* Crisp 5-Column Virtual Keypad */
 .virtual-keys-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 8px;
-  margin-bottom: 22px;
+  gap: 6px;
+  margin-bottom: 18px;
   width: 100%;
 }
 
@@ -1095,8 +1106,8 @@ body {
   background: var(--bg-surface-elevated);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
-  padding: 8px 4px;
-  min-height: 50px;
+  padding: 6px 2px;
+  min-height: 46px;
   cursor: pointer;
   transition: all 0.15s;
   user-select: none;
@@ -1115,36 +1126,35 @@ body {
 
 .v-key-symbol {
   font-family: var(--font-mono);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--text-main);
 }
 
 .v-key-sub {
-  font-size: 9.5px;
+  font-size: 8.5px;
   font-weight: 600;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  margin-top: 2px;
+  letter-spacing: 0.03em;
+  margin-top: 1px;
 }
 
-/* Classification Result Card (Clean Rect, No Balloon Distortion!) */
 .classification-banner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  padding: 14px 18px;
-  border-radius: var(--radius-md);
-  margin: 20px 0 16px;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  margin: 16px 0 12px;
   border: 1px solid var(--border-color);
   background: var(--bg-surface-elevated);
   flex-wrap: wrap;
 }
 
 .classification-label {
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--text-muted);
 }
@@ -1152,13 +1162,12 @@ body {
 .status-badge-box {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 13px;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12.5px;
   font-weight: 700;
   letter-spacing: 0.02em;
-  line-height: 1.3;
 }
 
 .status-badge-box.tautology {
@@ -1180,14 +1189,18 @@ body {
 }
 
 /* ==========================================================================
-   MOBILE RESPONSIVE OVERHAUL (< 900px)
+   MOBILE RESPONSIVE OVERHAUL (< 768px) - NO HORIZONTAL OVERFLOW & COMPACT TEXT
    ========================================================================== */
-@media (max-width: 900px) {
+@media (max-width: 768px) {
+  body {
+    font-size: 13px;
+  }
+
   .header-inner {
     flex-direction: column;
     align-items: stretch;
-    padding: 10px 14px;
-    gap: 10px;
+    padding: 8px 12px;
+    gap: 8px;
   }
 
   .header-brand-row {
@@ -1198,7 +1211,7 @@ body {
   }
 
   .brand-info p {
-    display: none; /* Hide long subtitle on mobile */
+    display: none;
   }
 
   .nav-scroll-container {
@@ -1207,23 +1220,23 @@ body {
   }
 
   .nav-tabs {
-    padding: 3px;
-    gap: 4px;
+    padding: 2px;
+    gap: 3px;
   }
 
   .nav-tab-btn {
-    font-size: 12.5px;
-    padding: 7px 13px;
-    min-height: 38px;
+    font-size: 12px;
+    padding: 6px 11px;
+    min-height: 34px;
   }
 
   .main-content {
-    padding: 16px 12px 60px;
+    padding: 10px 8px 40px !important;
   }
 
   .diktat-layout {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 14px;
   }
 
   .diktat-sidebar {
@@ -1231,88 +1244,138 @@ body {
   }
 
   .article-card {
-    padding: 20px 14px;
-    border-radius: var(--radius-md);
+    padding: 14px 10px !important;
+    border-radius: var(--radius-sm) !important;
   }
 
-  .article-card h2 {
-    font-size: 20px;
+  .article-card h1 { font-size: 18px !important; }
+  .article-card h2 { font-size: 15.5px !important; padding-bottom: 5px !important; margin-top: 14px !important; }
+  .article-card h3 { font-size: 14px !important; margin: 12px 0 6px !important; }
+  .article-card h4 { font-size: 13px !important; margin: 10px 0 4px !important; }
+  .article-card p, .article-card li { font-size: 12.5px !important; line-height: 1.5 !important; }
+  .article-card ul, .article-card ol { margin: 0 0 10px 16px !important; }
+
+  /* COMPACT TABLES - FIT ON MOBILE WITHOUT NEEDING HORIZONTAL SCROLL */
+  .table-scroll-wrap {
+    margin: 8px 0 !important;
+    border-radius: 6px !important;
+    max-width: 100% !important;
   }
 
-  .article-card h3 {
-    font-size: 16px;
+  .article-card table, .academic-table {
+    min-width: 0 !important;
+    width: 100% !important;
+    font-size: 11px !important;
+    table-layout: auto !important;
+  }
+
+  .article-card th, .academic-table th {
+    padding: 6px 4px !important;
+    font-size: 10px !important;
+    letter-spacing: 0 !important;
+    word-break: break-word !important;
+    white-space: normal !important;
+    line-height: 1.2 !important;
+  }
+
+  .article-card td, .academic-table td {
+    padding: 6px 4px !important;
+    font-size: 11px !important;
+    line-height: 1.3 !important;
+    word-break: break-word !important;
+    white-space: normal !important;
   }
 
   .drill-card, .tree-card, .arena-question-card, .sandbox-card {
-    padding: 18px 14px;
-    border-radius: var(--radius-md);
+    padding: 14px 10px !important;
+    border-radius: var(--radius-sm) !important;
   }
 
   .formula-display {
-    font-size: 16px;
+    font-size: 15px !important;
   }
 
   .section-hero {
-    padding: 18px 14px;
+    padding: 14px 10px !important;
   }
 
   .hero-text h2 {
-    font-size: 18px;
+    font-size: 16px !important;
   }
 
   .flashcard-3d-wrapper, .flashcard-inner, .flashcard-front, .flashcard-back {
-    min-height: 380px;
+    min-height: 330px !important;
   }
 
   .fc-question {
-    font-size: 16px;
+    font-size: 15px !important;
   }
 
   .btn-primary, .btn-secondary {
-    width: 100%;
+    width: 100% !important;
   }
 
   .drill-actions, .fc-controls {
-    flex-direction: column;
-    width: 100%;
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  /* Matrix table in Drills and Sandbox */
+  .drill-matrix-table {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+  .drill-matrix-table th {
+    padding: 6px 3px !important;
+    font-size: 10.5px !important;
+  }
+  .drill-matrix-table td {
+    padding: 4px 2px !important;
+    font-size: 10.5px !important;
+  }
+  .toggle-cell-btn {
+    min-width: 34px !important;
+    min-height: 30px !important;
+    padding: 3px 5px !important;
+    font-size: 11px !important;
   }
 
   /* Sandbox Mobile Specific */
   .sandbox-input-row {
-    flex-direction: column;
-    gap: 10px;
+    flex-direction: column !important;
+    gap: 8px !important;
   }
 
   .btn-generate {
-    width: 100%;
+    width: 100% !important;
   }
 
   .virtual-keys-grid {
-    gap: 6px;
+    gap: 5px !important;
   }
 
   .v-key {
-    min-height: 46px;
-    padding: 6px 2px;
+    min-height: 42px !important;
+    padding: 4px 2px !important;
   }
 
   .v-key-symbol {
-    font-size: 15px;
+    font-size: 14px !important;
   }
 
   .v-key-sub {
-    font-size: 8.5px;
+    font-size: 8px !important;
   }
 
   .classification-banner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
   }
 
   .status-badge-box {
-    width: 100%;
-    justify-content: center;
+    width: 100% !important;
+    justify-content: center !important;
   }
 }
 </style>
@@ -1406,7 +1469,7 @@ body {
 
         <h4>Tabel Skala Konversi Nilai Akhir (Slide 5)</h4>
         <div class="table-wrap">
-          <table class="academic-table">
+          <div class="table-scroll-wrap"><table class="academic-table">
             <thead>
               <tr><th>Huruf</th><th>Angka</th><th>Rentang Nilai Akhir</th><th>Keterangan Predikat</th></tr>
             </thead>
@@ -1419,12 +1482,12 @@ body {
               <tr><td><strong>D</strong></td><td>1,0</td><td>35 &le; Nilai &lt; 50</td><td><span class="val-f">Kurang (Wajib Remidi)</span></td></tr>
               <tr><td><strong>E</strong></td><td>0,0</td><td>Nilai &lt; 35</td><td><span class="val-f">Gagal / Mengulang</span></td></tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
 
         <h4>Peta Silabus 14 Pertemuan Semester Gasal (Slide 6)</h4>
         <div class="table-wrap">
-          <table class="academic-table">
+          <div class="table-scroll-wrap"><table class="academic-table">
             <thead>
               <tr><th>Pertemuan</th><th>Topik Perkuliahan</th><th>Fokus Capaian Pembelajaran</th></tr>
             </thead>
@@ -1446,7 +1509,7 @@ body {
               <tr><td>P14</td><td>Review Materi &amp; Evaluasi</td><td>Pendalaman keseluruhan materi dan persiapan ujian akhir</td></tr>
               <tr style="background:#CCFBF1;font-weight:700"><td>UAS</td><td colspan="2">Ujian Akhir Semester (Materi Komprehensif)</td></tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
       
         </article>
@@ -1536,7 +1599,7 @@ body {
         </p>
 
         <div class="table-wrap">
-          <table class="academic-table">
+          <div class="table-scroll-wrap"><table class="academic-table">
             <thead>
               <tr><th>Bentuk Pernyataan Silogisme</th><th>Pola Formal</th><th>Contoh di Slide Dosen</th></tr>
             </thead>
@@ -1546,7 +1609,7 @@ body {
               <tr><td><strong>Partikular Positif</strong></td><td>Beberapa A adalah B</td><td>Beberapa dosen (A) adalah penulis buku (B).</td></tr>
               <tr><td><strong>Partikular Negatif</strong></td><td>Beberapa A adalah bukan B</td><td>Beberapa kendaraan (A) adalah bukan mobil (B).</td></tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
 
         <h3>4. Logika Modern &amp; Logika Banyak Nilai (Slide 27–32)</h3>
@@ -1569,7 +1632,7 @@ body {
 
         <h3>1. Analisis Contoh Slide 2.1 s.d. 2.4 (Slide 5–7)</h3>
         <div class="table-wrap">
-          <table class="academic-table">
+          <div class="table-scroll-wrap"><table class="academic-table">
             <thead>
               <tr><th>Kalimat di Slide</th><th>Status</th><th>Nilai</th><th>Alasan Ilmiah</th></tr>
             </thead>
@@ -1579,7 +1642,7 @@ body {
               <tr><td>"Bawakan saya secangkir kopi!" (Contoh 2.3)</td><td>Bukan Proposisi</td><td>—</td><td>Kalimat imperatif / perintah</td></tr>
               <tr><td>"Apakah hari ini ada kuliah?" (Contoh 2.4)</td><td>Bukan Proposisi</td><td>—</td><td>Kalimat tanya / interogatif</td></tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
 
         <h3>2. Proposisi Atomik vs Majemuk (Slide 8–14)</h3>
@@ -1625,7 +1688,7 @@ body {
 
         <h3>1. 5 Perangkai Logika Dasar (Slide 9–20)</h3>
         <div class="table-wrap">
-          <table class="academic-table">
+          <div class="table-scroll-wrap"><table class="academic-table">
             <thead>
               <tr><th>Perangkai</th><th>Simbol</th><th>Jenis</th><th>Aturan Nilai Kebenaran</th></tr>
             </thead>
@@ -1636,7 +1699,7 @@ body {
               <tr><td><strong>Jika... maka... / Implikasi</strong> (Slide 18)</td><td><code>→</code></td><td>Binary</td><td>Hanya bernilai F jika Anteseden = T dan Konsekuen = F (<code>T → F = F</code>).</td></tr>
               <tr><td><strong>Ekuivalensi / Biimplikasi</strong> (Slide 20)</td><td><code>↔</code></td><td>Binary</td><td>Bernilai T jika kedua operan bernilai SAMA (keduanya T atau keduanya F).</td></tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
 
         <div class="article-grid-2">
@@ -1670,7 +1733,7 @@ body {
         </p>
 
         <div class="table-wrap">
-          <table class="academic-table">
+          <div class="table-scroll-wrap"><table class="academic-table">
             <thead>
               <tr><th>A</th><th>B</th><th>¬A</th><th>¬B</th><th>A ∧ B</th><th>A ∨ B</th><th>A → B</th><th>A ↔ B</th></tr>
             </thead>
@@ -1680,12 +1743,12 @@ body {
               <tr><td>F</td><td>T</td><td>T</td><td>F</td><td><span class="val-f">F</span></td><td><span class="val-t">T</span></td><td><span class="val-t">T</span></td><td><span class="val-f">F</span></td></tr>
               <tr><td>F</td><td>F</td><td>T</td><td>T</td><td><span class="val-f">F</span></td><td><span class="val-f">F</span></td><td><span class="val-t">T</span></td><td><span class="val-t">T</span></td></tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
 
         <h3>3. Latihan Slide 24 &amp; Hukum Argumen Logika (Slide 25–26)</h3>
         <div class="table-wrap">
-          <table class="academic-table">
+          <div class="table-scroll-wrap"><table class="academic-table">
             <thead>
               <tr><th>Hukum Argumen Logika</th><th>Bentuk Formal Implikasi</th><th>Status Nilai</th></tr>
             </thead>
@@ -1695,7 +1758,7 @@ body {
               <tr><td><strong>Silogisme Disjungtif</strong> (Slide 26)</td><td><code>((A ∨ B) ∧ ¬A) → B</code></td><td><span class="val-t">Tautologi (Valid)</span></td></tr>
               <tr><td><strong>Silogisme Hipotetis</strong> (Slide 26)</td><td><code>((A → B) ∧ (B → C)) → (A → C)</code></td><td><span class="val-t">Tautologi (Valid)</span></td></tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
       
         </article>
@@ -1711,7 +1774,7 @@ body {
 
         <h3>1. Hierarki Urutan Operator Logika (Slide 20)</h3>
         <div class="table-wrap">
-          <table class="academic-table">
+          <div class="table-scroll-wrap"><table class="academic-table">
             <thead>
               <tr><th>Urutan Tingkat</th><th>Perangkai</th><th>Nama Operator</th><th>Sifat Evaluasi</th></tr>
             </thead>
@@ -1722,7 +1785,7 @@ body {
               <tr><td><strong>4</strong></td><td><code>→</code></td><td>Implikasi</td><td>Mengevaluasi hubungan sebelum ekuivalensi</td></tr>
               <tr><td><strong>5 (Terendah)</strong></td><td><code>↔</code></td><td>Ekuivalensi</td><td>Dievaluasi paling akhir sebagai pembagi utama</td></tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
 
         <h3>2. Fully Parentheses Expression (FPE) &amp; wff</h3>
@@ -1791,7 +1854,7 @@ body {
         <h3>3. Contoh 5.1 (Slide 6–7) — Tabel 3 Variabel (8 Baris T-First)</h3>
         <p>Ekspresi: <code>(A ∧ ¬B) → ¬C</code> ("Jika Anda ambil matkul Lohim dan tidak paham tautologi, maka Anda tidak lulus")</p>
         <div class="table-wrap">
-          <table class="academic-table">
+          <div class="table-scroll-wrap"><table class="academic-table">
             <thead>
               <tr><th>A</th><th>B</th><th>C</th><th>¬B</th><th>¬C</th><th>A ∧ ¬B</th><th style="background:#0F766E;color:#fff">(A ∧ ¬B) → ¬C</th></tr>
             </thead>
@@ -1805,13 +1868,13 @@ body {
               <tr><td>F</td><td>F</td><td>T</td><td>T</td><td>F</td><td>F</td><td><span class="val-t">T</span></td></tr>
               <tr><td>F</td><td>F</td><td>F</td><td>T</td><td>T</td><td>F</td><td><span class="val-t">T</span></td></tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
 
         <h3>4. Pembuktian Tautologi 3 Variabel — Contoh 5.5 (Slide 16–17)</h3>
         <p>Buktikan bahwa ekspresi <code>(A ∧ B) → (C ∨ (¬B → ¬C))</code> adalah Tautologi:</p>
         <div class="table-wrap">
-          <table class="academic-table">
+          <div class="table-scroll-wrap"><table class="academic-table">
             <thead>
               <tr><th>A</th><th>B</th><th>C</th><th>A ∧ B</th><th>¬B → ¬C</th><th>C ∨ (¬B → ¬C)</th><th class="cell-taut">Hasil Akhir</th></tr>
             </thead>
@@ -1825,7 +1888,7 @@ body {
               <tr><td>F</td><td>F</td><td>T</td><td>F</td><td>F</td><td>T</td><td class="cell-taut">T</td></tr>
               <tr><td>F</td><td>F</td><td>F</td><td>F</td><td>T</td><td>T</td><td class="cell-taut">T</td></tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
         <p style="font-size:13px;color:var(--teal-dark);font-weight:700">✓ Seluruh 8 baris bernilai T ⇒ Terbukti TAUTOLOGI (Sound Argument)</p>
 
@@ -1835,7 +1898,7 @@ body {
             <h4>Contoh 5.9: Kontradiksi (Slide 24)</h4>
             <p>Ekspresi: <code>((A ∨ B) ∧ ¬A) ∧ ¬B</code></p>
             <div class="table-wrap">
-              <table class="academic-table">
+              <div class="table-scroll-wrap"><table class="academic-table">
                 <thead>
                   <tr><th>A</th><th>B</th><th>A ∨ B</th><th>Hasil Akhir</th></tr>
                 </thead>
@@ -1845,7 +1908,7 @@ body {
                   <tr><td>F</td><td>T</td><td>T</td><td class="cell-pivot"><span class="val-f">F</span></td></tr>
                   <tr><td>F</td><td>F</td><td>F</td><td class="cell-pivot"><span class="val-f">F</span></td></tr>
                 </tbody>
-              </table>
+              </table></div>
             </div>
             <p style="font-size:12px;color:var(--rose);font-weight:700">✓ Seluruh baris bernilai F (KONTRADIKSI)</p>
           </div>
@@ -1854,7 +1917,7 @@ body {
             <h4>Contoh 5.10: Contingent (Slide 26)</h4>
             <p>Ekspresi: <code>((A ∧ B) → C) → A</code></p>
             <div class="table-wrap">
-              <table class="academic-table">
+              <div class="table-scroll-wrap"><table class="academic-table">
                 <thead>
                   <tr><th>Baris</th><th>Kombinasi</th><th>Hasil Akhir</th></tr>
                 </thead>
@@ -1862,7 +1925,7 @@ body {
                   <tr><td>1–4</td><td>A = T</td><td><span class="val-t">T, T, T, T</span></td></tr>
                   <tr><td>5–8</td><td>A = F</td><td><span class="val-f">F, F, F, F</span></td></tr>
                 </tbody>
-              </table>
+              </table></div>
             </div>
             <p style="font-size:12px;color:var(--gold-dark);font-weight:700">✓ Campuran 4 T dan 4 F (CONTINGENT)</p>
           </div>
@@ -1889,15 +1952,15 @@ body {
       <div class="drill-card">
         <div class="drill-formula-bar">
           <div>
-            <span style="font-size:12px;text-transform:uppercase;color:var(--text-muted);font-weight:700">Formula Logika Target:</span>
+            <span style="font-size:11.5px;text-transform:uppercase;color:var(--text-muted);font-weight:700">Formula Logika Target:</span>
             <div class="formula-display" id="drillFormulaText">p ∧ ¬q</div>
           </div>
           <button class="btn-secondary" onclick="toggleDrillHint()">💡 Buka Hint / Tips</button>
         </div>
 
-        <div id="drillHintBox" class="callout callout-info" style="display:none;margin-bottom:20px;"></div>
+        <div id="drillHintBox" class="callout callout-info" style="display:none;margin-bottom:16px;"></div>
 
-        <!-- Matrix Table -->
+        <!-- Matrix Table with Safe Scroll Wrap -->
         <div class="table-scroll-wrap">
           <table class="drill-matrix-table" id="drillMatrixTable">
             <!-- Rendered by JS -->
@@ -1934,8 +1997,8 @@ body {
       </div>
 
       <div class="tree-card">
-        <h3 id="treeTitle" style="color:var(--text-main);margin-bottom:12px;">Parse Tree: ((p ∧ q) ∨ ¬r) → (s ↔ t)</h3>
-        <p id="treeDesc" style="color:var(--text-muted);font-size:14px;max-width:700px;margin:0 auto 20px;">
+        <h3 id="treeTitle" style="color:var(--text-main);margin-bottom:10px;">Parse Tree: ((p ∧ q) ∨ ¬r) → (s ↔ t)</h3>
+        <p id="treeDesc" style="color:var(--text-muted);font-size:13px;max-width:700px;margin:0 auto 16px;">
           Operator Utama berada di <strong>Root (Akar)</strong> yaitu implikasi (→). Evaluasi dilakukan dari daun (leaves) ke atas.
         </p>
 
@@ -1955,10 +2018,10 @@ body {
   <div id="tab-flashcards" class="tab-pane">
     <div class="flashcards-container">
       <div class="fc-meta-bar">
-        <span style="font-size:13px;font-weight:600;color:var(--text-muted);">
+        <span style="font-size:12.5px;font-weight:600;color:var(--text-muted);">
           Kartu <span id="fcCurrentIdx">1</span> dari <span id="fcTotalCount">12</span>
         </span>
-        <span style="font-size:13px;font-weight:600;color:var(--accent-emerald);">
+        <span style="font-size:12.5px;font-weight:600;color:var(--accent-emerald);">
           Paham: <span id="fcMasteredCount">0</span>
         </span>
       </div>
@@ -1970,13 +2033,13 @@ body {
           <div class="flashcard-front">
             <span class="fc-tag" id="fcTag">P1: Konsep Dasar</span>
             <div class="fc-question" id="fcQuestion">Pertanyaan...</div>
-            <div style="font-size:12px;color:var(--text-subtle);margin-top:24px;">(Klik kartu untuk membalik)</div>
+            <div style="font-size:11.5px;color:var(--text-subtle);margin-top:20px;">(Klik kartu untuk membalik)</div>
           </div>
           <!-- Back -->
           <div class="flashcard-back">
             <span class="fc-tag">Penjelasan & Kunci Jawaban</span>
             <div class="fc-answer" id="fcAnswer">Jawaban...</div>
-            <div style="font-size:12px;color:var(--text-subtle);margin-top:24px;">(Klik kembali untuk menutup)</div>
+            <div style="font-size:11.5px;color:var(--text-subtle);margin-top:20px;">(Klik kembali untuk menutup)</div>
           </div>
         </div>
       </div>
@@ -2009,9 +2072,9 @@ body {
           </div>
         </div>
 
-        <div style="display:flex;gap:10px;align-items:center;">
-          <span style="font-size:13px;color:var(--text-muted);">Filter Topik:</span>
-          <select id="arenaFilterTopic" onchange="filterArenaQuestions()" class="btn-secondary" style="padding:6px 12px;font-size:13px;min-height:38px;">
+        <div style="display:flex;gap:8px;align-items:center;">
+          <span style="font-size:12px;color:var(--text-muted);">Filter:</span>
+          <select id="arenaFilterTopic" onchange="filterArenaQuestions()" class="btn-secondary" style="padding:4px 8px;font-size:12px;min-height:34px;">
             <option value="ALL">Semua Soal (24)</option>
             <option value="UTS">Khusus Bertanda UTS</option>
             <option value="P1">P1: Pengenalan Logika</option>
@@ -2026,7 +2089,7 @@ body {
       <div class="arena-question-card">
         <div class="q-badge-row">
           <span class="q-pert-pill" id="arenaQPill">P1 • Mudah</span>
-          <span style="font-size:13px;color:var(--text-subtle);" id="arenaQStatus">Pilih satu opsi jawaban</span>
+          <span style="font-size:12px;color:var(--text-subtle);" id="arenaQStatus">Pilih satu opsi jawaban</span>
         </div>
 
         <div class="q-text" id="arenaQText">Memuat pertanyaan...</div>
@@ -2038,7 +2101,7 @@ body {
         <!-- Explanation Drawer -->
         <div class="q-explanation-drawer" id="arenaExplanation"></div>
 
-        <div style="display:flex;justify-content:space-between;margin-top:20px;gap:12px;flex-wrap:wrap;">
+        <div style="display:flex;justify-content:space-between;margin-top:16px;gap:10px;flex-wrap:wrap;">
           <button class="btn-secondary" style="flex:1;" onclick="prevArenaQ()">⬅ Sebelumnya</button>
           <button class="btn-primary" style="flex:1;" onclick="nextArenaQ()">Berikutnya ➡</button>
         </div>
@@ -2049,13 +2112,13 @@ body {
     </div>
   </div>
 
-  <!-- ==================== TAB 6: LOGIC SANDBOX (OVERHAULED) ==================== -->
+  <!-- ==================== TAB 6: LOGIC SANDBOX ==================== -->
   <div id="tab-sandbox" class="tab-pane">
     <div class="sandbox-card">
-      <h2 style="font-family:var(--font-heading);font-size:20px;color:var(--text-main);margin-bottom:8px;">
+      <h2 style="font-family:var(--font-heading);font-size:19px;color:var(--text-main);margin-bottom:6px;">
         🧪 Dynamic Logic Truth Table Generator & Analyzer
       </h2>
-      <p style="color:var(--text-muted);font-size:14px;margin-bottom:18px;">
+      <p style="color:var(--text-muted);font-size:13px;margin-bottom:14px;">
         Ketik formula proposisional menggunakan variabel <code>p</code>, <code>q</code>, <code>r</code> dan perangkai logika untuk menghasilkan tabel kebenaran lengkap serta analisis Tautologi/Kontradiksi secara instan.
       </p>
 
@@ -2157,7 +2220,7 @@ if (savedTheme) {
 // 1. TRUTH TABLE DRILL ENGINE
 // ==========================================
 let currentDrillIdx = 0;
-let drillUserAnswers = {}; // key: "r-c" -> "T"|"F"
+let drillUserAnswers = {};
 
 function initDrills() {
   const bar = document.getElementById('drillSelectorBar');
@@ -2453,7 +2516,7 @@ document.addEventListener('keydown', (e) => {
 // ==========================================
 let activeQuestions = [...QUIZ_DATA];
 let currentQIdx = 0;
-let arenaUserAnswers = {}; // qId -> optIndex
+let arenaUserAnswers = {};
 let arenaScoreVal = 0;
 let arenaStreakVal = 0;
 
@@ -2640,7 +2703,7 @@ function parseAndEvalLogic(expr, vars) {
     let left = parseOr();
     if (pos < tokens.length && tokens[pos] === 'IMP') {
       pos++;
-      let right = parseImp(); // right-associative
+      let right = parseImp();
       left = (!left || right);
     }
     return left;
@@ -2718,7 +2781,6 @@ function generateSandboxTable() {
     return;
   }
 
-  // Detect variables used
   const varSet = new Set();
   const lower = expr.toLowerCase();
   ['p', 'q', 'r', 's'].forEach(v => {
@@ -2733,7 +2795,6 @@ function generateSandboxTable() {
     return;
   }
 
-  // Test parse with dummy values
   const dummy = {};
   vars.forEach(v => dummy[v] = true);
   try {
@@ -2743,7 +2804,6 @@ function generateSandboxTable() {
     return;
   }
 
-  // Generate rows in standard T-First order
   const totalRows = Math.pow(2, vars.length);
   const rows = [];
   let trueCount = 0;
@@ -2774,7 +2834,7 @@ function generateSandboxTable() {
   } else if (falseCount === totalRows) {
     statusBadge = '<div class="status-badge-box contradiction"><span>🔴</span> <span>KONTRADIKSI (Selalu Salah)</span></div>';
   } else {
-    statusBadge = '<div class="status-badge-box contingent"><span>🟡</span> <span>CONTINGENT / KONTINGENSI (Campuran T & F)</span></div>';
+    statusBadge = '<div class="status-badge-box contingent"><span>🟡</span> <span>CONTINGENT (Campuran T & F)</span></div>';
   }
 
   let tableHtml = `
