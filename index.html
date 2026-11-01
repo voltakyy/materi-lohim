@@ -1458,34 +1458,114 @@ body {
     </div>
   </div>
 
-  <!-- ==================== TAB 4: PARSE TREE STUDIO ==================== -->
+  <!-- ==================== TAB 4: PARSE TREE STUDIO (AST GENERATOR & RANDOMIZER) ==================== -->
   <div id="tab-tree" class="tab-pane">
     <div class="tree-container">
       <div class="section-hero">
         <div class="hero-text">
-          <h2>🌲 Visual Parse Tree Explorer (AST Hierarchy)</h2>
-          <p>Pahami dekomposisi sintaksis logika dari akar (operator utama) hingga ke daun variabel atomik secara bottom-up.</p>
-        </div>
-        <div class="drill-selector">
-          <button class="drill-btn active" onclick="loadTree(0)">Contoh 1: ((p ∧ q) ∨ ¬r) → (s ↔ t)</button>
-          <button class="drill-btn" onclick="loadTree(1)">Contoh 2: (p → q) ∧ (q → r)</button>
-          <button class="drill-btn" onclick="loadTree(2)">Contoh 3: ¬(p ∧ ¬q) ∨ r</button>
+          <h2>🌲 Parse Tree Studio (AST Generator & Randomizer)</h2>
+          <p>Visualisasikan dekomposisi hierarki pohon sintaksis (Abstract Syntax Tree) logika proposisional dari akar (operator utama) hingga daun atomik. Ketik rumus kustom Anda sendiri atau acak soal baru secara otomatis.</p>
         </div>
       </div>
 
-      <div class="tree-card">
-        <h3 id="treeTitle" style="color:var(--text-main);margin-bottom:10px;">Parse Tree: ((p ∧ q) ∨ ¬r) → (s ↔ t)</h3>
-        <p id="treeDesc" style="color:var(--text-muted);font-size:13px;max-width:700px;margin:0 auto 16px;">
-          Operator Utama berada di <strong>Root (Akar)</strong> yaitu implikasi (→). Evaluasi dilakukan dari daun (leaves) ke atas.
-        </p>
+      <!-- Controls & Input Card -->
+      <div class="tree-card" style="text-align:left;">
+        <!-- Top Action Bar -->
+        <div class="gen-controls-bar" style="margin-bottom:14px;">
+          <button class="btn-primary" onclick="randomParseTree()">
+            <span>🎲</span> Acak Parse Tree Baru
+          </button>
+          <select id="treeVarFilter" class="btn-secondary" onchange="randomParseTree()" style="min-height:42px;">
+            <option value="ALL">Semua Tingkat (2, 3, & 4+ Variabel)</option>
+            <option value="2">Sederhana (2 Variabel)</option>
+            <option value="3">Menengah (3 Variabel)</option>
+            <option value="COMPLEX">Kompleks / UTS (4+ Variabel)</option>
+          </select>
+        </div>
 
-        <!-- SVG Tree Container -->
-        <div id="treeSvgContainer"></div>
+        <!-- Preset Buttons -->
+        <div style="margin-bottom:12px;">
+          <span style="font-size:12px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:6px;">Contoh Cepat Soal:</span>
+          <div class="drill-selector" style="margin-bottom:0;">
+            <button class="drill-btn" onclick="setTreePreset(0)">UTS: ((p ∧ q) ∨ ¬r) → (s ↔ t)</button>
+            <button class="drill-btn" onclick="setTreePreset(1)">Silogisme: (p → q) ∧ (q → r)</button>
+            <button class="drill-btn" onclick="setTreePreset(2)">De Morgan: ¬(p ∧ q) ↔ (¬p ∨ ¬q)</button>
+            <button class="drill-btn" onclick="setTreePreset(3)">Resolusi: (p ∨ q) ∧ (¬p ∨ r) → (q ∨ r)</button>
+          </div>
+        </div>
+
+        <!-- Custom Formula Input Row -->
+        <div style="margin-top:14px;">
+          <label style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;display:block;margin-bottom:6px;">
+            Input Formula Proposisi Kustom:
+          </label>
+          <div class="sandbox-input-row">
+            <input type="text" id="customTreeInput" class="sandbox-input" value="((p ∧ q) ∨ ¬r) → (s ↔ t)" placeholder="Ketik formula misal: (p → q) ∧ (q → r)" onkeyup="if(event.key==='Enter') renderCustomTree()">
+            <button class="btn-primary btn-generate" onclick="renderCustomTree()">🌲 Render Tree</button>
+          </div>
+        </div>
+
+        <!-- 5-Column Responsive Keypad for Tree -->
+        <div class="virtual-keys-grid" style="margin-top:8px;">
+          <button class="v-key" onclick="insertTreeKey('¬')">
+            <span class="v-key-symbol">¬</span>
+            <span class="v-key-sub">NOT</span>
+          </button>
+          <button class="v-key" onclick="insertTreeKey(' ∧ ')">
+            <span class="v-key-symbol">∧</span>
+            <span class="v-key-sub">AND</span>
+          </button>
+          <button class="v-key" onclick="insertTreeKey(' ∨ ')">
+            <span class="v-key-symbol">∨</span>
+            <span class="v-key-sub">OR</span>
+          </button>
+          <button class="v-key" onclick="insertTreeKey(' → ')">
+            <span class="v-key-symbol">→</span>
+            <span class="v-key-sub">IMP</span>
+          </button>
+          <button class="v-key" onclick="insertTreeKey(' ↔ ')">
+            <span class="v-key-symbol">↔</span>
+            <span class="v-key-sub">IFF</span>
+          </button>
+          <button class="v-key" onclick="insertTreeKey('(')"><span class="v-key-symbol">(</span><span class="v-key-sub">Open</span></button>
+          <button class="v-key" onclick="insertTreeKey(')')"><span class="v-key-symbol">)</span><span class="v-key-sub">Close</span></button>
+          <button class="v-key" onclick="insertTreeKey('p')"><span class="v-key-symbol">p</span><span class="v-key-sub">Var</span></button>
+          <button class="v-key" onclick="insertTreeKey('q')"><span class="v-key-symbol">q</span><span class="v-key-sub">Var</span></button>
+          <button class="v-key" onclick="insertTreeKey('r')"><span class="v-key-symbol">r</span><span class="v-key-sub">Var</span></button>
+          <button class="v-key" onclick="insertTreeKey('s')"><span class="v-key-symbol">s</span><span class="v-key-sub">Var</span></button>
+          <button class="v-key" onclick="insertTreeKey('t')"><span class="v-key-symbol">t</span><span class="v-key-sub">Var</span></button>
+          <button class="v-key" onclick="insertTreeKey('u')"><span class="v-key-symbol">u</span><span class="v-key-sub">Var</span></button>
+          <button class="v-key" onclick="backspaceTreeKey()"><span class="v-key-symbol">⌫</span><span class="v-key-sub">DEL</span></button>
+          <button class="v-key" onclick="clearTreeKey()"><span class="v-key-symbol">🗑️</span><span class="v-key-sub">Clear</span></button>
+        </div>
+
+        <div id="treeErrorBox" style="display:none;margin-top:12px;" class="drill-feedback-box error"></div>
+      </div>
+
+      <!-- Tree Visualization & Analysis Card -->
+      <div class="tree-card" id="treeResultCard">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;border-bottom:1px solid var(--border-color);padding-bottom:12px;text-align:left;">
+          <div>
+            <span style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;">Struktur Pohon Sintaksis:</span>
+            <h3 id="treeDisplayFormula" style="color:var(--text-main);font-family:var(--font-mono);font-size:17px;margin-top:2px;">((p ∧ q) ∨ ¬r) → (s ↔ t)</h3>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;" id="treeBadgesContainer">
+          </div>
+        </div>
+
+        <!-- Description & Analysis -->
+        <div id="treeAnalysisBox" style="background:var(--bg-surface-elevated);border:1px solid var(--border-color);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:16px;text-align:left;font-size:12.5px;line-height:1.6;color:var(--text-muted);">
+        </div>
+
+        <!-- SVG Tree Container inside touch-friendly scroll container -->
+        <div class="table-scroll-wrap" style="text-align:center;padding:12px 0;background:var(--bg-surface);border:1px solid var(--border-color);border-radius:var(--radius-sm);">
+          <div id="treeSvgContainer"></div>
+        </div>
 
         <div class="tree-legend">
           <div class="legend-item"><div class="legend-dot" style="background:#f59e0b;"></div> Root (Operator Utama)</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#6366f1;"></div> Internal Node (Sub-Operator)</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#10b981;"></div> Leaves (Variabel Atomik)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#6366f1;"></div> Sub-Operator (Internal)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#10b981;"></div> Daun (Variabel Atomik)</div>
         </div>
       </div>
     </div>
@@ -1626,26 +1706,16 @@ body {
           <span class="v-key-symbol">↔</span>
           <span class="v-key-sub">IFF</span>
         </button>
-        <button class="v-key" onclick="insertKey('(')">
-          <span class="v-key-symbol">(</span>
-          <span class="v-key-sub">L-PAR</span>
-        </button>
-        <button class="v-key" onclick="insertKey(')')">
-          <span class="v-key-symbol">)</span>
-          <span class="v-key-sub">R-PAR</span>
-        </button>
-        <button class="v-key" onclick="insertKey('p')">
-          <span class="v-key-symbol">p</span>
-          <span class="v-key-sub">VAR P</span>
-        </button>
-        <button class="v-key" onclick="insertKey('q')">
-          <span class="v-key-symbol">q</span>
-          <span class="v-key-sub">VAR Q</span>
-        </button>
-        <button class="v-key" onclick="insertKey('r')">
-          <span class="v-key-symbol">r</span>
-          <span class="v-key-sub">VAR R</span>
-        </button>
+        <button class="v-key" onclick="insertKey('(')"><span class="v-key-symbol">(</span><span class="v-key-sub">Open</span></button>
+        <button class="v-key" onclick="insertKey(')')"><span class="v-key-symbol">)</span><span class="v-key-sub">Close</span></button>
+        <button class="v-key" onclick="insertKey('p')"><span class="v-key-symbol">p</span><span class="v-key-sub">Var</span></button>
+        <button class="v-key" onclick="insertKey('q')"><span class="v-key-symbol">q</span><span class="v-key-sub">Var</span></button>
+        <button class="v-key" onclick="insertKey('r')"><span class="v-key-symbol">r</span><span class="v-key-sub">Var</span></button>
+        <button class="v-key" onclick="insertKey('s')"><span class="v-key-symbol">s</span><span class="v-key-sub">Var</span></button>
+        <button class="v-key" onclick="insertKey('t')"><span class="v-key-symbol">t</span><span class="v-key-sub">Var</span></button>
+        <button class="v-key" onclick="insertKey('u')"><span class="v-key-symbol">u</span><span class="v-key-sub">Var</span></button>
+        <button class="v-key" onclick="backspaceKey()"><span class="v-key-symbol">⌫</span><span class="v-key-sub">DEL</span></button>
+        <button class="v-key" onclick="clearKey()"><span class="v-key-symbol">🗑️</span><span class="v-key-sub">Clear</span></button>
       </div>
 
       <div id="sandboxResult"></div>
@@ -1696,6 +1766,29 @@ if (savedTheme) {
 // ==========================================
 // BULLETPROOF PROPOSITIONAL LOGIC PARSER
 // ==========================================
+function extractVariablesFromExpr(expr) {
+  const s = expr.trim();
+  const varSet = new Set();
+  let i = 0;
+  while (i < s.length) {
+    const ch = s[i];
+    if (/[a-zA-Z]/.test(ch)) {
+      let id = '';
+      while (i < s.length && /[a-zA-Z0-9]/.test(s[i])) {
+        id += s[i];
+        i++;
+      }
+      const lower = id.toLowerCase();
+      if (lower !== 'true' && lower !== 'false') {
+        varSet.add(lower);
+      }
+    } else {
+      i++;
+    }
+  }
+  return Array.from(varSet);
+}
+
 function parseAndEvalLogic(expr, vars) {
   const s = expr.trim();
   const tokens = [];
@@ -1726,8 +1819,12 @@ function parseAndEvalLogic(expr, vars) {
       tokens.push('IMP');
       i += (ch === '→' ? 1 : 2);
     } else if (/[a-zA-Z]/.test(ch)) {
-      tokens.push(ch.toLowerCase());
-      i++;
+      let id = '';
+      while (i < s.length && /[a-zA-Z0-9]/.test(s[i])) {
+        id += s[i];
+        i++;
+      }
+      tokens.push(id.toLowerCase());
     } else {
       i++;
     }
@@ -1799,11 +1896,11 @@ function parseAndEvalLogic(expr, vars) {
       pos++;
       return !!vars[t];
     }
-    if (t === 'true' || t === 't' || t === '1') {
+    if (t === 'true' || t === '1') {
       pos++;
       return true;
     }
-    if (t === 'false' || t === 'f' || t === '0') {
+    if (t === 'false' || t === '0') {
       pos++;
       return false;
     }
@@ -2163,129 +2260,375 @@ function resetCurrentDrill() {
 }
 
 // ==========================================
-// 3. PARSE TREE STUDIO
+// 3. PARSE TREE STUDIO (DYNAMIC AST ENGINE & RANDOMIZER)
 // ==========================================
-const TREE_DATA = [
-  {
-    title: "Parse Tree: ((p ∧ q) ∨ ¬r) → (s ↔ t)",
-    desc: "Formula ini memiliki operator utama Implikasi (→) di Root paling atas. Sisi kiri membentuk disjungsi kompleks, dan sisi kanan adalah biimplikasi.",
-    svg: `<svg viewBox="0 0 600 320" class="tree-display-svg">
-      <line x1="300" y1="40" x2="180" y2="100" stroke="var(--border-color)" stroke-width="2"/>
-      <line x1="300" y1="40" x2="420" y2="100" stroke="var(--border-color)" stroke-width="2"/>
-      <line x1="180" y1="100" x2="110" y2="170" stroke="var(--border-color)" stroke-width="2"/>
-      <line x1="180" y1="100" x2="250" y2="170" stroke="var(--border-color)" stroke-width="2"/>
-      <line x1="110" y1="170" x2="70" y2="240" stroke="var(--border-color)" stroke-width="2"/>
-      <line x1="110" y1="170" x2="150" y2="240" stroke="var(--border-color)" stroke-width="2"/>
-      <line x1="250" y1="170" x2="250" y2="240" stroke="var(--border-color)" stroke-width="2"/>
-      <line x1="420" y1="100" x2="380" y2="180" stroke="var(--border-color)" stroke-width="2"/>
-      <line x1="420" y1="100" x2="460" y2="180" stroke="var(--border-color)" stroke-width="2"/>
-
-      <circle cx="300" cy="40" r="22" fill="#f59e0b"/>
-      <text x="300" y="47" font-size="18" font-weight="bold" fill="#000" text-anchor="middle">→</text>
-      <text x="300" y="12" font-size="11" font-weight="bold" fill="#f59e0b" text-anchor="middle">ROOT (Utama)</text>
-
-      <circle cx="180" cy="100" r="18" fill="#6366f1"/>
-      <text x="180" y="106" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">∨</text>
-
-      <circle cx="420" cy="100" r="18" fill="#6366f1"/>
-      <text x="420" y="106" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">↔</text>
-
-      <circle cx="110" cy="170" r="16" fill="#6366f1"/>
-      <text x="110" y="175" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">∧</text>
-
-      <circle cx="250" cy="170" r="16" fill="#6366f1"/>
-      <text x="250" y="175" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">¬</text>
-
-      <circle cx="70" cy="240" r="15" fill="#10b981"/>
-      <text x="70" y="245" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">p</text>
-
-      <circle cx="150" cy="240" r="15" fill="#10b981"/>
-      <text x="150" y="245" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">q</text>
-
-      <circle cx="250" cy="240" r="15" fill="#10b981"/>
-      <text x="250" y="245" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">r</text>
-
-      <circle cx="380" cy="180" r="15" fill="#10b981"/>
-      <text x="380" y="185" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">s</text>
-
-      <circle cx="460" cy="180" r="15" fill="#10b981"/>
-      <text x="460" y="185" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">t</text>
-    </svg>`
-  },
-  {
-    title: "Parse Tree: (p → q) ∧ (q → r)",
-    desc: "Formula Silogisme Hipotetis. Operator utama adalah Konjungsi (∧) di Root yang menghubungkan dua klausa implikasi.",
-    svg: `<svg viewBox="0 0 500 240" class="tree-display-svg">
-      <line x1="250" y1="40" x2="160" y2="100" stroke="var(--border-color)" stroke-width="2"/>
-      <line x1="250" y1="40" x2="340" y2="100" stroke="var(--border-color)" stroke-width="2"/>
-      <line x1="160" y1="100" x2="120" y2="170" stroke="var(--border-color)" stroke-width="2"/>
-      <line x1="160" y1="100" x2="200" y2="170" stroke="var(--border-color)" stroke-width="2"/>
-      <line x1="340" y1="100" x2="300" y2="170" stroke="var(--border-color)" stroke-width="2"/>
-      <line x1="340" y1="100" x2="380" y2="170" stroke="var(--border-color)" stroke-width="2"/>
-
-      <circle cx="250" cy="40" r="20" fill="#f59e0b"/>
-      <text x="250" y="46" font-size="17" font-weight="bold" fill="#000" text-anchor="middle">∧</text>
-      <text x="250" y="12" font-size="11" font-weight="bold" fill="#f59e0b" text-anchor="middle">ROOT</text>
-
-      <circle cx="160" cy="100" r="16" fill="#6366f1"/>
-      <text x="160" y="105" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">→</text>
-
-      <circle cx="340" cy="100" r="16" fill="#6366f1"/>
-      <text x="340" y="105" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">→</text>
-
-      <circle cx="120" cy="170" r="14" fill="#10b981"/>
-      <text x="120" y="174" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">p</text>
-
-      <circle cx="200" cy="170" r="14" fill="#10b981"/>
-      <text x="200" y="174" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">q</text>
-
-      <circle cx="300" cy="170" r="14" fill="#10b981"/>
-      <text x="300" y="174" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">q</text>
-
-      <circle cx="380" cy="170" r="14" fill="#10b981"/>
-      <text x="380" y="174" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">r</text>
-    </svg>`
-  },
-  {
-    title: "Parse Tree: ¬(p ∧ ¬q) ∨ r",
-    desc: "Operator utama adalah Disjungsi (∨) yang menghubungkan negasi majemuk ¬(p ∧ ¬q) dengan variabel r.",
-    svg: `<svg viewBox="0 0 460 260" class="tree-display-svg">
-      <line x1="230" y1="35" x2="160" y2="90" stroke="var(--border-color)" stroke-width="2"/>
-      <line x1="230" y1="35" x2="300" y2="90" stroke="var(--border-color)" stroke-width="2"/>
-      <line x1="160" y1="90" x2="160" y2="145" stroke="var(--border-color)" stroke-width="2"/>
-      <line x1="160" y1="145" x2="120" y2="200" stroke="var(--border-color)" stroke-width="2"/>
-      <line x1="160" y1="145" x2="200" y2="200" stroke="var(--border-color)" stroke-width="2"/>
-      <line x1="200" y1="200" x2="200" y2="245" stroke="var(--border-color)" stroke-width="2"/>
-
-      <circle cx="230" cy="35" r="18" fill="#f59e0b"/>
-      <text x="230" y="41" font-size="16" font-weight="bold" fill="#000" text-anchor="middle">∨</text>
-
-      <circle cx="160" cy="90" r="15" fill="#6366f1"/>
-      <text x="160" y="95" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">¬</text>
-
-      <circle cx="300" cy="90" r="14" fill="#10b981"/>
-      <text x="300" y="94" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">r</text>
-
-      <circle cx="160" cy="145" r="15" fill="#6366f1"/>
-      <text x="160" y="150" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">∧</text>
-
-      <circle cx="120" cy="200" r="14" fill="#10b981"/>
-      <text x="120" y="204" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">p</text>
-
-      <circle cx="200" cy="200" r="14" fill="#6366f1"/>
-      <text x="200" y="204" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">¬</text>
-
-      <circle cx="200" cy="245" r="13" fill="#10b981"/>
-      <text x="200" y="249" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">q</text>
-    </svg>`
-  }
+const RANDOM_TREE_FORMULAS = [
+  { expr: "((p ∧ q) ∨ ¬r) → (s ↔ t)", level: "COMPLEX", note: "Formula Majemuk UTS: Disjungsi dan Biimplikasi di bawah Implikasi Utama" },
+  { expr: "(p → q) ∧ (q → r)", level: "3", note: "Silogisme Hipotetis: Konjungsi dua implikasi kondisional" },
+  { expr: "¬(p ∧ ¬q) ∨ r", level: "3", note: "Negasi Majemuk bertingkat dengan Disjungsi" },
+  { expr: "(p ∨ q) ∧ ¬p → q", level: "2", note: "Silogisme Disjungtif (Modus Tollendo Ponens)" },
+  { expr: "¬(p ∧ q) ↔ (¬p ∨ ¬q)", level: "2", note: "Hukum De Morgan (Negasi Konjungsi ekuivalen Disjungsi Negasi)" },
+  { expr: "¬(p ∨ q) ↔ (¬p ∧ ¬q)", level: "2", note: "Hukum De Morgan (Negasi Disjungsi ekuivalen Konjungsi Negasi)" },
+  { expr: "(p → q) ↔ (¬q → ¬p)", level: "2", note: "Hukum Kontraposisi (Implikasi ekuivalen dengan Kontraposisinya)" },
+  { expr: "(p → q) ↔ (¬p ∨ q)", level: "2", note: "Ekuivalensi Material Implikasi sebagai Disjungsi" },
+  { expr: "(p → q) ∧ p → q", level: "2", note: "Modus Ponens: Penegasan Anteseden" },
+  { expr: "(p → q) ∧ ¬q → ¬p", level: "2", note: "Modus Tollens: Penyangkalan Konsekuen" },
+  { expr: "(p ∧ q) → (p ∨ r)", level: "3", note: "Penyederhanaan dan Penambahan (Simplification & Addition)" },
+  { expr: "(p ↔ q) ∧ (q ↔ r) → (p ↔ r)", level: "3", note: "Hukum Transitivitas Relasi Ekuivalensi Biimplikasi" },
+  { expr: "¬(p → q) ↔ (p ∧ ¬q)", level: "2", note: "Negasi Implikasi: Hanya bernilai benar jika anteseden benar dan konsekuen salah" },
+  { expr: "(p ∨ q) ∧ (¬p ∨ r) → (q ∨ r)", level: "3", note: "Aturan Inferensi Resolusi Logika Proposisional" },
+  { expr: "(p ∧ (q ∨ r)) ↔ ((p ∧ q) ∨ (p ∧ r))", level: "3", note: "Hukum Distributif Konjungsi terhadap Disjungsi" },
+  { expr: "((p → q) ∧ (r → s) ∧ (p ∨ r)) → (q ∨ s)", level: "COMPLEX", note: "Dilema Konstruktif: Kombinasi dua premis implikasi dengan disjungsi anteseden" },
+  { expr: "¬(p ∧ (q ∨ ¬r)) → (¬p ∨ (¬q ∧ r))", level: "3", note: "De Morgan Majemuk 3 Variabel" },
+  { expr: "(p ↔ ¬q) → ¬(p ↔ q)", level: "2", note: "Sifat Hubungan Negasi pada Biimplikasi" }
 ];
 
-function loadTree(idx) {
-  const d = TREE_DATA[idx];
-  document.getElementById('treeTitle').textContent = d.title;
-  document.getElementById('treeDesc').innerHTML = d.desc;
-  document.getElementById('treeSvgContainer').innerHTML = d.svg;
+function parseTreeAST(expr) {
+  const s = expr.trim();
+  const tokens = [];
+  let i = 0;
+
+  while (i < s.length) {
+    const ch = s[i];
+    if (/\s/.test(ch)) { i++; continue; }
+    if (ch === '(' || ch === ')') { tokens.push(ch); i++; }
+    else if (ch === '¬' || ch === '~' || ch === '!') { tokens.push('NOT'); i++; }
+    else if (ch === '∧' || ch === '&') { tokens.push('AND'); i++; }
+    else if (ch === '∨' || ch === '|') { tokens.push('OR'); i++; }
+    else if (s.slice(i, i + 3) === '<->' || s.slice(i, i + 3) === '<=>' || ch === '↔') { tokens.push('IFF'); i += (ch === '↔' ? 1 : 3); }
+    else if (s.slice(i, i + 2) === '->' || s.slice(i, i + 2) === '=>' || ch === '→') { tokens.push('IMP'); i += (ch === '→' ? 1 : 2); }
+    else if (/[a-zA-Z]/.test(ch)) {
+      let id = '';
+      while (i < s.length && /[a-zA-Z0-9]/.test(s[i])) {
+        id += s[i];
+        i++;
+      }
+      tokens.push(id.toLowerCase());
+    } else {
+      i++;
+    }
+  }
+
+  let pos = 0;
+
+  function parseIff() {
+    let left = parseImp();
+    while (pos < tokens.length && tokens[pos] === 'IFF') {
+      pos++;
+      let right = parseImp();
+      left = { type: 'op', val: '↔', name: 'Biimplikasi', left: left, right: right };
+    }
+    return left;
+  }
+
+  function parseImp() {
+    let left = parseOr();
+    if (pos < tokens.length && tokens[pos] === 'IMP') {
+      pos++;
+      let right = parseImp();
+      left = { type: 'op', val: '→', name: 'Implikasi', left: left, right: right };
+    }
+    return left;
+  }
+
+  function parseOr() {
+    let left = parseAnd();
+    while (pos < tokens.length && tokens[pos] === 'OR') {
+      pos++;
+      let right = parseAnd();
+      left = { type: 'op', val: '∨', name: 'Disjungsi', left: left, right: right };
+    }
+    return left;
+  }
+
+  function parseAnd() {
+    let left = parseNot();
+    while (pos < tokens.length && tokens[pos] === 'AND') {
+      pos++;
+      let right = parseNot();
+      left = { type: 'op', val: '∧', name: 'Konjungsi', left: left, right: right };
+    }
+    return left;
+  }
+
+  function parseNot() {
+    if (pos < tokens.length && tokens[pos] === 'NOT') {
+      pos++;
+      const child = parseNot();
+      return { type: 'op', val: '¬', name: 'Negasi', left: child, right: null };
+    }
+    return parsePrimary();
+  }
+
+  function parsePrimary() {
+    if (pos >= tokens.length) throw new Error('Formula belum lengkap atau kurung terpotong.');
+    const t = tokens[pos];
+    if (t === '(') {
+      pos++;
+      const val = parseIff();
+      if (pos >= tokens.length || tokens[pos] !== ')') {
+        throw new Error('Kurung tutup ")" tidak ditemukan.');
+      }
+      pos++;
+      return val;
+    }
+    if (/[a-zA-Z]/.test(t)) {
+      pos++;
+      return { type: 'var', val: t, name: 'Variabel Atomik' };
+    }
+    throw new Error('Simbol tidak valid atau operator ganda: "' + t + '"');
+  }
+
+  const ast = parseIff();
+  if (pos < tokens.length) {
+    throw new Error('Kelebihan karakter setelah formula: "' + tokens[pos] + '"');
+  }
+  return ast;
+}
+
+function astToExpr(node) {
+  if (!node) return '';
+  if (node.type === 'var') return node.val;
+  if (node.val === '¬') return '¬' + (node.left.type === 'op' ? '(' + astToExpr(node.left) + ')' : astToExpr(node.left));
+  return '(' + astToExpr(node.left) + ' ' + node.val + ' ' + astToExpr(node.right) + ')';
+}
+
+function getTreeMetrics(ast) {
+  let vars = new Set();
+  let maxDepth = 0;
+  let opCount = 0;
+  let totalNodes = 0;
+
+  function walk(node, depth) {
+    if (!node) return;
+    totalNodes++;
+    if (depth > maxDepth) maxDepth = depth;
+    if (node.type === 'var') {
+      vars.add(node.val);
+    } else {
+      opCount++;
+      walk(node.left, depth + 1);
+      walk(node.right, depth + 1);
+    }
+  }
+
+  walk(ast, 1);
+  return {
+    vars: Array.from(vars).sort(),
+    depth: maxDepth,
+    opCount: opCount,
+    totalNodes: totalNodes,
+    rootOp: ast.type === 'op' ? ast.val : null,
+    rootName: ast.type === 'op' ? ast.name : 'Variabel Atomik Tunggal',
+    leftExpr: ast.left ? astToExpr(ast.left) : '',
+    rightExpr: ast.right ? astToExpr(ast.right) : ''
+  };
+}
+
+function generateTreeSVG(ast) {
+  function measure(node) {
+    if (!node) return 0;
+    if (node.type === 'var') {
+      node.width = 48;
+      return 48;
+    }
+    if (node.val === '¬') {
+      const w = measure(node.left);
+      node.width = Math.max(w, 48);
+      return node.width;
+    }
+    const leftW = measure(node.left);
+    const rightW = measure(node.right);
+    node.width = leftW + rightW + 24;
+    return node.width;
+  }
+
+  measure(ast);
+
+  let nodes = [];
+  let lines = [];
+
+  function layout(node, startX, depth, isRoot) {
+    if (!node) return;
+    const y = 46 + depth * 58;
+    let x;
+
+    if (node.type === 'var') {
+      x = startX + node.width / 2;
+    } else if (node.val === '¬') {
+      layout(node.left, startX, depth + 1, false);
+      x = node.left.x;
+      lines.push({ x1: x, y1: y, x2: node.left.x, y2: node.left.y });
+    } else {
+      const leftW = node.left ? node.left.width : 0;
+      layout(node.left, startX, depth + 1, false);
+      layout(node.right, startX + leftW + 24, depth + 1, false);
+      x = (node.left.x + node.right.x) / 2;
+      lines.push({ x1: x, y1: y, x2: node.left.x, y2: node.left.y });
+      lines.push({ x1: x, y1: y, x2: node.right.x, y2: node.right.y });
+    }
+
+    node.x = x;
+    node.y = y;
+    nodes.push({
+      x: x,
+      y: y,
+      val: node.val,
+      isRoot: isRoot,
+      isVar: node.type === 'var'
+    });
+  }
+
+  layout(ast, 16, 0, true);
+
+  const maxX = Math.max.apply(null, nodes.map(n => n.x)) + 36;
+  const maxY = Math.max.apply(null, nodes.map(n => n.y)) + 40;
+  const vbW = Math.max(maxX, 320);
+  const vbH = Math.max(maxY, 160);
+
+  let svg = '<svg viewBox="0 0 ' + vbW + ' ' + vbH + '" style="width:100%;max-width:' + Math.min(vbW, 700) + 'px;height:auto;display:inline-block;" preserveAspectRatio="xMidYMid meet">';
+
+  lines.forEach(l => {
+    svg += '<line x1="' + Math.round(l.x1) + '" y1="' + Math.round(l.y1) + '" x2="' + Math.round(l.x2) + '" y2="' + Math.round(l.y2) + '" stroke="var(--border-color)" stroke-width="2.5" stroke-linecap="round"/>';
+  });
+
+  nodes.forEach(n => {
+    const fill = n.isRoot ? '#f59e0b' : (n.isVar ? '#10b981' : '#6366f1');
+    const textFill = n.isRoot ? '#000000' : '#ffffff';
+    const r = n.isRoot ? 20 : (n.isVar ? 15 : 17);
+    const nx = Math.round(n.x);
+    const ny = Math.round(n.y);
+    svg += '<g class="tree-node-group">';
+    svg += '<circle cx="' + nx + '" cy="' + ny + '" r="' + r + '" fill="' + fill + '" stroke="var(--bg-surface)" stroke-width="2.5"/>';
+    svg += '<text x="' + nx + '" y="' + (ny + (r >= 20 ? 6 : 5)) + '" font-size="' + (r >= 20 ? 17 : 14) + '" font-family="var(--font-mono)" font-weight="bold" fill="' + textFill + '" text-anchor="middle">' + n.val + '</text>';
+    if (n.isRoot) {
+      svg += '<text x="' + nx + '" y="' + (ny - 25) + '" font-size="11" font-weight="bold" fill="#f59e0b" text-anchor="middle">ROOT (Utama)</text>';
+    }
+    svg += '</g>';
+  });
+
+  svg += '</svg>';
+  return svg;
+}
+
+function insertTreeKey(k) {
+  const input = document.getElementById('customTreeInput');
+  const start = input.selectionStart || input.value.length;
+  const end = input.selectionEnd || input.value.length;
+  input.value = input.value.substring(0, start) + k + input.value.substring(end);
+  input.selectionStart = input.selectionEnd = start + k.length;
+  input.focus();
+}
+
+function backspaceTreeKey() {
+  const input = document.getElementById('customTreeInput');
+  const start = input.selectionStart || input.value.length;
+  const end = input.selectionEnd || input.value.length;
+  if (start === end && start > 0) {
+    input.value = input.value.substring(0, start - 1) + input.value.substring(end);
+    input.selectionStart = input.selectionEnd = start - 1;
+  } else if (start !== end) {
+    input.value = input.value.substring(0, start) + input.value.substring(end);
+    input.selectionStart = input.selectionEnd = start;
+  }
+  input.focus();
+}
+
+function clearTreeKey() {
+  const input = document.getElementById('customTreeInput');
+  input.value = '';
+  input.focus();
+}
+
+function renderCustomTree(optionalNote) {
+  const input = document.getElementById('customTreeInput');
+  const formula = input.value.trim();
+  const errBox = document.getElementById('treeErrorBox');
+  const card = document.getElementById('treeResultCard');
+
+  if (!formula) {
+    errBox.style.display = 'block';
+    errBox.innerHTML = '<strong>⚠️ Perhatian:</strong> Masukkan formula proposisi logika terlebih dahulu.';
+    return;
+  }
+
+  try {
+    const ast = parseTreeAST(formula);
+    const metrics = getTreeMetrics(ast);
+    const svg = generateTreeSVG(ast);
+
+    errBox.style.display = 'none';
+    card.style.display = 'block';
+
+    document.getElementById('treeDisplayFormula').textContent = formula;
+
+    // Badges
+    const badgesContainer = document.getElementById('treeBadgesContainer');
+    badgesContainer.innerHTML = `
+      <span style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:6px;background:var(--amber-bg);color:var(--accent-amber);border:1px solid var(--amber-border);font-size:12px;font-weight:700;">
+        👑 Root: ${metrics.rootName} (${metrics.rootOp || 'Atom'})
+      </span>
+      <span style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:6px;background:var(--indigo-bg);color:var(--accent-indigo);border:1px solid var(--indigo-border);font-size:12px;font-weight:700;">
+        📊 Tinggi: ${metrics.depth} Tingkat
+      </span>
+      <span style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:6px;background:var(--emerald-bg);color:var(--accent-emerald);border:1px solid var(--emerald-border);font-size:12px;font-weight:700;">
+        🍃 ${metrics.vars.length} Daun (${metrics.vars.join(', ')})
+      </span>
+    `;
+
+    // Analysis
+    let analysisHtml = '';
+    if (optionalNote) {
+      analysisHtml += `<div style="color:var(--accent-amber);font-weight:700;margin-bottom:6px;">💡 ${optionalNote}</div>`;
+    }
+    if (ast.type === 'op') {
+      analysisHtml += `<div><strong>Operator Utama (Root):</strong> Simpul teratas adalah <strong>${metrics.rootName} (${metrics.rootOp})</strong>. Ini adalah perangkai logika terakhir yang dievaluasi saat menghitung nilai kebenaran baris.</div>`;
+      if (ast.left && ast.right) {
+        analysisHtml += `<div style="margin-top:4px;"><strong>Sub-Pohon Kiri:</strong> <code>${metrics.leftExpr}</code> &bull; <strong>Sub-Pohon Kanan:</strong> <code>${metrics.rightExpr}</code></div>`;
+      } else if (ast.left) {
+        analysisHtml += `<div style="margin-top:4px;"><strong>Operan Negasi:</strong> <code>${metrics.leftExpr}</code></div>`;
+      }
+    } else {
+      analysisHtml += `<div>Formula ini hanya terdiri dari sebuah variabel atomik tunggal <code>${ast.val}</code> tanpa operator.</div>`;
+    }
+    analysisHtml += `<div style="margin-top:6px;font-size:12px;color:var(--text-subtle);"><strong>Urutan Evaluasi Bottom-Up:</strong> Daun hijau (<code>${metrics.vars.join(', ')}</code>) dievaluasi pertama kali &rarr; kemudian simpul internal indigo dihitung per tingkat kurung &rarr; dan hasil akhir formula diperoleh pada simpul akar kuning (Root).</div>`;
+
+    document.getElementById('treeAnalysisBox').innerHTML = analysisHtml;
+    document.getElementById('treeSvgContainer').innerHTML = svg;
+  } catch (err) {
+    errBox.style.display = 'block';
+    errBox.innerHTML = `<strong>⚠️ Format Formula Tidak Valid:</strong> ${err.message}<br><span style="font-size:11.5px;color:var(--text-muted);">Gunakan perangkai: ¬ (NOT), ∧ (AND), ∨ (OR), → (IF), ↔ (IFF) dan variabel huruf bebas (p, q, r, s, t, u, dll.). Pastikan tanda kurung seimbang.</span>`;
+  }
+}
+
+function randomParseTree() {
+  const filter = document.getElementById('treeVarFilter') ? document.getElementById('treeVarFilter').value : 'ALL';
+  let pool = RANDOM_TREE_FORMULAS;
+  if (filter !== 'ALL') {
+    pool = RANDOM_TREE_FORMULAS.filter(f => f.level === filter);
+    if (pool.length === 0) pool = RANDOM_TREE_FORMULAS;
+  }
+  const currentVal = document.getElementById('customTreeInput').value.trim();
+  let candidate = pool[Math.floor(Math.random() * pool.length)];
+  if (pool.length > 1 && candidate.expr === currentVal) {
+    const others = pool.filter(f => f.expr !== currentVal);
+    if (others.length > 0) candidate = others[Math.floor(Math.random() * others.length)];
+  }
+  document.getElementById('customTreeInput').value = candidate.expr;
+  renderCustomTree(candidate.note);
+}
+
+function setTreePreset(idx) {
+  const presets = [
+    { expr: "((p ∧ q) ∨ ¬r) → (s ↔ t)", note: "Soal UTS: Implikasi utama menggabungkan disjungsi majemuk dan biimplikasi" },
+    { expr: "(p → q) ∧ (q → r)", note: "Silogisme Hipotetis: Konjungsi dua implikasi kondisional berantai" },
+    { expr: "¬(p ∧ q) ↔ (¬p ∨ ¬q)", note: "Hukum De Morgan I: Negasi konjungsi ekuivalen logis dengan disjungsi negasi" },
+    { expr: "(p ∨ q) ∧ (¬p ∨ r) → (q ∨ r)", note: "Inferensi Resolusi: Basis algoritma pembuktian otomatis Propositional Resolution" }
+  ];
+  if (presets[idx]) {
+    document.getElementById('customTreeInput').value = presets[idx].expr;
+    renderCustomTree(presets[idx].note);
+  }
 }
 
 // ==========================================
@@ -2471,7 +2814,30 @@ function jumpToQ(idx) {
 // ==========================================
 function insertKey(k) {
   const input = document.getElementById('sandboxExprInput');
-  input.value += k;
+  const start = input.selectionStart || input.value.length;
+  const end = input.selectionEnd || input.value.length;
+  input.value = input.value.substring(0, start) + k + input.value.substring(end);
+  input.selectionStart = input.selectionEnd = start + k.length;
+  input.focus();
+}
+
+function backspaceKey() {
+  const input = document.getElementById('sandboxExprInput');
+  const start = input.selectionStart || input.value.length;
+  const end = input.selectionEnd || input.value.length;
+  if (start === end && start > 0) {
+    input.value = input.value.substring(0, start - 1) + input.value.substring(end);
+    input.selectionStart = input.selectionEnd = start - 1;
+  } else if (start !== end) {
+    input.value = input.value.substring(0, start) + input.value.substring(end);
+    input.selectionStart = input.selectionEnd = start;
+  }
+  input.focus();
+}
+
+function clearKey() {
+  const input = document.getElementById('sandboxExprInput');
+  input.value = '';
   input.focus();
 }
 
@@ -2485,17 +2851,14 @@ function generateSandboxTable() {
     return;
   }
 
-  const varSet = new Set();
-  const lower = expr.toLowerCase();
-  ['p', 'q', 'r', 's'].forEach(v => {
-    if (new RegExp('\\b' + v + '\\b').test(lower) || lower.includes(v)) {
-      varSet.add(v);
-    }
-  });
-
-  const vars = Array.from(varSet);
+  const vars = extractVariablesFromExpr(expr);
   if (vars.length === 0) {
-    resContainer.innerHTML = '<div class="callout callout-warning">Harap gunakan minimal satu variabel proposisional: <code>p</code>, <code>q</code>, atau <code>r</code>.</div>';
+    resContainer.innerHTML = '<div class="callout callout-warning">Harap gunakan minimal satu variabel proposisional: misal <code>p</code>, <code>q</code>, <code>r</code>, <code>s</code>, <code>t</code>, <code>u</code>, <code>a</code>, dll.</div>';
+    return;
+  }
+
+  if (vars.length > 8) {
+    resContainer.innerHTML = `<div class="callout callout-warning"><strong>⚠️ Terlalu banyak variabel:</strong> Formula memiliki ${vars.length} variabel (${Math.pow(2, vars.length)} baris). Disarankan maksimal 8 variabel (256 baris) agar browser tetap responsif.</div>`;
     return;
   }
 
@@ -2546,6 +2909,9 @@ function generateSandboxTable() {
       <span class="classification-label">Hasil Klasifikasi Evaluasi:</span>
       ${statusBadge}
     </div>
+    <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">
+      Total Variabel: <strong>${vars.length}</strong> (${vars.join(', ')}) &bull; Total Baris: <strong>${totalRows}</strong> (2<sup>${vars.length}</sup>)
+    </div>
     <div class="table-scroll-wrap">
       <table class="drill-matrix-table">
         <tr>
@@ -2571,7 +2937,7 @@ function generateSandboxTable() {
 window.addEventListener('DOMContentLoaded', () => {
   initProblemGenerator();
   initDrills();
-  loadTree(0);
+  renderCustomTree();
   initFlashcards();
   initArena();
   generateSandboxTable();
