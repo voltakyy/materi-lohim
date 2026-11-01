@@ -762,6 +762,174 @@ body {
   .gen-controls-bar button, .gen-controls-bar select { width: 100% !important; }
   .gen-formula-title { font-size: 17px !important; }
 }
+
+/* UTS Special Module Styling - 100% Theme Adaptive */
+.uts-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.uts-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  display: inline-block;
+}
+.uts-badge-cyan {
+  background: var(--cyan-bg);
+  color: var(--accent-cyan);
+  border: 1px solid var(--cyan-border);
+}
+.uts-badge-primary {
+  background: var(--primary-light);
+  color: var(--primary);
+  border: 1px solid var(--primary-border);
+}
+
+.uts-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px;
+  margin: 16px 0 24px;
+}
+.uts-meta-card {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-color);
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+}
+.uts-meta-card .label {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.uts-meta-card .val {
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: 4px;
+  color: var(--text-main);
+}
+.uts-meta-card .val.primary { color: var(--primary); }
+.uts-meta-card .val.emerald { color: var(--accent-emerald); }
+.uts-meta-card .val.rose { color: var(--accent-rose); }
+
+.uts-topic-section {
+  margin-bottom: 26px;
+}
+
+.uts-soal-card {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--border-color);
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 12px;
+}
+.uts-soal-card.ganjil {
+  border-left-color: var(--accent-emerald);
+}
+.uts-soal-card.genap {
+  border-left-color: var(--accent-rose);
+}
+.uts-soal-card.primary {
+  border-left-color: var(--primary);
+}
+
+.uts-soal-card .soal-title {
+  font-weight: 700;
+  color: var(--text-main);
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+.uts-soal-card .soal-sub {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin: 4px 0;
+  line-height: 1.5;
+}
+.uts-soal-card .soal-ans {
+  margin-top: 6px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+.uts-soal-card blockquote {
+  margin: 6px 0 10px;
+  padding: 8px 12px;
+  border-left: 3px solid var(--primary);
+  background: var(--bg-surface);
+  color: var(--text-body);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-style: italic;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.uts-callout-warning {
+  background: var(--amber-bg);
+  border: 1px solid var(--amber-border);
+  border-left: 4px solid var(--accent-amber);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  margin: 16px 0 20px;
+}
+.uts-callout-warning h4 {
+  margin: 0 0 6px;
+  color: var(--accent-amber);
+  font-weight: 700;
+  font-size: 14px;
+}
+.uts-callout-warning p {
+  margin: 0 0 6px;
+  color: var(--text-body);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.uts-callout-warning p:last-child {
+  margin-bottom: 0;
+}
+
+.uts-callout-info {
+  background: var(--primary-light);
+  border: 1px solid var(--primary-border);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  margin: 14px 0 18px;
+}
+.uts-callout-info h4 {
+  margin: 0 0 6px;
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 14px;
+}
+.uts-callout-info ol, .uts-callout-info ul {
+  margin: 0 0 8px 20px;
+  padding: 0;
+  color: var(--text-body);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.uts-callout-info p {
+  margin: 0;
+  color: var(--text-body);
+  font-size: 12.5px;
+}
+
+.uts-grid-2col {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
 </style>
 </head>
 <body>
@@ -1320,241 +1488,231 @@ body {
         </article>
 
         <article id="art-uts_fokus" class="article-card" style="border: 1px solid rgba(245, 158, 11, 0.35); box-shadow: 0 0 25px rgba(245, 158, 11, 0.08);">
-          <div class="article-header" style="border-left: 4px solid #38bdf8; padding-left: 1rem; margin-bottom: 1.5rem;">
-  <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom: 0.5rem;">
-    <span class="badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56,189,248,0.4); padding: 0.25rem 0.6rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 700;">ARSIP RESMI REPOTIF UMS</span>
-    <span class="badge" style="background: rgba(168, 85, 247, 0.2); color: #c084fc; border: 1px solid rgba(168,85,247,0.4); padding: 0.25rem 0.6rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 700;">GASAL 2024/2025</span>
+          <div class="article-header">
+  <div class="uts-badge-row">
+    <span class="uts-badge uts-badge-cyan">ARSIP RESMI REPOTIF UMS</span>
+    <span class="uts-badge uts-badge-primary">GASAL 2024/2025</span>
   </div>
-  <h2 style="font-size: 1.6rem; font-weight: 800; color: #f1f5f9; margin: 0 0 0.5rem 0;">🎯 Modul Bedah Soal Fokus UTS Logika & Himpunan</h2>
-  <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6; margin: 0;">
+  <h2>🎯 Modul Bedah Soal Fokus UTS Logika &amp; Himpunan</h2>
+  <p>
     Berdasarkan berkas pindaian lembar soal asli <code>repotif_arsip_uts/25_UTS_2024_p1_img1.jpeg</code> dari repositori HIMATIF UMS. Dosen Penguji: <strong>Yudi Wahyu Wibowo, ST, M.Eng</strong> &amp; <strong>Dr. Eng. Yusuf Sulistyo Nugroho</strong>.
   </p>
 </div>
 
 <!-- INFO METADATA UJIAN -->
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; margin-bottom: 1.5rem;">
-  <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.08); padding: 0.85rem; border-radius: 8px;">
-    <div style="font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Waktu &amp; Sifat Ujian</div>
-    <div style="font-size: 1rem; color: #38bdf8; font-weight: 700; margin-top: 0.25rem;">⏱️ 90 Menit (Buku Tertutup)</div>
+<div class="uts-meta-grid">
+  <div class="uts-meta-card">
+    <div class="label">Waktu &amp; Sifat Ujian</div>
+    <div class="val primary">⏱️ 90 Menit (Buku Tertutup)</div>
   </div>
-  <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.08); padding: 0.85rem; border-radius: 8px;">
-    <div style="font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Pembagian NIM Ganjil</div>
-    <div style="font-size: 0.95rem; color: #34d399; font-weight: 700; margin-top: 0.25rem;">Soal 1.a, 1.c, 2.a, 3.a, 3.c, 4.a, 4.c</div>
+  <div class="uts-meta-card">
+    <div class="label">Pembagian NIM Ganjil</div>
+    <div class="val emerald">Soal 1.a, 1.c, 2.a, 3.a, 3.c, 4.a, 4.c</div>
   </div>
-  <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.08); padding: 0.85rem; border-radius: 8px;">
-    <div style="font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Pembagian NIM Genap</div>
-    <div style="font-size: 0.95rem; color: #f43f5e; font-weight: 700; margin-top: 0.25rem;">Soal 1.b, 1.d, 2.b, 3.b, 3.d, 4.b, 4.d</div>
+  <div class="uts-meta-card">
+    <div class="label">Pembagian NIM Genap</div>
+    <div class="val rose">Soal 1.b, 1.d, 2.b, 3.b, 3.d, 4.b, 4.d</div>
   </div>
 </div>
 
 <!-- ======================= TOPIK 1 ======================= -->
-<div class="theory-box" style="margin-bottom: 2rem;">
-  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1rem;">
-    <h3 style="color: #38bdf8; margin: 0; font-size: 1.25rem;">📌 TOPIK 1: Fully Parenthesized Expression (FPE) (Skor: 20)</h3>
-    <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">CPMK 1</span>
-  </div>
-  <p style="color: #cbd5e1; line-height: 1.6; font-size: 0.95rem;">
+<div class="uts-topic-section">
+  <h3>📌 Topik 1: Fully Parenthesized Expression (FPE) (Skor: 20 | CPMK 1)</h3>
+  <p>
     <strong>Instruksi Soal:</strong> <em>Berilah tanda kurung dengan sempurna (Fully Parenthesized Expression (FPE)) pada ekspresi logika berikut sesuai dengan hierarki operatornya!</em>
   </p>
 
-  <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-    <h4 style="color: #f8fafc; font-size: 0.95rem; margin: 0 0 0.5rem 0;">⭐ Urutan Presedensi Mutlak Informatika UMS:</h4>
-    <ol style="color: #e2e8f0; margin: 0; padding-left: 1.25rem; line-height: 1.7; font-size: 0.9rem;">
-      <li><strong>Negasi (¬)</strong> — Mengikat literal/ekspresi tepat di kanannya secara langsung.</li>
+  <div class="uts-callout-info">
+    <h4>⭐ Aturan Hierarki Presedensi Operator Logika UMS:</h4>
+    <ol>
+      <li><strong>Negasi (¬)</strong> — Prioritas tertinggi, mengikat variabel langsung di sebelah kanannya.</li>
       <li><strong>Konjungsi (∧)</strong> — Pengali logika (And).</li>
       <li><strong>Disjungsi (∨)</strong> — Penjumlahan logika (Or).</li>
-      <li><strong>Implikasi (→)</strong> — Hubungan jika-maka.</li>
-      <li><strong>Biimplikasi (↔)</strong> — Ekuivalensi ganda (prioritas terendah).</li>
+      <li><strong>Implikasi (→)</strong> — Relasi sebab-akibat (jika-maka).</li>
+      <li><strong>Biimplikasi (↔)</strong> — Ekuivalensi ganda (prioritas paling rendah).</li>
     </ol>
-    <div style="margin-top: 0.5rem; font-size: 0.85rem; color: #f59e0b;">
-      ⚠️ <em>Kaidah FPE:</em> Setiap perangkai biner (∧, ∨, →, ↔) <strong>wajib</strong> memiliki sepasang tanda kurung <code>( ... )</code> pembungkusnya sendiri!
-    </div>
+    <p>⚠️ <strong>Kaidah Wajib FPE:</strong> Setiap perangkai biner (<code>∧, ∨, →, ↔</code>) harus memiliki tepat satu pasang tanda kurung pembungkus <code>( ... )</code>.</p>
   </div>
 
-  <div style="display: flex; flex-direction: column; gap: 1rem;">
-    <!-- 1.a -->
-    <div style="background: rgba(15, 23, 42, 0.5); border-left: 3px solid #34d399; padding: 0.75rem 1rem; border-radius: 0 6px 6px 0;">
-      <div style="font-weight: 700; color: #34d399; font-size: 0.9rem;">Soal 1.a (NIM Ganjil): <code>A ∧ B ∨ C → ¬D</code></div>
-      <div style="color: #94a3b8; font-size: 0.85rem; margin: 0.25rem 0;">1. Negasi: <code>(¬D)</code> &nbsp;|&nbsp; 2. Konjungsi: <code>(A ∧ B)</code> &nbsp;|&nbsp; 3. Disjungsi: <code>((A ∧ B) ∨ C)</code> &nbsp;|&nbsp; 4. Implikasi utama</div>
-      <div style="color: #f1f5f9; font-weight: 600; font-size: 0.95rem; margin-top: 0.25rem;">
-        Jawaban FPE: <code style="color: #38bdf8; background: rgba(56,189,248,0.1); padding: 2px 6px; border-radius: 4px;">(((A ∧ B) ∨ C) → (¬D))</code>
-      </div>
-    </div>
+  <div class="uts-soal-card ganjil">
+    <div class="soal-title">Soal 1.a (NIM Ganjil): <code>A ∧ B ∨ C → ¬D</code></div>
+    <div class="soal-sub">Langkah: 1. Negasi: <code>(¬D)</code> &nbsp;|&nbsp; 2. Konjungsi: <code>(A ∧ B)</code> &nbsp;|&nbsp; 3. Disjungsi: <code>((A ∧ B) ∨ C)</code> &nbsp;|&nbsp; 4. Implikasi utama</div>
+    <div class="soal-ans">Jawaban FPE: <code>(((A ∧ B) ∨ C) → (¬D))</code></div>
+  </div>
 
-    <!-- 1.b -->
-    <div style="background: rgba(15, 23, 42, 0.5); border-left: 3px solid #f43f5e; padding: 0.75rem 1rem; border-radius: 0 6px 6px 0;">
-      <div style="font-weight: 700; color: #f43f5e; font-size: 0.9rem;">Soal 1.b (NIM Genap): <code>¬A ∧ B → ¬C ∨ D</code></div>
-      <div style="color: #94a3b8; font-size: 0.85rem; margin: 0.25rem 0;">1. Negasi: <code>(¬A)</code> dan <code>(¬C)</code> &nbsp;|&nbsp; 2. Konjungsi: <code>((¬A) ∧ B)</code> &nbsp;|&nbsp; 3. Disjungsi: <code>((¬C) ∨ D)</code> &nbsp;|&nbsp; 4. Implikasi</div>
-      <div style="color: #f1f5f9; font-weight: 600; font-size: 0.95rem; margin-top: 0.25rem;">
-        Jawaban FPE: <code style="color: #38bdf8; background: rgba(56,189,248,0.1); padding: 2px 6px; border-radius: 4px;">(((¬A) ∧ B) → ((¬C) ∨ D))</code>
-      </div>
-    </div>
+  <div class="uts-soal-card genap">
+    <div class="soal-title">Soal 1.b (NIM Genap): <code>¬A ∧ B → ¬C ∨ D</code></div>
+    <div class="soal-sub">Langkah: 1. Negasi: <code>(¬A)</code> dan <code>(¬C)</code> &nbsp;|&nbsp; 2. Konjungsi: <code>((¬A) ∧ B)</code> &nbsp;|&nbsp; 3. Disjungsi: <code>((¬C) ∨ D)</code> &nbsp;|&nbsp; 4. Implikasi</div>
+    <div class="soal-ans">Jawaban FPE: <code>(((¬A) ∧ B) → ((¬C) ∨ D))</code></div>
+  </div>
 
-    <!-- 1.c -->
-    <div style="background: rgba(15, 23, 42, 0.5); border-left: 3px solid #34d399; padding: 0.75rem 1rem; border-radius: 0 6px 6px 0;">
-      <div style="font-weight: 700; color: #34d399; font-size: 0.9rem;">Soal 1.c (NIM Ganjil): <code>A ∨ B ∧ ¬C ↔ A ∨ ¬B ∧ A → C</code></div>
-      <div style="color: #94a3b8; font-size: 0.85rem; margin: 0.25rem 0;">Perhatikan: <code>→</code> dieksekusi sebelum <code>↔</code>! Ruas kanan implikasi membungkus <code>(A ∨ ((¬B) ∧ A)) → C</code>.</div>
-      <div style="color: #f1f5f9; font-weight: 600; font-size: 0.95rem; margin-top: 0.25rem;">
-        Jawaban FPE: <code style="color: #38bdf8; background: rgba(56,189,248,0.1); padding: 2px 6px; border-radius: 4px;">((A ∨ (B ∧ (¬C))) ↔ ((A ∨ ((¬B) ∧ A)) → C))</code>
-      </div>
-    </div>
+  <div class="uts-soal-card ganjil">
+    <div class="soal-title">Soal 1.c (NIM Ganjil): <code>A ∨ B ∧ ¬C ↔ A ∨ ¬B ∧ A → C</code></div>
+    <div class="soal-sub">⚠️ Implikasi (→) lebih tinggi dibanding Biimplikasi (↔)! Sisi implikasi: <code>(A ∨ ((¬B) ∧ A)) → C</code>.</div>
+    <div class="soal-ans">Jawaban FPE: <code>((A ∨ (B ∧ (¬C))) ↔ ((A ∨ ((¬B) ∧ A)) → C))</code></div>
+  </div>
 
-    <!-- 1.d -->
-    <div style="background: rgba(15, 23, 42, 0.5); border-left: 3px solid #f43f5e; padding: 0.75rem 1rem; border-radius: 0 6px 6px 0;">
-      <div style="font-weight: 700; color: #f43f5e; font-size: 0.9rem;">Soal 1.d (NIM Genap): <code>¬A ∧ B ∨ C → A ↔ A ∧ B ∨ ¬C</code></div>
-      <div style="color: #94a3b8; font-size: 0.85rem; margin: 0.25rem 0;">Kiri: <code>((((¬A) ∧ B) ∨ C) → A)</code> &nbsp;|&nbsp; Kanan: <code>((A ∧ B) ∨ (¬C))</code> &nbsp;|&nbsp; Penghubung: Biimplikasi <code>↔</code></div>
-      <div style="color: #f1f5f9; font-weight: 600; font-size: 0.95rem; margin-top: 0.25rem;">
-        Jawaban FPE: <code style="color: #38bdf8; background: rgba(56,189,248,0.1); padding: 2px 6px; border-radius: 4px;">(((((¬A) ∧ B) ∨ C) → A) ↔ ((A ∧ B) ∨ (¬C)))</code>
-      </div>
-    </div>
+  <div class="uts-soal-card genap">
+    <div class="soal-title">Soal 1.d (NIM Genap): <code>¬A ∧ B ∨ C → A ↔ A ∧ B ∨ ¬C</code></div>
+    <div class="soal-sub">Ruas Kiri: <code>((((¬A) ∧ B) ∨ C) → A)</code> &nbsp;|&nbsp; Ruas Kanan: <code>((A ∧ B) ∨ (¬C))</code> &nbsp;|&nbsp; Operator Utama: Biimplikasi (↔)</div>
+    <div class="soal-ans">Jawaban FPE: <code>(((((¬A) ∧ B) ∨ C) → A) ↔ ((A ∧ B) ∨ (¬C)))</code></div>
   </div>
 </div>
 
 <!-- ======================= TOPIK 2 ======================= -->
-<div class="theory-box" style="margin-bottom: 2rem;">
-  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1rem;">
-    <h3 style="color: #c084fc; margin: 0; font-size: 1.25rem;">📌 TOPIK 2: Translasi Bahasa Alami ke Logika &amp; FPE (Skor: 20)</h3>
-    <span style="background: rgba(168, 85, 247, 0.15); color: #c084fc; padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">CPMK 1</span>
-  </div>
-  
-  <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-    <!-- 2.a -->
-    <div style="background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255,255,255,0.06); padding: 1rem; border-radius: 8px;">
-      <div style="color: #34d399; font-weight: 700; margin-bottom: 0.5rem;">Soal 2.a (NIM Ganjil):</div>
-      <blockquote style="margin: 0 0 0.75rem 0; padding-left: 0.75rem; border-left: 3px solid #64748b; color: #e2e8f0; font-style: italic; font-size: 0.9rem;">
-        "Jika hari ini libur atau cuaca cerah, maka saya akan menemani Ibu pergi ke pasar atau jika tidak libur dan cuaca tidak cerah, saya akan menemani Ayah pergi ke bengkel."
-      </blockquote>
-      <div style="font-size: 0.85rem; color: #94a3b8; line-height: 1.6;">
-        <strong>1. Definisikan Simbol Atomik:</strong><br>
-        • <code>p</code>: Hari ini libur<br>
-        • <code>q</code>: Cuaca cerah<br>
-        • <code>r</code>: Saya menemani Ibu pergi ke pasar<br>
-        • <code>s</code>: Saya menemani Ayah pergi ke bengkel<br>
-        <strong>2. Translasi Klausa:</strong><br>
-        • Klausa 1: <em>"Jika libur atau cuaca cerah, maka menemani Ibu"</em> &rarr; <code>(p ∨ q) → r</code><br>
-        • Klausa 2: <em>"jika tidak libur dan tidak cerah, maka menemani Ayah"</em> &rarr; <code>(¬p ∧ ¬q) → s</code><br>
-        • Kata Hubung Antar Klausa: <em>"atau"</em> &rarr; <code>∨</code><br>
-        <strong>3. Bentuk FPE Final:</strong>
-        <div style="margin-top: 0.4rem;">
-          <code style="color: #38bdf8; font-weight: 700; background: rgba(56,189,248,0.1); padding: 4px 8px; border-radius: 4px; font-size: 0.95rem;">(((p ∨ q) → r) ∨ (((¬p) ∧ (¬q)) → s))</code>
-        </div>
-      </div>
-    </div>
+<div class="uts-topic-section">
+  <h3>📌 Topik 2: Translasi Bahasa Alami ke Logika &amp; FPE (Skor: 20 | CPMK 1)</h3>
+  <p>
+    <strong>Instruksi Soal:</strong> <em>Ubahlah pernyataan berikut menjadi sebuah ekspresi logika dan memenuhi FPE!</em>
+  </p>
 
-    <!-- 2.b -->
-    <div style="background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255,255,255,0.06); padding: 1rem; border-radius: 8px;">
-      <div style="color: #f43f5e; font-weight: 700; margin-bottom: 0.5rem;">Soal 2.b (NIM Genap):</div>
-      <blockquote style="margin: 0 0 0.75rem 0; padding-left: 0.75rem; border-left: 3px solid #64748b; color: #e2e8f0; font-style: italic; font-size: 0.9rem;">
-        "Saya tidak akan melanjutkan kuliah jika dan hanya jika saya tidak lulus ujian dan mendapatkan nilai rendah atau orang tua keberatan."
-      </blockquote>
-      <div style="font-size: 0.85rem; color: #94a3b8; line-height: 1.6;">
-        <strong>1. Definisikan Simbol Atomik:</strong><br>
-        • <code>p</code>: Saya melanjutkan kuliah (maka "tidak melanjutkan kuliah" = <code>¬p</code>)<br>
-        • <code>q</code>: Saya lulus ujian (maka "tidak lulus ujian" = <code>¬q</code>)<br>
-        • <code>r</code>: Saya mendapatkan nilai rendah<br>
-        • <code>s</code>: Orang tua keberatan<br>
-        <strong>2. Struktur Kondisi Kanan:</strong><br>
-        • "tidak lulus dan nilai rendah": <code>(¬q ∧ r)</code><br>
-        • didisjungsikan dengan keberatan ortu: <code>((¬q ∧ r) ∨ s)</code><br>
-        • Penghubung Utama: <em>"jika dan hanya jika"</em> &rarr; Biimplikasi <code>↔</code><br>
-        <strong>3. Bentuk FPE Final:</strong>
-        <div style="margin-top: 0.4rem;">
-          <code style="color: #38bdf8; font-weight: 700; background: rgba(56,189,248,0.1); padding: 4px 8px; border-radius: 4px; font-size: 0.95rem;">((¬p) ↔ (((¬q) ∧ r) ∨ s))</code>
-        </div>
-      </div>
+  <div class="uts-soal-card ganjil">
+    <div class="soal-title">Soal 2.a (NIM Ganjil):</div>
+    <blockquote>
+      "Jika hari ini libur atau cuaca cerah, maka saya akan menemani Ibu pergi ke pasar atau jika tidak libur dan cuaca tidak cerah, saya akan menemani Ayah pergi ke bengkel."
+    </blockquote>
+    <div class="soal-sub">
+      <strong>1. Pendefinisian Variabel Atomik:</strong><br>
+      • <code>p</code>: Hari ini libur<br>
+      • <code>q</code>: Cuaca cerah<br>
+      • <code>r</code>: Saya menemani Ibu pergi ke pasar<br>
+      • <code>s</code>: Saya menemani Ayah pergi ke bengkel<br>
+      <strong>2. Analisis Struktur Klausa:</strong><br>
+      • Klausa 1: "Jika libur atau cerah, maka menemani Ibu" &rarr; <code>(p ∨ q) → r</code><br>
+      • Klausa 2: "Jika tidak libur dan tidak cerah, maka menemani Ayah" &rarr; <code>(¬p ∧ ¬q) → s</code><br>
+      • Penghubung Antar Klausa: "atau" &rarr; <code>∨</code>
+    </div>
+    <div class="soal-ans">
+      Jawaban FPE: <code>(((p ∨ q) → r) ∨ (((¬p) ∧ (¬q)) → s))</code>
+    </div>
+  </div>
+
+  <div class="uts-soal-card genap">
+    <div class="soal-title">Soal 2.b (NIM Genap):</div>
+    <blockquote>
+      "Saya tidak akan melanjutkan kuliah jika dan hanya jika saya tidak lulus ujian dan mendapatkan nilai rendah atau orang tua keberatan."
+    </blockquote>
+    <div class="soal-sub">
+      <strong>1. Pendefinisian Variabel Atomik:</strong><br>
+      • <code>p</code>: Saya melanjutkan kuliah (maka "tidak melanjutkan kuliah" = <code>¬p</code>)<br>
+      • <code>q</code>: Saya lulus ujian (maka "tidak lulus ujian" = <code>¬q</code>)<br>
+      • <code>r</code>: Saya mendapatkan nilai rendah<br>
+      • <code>s</code>: Orang tua keberatan<br>
+      <strong>2. Analisis Struktur Kondisi Kanan:</strong><br>
+      • Sub-kondisi: "tidak lulus dan nilai rendah": <code>(¬q ∧ r)</code><br>
+      • Didisjungsikan dengan keberatan orang tua: <code>((¬q ∧ r) ∨ s)</code><br>
+      • Penghubung Utama: "jika dan hanya jika" &rarr; Biimplikasi (↔)
+    </div>
+    <div class="soal-ans">
+      Jawaban FPE: <code>((¬p) ↔ (((¬q) ∧ r) ∨ s))</code>
     </div>
   </div>
 </div>
 
 <!-- ======================= TOPIK 3 ======================= -->
-<div class="theory-box" style="margin-bottom: 2rem;">
-  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1rem;">
-    <h3 style="color: #34d399; margin: 0; font-size: 1.25rem;">📌 TOPIK 3: Tabel Kebenaran 8 Baris &amp; Analisis Tautologi (Skor: 30)</h3>
-    <span style="background: rgba(52, 211, 153, 0.15); color: #34d399; padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">CPMK 2</span>
-  </div>
-
-  <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6;">
-    Untuk 3 variabel proposisi ($A, B, C$), jumlah baris yang wajib digambar adalah $2^3 = 8$ baris kombinasi: <code>TTT, TTF, TFT, TFF, FTT, FTF, FFT, FFF</code>.
+<div class="uts-topic-section">
+  <h3>📌 Topik 3: Tabel Kebenaran 8 Baris &amp; Analisis Tautologi (Skor: 30 | CPMK 2)</h3>
+  <p>
+    <strong>Instruksi Soal:</strong> <em>Tentukan apakah ekspresi logika berikut ini tautologi, kontradiksi, atau contingent dengan menggunakan Tabel Kebenaran!</em><br>
+    Untuk 3 variabel proposisi (<code>A, B, C</code>), wajib menyusun <strong>8 baris kombinasi</strong>: <code>TTT, TTF, TFT, TFF, FTT, FTF, FFT, FFF</code>.
   </p>
 
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+  <div class="uts-grid-2col">
     <!-- 3.a -->
-    <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(56,189,248,0.2); border-radius: 8px; padding: 1rem;">
-      <div style="font-weight: 700; color: #38bdf8; font-size: 0.95rem; margin-bottom: 0.25rem;">Soal 3.a (Frege's Axiom)</div>
-      <code style="display:block; color: #e2e8f0; font-size: 0.85rem; margin-bottom: 0.5rem;">(A → (B → C)) → ((A → B) → (A → C))</code>
-      <div style="font-size: 0.85rem; color: #94a3b8; line-height: 1.5;">
+    <div class="uts-soal-card primary">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 6px;">
+        <span class="soal-title">Soal 3.a (Frege's Axiom)</span>
+        <span class="uts-badge" style="background:var(--emerald-bg); color:var(--accent-emerald); border:1px solid var(--emerald-border);">TAUTOLOGI</span>
+      </div>
+      <code>(A → (B → C)) → ((A → B) → (A → C))</code>
+      <div class="soal-sub" style="margin-top: 8px;">
         Kolom Perantara: <code>B→C</code>, <code>A→(B→C)</code>, <code>A→B</code>, <code>A→C</code>, <code>(A→B)→(A→C)</code>.<br>
-        <span style="color: #34d399; font-weight: 700;">Hasil Akhir: TTTTTTTT (Semua Benar)</span><br>
-        Status: <strong>TAUTOLOGI</strong>
+        <strong>Hasil Akhir:</strong> Seluruh 8 baris bernilai Benar (T).
       </div>
     </div>
 
     <!-- 3.b -->
-    <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(56,189,248,0.2); border-radius: 8px; padding: 1rem;">
-      <div style="font-weight: 700; color: #38bdf8; font-size: 0.95rem; margin-bottom: 0.25rem;">Soal 3.b (Silogisme Hipotesis)</div>
-      <code style="display:block; color: #e2e8f0; font-size: 0.85rem; margin-bottom: 0.5rem;">((A → B) ∧ (B → C)) → (A → C)</code>
-      <div style="font-size: 0.85rem; color: #94a3b8; line-height: 1.5;">
+    <div class="uts-soal-card primary">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 6px;">
+        <span class="soal-title">Soal 3.b (Silogisme Hipotesis)</span>
+        <span class="uts-badge" style="background:var(--emerald-bg); color:var(--accent-emerald); border:1px solid var(--emerald-border);">TAUTOLOGI</span>
+      </div>
+      <code>((A → B) ∧ (B → C)) → (A → C)</code>
+      <div class="soal-sub" style="margin-top: 8px;">
         Kolom Perantara: <code>A→B</code>, <code>B→C</code>, <code>(A→B)∧(B→C)</code>, <code>A→C</code>.<br>
-        <span style="color: #34d399; font-weight: 700;">Hasil Akhir: TTTTTTTT (Semua Benar)</span><br>
-        Status: <strong>TAUTOLOGI</strong>
+        <strong>Hasil Akhir:</strong> Seluruh 8 baris bernilai Benar (T).
       </div>
     </div>
 
     <!-- 3.c -->
-    <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(56,189,248,0.2); border-radius: 8px; padding: 1rem;">
-      <div style="font-weight: 700; color: #38bdf8; font-size: 0.95rem; margin-bottom: 0.25rem;">Soal 3.c (Karakteristik Biimplikasi)</div>
-      <code style="display:block; color: #e2e8f0; font-size: 0.85rem; margin-bottom: 0.5rem;">(A ↔ B) ↔ ((A ∧ B) ∨ (¬A ∧ ¬B))</code>
-      <div style="font-size: 0.85rem; color: #94a3b8; line-height: 1.5;">
-        Dua variabel (4 baris): <code>A↔B</code> bernilai T saat (T,T) dan (F,F), persis sama dengan <code>(A∧B)∨(¬A∧¬B)</code>.<br>
-        <span style="color: #34d399; font-weight: 700;">Hasil Akhir: TTTT (Semua Benar)</span><br>
-        Status: <strong>TAUTOLOGI</strong>
+    <div class="uts-soal-card primary">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 6px;">
+        <span class="soal-title">Soal 3.c (Karakteristik Biimplikasi)</span>
+        <span class="uts-badge" style="background:var(--emerald-bg); color:var(--accent-emerald); border:1px solid var(--emerald-border);">TAUTOLOGI</span>
+      </div>
+      <code>(A ↔ B) ↔ ((A ∧ B) ∨ (¬A ∧ ¬B))</code>
+      <div class="soal-sub" style="margin-top: 8px;">
+        Tabel 4 Baris (2 Variabel): <code>A↔B</code> bernilai T saat (T,T) dan (F,F), tepat sama dengan <code>(A∧B)∨(¬A∧¬B)</code>.<br>
+        <strong>Hasil Akhir:</strong> Seluruh 4 baris bernilai Benar (T).
       </div>
     </div>
 
     <!-- 3.d -->
-    <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(244,63,94,0.3); border-radius: 8px; padding: 1rem;">
-      <div style="font-weight: 700; color: #f43f5e; font-size: 0.95rem; margin-bottom: 0.25rem;">Soal 3.d (Negasi Distributif)</div>
-      <code style="display:block; color: #e2e8f0; font-size: 0.85rem; margin-bottom: 0.5rem;">¬(A ∨ (B ∧ C)) ↔ ((A ∨ B) ∧ (A ∨ C))</code>
-      <div style="font-size: 0.85rem; color: #94a3b8; line-height: 1.5;">
-        Ruas kanan adalah bentuk distributif dari ruas dalam kiri: $X \equiv (A \vee B) \wedge (A \vee C)$. Formula ini menjadi $\neg X \leftrightarrow X$.<br>
-        <span style="color: #f43f5e; font-weight: 700;">Hasil Akhir: FFFFFFFF (Semua Salah)</span><br>
-        Status: <strong>KONTRADIKSI</strong>
+    <div class="uts-soal-card primary">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 6px;">
+        <span class="soal-title">Soal 3.d (Negasi Distributif)</span>
+        <span class="uts-badge" style="background:var(--rose-bg); color:var(--accent-rose); border:1px solid var(--rose-border);">KONTRADIKSI</span>
+      </div>
+      <code>¬(A ∨ (B ∧ C)) ↔ ((A ∨ B) ∧ (A ∨ C))</code>
+      <div class="soal-sub" style="margin-top: 8px;">
+        Berdasarkan hukum distributif, ruas kanan identik dengan isi kurung ruas kiri: <code>(A ∨ (B ∧ C)) ≡ ((A ∨ B) ∧ (A ∨ C))</code>.<br>
+        Formula ini setara dengan <code>¬X ↔ X</code> yang selalu bernilai Salah di setiap kondisi.<br>
+        <strong>Hasil Akhir:</strong> Seluruh 8 baris bernilai Salah (F).
       </div>
     </div>
   </div>
 </div>
 
 <!-- ======================= TOPIK 4 ======================= -->
-<div class="theory-box">
-  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1rem;">
-    <h3 style="color: #f59e0b; margin: 0; font-size: 1.25rem;">📌 TOPIK 4: Pembuktian Ekuivalensi &amp; Jebakan Asosiatif (Skor: 30)</h3>
-    <span style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">CPMK 2</span>
+<div class="uts-topic-section">
+  <h3>📌 Topik 4: Pembuktian Ekuivalensi &amp; Jebakan Asosiatif (Skor: 30 | CPMK 2)</h3>
+  <p>
+    <strong>Instruksi Soal:</strong> <em>Buktikan ekspresi-ekspresi logika berikut ini ekuivalen dengan tabel kebenaran!</em>
+  </p>
+
+  <!-- CALLOUT JEBAKAN POPULER -->
+  <div class="uts-callout-warning">
+    <h4>⚠️ JEBAKAN POPULER UTS UMS (Soal 4.d): Apakah Implikasi Asosiatif?</h4>
+    <p>
+      <strong>Pertanyaan:</strong> Apakah <code>A → (B → C) ≡ (A → B) → C</code> ?
+    </p>
+    <p>
+      <strong style="color:var(--accent-rose); font-size:14px;">JAWABAN: BUKTIKAN TIDAK EKUIVALEN!</strong>
+    </p>
+    <p>
+      Tunjukkan baris penyangkal (Counterexample) saat <code>A = F, B = F, C = F</code>:<br>
+      • <strong>Ruas Kiri:</strong> <code>F → (F → F) = F → T = T</code> (Benar)<br>
+      • <strong>Ruas Kanan:</strong> <code>(F → F) → F = T → F = F</code> (Salah)<br>
+      Karena terdapat baris dengan nilai kebenaran berbeda, terbukti bahwa <strong>Implikasi TIDAK BERSIFAT ASOSIATIF</strong>. Tanda kurung tidak boleh digeser sembarangan!
+    </p>
   </div>
 
-  <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 8px; padding: 1rem; margin-bottom: 1.25rem;">
-    <h4 style="color: #f87171; margin: 0 0 0.5rem 0; font-size: 1rem;">⚠️ JEBAKAN POPULER UTS UMS (Soal 4.d): Apakah Implikasi Asosiatif?</h4>
-    <div style="color: #f1f5f9; font-size: 0.95rem; line-height: 1.6;">
-      Apakah $A \rightarrow (B \rightarrow C) \equiv (A \rightarrow B) \rightarrow C$ ?<br>
-      <strong>JAWABAN: TIDAK EKUIVALEN!</strong><br>
-      Tunjukkan baris saat $A = \text{False}, B = \text{False}, C = \text{False}$:<br>
-      • <strong>Ruas Kiri:</strong> $F \rightarrow (F \rightarrow F) = F \rightarrow T = \mathbf{T}$ (Benar)<br>
-      • <strong>Ruas Kanan:</strong> $(F \rightarrow F) \rightarrow F = T \rightarrow F = \mathbf{F}$ (Salah)<br>
-      Karena terdapat baris dengan nilai kebenaran berbeda, kedua ruas terbukti <strong>TIDAK EKUIVALEN</strong>.
-    </div>
-  </div>
-
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
-    <div style="background: rgba(15, 23, 42, 0.5); border-left: 3px solid #38bdf8; padding: 0.75rem 1rem; border-radius: 0 6px 6px 0;">
-      <div style="font-weight: 700; color: #38bdf8; font-size: 0.9rem;">Soal 4.b: $A \rightarrow (\neg A \rightarrow B) \equiv 1$</div>
-      <div style="color: #94a3b8; font-size: 0.85rem; margin-top: 0.25rem;">
-        $\neg A \rightarrow B \equiv A \vee B$. Maka $A \rightarrow (A \vee B) \equiv \neg A \vee (A \vee B) \equiv (\neg A \vee A) \vee B \equiv 1 \vee B \equiv 1$. Kolom tabel seluruhnya T (Terbukti Tautologi).
+  <div class="uts-grid-2col">
+    <div class="uts-soal-card primary">
+      <div class="soal-title">Soal 4.b: <code>A → (¬A → B) ≡ 1</code></div>
+      <div class="soal-sub">
+        Uraian: <code>¬A → B ≡ A ∨ B</code>.<br>
+        Maka: <code>A → (A ∨ B) ≡ ¬A ∨ (A ∨ B) ≡ (¬A ∨ A) ∨ B ≡ 1 ∨ B ≡ 1</code>.<br>
+        <strong>Kesimpulan:</strong> Seluruh baris pada tabel bernilai Benar (Terbukti Tautologi = 1).
       </div>
     </div>
 
-    <div style="background: rgba(15, 23, 42, 0.5); border-left: 3px solid #38bdf8; padding: 0.75rem 1rem; border-radius: 0 6px 6px 0;">
-      <div style="font-weight: 700; color: #38bdf8; font-size: 0.9rem;">Soal 4.c: $\neg(\neg(A \wedge B) \vee B) \equiv 0$</div>
-      <div style="color: #94a3b8; font-size: 0.85rem; margin-top: 0.25rem;">
-        $\neg(A \wedge B) \vee B \equiv (\neg A \vee \neg B) \vee B \equiv \neg A \vee 1 \equiv 1$. Maka negasinya $\neg(1) \equiv 0$. Kolom tabel seluruhnya F (Terbukti Kontradiksi).
+    <div class="uts-soal-card primary">
+      <div class="soal-title">Soal 4.c: <code>¬(¬(A ∧ B) ∨ B) ≡ 0</code></div>
+      <div class="soal-sub">
+        Uraian: <code>¬(A ∧ B) ∨ B ≡ (¬A ∨ ¬B) ∨ B ≡ ¬A ∨ 1 ≡ 1</code>.<br>
+        Maka negasinya: <code>¬(1) ≡ 0</code>.<br>
+        <strong>Kesimpulan:</strong> Seluruh baris pada tabel bernilai Salah (Terbukti Kontradiksi = 0).
       </div>
     </div>
   </div>
