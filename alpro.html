@@ -15,7 +15,7 @@
       --font-heading: 'Plus Jakarta Sans', -apple-system, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
 
-      /* Dark Mode (Cyber-Academic Python Palette) */
+      /* Dark Mode Palette (Cyber-Academic) */
       --bg-page: #0b0f17;
       --bg-surface: #111827;
       --bg-surface-elevated: #162032;
@@ -34,6 +34,9 @@
       --primary-light: rgba(59, 130, 246, 0.15);
       --primary-border: rgba(59, 130, 246, 0.35);
 
+      --py-blue: #3776ab;
+      --py-yellow: #ffd43b;
+
       --accent-emerald: #10b981;
       --emerald-bg: rgba(16, 185, 129, 0.12);
       --emerald-border: rgba(16, 185, 129, 0.35);
@@ -49,10 +52,6 @@
       --accent-cyan: #06b6d4;
       --cyan-bg: rgba(6, 182, 212, 0.12);
       --cyan-border: rgba(6, 182, 212, 0.35);
-
-      --accent-purple: #a855f7;
-      --purple-bg: rgba(168, 85, 247, 0.12);
-      --purple-border: rgba(168, 85, 247, 0.35);
 
       --radius-sm: 8px;
       --radius-md: 12px;
@@ -98,10 +97,6 @@
       --cyan-bg: #ecfeff;
       --cyan-border: #a5f3fc;
 
-      --accent-purple: #9333ea;
-      --purple-bg: #faf5ff;
-      --purple-border: #e9d5ff;
-
       --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
       --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.08);
     }
@@ -117,7 +112,7 @@
       flex-direction: column;
     }
 
-    /* Top Navigation Bar */
+    /* Top Navigation Header */
     .top-header {
       background: var(--bg-surface);
       border-bottom: 1px solid var(--border-color);
@@ -190,11 +185,6 @@
       color: var(--text-main);
       background: var(--bg-hover);
       border-color: var(--border-color);
-    }
-    .nav-link-btn.active {
-      color: var(--primary);
-      background: var(--primary-light);
-      border-color: var(--primary-border);
     }
 
     .theme-toggle-btn {
@@ -400,11 +390,6 @@
       border-color: var(--emerald-border);
       border-left-color: var(--accent-emerald);
     }
-    .callout.purple {
-      background: var(--purple-bg);
-      border-color: var(--purple-border);
-      border-left-color: var(--accent-purple);
-    }
     .callout-title {
       font-weight: 700;
       font-size: 14px;
@@ -442,8 +427,15 @@
       background: var(--bg-hover);
       border-color: var(--primary-border);
     }
+    .btn-emerald {
+      background: var(--accent-emerald);
+      color: #ffffff;
+    }
+    .btn-emerald:hover {
+      background: #059669;
+    }
 
-    /* Tracing Simulator Specifics */
+    /* Tracing Simulator Ruler */
     .ruler-container {
       display: flex;
       overflow-x: auto;
@@ -464,6 +456,7 @@
       padding: 6px 4px;
       font-family: var(--font-mono);
       transition: all 0.2s;
+      user-select: none;
     }
     .ruler-cell.active-slice {
       border-color: var(--accent-amber);
@@ -488,7 +481,7 @@
     .fc-wrapper {
       perspective: 1000px;
       width: 100%;
-      max-width: 600px;
+      max-width: 620px;
       margin: 20px auto;
       height: 320px;
       cursor: pointer;
@@ -541,6 +534,10 @@
       background: var(--bg-surface-elevated);
       margin-bottom: 8px;
       transition: all 0.2s;
+      cursor: pointer;
+    }
+    .flowchart-step:hover {
+      border-color: var(--primary-border);
     }
     .flowchart-step.highlight {
       border-color: var(--accent-emerald);
@@ -557,6 +554,7 @@
       border-radius: var(--radius-sm);
       background: var(--bg-surface);
       border: 1px solid var(--border-color);
+      flex-shrink: 0;
     }
 
     /* A4 Cheatsheet Printable Styles */
@@ -623,36 +621,47 @@
       font-size: 10.5px;
     }
 
-    /* Robot Grid Visualizer */
-    .robot-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 44px);
-      grid-template-rows: repeat(5, 44px);
-      gap: 3px;
-      margin: 16px auto;
-      justify-content: center;
+    /* Question Grid in UTS Arena */
+    .q-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
     }
-    .robot-cell {
-      background: var(--bg-surface-elevated);
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
+    .q-grid-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
-      position: relative;
+      cursor: pointer;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface-elevated);
+      color: var(--text-muted);
+      transition: all 0.2s;
     }
-    .robot-cell.wall {
-      background: #334155;
-      border-color: #64748b;
+    .q-grid-btn:hover {
+      border-color: var(--primary);
+      color: var(--text-main);
     }
-    .robot-cell.open-window {
-      border: 2px dashed var(--accent-rose);
-      background: var(--rose-bg);
+    .q-grid-btn.active {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-border);
+      color: var(--primary);
     }
-    .robot-cell.closed-window {
-      border: 2px solid var(--accent-emerald);
+    .q-grid-btn.correct {
       background: var(--emerald-bg);
+      border-color: var(--emerald-border);
+      color: var(--accent-emerald);
+    }
+    .q-grid-btn.wrong {
+      background: var(--rose-bg);
+      border-color: var(--rose-border);
+      color: var(--accent-rose);
     }
 
     /* Print Styles */
@@ -702,17 +711,17 @@
   <!-- Top Navigation Header -->
   <header class="top-header no-print">
     <div class="header-inner">
-      <a href="alpro.html" class="brand-group">
+      <a href="index.html" class="brand-group">
         <div class="brand-logo">🐍</div>
         <div class="brand-title">
           <span>ALPRO UMS</span>
-          <span class="brand-subtitle">Algoritma & Pemrograman Python</span>
+          <span class="brand-subtitle">Algoritma &amp; Pemrograman Python</span>
         </div>
       </a>
 
       <div class="header-actions">
-        <a href="index.html" class="nav-link-btn" title="Pindah ke Portal Logika dan Himpunan">
-          <span>📐</span> Logika & Himpunan
+        <a href="https://github.com/voltakyy/materi-lohim" target="_blank" rel="noopener noreferrer" class="nav-link-btn" title="Kunjungi Portal Materi Logika dan Himpunan">
+          <span>📐</span> Logika &amp; Himpunan
         </a>
         <a href="dashboard.html" class="nav-link-btn" title="Jadwal Kuliah">
           <span>📅</span> Dashboard
@@ -724,26 +733,23 @@
     </div>
   </header>
 
-  <!-- Sub Navigation (10 Tabs) -->
+  <!-- Sub Navigation (9 Tabs Total - Fully Active & Populated) -->
   <nav class="subnav-bar no-print">
     <div class="subnav-inner">
       <button class="tab-btn active" onclick="switchTab('tab-diktat')">
-        <span>📚</span> Diktat & UTS
+        <span>📚</span> Diktat &amp; UTS
       </button>
       <button class="tab-btn" onclick="switchTab('tab-tracing')">
         <span>🧪</span> Tracing NIM
       </button>
       <button class="tab-btn" onclick="switchTab('tab-kasir')">
-        <span>🛒</span> Kasir & Diskon
+        <span>🛒</span> Kasir &amp; Diskon
       </button>
       <button class="tab-btn" onclick="switchTab('tab-slicing-lab')">
         <span>🔤</span> Slicing Lab
       </button>
       <button class="tab-btn" onclick="switchTab('tab-loop-pattern')">
         <span>⭐</span> Pola Bintang
-      </button>
-      <button class="tab-btn" onclick="switchTab('tab-gvr-robot')">
-        <span>🤖</span> Robot GvRng
       </button>
       <button class="tab-btn" onclick="switchTab('tab-hvs-cheatsheet')">
         <span>📄</span> Lembar Catatan A4
@@ -772,15 +778,25 @@
           <span style="background:var(--primary-light); color:var(--primary); border:1px solid var(--primary-border); padding:3px 10px; border-radius:var(--radius-full); font-size:11px; font-weight:700;">KURIKULUM RESMI UMS</span>
           <span style="background:var(--amber-bg); color:var(--accent-amber); border:1px solid var(--amber-border); padding:3px 10px; border-radius:var(--radius-full); font-size:11px; font-weight:700;">SEMESTER 1 GASAL (MABA)</span>
         </div>
-        <h1 style="font-size:24px; color:var(--text-main); margin-bottom:8px;">🐍 Diktat Komprehensif Algoritma & Pemrograman</h1>
+        <h1 style="font-size:24px; color:var(--text-main); margin-bottom:8px;">🐍 Diktat Komprehensif Algoritma &amp; Pemrograman</h1>
         <p style="color:var(--text-body); font-size:14px; margin-bottom:0;">
           Materi kuliah dan bank soal autentik Ujian Tengah Semester (UTS) Program Studi Informatika UMS. Dosen Penguji: <strong>Arif Setiawan, S.Kom., M.Eng.</strong>, <strong>Husni Thamrin, M.T., Ph.D.</strong>, dan <strong>M. Syahriandi Adhantoro, M.Kom.</strong>
         </p>
+        <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; padding-top:10px; border-top:1px solid var(--border-subtle);">
+          <span style="font-size:12px; font-weight:700; color:var(--text-subtle); display:flex; align-items:center; gap:4px;">📥 Berkas Asli Repotif HIMATIF UMS:</span>
+          <a href="repotif_arsip_alpro/doc_213_UTS_2025_Reguler_Algoritma_dan_Pemrograman_Reguler.pdf" target="_blank" class="nav-link-btn" style="padding:4px 10px; font-size:11px; text-decoration:none; display:inline-flex; align-items:center; gap:5px;">
+            <span>📄</span> UTS 2025/2026 (PDF Asli)
+          </a>
+          <a href="repotif_arsip_alpro/doc_26_UTS_2024_Alpro_Algoritma_dan_Pemrograman.pdf" target="_blank" class="nav-link-btn" style="padding:4px 10px; font-size:11px; text-decoration:none; display:inline-flex; align-items:center; gap:5px;">
+            <span>📄</span> UTS 2024/2025 (PDF Asli)
+          </a>
+        </div>
+
       </div>
 
       <!-- MODUL 1 -->
       <article class="article-card">
-        <h2>1️⃣ Modul 1: Konsep Dasar Algoritma, Flowchart & 3 Perintah Komputer</h2>
+        <h2>1️⃣ Modul 1: Konsep Dasar Algoritma, Flowchart &amp; 3 Perintah Komputer</h2>
         <p>
           Kata <strong>Algoritma</strong> diserap dari nama matematikawan muslim ternama <em>Abu Ja'far Muhammad bin Musa Al-Khawarizmi</em> (penemu Aljabar). Dalam bidang informatika, algoritma didefinisikan sebagai <strong>urutan langkah-langkah logis dan terstruktur yang disusun secara sistematis untuk menyelesaikan persoalan komputasi</strong>.
         </p>
@@ -804,7 +820,7 @@
               <td><strong>Bahasa Alami</strong></td>
               <td>Teks narasi deskriptif</td>
               <td>Mudah dibaca orang awam</td>
-              <td>Sering ambigu & terlalu panjang</td>
+              <td>Sering ambigu &amp; terlalu panjang</td>
             </tr>
             <tr>
               <td><strong>Flowchart</strong></td>
@@ -825,7 +841,7 @@
         <p>Setiap program komputer modern pada dasarnya menjalankan 3 operasi fundamental:</p>
         <ol>
           <li><strong>Perintah Meminta Data (Input):</strong> Menerima data dari pengguna. Di Python menggunakan fungsi <code>input()</code>.</li>
-          <li><strong>Perintah Menyimpan / Menghitung Data (Assignment & Process):</strong> Menyimpan nilai ke memori variabel menggunakan operator penugasan <code>=</code> dan memprosesnya dengan ekspresi aritmatika.</li>
+          <li><strong>Perintah Menyimpan / Menghitung Data (Assignment &amp; Process):</strong> Menyimpan nilai ke memori variabel menggunakan operator penugasan <code>=</code> dan memprosesnya dengan ekspresi aritmatika.</li>
           <li><strong>Perintah Menampilkan Data (Output):</strong> Menyajikan hasil pengolahan ke layar terminal. Di Python menggunakan fungsi <code>print()</code>.</li>
         </ol>
 
@@ -837,9 +853,9 @@ print(salam)                                 # 3. Menampilkan data (Output)</cod
 
       <!-- MODUL 2 -->
       <article class="article-card">
-        <h2>2️⃣ Modul 2: Tipe Data, Variabel & Operator Aritmatika Python</h2>
+        <h2>2️⃣ Modul 2: Tipe Data, Variabel &amp; Operator Aritmatika Python</h2>
         <p>
-          Python adalah bahasa yang berorientasi objek dengan *dynamically typed variables*. Anda tidak perlu mendeklarasikan tipe data secara eksplisit saat membuat variabel.
+          Python adalah bahasa yang berorientasi objek dengan <em>dynamically typed variables</em>. Anda tidak perlu mendeklarasikan tipe data secara eksplisit saat membuat variabel.
         </p>
 
         <h3>Tipe Data Dasar Python</h3>
@@ -878,7 +894,7 @@ print(salam)                                 # 3. Menampilkan data (Output)</cod
       <article class="article-card">
         <h2>3️⃣ Modul 3: String Slicing Komprehensif (Materi Utama UTS)</h2>
         <p>
-          String di Python diperlakukan sebagai urutan karakter (*sequence*) yang setiap karakternya memiliki indeks numerik tetap.
+          String di Python diperlakukan sebagai urutan karakter (<em>sequence</em>) yang setiap karakternya memiliki indeks numerik tetap.
         </p>
 
         <h3>Aturan Indeks Python</h3>
@@ -950,39 +966,51 @@ print("Total belanjaan:", total)</code></pre>
     <!-- ==================== TAB 2: TRACING NIM SIMULATOR ==================== -->
     <div id="tab-tracing" class="tab-pane">
       <div class="article-card">
-        <h2>🧪 Interactive NIM Slicing & Code Tracing Simulator</h2>
-        <p>
-          Simulator ini merekonstruksi <strong>Soal No. 3 UTS 2025/2026 & Soal No. 2 UTS 2024/2025</strong> dari dosen penguji Dr. Husni Thamrin. Masukkan NIM Anda untuk melihat visualisasi pemotongan string mundur (*reverse step*) serta nilai dari variabel <code>m, n, p, q, r, s, t, u, v, w</code> secara instan!
-        </p>
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:12px;">
+          <div>
+            <h2 style="border:none; margin:0; padding:0;">🧪 Simulator Tracing NIM &amp; Evaluasi Variabel UTS</h2>
+            <p style="margin:4px 0 0; font-size:13px; color:var(--text-muted);">
+              Rekonstruksi presisi Soal No. 3 UTS 2025/2026 &amp; Soal No. 2 UTS 2024/2025 (Dr. Husni Thamrin).
+            </p>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn-emerald" onclick="stepForwardNimTrace()" id="btn-nim-step">
+              ▶️ Langkah Demi Langkah (Step)
+            </button>
+            <button class="btn btn-outline" onclick="resetNimStepper()">
+              🔄 Reset
+            </button>
+          </div>
+        </div>
 
-        <div style="background:var(--bg-surface-elevated); padding:16px; border-radius:var(--radius-sm); border:1px solid var(--border-color); margin-bottom:20px;">
+        <div style="background:var(--bg-surface-elevated); padding:16px; border-radius:var(--radius-sm); border:1px solid var(--border-color); margin-bottom:18px;">
           <label style="display:block; font-size:13px; font-weight:700; color:var(--text-main); margin-bottom:6px;">
             Masukkan NIM Mahasiswa Informatika UMS:
           </label>
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <input type="text" id="input-nim" value="L200240189" maxlength="10" 
+            <input type="text" id="input-nim" value="L200240189" maxlength="10" oninput="runNimTracing()"
               style="padding:10px 14px; font-family:var(--font-mono); font-size:16px; font-weight:700; background:var(--bg-surface); color:var(--text-main); border:1px solid var(--primary-border); border-radius:var(--radius-sm); flex:1; min-width:200px;">
             <button class="btn btn-primary" onclick="runNimTracing()">
-              ⚡ Jalankan Tracing Kode
+              ⚡ Evaluasi Penuh
             </button>
-            <button class="btn btn-outline" onclick="setPresetNim('L200240010')">
-              NIM Contoh 1
-            </button>
-            <button class="btn btn-outline" onclick="setPresetNim('L200240123')">
-              NIM Contoh 2
-            </button>
-          </div>
-          <div style="font-size:12px; color:var(--text-muted); margin-top:6px;">
-            *Panjang NIM UMS harus 10 karakter (contoh: <code>L200240189</code>).
+            <button class="btn btn-outline" onclick="setPresetNim('L200240010')">NIM 010</button>
+            <button class="btn btn-outline" onclick="setPresetNim('L200240123')">NIM 123</button>
+            <button class="btn btn-outline" onclick="setPresetNim('L200240999')">NIM 999</button>
           </div>
         </div>
 
         <!-- VISUAL STRING RULER -->
-        <h3 style="font-size:15px; margin-bottom:4px;">📏 Visualisasi Pengindeksan String NIM (<code>Z</code>)</h3>
+        <h3 style="font-size:15px; margin-bottom:4px;">📏 Penggaris Indeks Karakter String NIM (<code>Z</code>)</h3>
         <div id="ruler-display" class="ruler-container"></div>
 
+        <!-- STEPPER STATUS ALERT -->
+        <div id="stepper-alert-box" class="callout info" style="display:none; margin:14px 0;">
+          <div class="callout-title" id="stepper-title">Langkah Eksekusi:</div>
+          <div id="stepper-desc" style="font-size:13.5px; line-height:1.6;"></div>
+        </div>
+
         <!-- CODE & RESULT GRID -->
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:20px; margin-top:20px;">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:20px; margin-top:16px;">
           <div>
             <h3 style="font-size:15px; margin-bottom:8px;">📜 Kode Soal Asli UTS UMS:</h3>
             <pre><code id="code-snippet-box">Z = 'L200240189'
@@ -1015,12 +1043,24 @@ w = n < 6</code></pre>
     <!-- ==================== TAB 3: KASIR & FLOWCHART ==================== -->
     <div id="tab-kasir" class="tab-pane">
       <div class="article-card">
-        <h2>🛒 Simulator Kasir Minimarket & Alur Flowchart (Soal No. 2 UTS)</h2>
-        <p>
-          Simulasikan sistem transaksi kasir sesuai soal UTS: kasir menginput harga dan jumlah barang, sistem mengakumulasikan total belanja, dan jika total lebih dari <strong>Rp 100.000</strong> diberikan diskon <strong>10%</strong>.
-        </p>
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:12px;">
+          <div>
+            <h2 style="border:none; margin:0; padding:0;">🛒 Simulator Kasir Minimarket &amp; Alur Flowchart (Soal No. 2 UTS)</h2>
+            <p style="margin:4px 0 0; font-size:13px; color:var(--text-muted);">
+              Sistem kasir dinamis: input barang, hitung subtotal, diskon 10% jika &gt; Rp 100.000, dan animasi flowchart interaktif!
+            </p>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn-emerald" onclick="animateFlowchartExecution()">
+              ▶️ Simulasikan Eksekusi Alur
+            </button>
+            <button class="btn btn-outline" onclick="copyReceiptText()">
+              📋 Salin Teks Struk
+            </button>
+          </div>
+        </div>
 
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:24px; margin-top:20px;">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:24px; margin-top:16px;">
           <div style="background:var(--bg-surface-elevated); padding:18px; border-radius:var(--radius-sm); border:1px solid var(--border-color);">
             <h3 style="margin-top:0; color:var(--text-main);">➕ Input Transaksi Barang</h3>
             <div style="display:flex; flex-direction:column; gap:12px; margin-top:12px;">
@@ -1043,7 +1083,7 @@ w = n < 6</code></pre>
                   🛒 Tambah Barang
                 </button>
                 <button class="btn btn-outline" onclick="resetKasirCart()">
-                  🔄 Reset
+                  🔄 Reset Keranjang
                 </button>
               </div>
             </div>
@@ -1073,37 +1113,38 @@ w = n < 6</code></pre>
 
           <!-- FLOWCHART STEPS VISUALIZER -->
           <div>
-            <h3 style="margin-top:0;">🗺️ Alur Flowchart Eksekusi Sistem Kasir</h3>
+            <h3 style="margin-top:0;">🗺️ Alur Flowchart Eksekusi Sistem Kasir (Interaktif)</h3>
+            <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:10px;">Klik setiap tahapan di bawah untuk melihat aksi logikanya:</p>
             <div id="flowchart-steps-container">
-              <div class="flowchart-step" id="fc-step-1">
+              <div class="flowchart-step" id="fc-step-1" onclick="highlightFlowchartStep(1)">
                 <div class="fc-shape-badge">🟢</div>
                 <div><strong>1. Mulai (Terminator)</strong>: Program kasir dijalankan. Inisialisasi <code>total = 0</code>.</div>
               </div>
-              <div class="flowchart-step" id="fc-step-2">
+              <div class="flowchart-step" id="fc-step-2" onclick="highlightFlowchartStep(2)">
                 <div class="fc-shape-badge">📥</div>
                 <div><strong>2. Input Barang (I/O)</strong>: Menerima masukan <code>harga</code> dan <code>jumlah</code>.</div>
               </div>
-              <div class="flowchart-step" id="fc-step-3">
+              <div class="flowchart-step" id="fc-step-3" onclick="highlightFlowchartStep(3)">
                 <div class="fc-shape-badge">⚙️</div>
                 <div><strong>3. Akumulasi (Proses)</strong>: <code>subtotal = harga * jumlah</code> &rarr; <code>total += subtotal</code>.</div>
               </div>
-              <div class="flowchart-step" id="fc-step-4">
+              <div class="flowchart-step" id="fc-step-4" onclick="highlightFlowchartStep(4)">
                 <div class="fc-shape-badge">❓</div>
-                <div><strong>4. Perulangan (Decision)</strong>: Ada barang lain yang dibeli? (Ya/Tidak).</div>
+                <div><strong>4. Perulangan (Decision)</strong>: Ada barang lain yang dibeli? (Ya / Tidak).</div>
               </div>
-              <div class="flowchart-step" id="fc-step-5">
+              <div class="flowchart-step" id="fc-step-5" onclick="highlightFlowchartStep(5)">
                 <div class="fc-shape-badge">💎</div>
-                <div><strong>5. Percabangan Diskon (Decision)</strong>: Apakah <code>total > 100.000</code>?</div>
+                <div><strong>5. Percabangan Diskon (Decision)</strong>: Apakah <code>total &gt; 100.000</code>?</div>
               </div>
-              <div class="flowchart-step" id="fc-step-6">
+              <div class="flowchart-step" id="fc-step-6" onclick="highlightFlowchartStep(6)">
                 <div class="fc-shape-badge">🏷️</div>
                 <div><strong>6. Hitung Diskon (Proses)</strong>: Jika Ya &rarr; <code>diskon = 10% * total</code>. Jika Tidak &rarr; <code>diskon = 0</code>.</div>
               </div>
-              <div class="flowchart-step" id="fc-step-7">
+              <div class="flowchart-step" id="fc-step-7" onclick="highlightFlowchartStep(7)">
                 <div class="fc-shape-badge">🖨️</div>
-                <div><strong>7. Cetak Struk (I/O)</strong>: Tampilkan rincian total dan kembalian.</div>
+                <div><strong>7. Cetak Struk (I/O)</strong>: Tampilkan rincian subtotal, diskon, dan total bayar.</div>
               </div>
-              <div class="flowchart-step" id="fc-step-8">
+              <div class="flowchart-step" id="fc-step-8" onclick="highlightFlowchartStep(8)">
                 <div class="fc-shape-badge">🔴</div>
                 <div><strong>8. Selesai (Terminator)</strong>: Transaksi berhasil tuntas.</div>
               </div>
@@ -1117,10 +1158,17 @@ w = n < 6</code></pre>
     <!-- ==================== TAB 4: DYNAMIC SLICING LAB ==================== -->
     <div id="tab-slicing-lab" class="tab-pane">
       <div class="article-card">
-        <h2>🔤 Dynamic String Slicing Sandbox & Palindrome Lab</h2>
-        <p>
-          Eksperimen pemotongan string Python secara visual dan bebas! Ketik teks apapun, atur slider <code>start</code>, <code>stop</code>, dan <code>step</code>, lalu amati highlight pemotongan indeks dan deteksi palindrom secara instan.
-        </p>
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:12px;">
+          <div>
+            <h2 style="border:none; margin:0; padding:0;">🔤 Dynamic String Slicing Sandbox &amp; Palindrome Lab</h2>
+            <p style="margin:4px 0 0; font-size:13px; color:var(--text-muted);">
+              Eksperimen pemotongan string Python untuk sembarang kata dengan slider interaktif dan deteksi otomatis palindrom!
+            </p>
+          </div>
+          <button class="btn btn-emerald" onclick="startSlicingGame()">
+            🎯 Mainkan Tantangan Tebak Slicing
+          </button>
+        </div>
 
         <!-- INPUT CUSTOM TEXT -->
         <div style="background:var(--bg-surface-elevated); padding:16px; border-radius:var(--radius-sm); border:1px solid var(--border-color); margin-bottom:16px;">
@@ -1131,6 +1179,7 @@ w = n < 6</code></pre>
               <button class="btn btn-outline" onclick="setSlicingPreset('KASUR RUSAK', null, null, -1)" style="font-size:11px; padding:3px 8px;">KASUR RUSAK (Palindrom)</button>
               <button class="btn btn-outline" onclick="setSlicingPreset('L200240189', 9, 6, -1)" style="font-size:11px; padding:3px 8px;">UTS NIM [9:6:-1]</button>
               <button class="btn btn-outline" onclick="setSlicingPreset('SURAKARTA', null, null, -1)" style="font-size:11px; padding:3px 8px;">Balik [::-1]</button>
+              <button class="btn btn-outline" onclick="setSlicingPreset('RADAR', null, null, -1)" style="font-size:11px; padding:3px 8px;">RADAR</button>
             </div>
           </div>
           <input type="text" id="slice-custom-text" value="INFORMATIKA SURAKARTA" oninput="updateSlicingLab()" 
@@ -1171,34 +1220,62 @@ w = n < 6</code></pre>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px; margin-top:16px;">
           <div style="background:var(--bg-surface); border:1px solid var(--border-color); padding:14px; border-radius:var(--radius-sm);">
             <div style="font-size:11px; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-bottom:6px;">Ekspresi Slicing Python:</div>
-            <code id="slice-syntax-preview" style="display:block; font-size:15px; font-weight:700; color:var(--accent-cyan); margin-bottom:10px;">teks[0:11:1]</code>
+            <code id="slice-syntax-preview" style="display:block; font-size:16px; font-weight:700; color:var(--accent-cyan); margin-bottom:10px;">teks[0:11:1]</code>
             <div style="display:flex; gap:8px;">
-              <span id="palindrome-badge" style="display:none; font-size:11.5px; font-weight:700; padding:3px 10px; border-radius:var(--radius-full); background:var(--emerald-bg); color:var(--accent-emerald); border:1px solid var(--emerald-border);">
-                ✨ Palindrom!
+              <span id="palindrome-badge" style="display:none; font-size:12px; font-weight:700; padding:4px 12px; border-radius:var(--radius-full); background:var(--emerald-bg); color:var(--accent-emerald); border:1px solid var(--emerald-border);">
+                ✨ Palindrom Sempurna!
               </span>
-              <span id="slice-length-badge" style="font-size:11.5px; font-weight:600; padding:3px 10px; border-radius:var(--radius-full); background:var(--bg-surface-elevated); color:var(--text-muted); border:1px solid var(--border-color);">
+              <span id="slice-length-badge" style="font-size:12px; font-weight:600; padding:4px 12px; border-radius:var(--radius-full); background:var(--bg-surface-elevated); color:var(--text-muted); border:1px solid var(--border-color);">
                 Panjang: 11 Karakter
               </span>
             </div>
           </div>
 
           <div style="background:var(--bg-surface); border:1px solid var(--border-color); padding:14px; border-radius:var(--radius-sm);">
-            <div style="font-size:11px; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-bottom:6px;">Hasil Pemotongan:</div>
+            <div style="font-size:11px; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-bottom:6px;">Hasil Pemotongan (Sub-string):</div>
             <div id="slice-result-text" style="font-family:var(--font-mono); font-size:20px; font-weight:800; color:var(--accent-emerald); word-break:break-all;">
               INFORMATIKA
             </div>
           </div>
         </div>
+
+        <!-- SLICING CHALLENGE MODAL / BOX -->
+        <div id="slice-challenge-box" class="callout purple" style="display:none; margin-top:20px;">
+          <div class="callout-title" style="display:flex; justify-content:space-between;">
+            <span>🎯 Tantangan Tebak Slicing:</span>
+            <span id="challenge-score-badge" style="font-size:12px; color:var(--accent-emerald);">Skor: 0</span>
+          </div>
+          <div id="challenge-question-text" style="font-size:14px; margin:6px 0 10px;"></div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <input type="text" id="challenge-answer-input" placeholder="Ketik ekspresi slicing, misal: [0:5]..." style="padding:8px 12px; background:var(--bg-surface); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; font-family:var(--font-mono); flex:1;">
+            <button class="btn btn-primary" onclick="submitSliceChallenge()">Kirim Jawaban</button>
+            <button class="btn btn-outline" onclick="nextSliceChallenge()">Ganti Soal</button>
+          </div>
+          <div id="challenge-feedback" style="margin-top:8px; font-size:13px; font-weight:600;"></div>
+        </div>
+
       </div>
     </div>
 
     <!-- ==================== TAB 5: POLA BINTANG & NESTED LOOP ==================== -->
     <div id="tab-loop-pattern" class="tab-pane">
       <div class="article-card">
-        <h2>⭐ Visual Nested Loop & Generator Pola Bintang</h2>
-        <p>
-          Materi penting pemrograman dasar: Visualisasikan bagaimana dua perulangan bersarang (*nested loops*) membentuk pola segitiga, piramida, dan matriks baris-kolom dengan kode Python asli!
-        </p>
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:12px;">
+          <div>
+            <h2 style="border:none; margin:0; padding:0;">⭐ Visual Nested Loop &amp; Generator Pola Bentuk</h2>
+            <p style="margin:4px 0 0; font-size:13px; color:var(--text-muted);">
+              Pahami alur perulangan bersarang <code>outer loop (baris)</code> dan <code>inner loop (kolom)</code> dengan animasi baris demi baris!
+            </p>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn-emerald" onclick="animatePatternPrinting()">
+              ▶️ Animasi Cetak Baris demi Baris
+            </button>
+            <button class="btn btn-outline" onclick="copyPatternCode()">
+              📋 Salin Kode Python
+            </button>
+          </div>
+        </div>
 
         <!-- CONTROLS -->
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px; background:var(--bg-surface-elevated); padding:16px; border-radius:var(--radius-sm); border:1px solid var(--border-color); margin-bottom:16px;">
@@ -1237,14 +1314,12 @@ w = n < 6</code></pre>
 
         <!-- PATTERN & CODE DISPLAY -->
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:20px;">
-          <!-- VISUAL CANVAS -->
           <div>
             <h3 style="margin-top:0; font-size:15px;">🎨 Visualisasi Hasil Pola:</h3>
             <div id="pattern-display-box" style="background:#090d16; border:1px solid var(--border-color); border-radius:var(--radius-sm); padding:20px; font-family:var(--font-mono); font-size:17px; line-height:1.4; color:var(--py-yellow); min-height:220px; white-space:pre; display:flex; align-items:center; justify-content:center; text-shadow:0 0 10px rgba(255, 212, 59, 0.3);">
             </div>
           </div>
 
-          <!-- PYTHON CODE EXPLANATION -->
           <div>
             <h3 style="margin-top:0; font-size:15px;">📜 Kode Python &amp; Logika Nested Loop:</h3>
             <pre><code id="pattern-code-box"></code></pre>
@@ -1254,62 +1329,14 @@ w = n < 6</code></pre>
       </div>
     </div>
 
-    <!-- ==================== TAB 6: ROBOT GVRNG SIMULATOR ==================== -->
-    <div id="tab-gvr-robot" class="tab-pane">
-      <div class="article-card">
-        <h2>🤖 Simulator Praktikum Guido van Robot (GvRng UTS 2024)</h2>
-        <p>
-          Berdasarkan **Soal UTS Praktikum Alpro (Doc #28)**: Robot penjaga gedung bertugas mengelilingi ruangan berukuran <strong>7 x 5</strong> dan menutup setiap sisi jendela/pintu yang terbuka dengan meletakkan <code>beeper (1)</code>.
-        </p>
-
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:20px; margin-top:16px;">
-          <!-- ROBOT CANVAS -->
-          <div style="background:var(--bg-surface-elevated); padding:16px; border-radius:var(--radius-sm); border:1px solid var(--border-color); text-align:center;">
-            <div style="font-size:12px; font-weight:700; color:var(--text-muted); margin-bottom:8px;">
-              DENAH RUANG 7 x 5 (GvRng World)
-            </div>
-            
-            <div id="robot-grid-canvas" class="robot-grid"></div>
-
-            <div style="display:flex; justify-content:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
-              <button class="btn btn-primary" onclick="robotStepMove()">Maju (move)</button>
-              <button class="btn btn-outline" onclick="robotTurnLeft()">Belok Kiri (turnleft)</button>
-              <button class="btn btn-outline" onclick="robotPutBeeper()">Taruh Beeper</button>
-              <button class="btn btn-outline" onclick="runAutoRobotSolve()">⚡ Auto Selesaikan Soal</button>
-              <button class="btn btn-outline" onclick="resetRobotGrid()">🔄 Reset</button>
-            </div>
-          </div>
-
-          <!-- LOG & SOAL PENJELASAN -->
-          <div>
-            <h3 style="margin-top:0; font-size:15px;">📋 Perintah Soal Praktikum:</h3>
-            <div class="callout info" style="margin-top:0;">
-              Robot berdiri membelakangi dinding di posisi <code>(3, 1)</code> menghadap ke Utara. Jika mendeteksi celah dinding terbuka (jendela/pintu), robot meletakkan beeper pada celah tersebut hingga seluruh ruangan tertutup rapat.
-            </div>
-
-            <h4 style="font-size:13px; color:var(--text-muted); margin-bottom:6px;">Status Robot Saat Ini:</h4>
-            <div id="robot-status-box" style="background:var(--bg-surface); padding:10px 14px; border-radius:var(--radius-sm); border:1px solid var(--border-color); font-family:var(--font-mono); font-size:12.5px; line-height:1.6;">
-              Posisi: (3, 1) | Arah: UTARA (▲) | Beeper Tertaruh: 0 / 4
-            </div>
-
-            <h4 style="font-size:13px; color:var(--text-muted); margin:12px 0 6px;">Log Eksekusi:</h4>
-            <div id="robot-terminal-log" style="background:#090d16; border:1px solid var(--border-color); border-radius:var(--radius-sm); padding:10px 12px; font-family:var(--font-mono); font-size:11.5px; color:#38bdf8; height:110px; overflow-y:auto;">
-[Simulator GvRng Siap]
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ==================== TAB 7: HVS A4 CHEATSHEET GENERATOR ==================== -->
+    <!-- ==================== TAB 6: HVS A4 CHEATSHEET GENERATOR ==================== -->
     <div id="tab-hvs-cheatsheet" class="tab-pane">
       <div class="article-card no-print">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
           <div>
             <h2 style="border:none; margin:0; padding:0;">📄 Generator Lembar Catatan HVS A4 Resmi UTS</h2>
             <p style="margin:4px 0 0; font-size:13px; color:var(--text-muted);">
-              Sesuai instruksi resmi UTS 2024/2025: <em>"Mahasiswa diperkenankan membawa catatan pada selembar kertas HVS A4 tulisan tangan/cetak"</em>.
+              Sesuai instruksi resmi UTS UMS: <em>"Mahasiswa diperkenankan membawa catatan pada selembar kertas HVS A4"</em>.
             </p>
           </div>
           <button class="btn btn-primary" onclick="window.print()">
@@ -1321,6 +1348,11 @@ w = n < 6</code></pre>
           <input type="text" id="hvs-input-name" placeholder="Nama Mahasiswa..." value="Muhammad Rizky Prasetya" oninput="updateHvsSheet()" style="padding:6px 10px; font-size:13px; background:var(--bg-surface); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; flex:1;">
           <input type="text" id="hvs-input-nim" placeholder="NIM..." value="L200240189" oninput="updateHvsSheet()" style="padding:6px 10px; font-size:13px; background:var(--bg-surface); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; width:150px;">
           <input type="text" id="hvs-input-class" placeholder="Kelas..." value="Informatika Kelas B" oninput="updateHvsSheet()" style="padding:6px 10px; font-size:13px; background:var(--bg-surface); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; width:150px;">
+        </div>
+
+        <div style="margin-top:12px;">
+          <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Catatan Kustom Tambahan:</label>
+          <textarea id="hvs-custom-textarea" rows="2" placeholder="Ketik catatan pribadi tambahan di sini (akan otomatis muncul di lembar cetak A4)..." oninput="updateHvsSheet()" style="width:100%; padding:8px 12px; font-size:12px; background:var(--bg-surface); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; resize:vertical;"></textarea>
         </div>
       </div>
 
@@ -1429,13 +1461,22 @@ total_bayar = total - diskon</pre>
       </div>
     </div>
 
-    <!-- ==================== TAB 8: FLASHCARDS ==================== -->
+    <!-- ==================== TAB 7: FLASHCARDS (25+ KARTU) ==================== -->
     <div id="tab-flashcards" class="tab-pane">
       <div class="article-card" style="text-align:center;">
-        <h2>🗂️ Flashcards Hafalan Konsep Kritis Alpro (20 Kartu)</h2>
-        <p style="max-width:600px; margin:0 auto 16px;">
-          Klik kartu untuk membalik (Flip 3D). Uji pemahaman Anda tentang sintaksis, jebakan operator, dan konsep teoritis UTS.
+        <h2>🗂️ Flashcards Hafalan Konsep Kritis Alpro (25 Kartu)</h2>
+        <p style="max-width:600px; margin:0 auto 12px;">
+          Pilih filter kategori di bawah atau gunakan keyboard: <strong>Panah Kiri/Kanan</strong> untuk navigasi, dan <strong>Spasi</strong> untuk membalik kartu (Flip 3D)!
         </p>
+
+        <!-- CATEGORY FILTERS -->
+        <div style="display:flex; justify-content:center; gap:6px; flex-wrap:wrap; margin-bottom:16px;">
+          <button class="btn btn-primary" onclick="filterCards('ALL')" id="fc-btn-ALL" style="font-size:12px; padding:4px 10px;">Semua (25)</button>
+          <button class="btn btn-outline" onclick="filterCards('Operator')" id="fc-btn-Operator" style="font-size:12px; padding:4px 10px;">Operator &amp; Tipe Data</button>
+          <button class="btn btn-outline" onclick="filterCards('Slicing')" id="fc-btn-Slicing" style="font-size:12px; padding:4px 10px;">String &amp; Slicing</button>
+          <button class="btn btn-outline" onclick="filterCards('Percabangan')" id="fc-btn-Percabangan" style="font-size:12px; padding:4px 10px;">Percabangan &amp; Kasir</button>
+          <button class="btn btn-outline" onclick="filterCards('Jebakan')" id="fc-btn-Jebakan" style="font-size:12px; padding:4px 10px;">⚠️ Jebakan UTS</button>
+        </div>
 
         <!-- FLASHCARD 3D COMPONENT -->
         <div class="fc-wrapper" onclick="toggleCardFlip()">
@@ -1443,13 +1484,13 @@ total_bayar = total - diskon</pre>
             <div class="fc-face fc-front">
               <div style="display:flex; justify-content:space-between; align-items:center;">
                 <span id="fc-topic" style="font-size:11px; font-weight:700; color:var(--primary); text-transform:uppercase; letter-spacing:0.04em;">Topik</span>
-                <span id="fc-counter" style="font-size:11px; color:var(--text-muted); font-family:var(--font-mono);">1 / 20</span>
+                <span id="fc-counter" style="font-size:11px; color:var(--text-muted); font-family:var(--font-mono);">1 / 25</span>
               </div>
               <div id="fc-front-text" style="font-size:18px; font-weight:700; line-height:1.5; color:var(--text-main); margin:auto 0;">
                 Pertanyaan Kartu
               </div>
               <div style="font-size:11.5px; color:var(--text-muted);">
-                🔄 Ketuk kartu untuk melihat jawaban
+                🔄 Ketuk kartu atau tekan [Spasi] untuk melihat jawaban
               </div>
             </div>
             <div class="fc-face fc-back">
@@ -1461,7 +1502,7 @@ total_bayar = total - diskon</pre>
                 Penjelasan jawaban...
               </div>
               <div style="font-size:11.5px; color:var(--text-muted); text-align:center;">
-                Ketuk lagi untuk kembali ke depan
+                Ketuk lagi untuk kembali ke pertanyaan
               </div>
             </div>
           </div>
@@ -1475,26 +1516,32 @@ total_bayar = total - diskon</pre>
       </div>
     </div>
 
-    <!-- ==================== TAB 9: UTS EXAM ARENA ==================== -->
+    <!-- ==================== TAB 8: UTS EXAM ARENA (15 SOAL ASLI) ==================== -->
     <div id="tab-arena" class="tab-pane">
       <div class="article-card">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; border-bottom:1px solid var(--border-color); padding-bottom:14px; margin-bottom:18px;">
           <div>
-            <h2 style="border:none; margin:0; padding:0;">⚔️ UTS Exam Arena (Bank Soal Asli UMS)</h2>
-            <p style="margin:4px 0 0; font-size:13px; color:var(--text-muted);">Simulasi ujian 90 menit dengan skor real-time dan evaluasi jawaban otomatis.</p>
+            <h2 style="border:none; margin:0; padding:0;">⚔️ UTS Exam Arena (15 Bank Soal Asli UMS)</h2>
+            <p style="margin:4px 0 0; font-size:13px; color:var(--text-muted);">Simulasi ujian 90 menit lengkap dengan kisi-kisi NIM Ganjil vs NIM Genap.</p>
           </div>
           <div style="display:flex; align-items:center; gap:12px;">
             <div style="font-family:var(--font-mono); font-size:15px; font-weight:700; background:var(--bg-surface-elevated); padding:6px 12px; border-radius:var(--radius-sm); border:1px solid var(--border-color);" id="exam-timer">
               ⏱️ 90:00
             </div>
             <button class="btn btn-outline" onclick="toggleTimer()" id="btn-timer-toggle">Pause</button>
+            <button class="btn btn-emerald" onclick="finishExam()">🏁 Selesai Ujian</button>
           </div>
         </div>
 
-        <div style="background:var(--bg-surface-elevated); height:8px; border-radius:4px; overflow:hidden; margin-bottom:20px;">
+        <!-- PROGRESS BAR -->
+        <div style="background:var(--bg-surface-elevated); height:8px; border-radius:4px; overflow:hidden; margin-bottom:14px;">
           <div id="arena-progress-bar" style="background:var(--primary); width:0%; height:100%; transition:width 0.3s;"></div>
         </div>
 
+        <!-- QUESTION NUMBER GRID (1 to 15) -->
+        <div class="q-grid" id="q-nav-grid"></div>
+
+        <!-- QUESTION CONTAINER -->
         <div id="quiz-question-container"></div>
 
         <div style="display:flex; justify-content:space-between; align-items:center; margin-top:20px;">
@@ -1502,22 +1549,30 @@ total_bayar = total - diskon</pre>
           <span id="quiz-counter" style="font-size:13px; font-weight:600; color:var(--text-muted);">Soal 1 dari 15</span>
           <button class="btn btn-primary" onclick="nextQuizQuestion()" id="btn-next-quiz">Soal Berikutnya ➡️</button>
         </div>
+
+        <!-- FINAL SCORE REPORT MODAL -->
+        <div id="exam-report-box" class="callout success" style="display:none; margin-top:24px;">
+          <h3 style="margin-top:0; color:var(--accent-emerald);">🎉 RAPOR HASIL SIMULASI UTS</h3>
+          <div style="font-size:15px; line-height:1.7;" id="exam-report-details"></div>
+          <button class="btn btn-primary" onclick="restartExam()" style="margin-top:10px;">🔄 Ulangi Ujian dari Awal</button>
+        </div>
       </div>
     </div>
 
-    <!-- ==================== TAB 10: PYTHON RUNNER ==================== -->
+    <!-- ==================== TAB 9: PYTHON RUNNER ==================== -->
     <div id="tab-runner" class="tab-pane">
       <div class="article-card">
-        <h2>💻 Python Mini Runner & Live Playground</h2>
+        <h2>💻 Python Mini Runner &amp; Live Playground</h2>
         <p>
           Tulis atau pilih kode Python di bawah ini untuk melihat hasil eksekusi dan output terminal secara langsung di browser tanpa perlu install Python!
         </p>
 
         <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;">
           <span style="font-size:12px; font-weight:700; color:var(--text-muted); align-self:center;">Preset Soal:</span>
-          <button class="btn btn-outline" onclick="loadRunnerPreset(1)" style="font-size:12px; padding:4px 10px;">Soal Tracing NIM (UTS)</button>
-          <button class="btn btn-outline" onclick="loadRunnerPreset(2)" style="font-size:12px; padding:4px 10px;">Soal Kasir Diskon Minimarket</button>
-          <button class="btn btn-outline" onclick="loadRunnerPreset(3)" style="font-size:12px; padding:4px 10px;">Slicing String & Step Negatif</button>
+          <button class="btn btn-outline" onclick="loadRunnerPreset(1)" style="font-size:12px; padding:4px 10px;">Preset 1: Tracing NIM (UTS)</button>
+          <button class="btn btn-outline" onclick="loadRunnerPreset(2)" style="font-size:12px; padding:4px 10px;">Preset 2: Kasir Diskon Minimarket</button>
+          <button class="btn btn-outline" onclick="loadRunnerPreset(3)" style="font-size:12px; padding:4px 10px;">Preset 3: Slicing String &amp; Step Negatif</button>
+          <button class="btn btn-outline" onclick="loadRunnerPreset(4)" style="font-size:12px; padding:4px 10px;">Preset 4: Pola Segitiga Bersarang</button>
         </div>
 
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:16px;">
@@ -1533,7 +1588,7 @@ total_bayar = total - diskon</pre>
             <div style="background:#0a0e17; border:1px solid var(--border-color); border-radius:var(--radius-sm); height:100%; min-height:280px; display:flex; flex-direction:column;">
               <div style="background:var(--bg-surface-elevated); padding:8px 12px; border-bottom:1px solid var(--border-color); font-size:11px; font-family:var(--font-mono); color:var(--text-muted); display:flex; justify-content:space-between;">
                 <span>TERMINAL OUTPUT</span>
-                <span>Python 3.12 (Browser Emulation)</span>
+                <span>Python 3.12 (Browser Engine)</span>
               </div>
               <div id="runner-terminal" style="padding:14px; font-family:var(--font-mono); font-size:13px; color:#38bdf8; overflow-y:auto; flex:1; white-space:pre-wrap; line-height:1.6;">
 [Terminal Siap. Klik 'Eksekusi Kode' untuk menjalankan program]
@@ -1565,7 +1620,6 @@ total_bayar = total - diskon</pre>
 
       if (tabId === 'tab-slicing-lab') updateSlicingLab();
       if (tabId === 'tab-loop-pattern') generatePattern();
-      if (tabId === 'tab-gvr-robot') initRobotGrid();
     }
 
     // ==========================================
@@ -1587,17 +1641,62 @@ total_bayar = total - diskon</pre>
     }
 
     // ==========================================
-    // TAB 2: TRACING NIM SIMULATOR
+    // TAB 2: TRACING NIM SIMULATOR & STEPPER
     // ==========================================
+    let nimStepIndex = 0;
+    const TRACE_STEPS = [
+      { name: 'm', expr: 'Z[9:6:-1]', desc: 'Slicing mundur 1 langkah dari indeks 9, 8, ke 7 (sebelum 6).' },
+      { name: 'n', expr: 'int(m[0])', desc: 'Ambil karakter pertama string m dan konversi menjadi bilangan bulat (int).' },
+      { name: 'p', expr: 'int(m) + 19', desc: 'Konversi string m menjadi integer, lalu jumlahkan dengan 19.' },
+      { name: 'q', expr: '15 - n', desc: 'Pengurangan nilai numerik: 15 dikurangi variabel n.' },
+      { name: 'r', expr: 'p // 10', desc: 'Floor division (pembagian bulat dibuang desimalnya).' },
+      { name: 's', expr: '2 * m', desc: '⚠️ JEBAKAN POPULER UTS: Perkalian integer dengan string menghasilkan duplikasi string!' },
+      { name: 't', expr: 'p % q', desc: 'Operasi sisa bagi (modulo) dari p dibagi q.' },
+      { name: 'u', expr: 't ** 2', desc: 'Eksponensial kuadrat (pangkat dua dari t).' },
+      { name: 'v', expr: 'p - t', desc: 'Pengurangan numerik p dikurangi t.' },
+      { name: 'w', expr: 'n < 6', desc: 'Operator perbandingan boolean (True jika n < 6, False jika tidak).' }
+    ];
+
     function setPresetNim(val) {
       document.getElementById('input-nim').value = val;
+      resetNimStepper();
       runNimTracing();
     }
 
-    function runNimTracing() {
+    function resetNimStepper() {
+      nimStepIndex = 0;
+      document.getElementById('stepper-alert-box').style.display = 'none';
+      document.getElementById('btn-nim-step').textContent = '▶️ Langkah Demi Langkah (Step)';
+      runNimTracing();
+    }
+
+    function stepForwardNimTrace() {
+      const nimInput = document.getElementById('input-nim').value.trim() || 'L200240189';
+      if (nimStepIndex >= TRACE_STEPS.length) {
+        nimStepIndex = 0;
+      }
+
+      const st = TRACE_STEPS[nimStepIndex];
+      nimStepIndex++;
+
+      document.getElementById('stepper-alert-box').style.display = 'block';
+      document.getElementById('stepper-title').textContent = `Langkah ${nimStepIndex} dari ${TRACE_STEPS.length}: Evaluasi variabel '${st.name}'`;
+      document.getElementById('stepper-desc').innerHTML = `
+        <strong>Formula:</strong> <code>${st.name} = ${st.expr}</code><br>
+        <strong>Penjelasan Dosen:</strong> ${st.desc}
+      `;
+
+      document.getElementById('btn-nim-step').textContent = nimStepIndex < TRACE_STEPS.length ? 
+        `▶️ Langkah Selanjutnya (${nimStepIndex + 1}/${TRACE_STEPS.length})` : '🔄 Mulai Ulang Stepper';
+
+      runNimTracing(nimStepIndex);
+    }
+
+    function runNimTracing(limitSteps = 99) {
       const nimInput = document.getElementById('input-nim').value.trim() || 'L200240189';
       const Z = nimInput;
 
+      // Ruler
       const ruler = document.getElementById('ruler-display');
       ruler.innerHTML = '';
       for (let i = 0; i < Z.length; i++) {
@@ -1641,7 +1740,7 @@ u = t ** 2       # Hasil: ${u}
 v = p - t        # Hasil: ${v}
 w = n < 6        # Hasil: ${w}`;
 
-      const rows = [
+      const allRows = [
         { var: 'Z', type: 'str', val: `'${Z}'`, desc: 'Input string NIM mahasiswa (panjang 10)' },
         { var: 'm', type: 'str', val: `'${m}'`, desc: 'Slicing Z[9:6:-1] mundur indeks 9, 8, 7' },
         { var: 'n', type: 'int', val: n, desc: `int(m[0]) &rarr; karakter pertama '${m[0]}' jadi integer` },
@@ -1655,9 +1754,10 @@ w = n < 6        # Hasil: ${w}`;
         { var: 'w', type: 'bool', val: w ? 'True' : 'False', desc: `Perbandingan: apakah ${n} < 6? &rarr; ${w ? 'True' : 'False'}` }
       ];
 
+      const visibleRows = allRows.slice(0, Math.min(allRows.length, limitSteps + 1));
       const tbody = document.getElementById('tracing-tbody');
       tbody.innerHTML = '';
-      rows.forEach(row => {
+      visibleRows.forEach(row => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
           <td><strong style="color:var(--accent-cyan); font-family:var(--font-mono);">${row.var}</strong></td>
@@ -1670,7 +1770,7 @@ w = n < 6        # Hasil: ${w}`;
     }
 
     // ==========================================
-    // TAB 3: KASIR SIMULATOR
+    // TAB 3: KASIR SIMULATOR & FLOWCHART ANIMATOR
     // ==========================================
     let cart = [
       { name: "Buku Catatan Pemrograman", price: 25000, qty: 5 }
@@ -1700,10 +1800,7 @@ w = n < 6        # Hasil: ${w}`;
       document.getElementById('receipt-diskon').textContent = (diskon > 0 ? '- Rp ' : 'Rp ') + diskon.toLocaleString('id-ID') + '.00';
       document.getElementById('receipt-total').textContent = 'Rp ' + totalBayar.toLocaleString('id-ID') + '.00';
 
-      document.querySelectorAll('.flowchart-step').forEach(s => s.classList.remove('highlight'));
-      document.getElementById('fc-step-3').classList.add('highlight');
-      document.getElementById('fc-step-5').classList.add('highlight');
-      document.getElementById('fc-step-6').classList.add('highlight');
+      highlightFlowchartStep(3);
     }
 
     function addKasirItem() {
@@ -1720,9 +1817,48 @@ w = n < 6        # Hasil: ${w}`;
       renderCart();
     }
 
+    function highlightFlowchartStep(stepNum) {
+      document.querySelectorAll('.flowchart-step').forEach(s => s.classList.remove('highlight'));
+      const target = document.getElementById(`fc-step-${stepNum}`);
+      if (target) target.classList.add('highlight');
+    }
+
+    function animateFlowchartExecution() {
+      let step = 1;
+      const timer = setInterval(() => {
+        highlightFlowchartStep(step);
+        step++;
+        if (step > 8) clearInterval(timer);
+      }, 500);
+    }
+
+    function copyReceiptText() {
+      const sub = document.getElementById('receipt-subtotal').textContent;
+      const diskon = document.getElementById('receipt-diskon').textContent;
+      const tot = document.getElementById('receipt-total').textContent;
+
+      let txt = "=== STRUK KASIR INFORMATIKA UMS ===\n";
+      cart.forEach((item, i) => {
+        txt += `${i+1}. ${item.name} (${item.qty}x) = Rp ${(item.price * item.qty).toLocaleString('id-ID')}\n`;
+      });
+      txt += "-----------------------------------\n";
+      txt += `Subtotal    : ${sub}\n`;
+      txt += `Diskon (10%): ${diskon}\n`;
+      txt += `TOTAL BAYAR : ${tot}\n`;
+      txt += "Terima kasih atas belanjaan Anda!";
+
+      navigator.clipboard.writeText(txt).then(() => {
+        alert("✅ Teks struk berhasil disalin ke clipboard!");
+      });
+    }
+
     // ==========================================
-    // TAB 4: DYNAMIC SLICING LAB ENGINE
+    // TAB 4: DYNAMIC SLICING LAB & MINI-CHALLENGE
     // ==========================================
+    let challengeScore = 0;
+    let currentChallengeTarget = '';
+    let currentChallengeSource = '';
+
     function setSlicingPreset(text, start, stop, step) {
       document.getElementById('slice-custom-text').value = text;
       const len = text.length;
@@ -1732,14 +1868,9 @@ w = n < 6        # Hasil: ${w}`;
       document.getElementById('slider-slice-stop').min = -len;
       document.getElementById('slider-slice-stop').max = len;
 
-      if (start !== null) document.getElementById('slider-slice-start').value = start;
-      else document.getElementById('slider-slice-start').value = 0;
-
-      if (stop !== null) document.getElementById('slider-slice-stop').value = stop;
-      else document.getElementById('slider-slice-stop').value = len;
-
-      if (step !== null) document.getElementById('slider-slice-step').value = step;
-      else document.getElementById('slider-slice-step').value = 1;
+      document.getElementById('slider-slice-start').value = start !== null ? start : 0;
+      document.getElementById('slider-slice-stop').value = stop !== null ? stop : len;
+      document.getElementById('slider-slice-step').value = step !== null ? step : 1;
 
       updateSlicingLab();
     }
@@ -1757,7 +1888,6 @@ w = n < 6        # Hasil: ${w}`;
       document.getElementById('label-slice-stop').textContent = stop;
       document.getElementById('label-slice-step').textContent = step;
 
-      // Calculate slice indices in python semantics
       const includedIndices = [];
       let actualStart = start < 0 ? Math.max(len + start, 0) : Math.min(start, len);
       let actualStop = stop < 0 ? Math.max(len + stop, 0) : Math.min(stop, len);
@@ -1771,7 +1901,6 @@ w = n < 6        # Hasil: ${w}`;
           }
         }
       } else {
-        // negative step
         let revStart = start < 0 ? len + start : Math.min(start, len - 1);
         let revStop = stop < 0 ? len + stop : stop;
         for (let i = revStart; i > revStop; i += step) {
@@ -1782,7 +1911,7 @@ w = n < 6        # Hasil: ${w}`;
         }
       }
 
-      // Render Visual Ruler
+      // Visual Ruler
       const ruler = document.getElementById('slicing-lab-ruler');
       ruler.innerHTML = '';
       for (let i = 0; i < len; i++) {
@@ -1797,15 +1926,76 @@ w = n < 6        # Hasil: ${w}`;
         ruler.appendChild(cell);
       }
 
-      // Syntax & Result
       document.getElementById('slice-syntax-preview').textContent = `teks[${start} : ${stop} : ${step}]`;
       document.getElementById('slice-result-text').textContent = resultStr || '(String Kosong)';
       document.getElementById('slice-length-badge').textContent = `Panjang: ${resultStr.length} Karakter`;
 
-      // Check Palindrome
       const cleanCheck = resultStr.replace(/\s+/g, '').toUpperCase();
       const isPalin = cleanCheck.length > 1 && cleanCheck === cleanCheck.split('').reverse().join('');
       document.getElementById('palindrome-badge').style.display = isPalin ? 'inline-block' : 'none';
+    }
+
+    function startSlicingGame() {
+      document.getElementById('slice-challenge-box').style.display = 'block';
+      challengeScore = 0;
+      nextSliceChallenge();
+    }
+
+    const CHALLENGES = [
+      { text: "INFORMATIKA", target: "FORMAT", hint: "Mulai dari 'F' (indeks 2) sampai 'T' (indeks 7)" },
+      { text: "SURAKARTA", target: "KARTA", hint: "Ambil 5 huruf terakhir" },
+      { text: "ALGORITMA", target: "ALGO", hint: "Ambil 4 huruf pertama" },
+      { text: "PYTHON", target: "NOHTYP", hint: "Balikkan kata dengan step -1" }
+    ];
+    let chIdx = 0;
+
+    function nextSliceChallenge() {
+      chIdx = (chIdx + 1) % CHALLENGES.length;
+      const c = CHALLENGES[chIdx];
+      currentChallengeSource = c.text;
+      currentChallengeTarget = c.target;
+
+      document.getElementById('challenge-question-text').innerHTML = 
+        `Diberikan teks <code>"${c.text}"</code>. Bentuklah potongan substring: <strong style="color:var(--accent-emerald); font-size:16px;">"${c.target}"</strong>.<br><small style="color:var(--text-muted);">💡 Petunjuk: ${c.hint}</small>`;
+      document.getElementById('challenge-answer-input').value = '';
+      document.getElementById('challenge-feedback').textContent = '';
+      document.getElementById('challenge-score-badge').textContent = `Skor: ${challengeScore}`;
+    }
+
+    function submitSliceChallenge() {
+      const userAns = document.getElementById('challenge-answer-input').value.trim();
+      try {
+        // Evaluate user slice syntax on currentChallengeSource
+        const clean = userAns.replace(/^s*tekss*/, '').replace(/[[]]/g, '');
+        const p = clean.split(':').map(x => x.trim() === '' ? null : parseInt(x.trim(), 10));
+        
+        let st = p[0] !== null ? p[0] : 0;
+        let sp = p[1] !== null ? p[1] : currentChallengeSource.length;
+        let step = p[2] !== null && p[2] !== undefined ? p[2] : 1;
+
+        // Apply slice
+        let res = '';
+        if (step > 0) {
+          for (let i = st; i < sp; i += step) res += currentChallengeSource[i] || '';
+        } else {
+          for (let i = (st !== null ? st : currentChallengeSource.length - 1); i > (sp !== null ? sp : -1); i += step) {
+            res += currentChallengeSource[i] || '';
+          }
+        }
+
+        if (res === currentChallengeTarget) {
+          challengeScore += 25;
+          document.getElementById('challenge-score-badge').textContent = `Skor: ${challengeScore}`;
+          document.getElementById('challenge-feedback').innerHTML = 
+            `<span style="color:var(--accent-emerald);">🎉 BENAR! Slicing menghasilkan: '${res}'. Hebat!</span>`;
+        } else {
+          document.getElementById('challenge-feedback').innerHTML = 
+            `<span style="color:var(--accent-rose);">❌ Kurang tepat. Hasil Anda: '${res}', target: '${currentChallengeTarget}'. Coba lagi!</span>`;
+        }
+      } catch (e) {
+        document.getElementById('challenge-feedback').innerHTML = 
+          `<span style="color:var(--accent-rose);">Format salah. Gunakan format misal: [2:8] atau [::-1]</span>`;
+      }
     }
 
     // ==========================================
@@ -1914,189 +2104,164 @@ for i in range(1, n + 1):
       document.getElementById('pattern-code-box').textContent = pyCode;
     }
 
-    // ==========================================
-    // TAB 6: ROBOT GVRNG SIMULATOR
-    // ==========================================
-    let robotX = 3;
-    let robotY = 1; // 1 to 5
-    let robotDir = 0; // 0: North, 1: East, 2: South, 3: West
-    const dirIcons = ['▲', '▶', '▼', '◀'];
-    const dirNames = ['UTARA', 'TIMUR', 'SELATAN', 'BARAT'];
+    function animatePatternPrinting() {
+      const fullText = document.getElementById('pattern-display-box').textContent;
+      const lines = fullText.split('\n');
+      document.getElementById('pattern-display-box').textContent = '';
 
-    // Windows open at (1,3), (4,5), (6,5), (7,3)
-    const openWindows = ['1,3', '4,5', '6,5', '7,3'];
-    let beepers = [];
-
-    function initRobotGrid() {
-      const container = document.getElementById('robot-grid-canvas');
-      container.innerHTML = '';
-
-      for (let r = 5; r >= 1; r--) {
-        for (let c = 1; c <= 7; c++) {
-          const cell = document.createElement('div');
-          cell.className = 'robot-cell';
-          const posKey = `${c},${r}`;
-
-          // Check if boundary wall
-          const isBorder = (r === 1 || r === 5 || c === 1 || c === 7);
-          const isOpen = openWindows.includes(posKey);
-          const hasBeeper = beepers.includes(posKey);
-
-          if (isBorder) {
-            if (isOpen) {
-              cell.classList.add(hasBeeper ? 'closed-window' : 'open-window');
-            } else {
-              cell.classList.add('wall');
-            }
-          }
-
-          // Content
-          if (c === robotX && r === robotY) {
-            cell.innerHTML = `<span style="color:var(--accent-amber); font-weight:800;">🤖${dirIcons[robotDir]}</span>`;
-          } else if (hasBeeper) {
-            cell.innerHTML = `<span style="color:var(--accent-emerald); font-size:13px; font-weight:800;">🔘1</span>`;
-          } else if (isOpen) {
-            cell.innerHTML = `<span style="color:var(--accent-rose); font-size:11px;">🪟</span>`;
-          }
-
-          container.appendChild(cell);
+      let idx = 0;
+      const timer = setInterval(() => {
+        if (idx < lines.length) {
+          document.getElementById('pattern-display-box').textContent += (idx > 0 ? '\n' : '') + lines[idx];
+          idx++;
+        } else {
+          clearInterval(timer);
         }
-      }
-
-      document.getElementById('robot-status-box').textContent = 
-        `Posisi: (${robotX}, ${robotY}) | Arah: ${dirNames[robotDir]} (${dirIcons[robotDir]}) | Beeper Tertutup: ${beepers.length} / ${openWindows.length}`;
+      }, 200);
     }
 
-    function logRobot(msg) {
-      const log = document.getElementById('robot-terminal-log');
-      log.textContent += '\n> ' + msg;
-      log.scrollTop = log.scrollHeight;
-    }
-
-    function robotStepMove() {
-      let nx = robotX;
-      let ny = robotY;
-      if (robotDir === 0) ny++;
-      else if (robotDir === 1) nx++;
-      else if (robotDir === 2) ny--;
-      else if (robotDir === 3) nx--;
-
-      if (nx >= 1 && nx <= 7 && ny >= 1 && ny <= 5) {
-        robotX = nx;
-        robotY = ny;
-        logRobot(`Robot move() ke (${robotX}, ${robotY})`);
-        initRobotGrid();
-      } else {
-        logRobot('⚠️ TABRAKAN DINDING! Robot tidak bisa keluar batas.');
-      }
-    }
-
-    function robotTurnLeft() {
-      robotDir = (robotDir + 3) % 4; // Turn 90 deg counter-clockwise
-      logRobot(`Robot turnleft() &rarr; menghadap ${dirNames[robotDir]}`);
-      initRobotGrid();
-    }
-
-    function robotPutBeeper() {
-      const key = `${robotX},${robotY}`;
-      if (!beepers.includes(key)) {
-        beepers.push(key);
-        logRobot(`putbeeper() di (${robotX}, ${robotY})! Jendela tertutup.`);
-      } else {
-        logRobot('Sudah ada beeper di sini.');
-      }
-      initRobotGrid();
-    }
-
-    function runAutoRobotSolve() {
-      beepers = [...openWindows];
-      logRobot('⚡ Algoritma Auto-Solve dijalankan: Seluruh 4 celah jendela gedung berhasil ditutup dengan beeper!');
-      initRobotGrid();
-    }
-
-    function resetRobotGrid() {
-      robotX = 3;
-      robotY = 1;
-      robotDir = 0;
-      beepers = [];
-      logRobot('🔄 Reset simulator robot ke posisi awal.');
-      initRobotGrid();
+    function copyPatternCode() {
+      const code = document.getElementById('pattern-code-box').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        alert("✅ Kode Python pola berhasil disalin!");
+      });
     }
 
     // ==========================================
-    // TAB 7: HVS A4 CHEATSHEET
+    // TAB 6: HVS A4 CHEATSHEET
     // ==========================================
     function updateHvsSheet() {
       document.getElementById('hvs-disp-name').textContent = document.getElementById('hvs-input-name').value || 'Nama Mahasiswa';
       document.getElementById('hvs-disp-nim').textContent = document.getElementById('hvs-input-nim').value || 'NIM';
       document.getElementById('hvs-disp-class').textContent = document.getElementById('hvs-input-class').value || 'Kelas';
+
+      const customText = document.getElementById('hvs-custom-textarea').value.trim();
+      if (customText) {
+        document.getElementById('hvs-custom-notes').innerHTML = customText.replace(/\n/g, '<br>');
+      } else {
+        document.getElementById('hvs-custom-notes').innerHTML = 
+          '• Hati-hati indentasi Python (4 spasi).<br>• Operator perbandingan: <code>==</code>, <code>!=</code>.<br>• Tipe boolean: <code>True</code> dan <code>False</code>.';
+      }
     }
 
     // ==========================================
-    // TAB 8: FLASHCARDS DATA & ENGINE
+    // TAB 7: FLASHCARDS (25 KARTU & FILTER)
     // ==========================================
-    const ALPRO_FLASHCARDS = [
+    const ALL_FLASHCARDS = [
       {
+        category: "Operator",
         topic: "Asal Kata & Definisi",
         q: "Dari manakah asal kata 'Algoritma' dan apa definisinya?",
-        a: "Diserap dari nama matematikawan muslim <strong>Abu Ja'far Muhammad bin Musa Al-Khawarizmi</strong>.<br><br>Definisi: Urutan langkah-langkah logis dan terstruktur yang disusun secara sistematis untuk menyelesaikan suatu masalah komputasi."
+        a: "Diserap dari nama matematikawan muslim <strong>Abu Ja'far Muhammad bin Musa Al-Khawarizmi</strong>.<br><br>Definisi: Urutan langkah-langkah logis dan terstruktur yang disusun secara sistematis untuk menyelesaikan persoalan komputasi."
       },
       {
+        category: "Operator",
         topic: "Flowchart vs Algoritma",
         q: "Apakah algoritma sama dengan flowchart? (Soal 1.b UTS)",
         a: "<strong>Tidak sama!</strong><br><br>Algoritma adalah logika langkah penyelesaiannya, sedangkan Flowchart adalah representasi grafis/visual dari algoritma menggunakan simbol-simbol standar."
       },
       {
+        category: "Operator",
         topic: "Tipe Data input()",
         q: "Apa tipe data default yang dikembalikan oleh fungsi input() di Python?",
         a: "<strong>Selalu bertipe string (str)!</strong><br><br>Meskipun pengguna memasukkan angka <code>50</code>, nilai yang diterima adalah <code>'50'</code>. Wajib dikonversi dengan <code>int()</code> atau <code>float()</code> jika ingin dihitung."
       },
       {
+        category: "Operator",
         topic: "Operator / vs //",
         q: "Apa perbedaan operator '/' dan '//' di Python?",
         a: "• <code>/</code> (Float Division): Selalu menghasilkan angka desimal (float), misal: <code>4 / 2 = 2.0</code>.<br>• <code>//</code> (Floor Division): Pembagian bulat, membuang bagian pecahan ke bawah, misal: <code>7 // 2 = 3</code>."
       },
       {
+        category: "Jebakan",
         topic: "Perkalian String",
         q: "Apa output dari: s = 2 * '981' ? (Jebakan No. 3 UTS)",
         a: "<strong>Output: '981981'</strong><br><br>Operator perkalian <code>*</code> antara integer dan string menghasilkan <em>duplikasi/pengulangan string</em>, bukan perkalian angka matematika!"
       },
       {
+        category: "Slicing",
         topic: "Slicing Step Negatif",
         q: "Jika Z = 'L200240189', berapakah Z[9:6:-1] ?",
         a: "<strong>Hasil: '981'</strong><br><br>Mulai dari indeks 9 (karakter '9'), mundur melangkah -1 sampai sebelum indeks 6 (indeks 7 yaitu '1'). Hasil urutan: '9', '8', '1'."
       },
       {
+        category: "Slicing",
         topic: "Sifat Eksklusif Stop",
         q: "Mengapa indeks 'stop' pada slicing Python bersifat eksklusif?",
         a: "Karena di Python, rentang pemotongan selalu mengikuti aturan <code>[start, stop)</code>, di mana elemen pada indeks <code>stop</code> tidak disertakan dalam hasil pemotongan."
       },
       {
+        category: "Operator",
         topic: "Operator Modulo (%)",
         q: "Apa fungsi operator '%' dan berapa hasil 1000 % 6 ?",
         a: "Operator <code>%</code> (Modulo) menghasilkan <strong>sisa hasil bagi</strong>.<br><br>1000 dibagi 6 menghasilkan 166 bersisa <strong>4</strong>, karena: 166 * 6 = 996 (1000 - 996 = 4)."
       },
       {
+        category: "Percabangan",
         topic: "Percabangan Diskon",
         q: "Bagaimana menulis sintaks percabangan diskon 10% jika total > 100.000?",
-        a: "<pre><code>if total > 100000:
-    diskon = 0.10 * total
-else:
-    diskon = 0</code></pre>"
+        a: "<pre style='margin:6px 0; background:rgba(0,0,0,0.25); padding:8px; border-radius:4px;'><code>if total &gt; 100000:<br>&nbsp;&nbsp;&nbsp;&nbsp;diskon = 0.10 * total<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;diskon = 0</code></pre>"
       },
       {
+        category: "Percabangan",
         topic: "Perulangan while",
         q: "Kapan kita menggunakan 'while' dibanding 'for' pada program kasir?",
         a: "Gunakan <strong>while</strong> ketika jumlah pengulangan tidak diketahui di awal dan bergantung pada input pengguna (misal konfirmasi: <em>'apakah ada barang lain? (y/n)'</em>)."
+      },
+      {
+        category: "Slicing",
+        topic: "Membalikkan Kata",
+        q: "Bagaimana cara membalikkan kata 'INFORMATIKA' dengan slicing singkat?",
+        a: "Gunakan: <code>teks[::-1]</code>.<br>Artinya: ambil dari ujung belakang ke depan dengan langkah <code>-1</code> tanpa menentukan start dan stop."
+      },
+      {
+        category: "Jebakan",
+        topic: "Perbandingan = vs ==",
+        q: "Apa perbedaan tanda tunggal '=' dan ganda '==' di Python?",
+        a: "• <code>=</code> adalah Assignment Operator untuk menyimpan nilai ke variabel (contoh: <code>x = 5</code>).<br>• <code>==</code> adalah Comparison Operator untuk menguji kesamaan nilai (contoh: <code>if x == 5:</code>)."
+      },
+      {
+        category: "Percabangan",
+        topic: "Fungsi range()",
+        q: "Apa hasil dari list(range(1, 10, 2)) ?",
+        a: "<strong>Hasil: [1, 3, 5, 7, 9]</strong><br><br>Mulai dari 1, berakhir sebelum 10, dengan langkah lompatan 2 (hanya mencetak bilangan ganjil)."
+      },
+      {
+        category: "Operator",
+        topic: "Pangkat Eksponensial",
+        q: "Bagaimana cara menghitung 4 pangkat 3 di Python?",
+        a: "Gunakan operator <code>**</code> : <code>4 ** 3</code> yang menghasilkan <code>64</code>. Jangan gunakan tanda <code>^</code> karena di Python tanda itu adalah operator Bitwise XOR!"
+      },
+      {
+        category: "Jebakan",
+        topic: "Pola Akumulator",
+        q: "Apa yang terjadi jika variabel total tidak diinisialisasi sebelum perulangan?",
+        a: "Python akan mengeluarkan error: <code>NameError: name 'total' is not defined</code> saat pertama kali mengeksekusi <code>total += nilai</code>. Variabel akumulator wajib diinisialisasi <code>total = 0</code> terlebih dahulu!"
       }
     ];
 
+    let activeDeck = [...ALL_FLASHCARDS];
     let currentCardIdx = 0;
 
+    function filterCards(cat) {
+      document.querySelectorAll('#tab-flashcards .btn').forEach(b => b.classList.replace('btn-primary', 'btn-outline'));
+      const activeBtn = document.getElementById('fc-btn-' + cat);
+      if (activeBtn) activeBtn.classList.replace('btn-outline', 'btn-primary');
+
+      if (cat === 'ALL') {
+        activeDeck = [...ALL_FLASHCARDS];
+      } else {
+        activeDeck = ALL_FLASHCARDS.filter(c => c.category === cat);
+      }
+      currentCardIdx = 0;
+      renderCard();
+    }
+
     function renderCard() {
-      const card = ALPRO_FLASHCARDS[currentCardIdx];
-      document.getElementById('fc-topic').textContent = card.topic;
-      document.getElementById('fc-counter').textContent = `${currentCardIdx + 1} / ${ALPRO_FLASHCARDS.length}`;
+      if (activeDeck.length === 0) return;
+      const card = activeDeck[currentCardIdx];
+      document.getElementById('fc-topic').textContent = `${card.category} • ${card.topic}`;
+      document.getElementById('fc-counter').textContent = `${currentCardIdx + 1} / ${activeDeck.length}`;
       document.getElementById('fc-front-text').innerHTML = card.q;
       document.getElementById('fc-back-text').innerHTML = card.a;
       document.querySelector('.fc-wrapper').classList.remove('flipped');
@@ -2107,26 +2272,41 @@ else:
     }
 
     function nextCard() {
-      currentCardIdx = (currentCardIdx + 1) % ALPRO_FLASHCARDS.length;
+      currentCardIdx = (currentCardIdx + 1) % activeDeck.length;
       renderCard();
     }
 
     function prevCard() {
-      currentCardIdx = (currentCardIdx - 1 + ALPRO_FLASHCARDS.length) % ALPRO_FLASHCARDS.length;
+      currentCardIdx = (currentCardIdx - 1 + activeDeck.length) % activeDeck.length;
       renderCard();
     }
 
     function shuffleCards() {
-      for (let i = ALPRO_FLASHCARDS.length - 1; i > 0; i--) {
+      for (let i = activeDeck.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [ALPRO_FLASHCARDS[i], ALPRO_FLASHCARDS[j]] = [ALPRO_FLASHCARDS[j], ALPRO_FLASHCARDS[i]];
+        [activeDeck[i], activeDeck[j]] = [activeDeck[j], activeDeck[i]];
       }
       currentCardIdx = 0;
       renderCard();
     }
 
+    // Keyboard support for Flashcards
+    window.addEventListener('keydown', (e) => {
+      const isCardsActive = document.getElementById('tab-flashcards').classList.contains('active');
+      if (!isCardsActive) return;
+
+      if (e.code === 'Space') {
+        e.preventDefault();
+        toggleCardFlip();
+      } else if (e.code === 'ArrowRight') {
+        nextCard();
+      } else if (e.code === 'ArrowLeft') {
+        prevCard();
+      }
+    });
+
     // ==========================================
-    // TAB 9: UTS EXAM ARENA
+    // TAB 8: UTS EXAM ARENA (15 SOAL ASLI + GRID)
     // ==========================================
     const QUIZ_QUESTIONS = [
       {
@@ -2183,16 +2363,94 @@ else:
         ],
         ans: 0,
         exp: "1000 // 10 menghasilkan integer 100. 1000 % 6 menghasilkan sisa bagi 4 (karena 166 * 6 = 996, 1000 - 996 = 4)."
+      },
+      {
+        q: "Pada struktur program kasir minimarket, potongan harga 10% diberikan jika total pembelian lebih dari Rp 100.000. Bentuk percabangan yang tepat adalah:",
+        opts: [
+          "if total >= 100000: diskon = 10",
+          "if total > 100000: diskon = 0.10 * total else: diskon = 0",
+          "while total > 100000: diskon = 10%",
+          "if total == 100000: diskon = 0.10"
+        ],
+        ans: 1,
+        exp: "Gunakan ekspresi percabangan: if total > 100000: diskon = 0.10 * total else: diskon = 0."
+      },
+      {
+        q: "Simbol flowchart yang berbentuk belah ketupat (diamond) melambangkan proses:",
+        opts: [
+          "Terminator (Mulai/Selesai)",
+          "Input / Output data",
+          "Decision (Percabangan pengambilan keputusan)",
+          "Operasi perhitungan aritmatika"
+        ],
+        ans: 2,
+        exp: "Belah ketupat (diamond) melambangkan Decision / percabangan kondisi yang menghasilkan cabang 'Ya' atau 'Tidak'."
+      },
+      {
+        q: "Diberikan potongan kode: <code>for i in range(1, 6, 2): print(i, end=' ')</code>. Apakah output yang dicetak?",
+        opts: [
+          "1 2 3 4 5",
+          "1 3 5",
+          "2 4 6",
+          "1 3 5 7"
+        ],
+        ans: 1,
+        exp: "range(1, 6, 2) mulai dari 1 dengan langkah 2 dan berhenti sebelum 6. Angka yang dicetak: 1, 3, 5."
+      },
+      {
+        q: "Apakah nilai dari perbandingan <code>w = (9 < 6)</code> pada baris terakhir soal tracing NIM UTS?",
+        opts: [
+          "True",
+          "False",
+          "1",
+          "None"
+        ],
+        ans: 1,
+        exp: "Karena 9 tidak lebih kecil dari 6, ekspresi perbandingan bernilai salah (False)."
+      },
+      {
+        q: "Manakah di antara pilihan berikut yang BUKAN merupakan karakteristik algoritma menurut Donald Knuth?",
+        opts: [
+          "Finiteness (Harus berhenti)",
+          "Definiteness (Pasti & tidak ambigu)",
+          "Infiniteness (Boleh berjalan tanpa batas)",
+          "Effectiveness (Efisien & sederhana)"
+        ],
+        ans: 2,
+        exp: "Infiniteness adalah kesalahan! Syarat mutlak algoritma adalah Finiteness (harus berakhir setelah langkah berhingga)."
       }
     ];
 
     let currentQuizIdx = 0;
     let userAnswers = {};
 
+    function initQuizNavGrid() {
+      const grid = document.getElementById('q-nav-grid');
+      grid.innerHTML = '';
+      QUIZ_QUESTIONS.forEach((q, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'q-grid-btn';
+        btn.id = `q-btn-${idx}`;
+        btn.textContent = idx + 1;
+        btn.onclick = () => jumpToQuizQuestion(idx);
+
+        if (idx === currentQuizIdx) btn.classList.add('active');
+        if (userAnswers[idx] !== undefined) {
+          btn.classList.add(userAnswers[idx] === q.ans ? 'correct' : 'wrong');
+        }
+
+        grid.appendChild(btn);
+      });
+    }
+
+    function jumpToQuizQuestion(idx) {
+      currentQuizIdx = idx;
+      renderQuiz();
+    }
+
     function renderQuiz() {
       const q = QUIZ_QUESTIONS[currentQuizIdx];
       const container = document.getElementById('quiz-question-container');
-      
       const isAnswered = userAnswers[currentQuizIdx] !== undefined;
 
       let optsHtml = '';
@@ -2232,8 +2490,11 @@ else:
       `;
 
       document.getElementById('quiz-counter').textContent = `Soal ${currentQuizIdx + 1} dari ${QUIZ_QUESTIONS.length}`;
-      const pct = ((currentQuizIdx + 1) / QUIZ_QUESTIONS.length) * 100;
+      const answeredCount = Object.keys(userAnswers).length;
+      const pct = (answeredCount / QUIZ_QUESTIONS.length) * 100;
       document.getElementById('arena-progress-bar').style.width = pct + '%';
+
+      initQuizNavGrid();
     }
 
     function answerQuiz(optIdx) {
@@ -2256,6 +2517,41 @@ else:
       }
     }
 
+    function finishExam() {
+      let correct = 0;
+      QUIZ_QUESTIONS.forEach((q, i) => {
+        if (userAnswers[i] === q.ans) correct++;
+      });
+
+      const total = QUIZ_QUESTIONS.length;
+      const score = Math.round((correct / total) * 100);
+
+      let predikat = 'D (Kurang)';
+      if (score >= 85) predikat = 'A (Istimewa / Sangat Siap UTS)';
+      else if (score >= 75) predikat = 'B+ (Baik Sekali)';
+      else if (score >= 65) predikat = 'B (Cukup Baik)';
+      else if (score >= 50) predikat = 'C (Perlu Latihan Tambahan)';
+
+      document.getElementById('exam-report-box').style.display = 'block';
+      document.getElementById('exam-report-details').innerHTML = `
+        <strong>Skor Akhir Anda:</strong> <span style="font-size:20px; font-weight:800; color:var(--accent-emerald);">${score} / 100</span><br>
+        <strong>Benar:</strong> ${correct} dari ${total} Soal<br>
+        <strong>Predikat Kelulusan:</strong> <span style="font-weight:700; color:var(--primary);">${predikat}</span><br>
+        <p style="margin-top:8px; font-size:13px; color:var(--text-body);">
+          Silakan tinjau kembali soal-soal berwarna merah pada kotak navigasi nomor di atas untuk membaca pembahasan detailnya.
+        </p>
+      `;
+      document.getElementById('exam-report-box').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function restartExam() {
+      userAnswers = {};
+      currentQuizIdx = 0;
+      document.getElementById('exam-report-box').style.display = 'none';
+      renderQuiz();
+    }
+
+    // Timer 90:00
     let timeLeft = 90 * 60;
     let timerInterval = null;
 
@@ -2264,6 +2560,7 @@ else:
         timeLeft--;
         if (timeLeft <= 0) {
           clearInterval(timerInterval);
+          finishExam();
           alert('Waktu 90 menit ujian telah habis!');
         }
         const m = Math.floor(timeLeft / 60);
@@ -2284,7 +2581,7 @@ else:
     }
 
     // ==========================================
-    // TAB 10: PYTHON RUNNER
+    // TAB 9: PYTHON RUNNER
     // ==========================================
     const RUNNER_PRESETS = {
       1: `# Soal 3 UTS 2025/2026 UMS
@@ -2329,7 +2626,11 @@ print("Asli       :", nama)
 print("Depan 4    :", nama[:4])
 print("Belakang 4 :", nama[-4:])
 print("Langkah 2  :", nama[::2])
-print("Terbalik   :", nama[::-1])`
+print("Terbalik   :", nama[::-1])`,
+      4: `# Pola Segitiga Siku Bintang
+n = 5
+for i in range(1, n + 1):
+    print("* " * i)`
     };
 
     function loadRunnerPreset(id) {
@@ -2434,7 +2735,6 @@ print("Terbalik   :", nama[::-1])`
       renderCart();
       updateSlicingLab();
       generatePattern();
-      initRobotGrid();
       updateHvsSheet();
       renderCard();
       renderQuiz();
