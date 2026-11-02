@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Algoritma & Pemrograman (Python) — Portal Belajar & Bank Soal UTS UMS</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-heading: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      /* Dark Mode (Cyber-Academic Python Palette) */
+      --bg-page: #0b0f17;
+      --bg-surface: #111827;
+      --bg-surface-elevated: #162032;
+      --bg-surface-card: #131c2e;
+      --bg-hover: #1e2c44;
+      --border-color: #22324d;
+      --border-subtle: #19263c;
+
+      --text-main: #f8fafc;
+      --text-body: #cbd5e1;
+      --text-muted: #8da2be;
+      --text-subtle: #64748b;
+
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --primary-light: rgba(59, 130, 246, 0.15);
+      --primary-border: rgba(59, 130, 246, 0.35);
+
+      --py-blue: #3776ab;
+      --py-yellow: #ffd43b;
+
+      --accent-emerald: #10b981;
+      --emerald-bg: rgba(16, 185, 129, 0.12);
+      --emerald-border: rgba(16, 185, 129, 0.35);
+
+      --accent-amber: #f59e0b;
+      --amber-bg: rgba(245, 158, 11, 0.12);
+      --amber-border: rgba(245, 158, 11, 0.35);
+
+      --accent-rose: #f43f5e;
+      --rose-bg: rgba(244, 63, 94, 0.12);
+      --rose-border: rgba(244, 63, 94, 0.35);
+
+      --accent-cyan: #06b6d4;
+      --cyan-bg: rgba(6, 182, 212, 0.12);
+      --cyan-border: rgba(6, 182, 212, 0.35);
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+      --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.35);
+    }
+
+    [data-theme="light"] {
+      --bg-page: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-surface-elevated: #f1f5f9;
+      --bg-surface-card: #ffffff;
+      --bg-hover: #e2e8f0;
+      --border-color: #e2e8f0;
+      --border-subtle: #edf2f7;
+
+      --text-main: #0f172a;
+      --text-body: #334155;
+      --text-muted: #64748b;
+      --text-subtle: #94a3b8;
+
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-light: #eff6ff;
+      --primary-border: #bfdbfe;
+
+      --py-blue: #2b5b84;
+      --py-yellow: #b48608;
+
+      --accent-emerald: #059669;
+      --emerald-bg: #ecfdf5;
+      --emerald-border: #a7f3d0;
+
+      --accent-amber: #d97706;
+      --amber-bg: #fffbeb;
+      --amber-border: #fde68a;
+
+      --accent-rose: #e11d48;
+      --rose-bg: #fff1f2;
+      --rose-border: #fecdd3;
+
+      --accent-cyan: #0891b2;
+      --cyan-bg: #ecfeff;
+      --cyan-border: #a5f3fc;
+
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+      --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-page);
+      color: var(--text-body);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navigation Bar */
+    .top-header {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .brand-logo {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, #3776ab, #ffd43b);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 2px 10px rgba(55, 118, 171, 0.3);
+    }
+    .brand-title {
+      font-family: var(--font-heading);
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+    .brand-subtitle {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .nav-link-btn:hover {
+      color: var(--text-main);
+      background: var(--bg-hover);
+      border-color: var(--border-color);
+    }
+    .nav-link-btn.active {
+      color: var(--primary);
+      background: var(--primary-light);
+      border-color: var(--primary-border);
+    }
+
+    .theme-toggle-btn {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .theme-toggle-btn:hover {
+      background: var(--bg-hover);
+      border-color: var(--primary-border);
+    }
+
+    /* Subnav Tabs */
+    .subnav-bar {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-color);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .subnav-bar::-webkit-scrollbar { display: none; }
+    .subnav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      gap: 4px;
+    }
+    .tab-btn {
+      padding: 12px 16px;
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover {
+      color: var(--text-main);
+    }
+    .tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    /* Main Container */
+    .main-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
+      width: 100%;
+      flex: 1;
+    }
+
+    .tab-pane {
+      display: none;
+    }
+    .tab-pane.active {
+      display: block;
+      animation: fadeIn 0.25s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Typography & Academic Cards */
+    .article-card {
+      background: var(--bg-surface-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .article-card h1, .article-card h2 {
+      font-family: var(--font-heading);
+      color: var(--text-main);
+    }
+    .article-card h2 {
+      font-size: 20px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .article-card h3 {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      color: var(--primary);
+      margin: 20px 0 10px;
+    }
+    .article-card h4 {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--text-main);
+      margin: 14px 0 6px;
+    }
+    .article-card p {
+      margin-bottom: 12px;
+      color: var(--text-body);
+      font-size: 14px;
+    }
+    .article-card ul, .article-card ol {
+      margin: 0 0 16px 20px;
+    }
+    .article-card li {
+      margin-bottom: 6px;
+      font-size: 14px;
+      color: var(--text-body);
+    }
+    .article-card code {
+      font-family: var(--font-mono);
+      background: var(--bg-surface-elevated);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--accent-cyan);
+      font-size: 0.9em;
+      border: 1px solid var(--border-color);
+    }
+    .article-card pre {
+      background: #0d131f;
+      color: #e2e8f0;
+      border: 1px solid var(--border-color);
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.5;
+      margin: 12px 0 18px;
+    }
+
+    .academic-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin: 12px 0 20px;
+    }
+    .academic-table th {
+      background: var(--bg-surface-elevated);
+      color: var(--text-main);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border-color);
+      text-align: left;
+    }
+    .academic-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-body);
+    }
+    .academic-table tr:hover td {
+      background: var(--bg-hover);
+    }
+
+    /* Common Callout Boxes */
+    .callout {
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      border-left: 4px solid var(--primary);
+      background: var(--bg-surface-elevated);
+      margin: 16px 0;
+    }
+    .callout.info {
+      background: var(--primary-light);
+      border-color: var(--primary-border);
+      border-left-color: var(--primary);
+    }
+    .callout.warning {
+      background: var(--amber-bg);
+      border-color: var(--amber-border);
+      border-left-color: var(--accent-amber);
+    }
+    .callout.danger {
+      background: var(--rose-bg);
+      border-color: var(--rose-border);
+      border-left-color: var(--accent-rose);
+    }
+    .callout.success {
+      background: var(--emerald-bg);
+      border-color: var(--emerald-border);
+      border-left-color: var(--accent-emerald);
+    }
+    .callout-title {
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+    }
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+    .btn-outline {
+      background: var(--bg-surface-elevated);
+      border-color: var(--border-color);
+      color: var(--text-main);
+    }
+    .btn-outline:hover {
+      background: var(--bg-hover);
+      border-color: var(--primary-border);
+    }
+
+    /* Tracing Simulator Specifics */
+    .ruler-container {
+      display: flex;
+      overflow-x: auto;
+      gap: 4px;
+      padding: 12px 0;
+      margin: 16px 0;
+    }
+    .ruler-cell {
+      min-width: 48px;
+      height: 70px;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 4px;
+      font-family: var(--font-mono);
+      transition: all 0.2s;
+    }
+    .ruler-cell.active-slice {
+      border-color: var(--accent-amber);
+      background: var(--amber-bg);
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.25);
+    }
+    .ruler-cell .pos-idx {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+    .ruler-cell .char-val {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .ruler-cell .neg-idx {
+      font-size: 10px;
+      color: var(--primary);
+    }
+
+    /* Flashcard Flip 3D */
+    .fc-wrapper {
+      perspective: 1000px;
+      width: 100%;
+      max-width: 600px;
+      margin: 20px auto;
+      height: 320px;
+      cursor: pointer;
+    }
+    .fc-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+    .fc-wrapper.flipped .fc-inner {
+      transform: rotateY(180deg);
+    }
+    .fc-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: var(--radius-md);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-md);
+    }
+    .fc-front {
+      background: var(--bg-surface-card);
+      color: var(--text-main);
+    }
+    .fc-back {
+      background: var(--bg-surface-elevated);
+      color: var(--text-main);
+      transform: rotateY(180deg);
+      border-color: var(--primary-border);
+      text-align: left;
+    }
+
+    /* Flowchart Simulator Visualizer */
+    .flowchart-step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface-elevated);
+      margin-bottom: 8px;
+      transition: all 0.2s;
+    }
+    .flowchart-step.highlight {
+      border-color: var(--accent-emerald);
+      background: var(--emerald-bg);
+      transform: translateX(6px);
+    }
+    .fc-shape-badge {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-inner { padding: 10px 14px; }
+      .brand-subtitle { display: none; }
+      .subnav-inner { padding: 0 10px; }
+      .tab-btn { padding: 10px 12px; font-size: 12.5px; }
+      .main-content { padding: 16px 12px 40px; }
+      .article-card { padding: 16px 14px; }
+      .fc-wrapper { height: 350px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="top-header">
+    <div class="header-inner">
+      <a href="alpro.html" class="brand-group">
+        <div class="brand-logo">🐍</div>
+        <div class="brand-title">
+          <span>ALPRO UMS</span>
+          <span class="brand-subtitle">Algoritma & Pemrograman Python</span>
+        </div>
+      </a>
+
+      <div class="header-actions">
+        <a href="index.html" class="nav-link-btn" title="Pindah ke Portal Logika dan Himpunan">
+          <span>📐</span> Logika & Himpunan
+        </a>
+        <a href="dashboard.html" class="nav-link-btn" title="Jadwal Kuliah">
+          <span>📅</span> Dashboard
+        </a>
+        <button class="theme-toggle-btn" onclick="toggleTheme()" title="Ganti Tema (Dark / Light)">
+          <span id="theme-icon">🌙</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sub Navigation (Tabs) -->
+  <nav class="subnav-bar">
+    <div class="subnav-inner">
+      <button class="tab-btn active" onclick="switchTab('tab-diktat')">
+        <span>📚</span> Diktat Teori & UTS
+      </button>
+      <button class="tab-btn" onclick="switchTab('tab-tracing')">
+        <span>🧪</span> Simulator Tracing NIM (UTS)
+      </button>
+      <button class="tab-btn" onclick="switchTab('tab-kasir')">
+        <span>🛒</span> Flowchart & Kasir Diskon
+      </button>
+      <button class="tab-btn" onclick="switchTab('tab-flashcards')">
+        <span>🗂️</span> Flashcards Konsep
+      </button>
+      <button class="tab-btn" onclick="switchTab('tab-arena')">
+        <span>⚔️</span> UTS Exam Arena
+      </button>
+      <button class="tab-btn" onclick="switchTab('tab-runner')">
+        <span>💻</span> Python Mini Runner
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <main class="main-content">
+
+    <!-- ==================== TAB 1: DIKTAT TEORI ==================== -->
+    <div id="tab-diktat" class="tab-pane active">
+      
+      <!-- HERO BANNER -->
+      <div class="article-card" style="border-left: 4px solid var(--primary); background: linear-gradient(to right, var(--bg-surface-card), var(--bg-surface-elevated));">
+        <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+          <span style="background:var(--primary-light); color:var(--primary); border:1px solid var(--primary-border); padding:3px 10px; border-radius:var(--radius-full); font-size:11px; font-weight:700;">KURIKULUM RESMI UMS</span>
+          <span style="background:var(--amber-bg); color:var(--accent-amber); border:1px solid var(--amber-border); padding:3px 10px; border-radius:var(--radius-full); font-size:11px; font-weight:700;">SEMESTER 1 GASAL (MABA)</span>
+        </div>
+        <h1 style="font-size:24px; color:var(--text-main); margin-bottom:8px;">🐍 Diktat Komprehensif Algoritma & Pemrograman</h1>
+        <p style="color:var(--text-body); font-size:14px; margin-bottom:0;">
+          Materi kuliah dan bank soal autentik Ujian Tengah Semester (UTS) Program Studi Informatika UMS. Dosen Penguji: <strong>Arif Setiawan, S.Kom., M.Eng.</strong>, <strong>Husni Thamrin, M.T., Ph.D.</strong>, dan <strong>M. Syahriandi Adhantoro, M.Kom.</strong>
+        </p>
+      </div>
+
+      <!-- MODUL 1 -->
+      <article class="article-card">
+        <h2>1️⃣ Modul 1: Konsep Dasar Algoritma, Flowchart & 3 Perintah Komputer</h2>
+        <p>
+          Kata <strong>Algoritma</strong> diserap dari nama ilmuwan matematika muslim ternama <em>Abu Ja'far Muhammad bin Musa Al-Khawarizmi</em> (penemu Aljabar). Dalam bidang informatika, algoritma didefinisikan sebagai <strong>urutan langkah-langkah logis dan terstruktur yang disusun secara sistematis untuk menyelesaikan persoalan komputasi</strong>.
+        </p>
+
+        <h3>5 Karakteristik Mutlak Algoritma (Donald Knuth)</h3>
+        <ul>
+          <li><strong>Finiteness (Keterbatasan):</strong> Algoritma harus berakhir setelah sejumlah langkah berhingga. Tidak boleh looping selamanya tanpa henti!</li>
+          <li><strong>Definiteness (Kepastian):</strong> Setiap instruksi harus jelas, eksplisit, dan tidak menimbulkan makna ganda (tidak ambigu).</li>
+          <li><strong>Input (Masukan):</strong> Memiliki nol atau lebih data masukan dari luar sistem.</li>
+          <li><strong>Output (Keluaran):</strong> Memiliki satu atau lebih hasil keluaran sebagai solusi.</li>
+          <li><strong>Effectiveness (Efektivitas):</strong> Setiap langkah harus sederhana dan dapat dikerjakan dalam waktu yang masuk akal.</li>
+        </ul>
+
+        <h3>Perbedaan Algoritma vs Flowchart vs Pseudocode (Soal UTS 1.b)</h3>
+        <table class="academic-table">
+          <thead>
+            <tr><th>Bentuk Penyajian</th><th>Format</th><th>Kelebihan</th><th>Kelemahan</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Bahasa Alami</strong></td>
+              <td>Teks narasi deskriptif</td>
+              <td>Mudah dibaca orang awam</td>
+              <td>Sering ambigu & terlalu panjang</td>
+            </tr>
+            <tr>
+              <td><strong>Flowchart</strong></td>
+              <td>Diagram visual dengan simbol grafis standar</td>
+              <td>Alur logika (percabangan/loop) sangat mudah dilihat sekilas</td>
+              <td>Memakan banyak tempat jika program rumit</td>
+            </tr>
+            <tr>
+              <td><strong>Pseudocode</strong></td>
+              <td>Teks mirip kode pemrograman (high-level)</td>
+              <td>Sangat cepat diterjemahkan ke kode Python riil</td>
+              <td>Perlu pemahaman logika kode</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>3 Perintah Dasar Pemrograman (Soal UTS Husni Thamrin)</h3>
+        <p>Setiap program komputer modern pada dasarnya menjalankan 3 operasi fundamental:</p>
+        <ol>
+          <li><strong>Perintah Meminta Data (Input):</strong> Menerima data dari pengguna. Di Python menggunakan fungsi <code>input()</code>.</li>
+          <li><strong>Perintah Menyimpan / Menghitung Data (Assignment & Process):</strong> Menyimpan nilai ke memori variabel menggunakan operator penugasan <code>=</code> dan memprosesnya dengan ekspresi aritmatika.</li>
+          <li><strong>Perintah Menampilkan Data (Output):</strong> Menyajikan hasil pengolahan ke layar terminal. Di Python menggunakan fungsi <code>print()</code>.</li>
+        </ol>
+
+        <pre><code># Contoh 3 Perintah Dasar di Python
+nama = input("Siapa nama Anda? ")           # 1. Meminta data (Input)
+salam = "Halo, Selamat Datang " + nama       # 2. Menyimpan & Memproses (Assignment)
+print(salam)                                 # 3. Menampilkan data (Output)</code></pre>
+      </article>
+
+      <!-- MODUL 2 -->
+      <article class="article-card">
+        <h2>2️⃣ Modul 2: Tipe Data, Variabel & Operator Aritmatika Python</h2>
+        <p>
+          Python adalah bahasa yang berorientasi objek dengan *dynamically typed variables*. Anda tidak perlu mendeklarasikan tipe data secara eksplisit saat membuat variabel.
+        </p>
+
+        <h3>Tipe Data Dasar Python</h3>
+        <ul>
+          <li><code>int</code>: Bilangan bulat (contoh: <code>10</code>, <code>-5</code>, <code>0</code>).</li>
+          <li><code>float</code>: Bilangan berkoma / desimal (contoh: <code>3.14</code>, <code>100.5</code>).</li>
+          <li><code>str</code>: String teks (contoh: <code>"Informatika"</code>, <code>'L200240189'</code>).</li>
+          <li><code>bool</code>: Nilai boolean (<code>True</code> atau <code>False</code>).</li>
+        </ul>
+
+        <div class="callout warning">
+          <div class="callout-title">⚠️ JEBAKAN POPULER UTS: Tipe Data input()</div>
+          Fungsi <code>input()</code> di Python <strong>SELALU</strong> mengembalikan nilai bertipe <code>str</code> (string)!<br>
+          Jika user memasukkan angka <code>5</code>, variabel akan bernilai string <code>'5'</code>.<br>
+          Untuk operasi matematika, <strong>WAJIB</strong> dikonversi dengan <code>int(input(...))</code> atau <code>float(input(...))</code>!
+        </div>
+
+        <h3>Daftar Lengkap Operator Aritmatika di Python</h3>
+        <table class="academic-table">
+          <thead>
+            <tr><th>Operator</th><th>Nama</th><th>Contoh</th><th>Hasil</th><th>Penjelasan Penting</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>+</code></td><td>Penjumlahan</td><td><code>10 + 5</code></td><td><code>15</code></td><td>Jika pada string, berfungsi sebagai penggabung (<em>concatenation</em>): <code>'A' + 'B' = 'AB'</code></td></tr>
+            <tr><td><code>-</code></td><td>Pengurangan</td><td><code>10 - 4</code></td><td><code>6</code></td><td>Pengurangan nilai numerik</td></tr>
+            <tr><td><code>*</code></td><td>Perkalian</td><td><code>4 * 3</code></td><td><code>12</code></td><td><strong>Jebakan UTS:</strong> Pada string berfungsi menggandakan: <code>2 * '981' = '981981'</code>!</td></tr>
+            <tr><td><code>/</code></td><td>Float Division</td><td><code>7 / 2</code></td><td><code>3.5</code></td><td>Selalu menghasilkan tipe data <code>float</code> meskipun habis dibagi: <code>4 / 2 = 2.0</code></td></tr>
+            <tr><td><code>//</code></td><td>Floor Division</td><td><code>7 // 2</code></td><td><code>3</code></td><td>Pembagian bulat (dibulatkan ke bawah, membuang desimal)</td></tr>
+            <tr><td><code>%</code></td><td>Modulo</td><td><code>10 % 3</code></td><td><code>1</code></td><td>Sisa pembagian: 10 dibagi 3 adalah 3 bersisa 1</td></tr>
+            <tr><td><code>**</code></td><td>Eksponensial</td><td><code>2 ** 3</code></td><td><code>8</code></td><td>Pangkat (2 pangkat 3)</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <!-- MODUL 3 -->
+      <article class="article-card">
+        <h2>3️⃣ Modul 3: String Slicing Komprehensif (Materi Utama UTS)</h2>
+        <p>
+          String di Python diperlakukan sebagai urutan karakter (*sequence*) yang setiap karakternya memiliki indeks numerik tetap.
+        </p>
+
+        <h3>Aturan Indeks Python</h3>
+        <ul>
+          <li><strong>Indeks Positif (Kiri ke Kanan):</strong> Dimulai dari <code>0</code> untuk karakter pertama, <code>1</code> untuk karakter kedua, dst.</li>
+          <li><strong>Indeks Negatif (Kanan ke Kiri):</strong> Dimulai dari <code>-1</code> untuk karakter paling belakang, <code>-2</code> untuk karakter kedua dari belakang, dst.</li>
+        </ul>
+
+        <h3>Sintaks Slicing: <code>teks[start : stop : step]</code></h3>
+        <ul>
+          <li><code>start</code>: Indeks awal pemotongan (inklusif).</li>
+          <li><code>stop</code>: Indeks batas akhir (<strong>eksklusif</strong> — karakter di indeks ini TIDAK diikutkan!).</li>
+          <li><code>step</code>: Langkah lompatan. Jika positif, bergerak maju (kiri ke kanan). Jika negatif, bergerak mundur (kanan ke kiri).</li>
+        </ul>
+
+        <div class="callout info">
+          <div class="callout-title">💡 Bedah Rumus Tracing UTS UMS: <code>Z[9:6:-1]</code></div>
+          Misalkan string NIM: <code>Z = 'L200240189'</code> (Panjang 10 karakter, indeks 0 sampai 9).<br>
+          • <code>start = 9</code>: Karakter di indeks 9 yaitu <code>'9'</code>.<br>
+          • <code>stop = 6</code>: Batas akhir berhenti di sebelum 6 (yaitu indeks 7).<br>
+          • <code>step = -1</code>: Melangkah mundur 1 langkah per karakter.<br>
+          Karakter yang diambil berurutan: Indeks 9 (<code>'9'</code>), Indeks 8 (<code>'8'</code>), Indeks 7 (<code>'1'</code>).<br>
+          <strong>Hasil potongan:</strong> <code>'981'</code> (String 3 karakter terbalik).
+        </div>
+      </article>
+
+      <!-- MODUL 4 -->
+      <article class="article-card">
+        <h2>4️⃣ Modul 4: Struktur Kontrol Percabangan (if, elif, else)</h2>
+        <p>
+          Percabangan memungkinkan program mengambil keputusan berdasarkan evaluasi kondisi boolean (<code>True</code> atau <code>False</code>).
+        </p>
+
+        <h3>Aturan Indentasi Python</h3>
+        <p>
+          Berbeda dari C++ atau Java yang menggunakan kurung kurawal <code>{ }</code>, Python menggunakan <strong>indentasi (spasi/tab)</strong> untuk mendefinisikan blok kode di dalam <code>if</code>, <code>for</code>, dan <code>while</code>.
+        </p>
+
+        <pre><code># Studi Kasus Diskon Kasir Minimarket (UTS 2025)
+total_belanja = 125000
+
+if total_belanja > 100000:
+    diskon = 0.10 * total_belanja    # Potongan 10% jika belanja > 100k
+else:
+    diskon = 0                       # Tidak ada diskon jika <= 100k
+
+total_bayar = total_belanja - diskon
+print("Total Bayar: Rp", total_bayar)</code></pre>
+      </article>
+
+      <!-- MODUL 5 -->
+      <article class="article-card">
+        <h2>5️⃣ Modul 5: Struktur Kontrol Perulangan (for, while)</h2>
+        <p>
+          Perulangan digunakan untuk mengeksekusi blok kode yang sama berulang kali selama kondisi terpenuhi atau melintasi elemen koleksi.
+        </p>
+
+        <h3>Perulangan <code>while</code> (Sentinel Controlled Loop)</h3>
+        <p>Sangat cocok untuk program kasir yang jumlah barangnya tidak diketahui di awal:</p>
+        <pre><code>total = 0
+lanjut = "ya"
+
+while lanjut.lower() == "ya":
+    harga = float(input("Harga barang: "))
+    qty = int(input("Jumlah barang: "))
+    total += harga * qty
+    lanjut = input("Ada barang lagi? (ya/tidak): ")
+
+print("Total belanjaan:", total)</code></pre>
+
+        <h3>Perulangan <code>for</code> dengan <code>range()</code></h3>
+        <p><code>range(start, stop, step)</code> menghasilkan barisan bilangan bulat:</p>
+        <ul>
+          <li><code>range(5)</code> $ightarrow$ <code>0, 1, 2, 3, 4</code></li>
+          <li><code>range(1, 6)</code> $ightarrow$ <code>1, 2, 3, 4, 5</code></li>
+          <li><code>range(1, 10, 2)</code> $ightarrow$ <code>1, 3, 5, 7, 9</code> (bilangan ganjil)</li>
+        </ul>
+      </article>
+
+    </div>
+
+    <!-- ==================== TAB 2: TRACING NIM SIMULATOR ==================== -->
+    <div id="tab-tracing" class="tab-pane">
+      <div class="article-card">
+        <h2>🧪 Interactive NIM Slicing & Code Tracing Simulator</h2>
+        <p>
+          Simulator ini merekonstruksi <strong>Soal No. 3 UTS 2025/2026 & Soal No. 2 UTS 2024/2025</strong> dari dosen penguji Dr. Husni Thamrin. Masukkan NIM Anda untuk melihat visualisasi pemotongan string mundur (*reverse step*) serta nilai dari variabel <code>m, n, p, q, r, s, t, u, v, w</code> secara instan!
+        </p>
+
+        <div style="background:var(--bg-surface-elevated); padding:16px; border-radius:var(--radius-sm); border:1px solid var(--border-color); margin-bottom:20px;">
+          <label style="display:block; font-size:13px; font-weight:700; color:var(--text-main); margin-bottom:6px;">
+            Masukkan NIM Mahasiswa Informatika UMS:
+          </label>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <input type="text" id="input-nim" value="L200240189" maxlength="10" 
+              style="padding:10px 14px; font-family:var(--font-mono); font-size:16px; font-weight:700; background:var(--bg-surface); color:var(--text-main); border:1px solid var(--primary-border); border-radius:var(--radius-sm); flex:1; min-width:200px;">
+            <button class="btn btn-primary" onclick="runNimTracing()">
+              ⚡ Jalankan Tracing Kode
+            </button>
+            <button class="btn btn-outline" onclick="setPresetNim('L200240010')">
+              NIM Contoh 1
+            </button>
+            <button class="btn btn-outline" onclick="setPresetNim('L200240123')">
+              NIM Contoh 2
+            </button>
+          </div>
+          <div style="font-size:12px; color:var(--text-muted); margin-top:6px;">
+            *Panjang NIM UMS harus 10 karakter (contoh: <code>L200240189</code>).
+          </div>
+        </div>
+
+        <!-- VISUAL STRING RULER -->
+        <h3 style="font-size:15px; margin-bottom:4px;">📏 Visualisasi Pengindeksan String NIM (<code>Z</code>)</h3>
+        <div id="ruler-display" class="ruler-container"></div>
+
+        <!-- CODE & RESULT GRID -->
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:20px; margin-top:20px;">
+          <!-- CODE BOX -->
+          <div>
+            <h3 style="font-size:15px; margin-bottom:8px;">📜 Kode Soal Asli UTS UMS:</h3>
+            <pre><code id="code-snippet-box">Z = 'L200240189'
+m = Z[9:6:-1]
+n = int(m[0])
+p = int(m) + 19
+q = 15 - n
+r = p // 10
+s = 2 * m
+t = p % q
+u = t ** 2
+v = p - t
+w = n < 6</code></pre>
+          </div>
+
+          <!-- TABLE RESULT -->
+          <div>
+            <h3 style="font-size:15px; margin-bottom:8px;">📊 Tabel Nilai Variabel Akhir:</h3>
+            <table class="academic-table" id="table-tracing-results">
+              <thead>
+                <tr><th>Var</th><th>Tipe</th><th>Nilai</th><th>Operasi / Keterangan</th></tr>
+              </thead>
+              <tbody id="tracing-tbody">
+                <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== TAB 3: KASIR & FLOWCHART ==================== -->
+    <div id="tab-kasir" class="tab-pane">
+      <div class="article-card">
+        <h2>🛒 Simulator Kasir Minimarket & Alur Flowchart (Soal No. 2 UTS)</h2>
+        <p>
+          Simulasikan sistem transaksi kasir sesuai soal UTS: kasir menginput harga dan jumlah barang, sistem mengakumulasikan total belanja, dan jika total lebih dari <strong>Rp 100.000</strong> diberikan diskon <strong>10%</strong>.
+        </p>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:24px; margin-top:20px;">
+          <!-- FORM INPUT KASIR -->
+          <div style="background:var(--bg-surface-elevated); padding:18px; border-radius:var(--radius-sm); border:1px solid var(--border-color);">
+            <h3 style="margin-top:0; color:var(--text-main);">➕ Input Transaksi Barang</h3>
+            <div style="display:flex; flex-direction:column; gap:12px; margin-top:12px;">
+              <div>
+                <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Nama Barang:</label>
+                <input type="text" id="kasir-item-name" value="Buku Catatan Pemrograman" style="width:100%; padding:8px 12px; background:var(--bg-surface); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--radius-sm); font-size:13.5px;">
+              </div>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                <div>
+                  <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Harga Satuan (Rp):</label>
+                  <input type="number" id="kasir-item-price" value="25000" step="1000" style="width:100%; padding:8px 12px; background:var(--bg-surface); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--radius-sm); font-size:13.5px;">
+                </div>
+                <div>
+                  <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Jumlah (Qty):</label>
+                  <input type="number" id="kasir-item-qty" value="5" min="1" style="width:100%; padding:8px 12px; background:var(--bg-surface); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--radius-sm); font-size:13.5px;">
+                </div>
+              </div>
+              <div style="display:flex; gap:10px; margin-top:6px;">
+                <button class="btn btn-primary" onclick="addKasirItem()" style="flex:1;">
+                  🛒 Tambah Barang
+                </button>
+                <button class="btn btn-outline" onclick="resetKasirCart()">
+                  🔄 Reset
+                </button>
+              </div>
+            </div>
+
+            <!-- RECEIPT PREVIEW -->
+            <div style="margin-top:20px; background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-sm); padding:14px; font-family:var(--font-mono);">
+              <div style="text-align:center; font-weight:700; border-bottom:1px dashed var(--border-color); padding-bottom:8px; margin-bottom:8px;">
+                MINIMARKET INFORMATIKA UMS
+              </div>
+              <div id="cart-item-list" style="font-size:12px; line-height:1.6; margin-bottom:10px;">
+                <!-- Injected via JS -->
+              </div>
+              <div style="border-top:1px dashed var(--border-color); padding-top:8px; font-size:12px; line-height:1.8;">
+                <div style="display:flex; justify-content:space-between;">
+                  <span>Subtotal Belanja:</span>
+                  <span id="receipt-subtotal">Rp 125,000.00</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; color:var(--accent-amber);">
+                  <span>Potongan Diskon (10%):</span>
+                  <span id="receipt-diskon">- Rp 12,500.00</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; font-weight:700; font-size:14px; color:var(--accent-emerald); border-top:1px solid var(--border-color); margin-top:4px; padding-top:4px;">
+                  <span>TOTAL BAYAR:</span>
+                  <span id="receipt-total">Rp 112,500.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- FLOWCHART STEPS VISUALIZER -->
+          <div>
+            <h3 style="margin-top:0;">🗺️ Alur Flowchart Eksekusi Sistem Kasir</h3>
+            <div id="flowchart-steps-container">
+              <div class="flowchart-step" id="fc-step-1">
+                <div class="fc-shape-badge">🟢</div>
+                <div><strong>1. Mulai (Terminator)</strong>: Program kasir dijalankan. Inisialisasi <code>total = 0</code>.</div>
+              </div>
+              <div class="flowchart-step" id="fc-step-2">
+                <div class="fc-shape-badge">📥</div>
+                <div><strong>2. Input Barang (I/O)</strong>: Menerima masukan <code>harga</code> dan <code>jumlah</code>.</div>
+              </div>
+              <div class="flowchart-step" id="fc-step-3">
+                <div class="fc-shape-badge">⚙️</div>
+                <div><strong>3. Akumulasi (Proses)</strong>: <code>subtotal = harga * jumlah</code> &rarr; <code>total += subtotal</code>.</div>
+              </div>
+              <div class="flowchart-step" id="fc-step-4">
+                <div class="fc-shape-badge">❓</div>
+                <div><strong>4. Perulangan (Decision)</strong>: Ada barang lain yang dibeli? (Ya/Tidak).</div>
+              </div>
+              <div class="flowchart-step" id="fc-step-5">
+                <div class="fc-shape-badge">💎</div>
+                <div><strong>5. Percabangan Diskon (Decision)</strong>: Apakah <code>total > 100.000</code>?</div>
+              </div>
+              <div class="flowchart-step" id="fc-step-6">
+                <div class="fc-shape-badge">🏷️</div>
+                <div><strong>6. Hitung Diskon (Proses)</strong>: Jika Ya &rarr; <code>diskon = 10% * total</code>. Jika Tidak &rarr; <code>diskon = 0</code>.</div>
+              </div>
+              <div class="flowchart-step" id="fc-step-7">
+                <div class="fc-shape-badge">🖨️</div>
+                <div><strong>7. Cetak Struk (I/O)</strong>: Tampilkan rincian total dan kembalian.</div>
+              </div>
+              <div class="flowchart-step" id="fc-step-8">
+                <div class="fc-shape-badge">🔴</div>
+                <div><strong>8. Selesai (Terminator)</strong>: Transaksi berhasil tuntas.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== TAB 4: FLASHCARDS ==================== -->
+    <div id="tab-flashcards" class="tab-pane">
+      <div class="article-card" style="text-align:center;">
+        <h2>🗂️ Flashcards Hafalan Konsep Kritis Alpro (20 Kartu)</h2>
+        <p style="max-width:600px; margin:0 auto 16px;">
+          Klik kartu untuk membalik (Flip 3D). Uji pemahaman Anda tentang sintaksis, jebakan operator, dan konsep teoritis UTS.
+        </p>
+
+        <!-- FLASHCARD 3D COMPONENT -->
+        <div class="fc-wrapper" onclick="toggleCardFlip()">
+          <div class="fc-inner" id="fc-inner">
+            <div class="fc-face fc-front">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span id="fc-topic" style="font-size:11px; font-weight:700; color:var(--primary); text-transform:uppercase; letter-spacing:0.04em;">Topik</span>
+                <span id="fc-counter" style="font-size:11px; color:var(--text-muted); font-family:var(--font-mono);">1 / 20</span>
+              </div>
+              <div id="fc-front-text" style="font-size:18px; font-weight:700; line-height:1.5; color:var(--text-main); margin:auto 0;">
+                Pertanyaan Kartu
+              </div>
+              <div style="font-size:11.5px; color:var(--text-muted);">
+                🔄 Ketuk kartu untuk melihat jawaban
+              </div>
+            </div>
+            <div class="fc-face fc-back">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:11px; font-weight:700; color:var(--accent-emerald); text-transform:uppercase;">Kunci Konsep</span>
+                <span style="font-size:11px; color:var(--text-muted);">💡 Jawaban Benar</span>
+              </div>
+              <div id="fc-back-text" style="font-size:14px; line-height:1.6; color:var(--text-body); margin:auto 0; overflow-y:auto; max-height:220px;">
+                Penjelasan jawaban...
+              </div>
+              <div style="font-size:11.5px; color:var(--text-muted); text-align:center;">
+                Ketuk lagi untuk kembali ke depan
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONTROLS -->
+        <div style="display:flex; justify-content:center; gap:12px; margin-top:20px;">
+          <button class="btn btn-outline" onclick="prevCard()">⬅️ Sebelumnya</button>
+          <button class="btn btn-outline" onclick="shuffleCards()">🔀 Acak Kartu</button>
+          <button class="btn btn-primary" onclick="nextCard()">Berikutnya ➡️</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 5: UTS EXAM ARENA ==================== -->
+    <div id="tab-arena" class="tab-pane">
+      <div class="article-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; border-bottom:1px solid var(--border-color); padding-bottom:14px; margin-bottom:18px;">
+          <div>
+            <h2 style="border:none; margin:0; padding:0;">⚔️ UTS Exam Arena (Bank Soal Asli UMS)</h2>
+            <p style="margin:4px 0 0; font-size:13px; color:var(--text-muted);">Simulasi ujian 90 menit dengan skor real-time dan evaluasi jawaban otomatis.</p>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="font-family:var(--font-mono); font-size:15px; font-weight:700; background:var(--bg-surface-elevated); padding:6px 12px; border-radius:var(--radius-sm); border:1px solid var(--border-color);" id="exam-timer">
+              ⏱️ 90:00
+            </div>
+            <button class="btn btn-outline" onclick="toggleTimer()" id="btn-timer-toggle">Pause</button>
+          </div>
+        </div>
+
+        <!-- PROGRESS BAR -->
+        <div style="background:var(--bg-surface-elevated); height:8px; border-radius:4px; overflow:hidden; margin-bottom:20px;">
+          <div id="arena-progress-bar" style="background:var(--primary); width:0%; height:100%; transition:width 0.3s;"></div>
+        </div>
+
+        <!-- QUESTION CONTAINER -->
+        <div id="quiz-question-container">
+          <!-- Injected via JS -->
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:20px;">
+          <button class="btn btn-outline" onclick="prevQuizQuestion()" id="btn-prev-quiz">⬅️ Soal Sebelumnya</button>
+          <span id="quiz-counter" style="font-size:13px; font-weight:600; color:var(--text-muted);">Soal 1 dari 15</span>
+          <button class="btn btn-primary" onclick="nextQuizQuestion()" id="btn-next-quiz">Soal Berikutnya ➡️</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 6: PYTHON RUNNER ==================== -->
+    <div id="tab-runner" class="tab-pane">
+      <div class="article-card">
+        <h2>💻 Python Mini Runner & Live Playground</h2>
+        <p>
+          Tulis atau pilih kode Python di bawah ini untuk melihat hasil eksekusi dan output terminal secara langsung di browser tanpa perlu install Python!
+        </p>
+
+        <!-- PRESETS -->
+        <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;">
+          <span style="font-size:12px; font-weight:700; color:var(--text-muted); align-self:center;">Preset Soal:</span>
+          <button class="btn btn-outline" onclick="loadRunnerPreset(1)" style="font-size:12px; padding:4px 10px;">Soal Tracing NIM (UTS)</button>
+          <button class="btn btn-outline" onclick="loadRunnerPreset(2)" style="font-size:12px; padding:4px 10px;">Soal Kasir Diskon Minimarket</button>
+          <button class="btn btn-outline" onclick="loadRunnerPreset(3)" style="font-size:12px; padding:4px 10px;">Slicing String & Step Negatif</button>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:16px;">
+          <div>
+            <textarea id="python-editor" rows="14" style="width:100%; padding:14px; font-family:var(--font-mono); font-size:13.5px; line-height:1.5; background:#0d131f; color:#f8fafc; border:1px solid var(--border-color); border-radius:var(--radius-sm); resize:vertical; outline:none;" spellcheck="false"></textarea>
+            <div style="display:flex; gap:10px; margin-top:10px;">
+              <button class="btn btn-primary" onclick="runPythonCode()">▶️ Eksekusi Kode (Run)</button>
+              <button class="btn btn-outline" onclick="clearRunnerTerminal()">Bersihkan Terminal</button>
+            </div>
+          </div>
+
+          <div>
+            <div style="background:#0a0e17; border:1px solid var(--border-color); border-radius:var(--radius-sm); height:100%; min-height:280px; display:flex; flex-direction:column;">
+              <div style="background:var(--bg-surface-elevated); padding:8px 12px; border-bottom:1px solid var(--border-color); font-size:11px; font-family:var(--font-mono); color:var(--text-muted); display:flex; justify-content:space-between;">
+                <span>TERMINAL OUTPUT</span>
+                <span>Python 3.12 (Browser Emulation)</span>
+              </div>
+              <div id="runner-terminal" style="padding:14px; font-family:var(--font-mono); font-size:13px; color:#38bdf8; overflow-y:auto; flex:1; white-space:pre-wrap; line-height:1.6;">
+[Terminal Siap. Klik 'Eksekusi Kode' untuk menjalankan program]
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // ==========================================
+    // TAB NAVIGATION
+    // ==========================================
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+
+      const targetPane = document.getElementById(tabId);
+      if (targetPane) targetPane.classList.add('active');
+
+      const clickedBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick')?.includes(tabId));
+      if (clickedBtn) clickedBtn.classList.add('active');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ==========================================
+    // THEME TOGGLE (DARK / LIGHT)
+    // ==========================================
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('alpro_theme', next);
+      document.getElementById('theme-icon').textContent = next === 'dark' ? '🌙' : '☀️';
+    }
+
+    const savedTheme = localStorage.getItem('alpro_theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      document.getElementById('theme-icon').textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+    }
+
+    // ==========================================
+    // TAB 2: TRACING NIM SIMULATOR
+    // ==========================================
+    function setPresetNim(val) {
+      document.getElementById('input-nim').value = val;
+      runNimTracing();
+    }
+
+    function runNimTracing() {
+      const nimInput = document.getElementById('input-nim').value.trim() || 'L200240189';
+      const Z = nimInput;
+
+      // Build Visual Ruler
+      const ruler = document.getElementById('ruler-display');
+      ruler.innerHTML = '';
+      for (let i = 0; i < Z.length; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'ruler-cell';
+        const isSliced = (i >= 7 && i <= 9); // Indices 7, 8, 9 sliced by [9:6:-1]
+        if (isSliced) cell.classList.add('active-slice');
+
+        cell.innerHTML = `
+          <span class="pos-idx">+${i}</span>
+          <span class="char-val">${Z[i]}</span>
+          <span class="neg-idx">-${Z.length - i}</span>
+        `;
+        ruler.appendChild(cell);
+      }
+
+      // Compute Variables safely
+      let m = '', n = 0, p = 0, q = 0, r = 0, s = '', t = 0, u = 0, v = 0, w = false;
+      if (Z.length >= 10) {
+        // m = Z[9:6:-1]
+        m = Z[9] + Z[8] + Z[7];
+        n = parseInt(m[0], 10) || 0;
+        p = (parseInt(m, 10) || 0) + 19;
+        q = 15 - n;
+        r = Math.floor(p / 10);
+        s = m + m; // 2 * m string duplication!
+        t = q !== 0 ? (p % q) : 0;
+        u = Math.pow(t, 2);
+        v = p - t;
+        w = n < 6;
+      }
+
+      // Update Code Box
+      document.getElementById('code-snippet-box').textContent = 
+`Z = '${Z}'
+m = Z[9:6:-1]   # Hasil: '${m}'
+n = int(m[0])    # Hasil: ${n}
+p = int(m) + 19  # Hasil: ${p}
+q = 15 - n       # Hasil: ${q}
+r = p // 10      # Hasil: ${r}
+s = 2 * m        # Hasil: '${s}' (Duplikasi String!)
+t = p % q        # Hasil: ${t}
+u = t ** 2       # Hasil: ${u}
+v = p - t        # Hasil: ${v}
+w = n < 6        # Hasil: ${w}`;
+
+      // Update Table
+      const rows = [
+        { var: 'Z', type: 'str', val: `'${Z}'`, desc: 'Input string NIM mahasiswa (panjang 10)' },
+        { var: 'm', type: 'str', val: `'${m}'`, desc: 'Slicing Z[9:6:-1] mundur indeks 9, 8, 7' },
+        { var: 'n', type: 'int', val: n, desc: `int(m[0]) &rarr; karakter pertama '${m[0]}' jadi integer` },
+        { var: 'p', type: 'int', val: p, desc: `int(m) + 19 &rarr; ${parseInt(m)||0} + 19 = ${p}` },
+        { var: 'q', type: 'int', val: q, desc: `15 - n &rarr; 15 - ${n} = ${q}` },
+        { var: 'r', type: 'int', val: r, desc: `p // 10 &rarr; pembagian bulat ${p} // 10 = ${r}` },
+        { var: 's', type: 'str', val: `'${s}'`, desc: '⚠️ Duplikasi string! 2 * string = ulang 2x' },
+        { var: 't', type: 'int', val: t, desc: `p % q &rarr; modulo ${p} % ${q} = ${t}` },
+        { var: 'u', type: 'int', val: u, desc: `t ** 2 &rarr; pangkat ${t}² = ${u}` },
+        { var: 'v', type: 'int', val: v, desc: `p - t &rarr; ${p} - ${t} = ${v}` },
+        { var: 'w', type: 'bool', val: w ? 'True' : 'False', desc: `Perbandingan: apakah ${n} < 6? &rarr; ${w ? 'True' : 'False'}` }
+      ];
+
+      const tbody = document.getElementById('tracing-tbody');
+      tbody.innerHTML = '';
+      rows.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong style="color:var(--accent-cyan); font-family:var(--font-mono);">${row.var}</strong></td>
+          <td><span style="font-size:11px; font-weight:700; color:var(--text-muted); font-family:var(--font-mono);">${row.type}</span></td>
+          <td><code style="font-weight:700; color:var(--text-main);">${row.val}</code></td>
+          <td style="font-size:12px;">${row.desc}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // ==========================================
+    // TAB 3: KASIR SIMULATOR
+    // ==========================================
+    let cart = [
+      { name: "Buku Catatan Pemrograman", price: 25000, qty: 5 }
+    ];
+
+    function renderCart() {
+      const container = document.getElementById('cart-item-list');
+      container.innerHTML = '';
+      let subtotal = 0;
+
+      cart.forEach((item, idx) => {
+        const itemTotal = item.price * item.qty;
+        subtotal += itemTotal;
+        const row = document.createElement('div');
+        row.style.cssText = 'display:flex; justify-content:space-between; margin-bottom:4px;';
+        row.innerHTML = `
+          <span>${idx + 1}. ${item.name} (${item.qty}x)</span>
+          <span>Rp ${itemTotal.toLocaleString('id-ID')}</span>
+        `;
+        container.appendChild(row);
+      });
+
+      // Diskon rule: jika > 100.000 diskon 10%
+      const diskon = subtotal > 100000 ? subtotal * 0.10 : 0;
+      const totalBayar = subtotal - diskon;
+
+      document.getElementById('receipt-subtotal').textContent = 'Rp ' + subtotal.toLocaleString('id-ID') + '.00';
+      document.getElementById('receipt-diskon').textContent = (diskon > 0 ? '- Rp ' : 'Rp ') + diskon.toLocaleString('id-ID') + '.00';
+      document.getElementById('receipt-total').textContent = 'Rp ' + totalBayar.toLocaleString('id-ID') + '.00';
+
+      // Flowchart step highlight
+      document.querySelectorAll('.flowchart-step').forEach(s => s.classList.remove('highlight'));
+      document.getElementById('fc-step-3').classList.add('highlight');
+      document.getElementById('fc-step-5').classList.add('highlight');
+      document.getElementById('fc-step-6').classList.add('highlight');
+    }
+
+    function addKasirItem() {
+      const name = document.getElementById('kasir-item-name').value.trim() || 'Barang Baru';
+      const price = parseFloat(document.getElementById('kasir-item-price').value) || 0;
+      const qty = parseInt(document.getElementById('kasir-item-qty').value, 10) || 1;
+
+      cart.push({ name, price, qty });
+      renderCart();
+    }
+
+    function resetKasirCart() {
+      cart = [];
+      renderCart();
+    }
+
+    // ==========================================
+    // TAB 4: FLASHCARDS DATA & ENGINE
+    // ==========================================
+    const ALPRO_FLASHCARDS = [
+      {
+        topic: "Asal Kata & Definisi",
+        q: "Dari manakah asal kata 'Algoritma' dan apa definisinya?",
+        a: "Diserap dari nama matematikawan muslim <strong>Abu Ja'far Muhammad bin Musa Al-Khawarizmi</strong>.<br><br>Definisi: Urutan langkah-langkah logis dan terstruktur yang disusun secara sistematis untuk menyelesaikan suatu masalah komputasi."
+      },
+      {
+        topic: "Flowchart vs Algoritma",
+        q: "Apakah algoritma sama dengan flowchart? (Soal 1.b UTS)",
+        a: "<strong>Tidak sama!</strong><br><br>Algoritma adalah logika langkah penyelesaiannya, sedangkan Flowchart adalah representasi grafis/visual dari algoritma menggunakan simbol-simbol standar."
+      },
+      {
+        topic: "Tipe Data input()",
+        q: "Apa tipe data default yang dikembalikan oleh fungsi input() di Python?",
+        a: "<strong>Selalu bertipe string (str)!</strong><br><br>Meskipun pengguna memasukkan angka <code>50</code>, nilai yang diterima adalah <code>'50'</code>. Wajib dikonversi dengan <code>int()</code> atau <code>float()</code> jika ingin dihitung."
+      },
+      {
+        topic: "Operator / vs //",
+        q: "Apa perbedaan operator '/' dan '//' di Python?",
+        a: "• <code>/</code> (Float Division): Selalu menghasilkan angka desimal (float), misal: <code>4 / 2 = 2.0</code>.<br>• <code>//</code> (Floor Division): Pembagian bulat, membuang bagian pecahan ke bawah, misal: <code>7 // 2 = 3</code>."
+      },
+      {
+        topic: "Perkalian String",
+        q: "Apa output dari: s = 2 * '981' ? (Jebakan No. 3 UTS)",
+        a: "<strong>Output: '981981'</strong><br><br>Operator perkalian <code>*</code> antara integer dan string menghasilkan <em>duplikasi/pengulangan string</em>, bukan perkalian angka matematika!"
+      },
+      {
+        topic: "Slicing Step Negatif",
+        q: "Jika Z = 'L200240189', berapakah Z[9:6:-1] ?",
+        a: "<strong>Hasil: '981'</strong><br><br>Mulai dari indeks 9 (karakter '9'), mundur melangkah -1 sampai sebelum indeks 6 (indeks 7 yaitu '1'). Hasil urutan: '9', '8', '1'."
+      },
+      {
+        topic: "Sifat Eksklusif Stop",
+        q: "Mengapa indeks 'stop' pada slicing Python bersifat eksklusif?",
+        a: "Karena di Python, rentang pemotongan selalu mengikuti aturan <code>[start, stop)</code>, di mana elemen pada indeks <code>stop</code> tidak disertakan dalam hasil pemotongan."
+      },
+      {
+        topic: "Operator Modulo (%)",
+        q: "Apa fungsi operator '%' dan berapa hasil 1000 % 6 ?",
+        a: "Operator <code>%</code> (Modulo) menghasilkan <strong>sisa hasil bagi</strong>.<br><br>1000 dibagi 6 menghasilkan 166 bersisa <strong>4</strong>, karena: 166 * 6 = 996 (1000 - 996 = 4)."
+      },
+      {
+        topic: "Percabangan Diskon",
+        q: "Bagaimana menulis sintaks percabangan diskon 10% jika total > 100.000?",
+        a: "<pre><code>if total > 100000:
+    diskon = 0.10 * total
+else:
+    diskon = 0</code></pre>"
+      },
+      {
+        topic: "Perulangan while",
+        q: "Kapan kita menggunakan 'while' dibanding 'for' pada program kasir?",
+        a: "Gunakan <strong>while</strong> ketika jumlah pengulangan tidak diketahui di awal dan bergantung pada input pengguna (misal konfirmasi: <em>'apakah ada barang lain? (y/n)'</em>)."
+      }
+    ];
+
+    let currentCardIdx = 0;
+
+    function renderCard() {
+      const card = ALPRO_FLASHCARDS[currentCardIdx];
+      document.getElementById('fc-topic').textContent = card.topic;
+      document.getElementById('fc-counter').textContent = `${currentCardIdx + 1} / ${ALPRO_FLASHCARDS.length}`;
+      document.getElementById('fc-front-text').innerHTML = card.q;
+      document.getElementById('fc-back-text').innerHTML = card.a;
+      document.querySelector('.fc-wrapper').classList.remove('flipped');
+    }
+
+    function toggleCardFlip() {
+      document.querySelector('.fc-wrapper').classList.toggle('flipped');
+    }
+
+    function nextCard() {
+      currentCardIdx = (currentCardIdx + 1) % ALPRO_FLASHCARDS.length;
+      renderCard();
+    }
+
+    function prevCard() {
+      currentCardIdx = (currentCardIdx - 1 + ALPRO_FLASHCARDS.length) % ALPRO_FLASHCARDS.length;
+      renderCard();
+    }
+
+    function shuffleCards() {
+      for (let i = ALPRO_FLASHCARDS.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [ALPRO_FLASHCARDS[i], ALPRO_FLASHCARDS[j]] = [ALPRO_FLASHCARDS[j], ALPRO_FLASHCARDS[i]];
+      }
+      currentCardIdx = 0;
+      renderCard();
+    }
+
+    // ==========================================
+    // TAB 5: UTS EXAM ARENA
+    // ==========================================
+    const QUIZ_QUESTIONS = [
+      {
+        q: "Berdasarkan Soal 1 UTS 2025/2026, manakah pernyataan yang BENAR mengenai perbedaan Algoritma dan Flowchart?",
+        opts: [
+          "Algoritma dan Flowchart adalah hal yang sama persis",
+          "Algoritma adalah urutan langkah logis, sedangkan Flowchart adalah representasi grafisnya",
+          "Flowchart hanya digunakan untuk perulangan, sedangkan algoritma untuk percabangan",
+          "Algoritma selalu ditulis dalam bahasa Python"
+        ],
+        ans: 1,
+        exp: "Algoritma adalah urutan logika penyelesaian masalah, sedangkan flowchart adalah representasi visual diagramatik menggunakan simbol grafis standar."
+      },
+      {
+        q: "Diberikan string <code>Z = 'L200240189'</code>. Berapakah hasil pemotongan <code>m = Z[9:6:-1]</code> pada soal UTS Husni Thamrin?",
+        opts: [
+          "'189'",
+          "'981'",
+          "'018'",
+          "'890'"
+        ],
+        ans: 1,
+        exp: "Slicing [9:6:-1] melangkah mundur dari indeks 9 ('9'), 8 ('8'), sampai 7 ('1'). Karakter indeks 6 eksklusif. Hasilnya adalah '981'."
+      },
+      {
+        q: "Jika variabel <code>m = '981'</code> (string), berapakah nilai yang tersimpan di <code>s = 2 * m</code>?",
+        opts: [
+          "1962 (integer)",
+          "'981981' (string)",
+          "Error sintaks",
+          "'1962' (string)"
+        ],
+        ans: 1,
+        exp: "Operator perkalian '*' antara integer dan string di Python melakukan string duplication (pengulangan string sebanyak 2 kali), menghasilkan '981981'."
+      },
+      {
+        q: "Fungsi <code>input()</code> di Python secara bawaan selalu menghasilkan nilai dengan tipe data:",
+        opts: [
+          "int (Integer)",
+          "float (Desimal)",
+          "str (String)",
+          "Sesuai input angka yang diketik user"
+        ],
+        ans: 2,
+        exp: "Fungsi input() di Python SELALU mengembalikan string. Untuk menggunakannya dalam perhitungan matematika, harus dikonversi manual menggunakan int() atau float()."
+      },
+      {
+        q: "Berapakah hasil evaluasi operasi floor division <code>1000 // 10</code> dan modulo <code>1000 % 6</code> di Python?",
+        opts: [
+          "100 dan 4",
+          "100.0 dan 4",
+          "100 dan 0",
+          "99 dan 4"
+        ],
+        ans: 0,
+        exp: "1000 // 10 menghasilkan integer 100. 1000 % 6 menghasilkan sisa bagi 4 (karena 166 * 6 = 996, 1000 - 996 = 4)."
+      }
+    ];
+
+    let currentQuizIdx = 0;
+    let userAnswers = {};
+
+    function renderQuiz() {
+      const q = QUIZ_QUESTIONS[currentQuizIdx];
+      const container = document.getElementById('quiz-question-container');
+      
+      const isAnswered = userAnswers[currentQuizIdx] !== undefined;
+
+      let optsHtml = '';
+      q.opts.forEach((opt, idx) => {
+        let btnStyle = 'background:var(--bg-surface-elevated); border:1px solid var(--border-color); color:var(--text-main);';
+        if (isAnswered) {
+          if (idx === q.ans) {
+            btnStyle = 'background:var(--emerald-bg); border:1px solid var(--emerald-border); color:var(--accent-emerald); font-weight:700;';
+          } else if (idx === userAnswers[currentQuizIdx]) {
+            btnStyle = 'background:var(--rose-bg); border:1px solid var(--rose-border); color:var(--accent-rose);';
+          }
+        }
+
+        optsHtml += `
+          <button onclick="answerQuiz(${idx})" style="${btnStyle} width:100%; text-align:left; padding:12px 16px; border-radius:var(--radius-sm); margin-bottom:8px; cursor:pointer; font-size:13.5px; transition:all 0.2s;">
+            ${String.fromCharCode(65 + idx)}. ${opt}
+          </button>
+        `;
+      });
+
+      let expHtml = '';
+      if (isAnswered) {
+        expHtml = `
+          <div class="callout ${userAnswers[currentQuizIdx] === q.ans ? 'success' : 'danger'}" style="margin-top:14px;">
+            <strong>${userAnswers[currentQuizIdx] === q.ans ? '✅ Jawaban Anda Benar!' : '❌ Jawaban Kurang Tepat!'}</strong><br>
+            ${q.exp}
+          </div>
+        `;
+      }
+
+      container.innerHTML = `
+        <div style="font-size:16px; font-weight:700; color:var(--text-main); margin-bottom:14px; line-height:1.5;">
+          Soal ${currentQuizIdx + 1}: ${q.q}
+        </div>
+        <div>${optsHtml}</div>
+        ${expHtml}
+      `;
+
+      document.getElementById('quiz-counter').textContent = `Soal ${currentQuizIdx + 1} dari ${QUIZ_QUESTIONS.length}`;
+      const pct = ((currentQuizIdx + 1) / QUIZ_QUESTIONS.length) * 100;
+      document.getElementById('arena-progress-bar').style.width = pct + '%';
+    }
+
+    function answerQuiz(optIdx) {
+      if (userAnswers[currentQuizIdx] !== undefined) return;
+      userAnswers[currentQuizIdx] = optIdx;
+      renderQuiz();
+    }
+
+    function nextQuizQuestion() {
+      if (currentQuizIdx < QUIZ_QUESTIONS.length - 1) {
+        currentQuizIdx++;
+        renderQuiz();
+      }
+    }
+
+    function prevQuizQuestion() {
+      if (currentQuizIdx > 0) {
+        currentQuizIdx--;
+        renderQuiz();
+      }
+    }
+
+    // Timer 90:00
+    let timeLeft = 90 * 60;
+    let timerInterval = null;
+
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          alert('Waktu 90 menit ujian telah habis!');
+        }
+        const m = Math.floor(timeLeft / 60);
+        const s = timeLeft % 60;
+        document.getElementById('exam-timer').textContent = `⏱️ ${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+      }, 1000);
+    }
+
+    function toggleTimer() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        document.getElementById('btn-timer-toggle').textContent = 'Lanjut';
+      } else {
+        startTimer();
+        document.getElementById('btn-timer-toggle').textContent = 'Pause';
+      }
+    }
+
+    // ==========================================
+    // TAB 6: PYTHON RUNNER
+    // ==========================================
+    const RUNNER_PRESETS = {
+      1: `# Soal 3 UTS 2025/2026 UMS
+Z = 'L200240189'
+m = Z[9:6:-1]
+n = int(m[0])
+p = int(m) + 19
+q = 15 - n
+r = p // 10
+s = 2 * m
+t = p % q
+u = t ** 2
+v = p - t
+w = n < 6
+
+print("m =", m)
+print("n =", n)
+print("p =", p)
+print("q =", q)
+print("r =", r)
+print("s =", s)
+print("t =", t)
+print("u =", u)
+print("v =", v)
+print("w =", w)`,
+      2: `# Soal Kasir Minimarket Diskon 10%
+total_belanja = 125000
+
+if total_belanja > 100000:
+    diskon = 0.10 * total_belanja
+else:
+    diskon = 0
+
+total_bayar = total_belanja - diskon
+
+print("Total Belanja : Rp", total_belanja)
+print("Diskon (10%)  : Rp", diskon)
+print("Total Bayar   : Rp", total_bayar)`,
+      3: `# Slicing String Python
+nama = "INFORMATIKA"
+print("Asli       :", nama)
+print("Depan 4    :", nama[:4])
+print("Belakang 4 :", nama[-4:])
+print("Langkah 2  :", nama[::2])
+print("Terbalik   :", nama[::-1])`
+    };
+
+    function loadRunnerPreset(id) {
+      document.getElementById('python-editor').value = RUNNER_PRESETS[id];
+    }
+
+    function clearRunnerTerminal() {
+      document.getElementById('runner-terminal').textContent = '[Terminal Bersih]';
+    }
+
+    function runPythonCode() {
+      const code = document.getElementById('python-editor').value;
+      const term = document.getElementById('runner-terminal');
+      term.textContent = 'Menjalankan program...\n';
+
+      let output = '';
+      try {
+        // Safe mini JS interpreter for the basic assignments & prints
+        const lines = code.split('\n');
+        const env = {};
+
+        lines.forEach(line => {
+          let trimmed = line.trim();
+          if (!trimmed || trimmed.startsWith('#')) return;
+
+          // Handle print
+          if (trimmed.startsWith('print(') && trimmed.endsWith(')')) {
+            const inner = trimmed.slice(6, -1);
+            const parts = inner.split(',').map(p => p.trim());
+            const evaluated = parts.map(part => {
+              if (part.startsWith('"') || part.startsWith("'")) {
+                return part.slice(1, -1);
+              }
+              if (env[part] !== undefined) return env[part];
+              try { return eval(part); } catch(e) { return part; }
+            });
+            output += evaluated.join(' ') + '\n';
+            return;
+          }
+
+          // Handle assignment
+          if (trimmed.includes('=')) {
+            const eqIdx = trimmed.indexOf('=');
+            const varName = trimmed.slice(0, eqIdx).trim();
+            let rhs = trimmed.slice(eqIdx + 1).trim();
+            // remove inline comment
+            if (rhs.includes('#')) rhs = rhs.split('#')[0].trim();
+
+            // Slicing emulation Z[9:6:-1]
+            if (rhs.match(/^[a-zA-Z0-9_]+\[[^\]]+\]$/)) {
+              const srcVar = rhs.split('[')[0];
+              const sliceParts = rhs.split('[')[1].slice(0, -1).split(':');
+              const strVal = env[srcVar] || '';
+              const st = parseInt(sliceParts[0], 10);
+              const sp = parseInt(sliceParts[1], 10);
+              const step = sliceParts[2] ? parseInt(sliceParts[2], 10) : 1;
+
+              let res = '';
+              if (step === -1) {
+                for (let k = st; k > sp; k--) res += strVal[k] || '';
+              } else {
+                for (let k = st; k < sp; k += step) res += strVal[k] || '';
+              }
+              env[varName] = res;
+              return;
+            }
+
+            // string multiplication 2 * m
+            if (rhs.includes('*') && !rhs.includes('**')) {
+              const p = rhs.split('*').map(x => x.trim());
+              if (p[0] === '2' && env[p[1]] && typeof env[p[1]] === 'string') {
+                env[varName] = env[p[1]] + env[p[1]];
+                return;
+              }
+            }
+
+            // Replace known vars in rhs
+            let evalExpr = rhs;
+            Object.keys(env).forEach(k => {
+              const regex = new RegExp('\\b' + k + '\\b', 'g');
+              const val = env[k];
+              evalExpr = evalExpr.replace(regex, typeof val === 'string' ? `"${val}"` : val);
+            });
+
+            // Replace python // and **
+            evalExpr = evalExpr.replace(/\/\//g, '/');
+            evalExpr = evalExpr.replace(/int\(([^)]+)\)/g, 'parseInt($1, 10)');
+
+            try {
+              let computed = eval(evalExpr);
+              if (rhs.includes('//')) computed = Math.floor(computed);
+              env[varName] = computed;
+            } catch(e) {
+              env[varName] = rhs;
+            }
+          }
+        });
+
+        term.textContent = output || '[Program selesai tanpa output teks]';
+      } catch (err) {
+        term.textContent = '⚠️ Terjadi Kesalahan: ' + err.message;
+      }
+    }
+
+    // ==========================================
+    // INITIALIZATION
+    // ==========================================
+    window.addEventListener('DOMContentLoaded', () => {
+      runNimTracing();
+      renderCart();
+      renderCard();
+      renderQuiz();
+      loadRunnerPreset(1);
+      startTimer();
+    });
+  </script>
+</body>
+</html>
