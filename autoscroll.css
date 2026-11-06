@@ -1,0 +1,225 @@
+/* ============================================================
+   Auto-scroll materi kuliah — kontrol mengambang
+   Dipakai bersama autoscroll.js. Warna mengikuti variabel
+   tema tiap situs, dengan cadangan warna netral.
+   ============================================================ */
+
+.has-autoscroll {
+  padding-bottom: 104px;
+}
+
+.autoscroll-dock {
+  --as-ink: var(--ink, var(--text-main, #24221f));
+  --as-card: var(--card, var(--bg-surface-card, #fffdf7));
+  --as-line: var(--ink, var(--border-color, #24221f));
+  --as-shadow: var(--ink, rgba(0, 0, 0, .5));
+  --as-track: var(--paper-deep, var(--paper-2, var(--bg-surface-elevated, #e9e2d2)));
+  --as-accent: var(--mustard, var(--gold, var(--amber, var(--accent-amber, #f2b544))));
+  --as-accent-soft: var(--mustard-soft, var(--gold-soft, var(--amber-soft, var(--amber-bg, rgba(242, 181, 68, .2)))));
+  --as-play: var(--teal, var(--green, var(--accent-emerald, var(--cobalt, #2b8a79))));
+  --as-thumb: var(--tomato, var(--red, var(--accent-rose, var(--coral, #dd5a3a))));
+  --as-faint: var(--faint, var(--ink-faint, var(--text-muted, #8a8377)));
+  --as-mono: var(--mono, var(--font-mono, ui-monospace, "Cascadia Code", Consolas, monospace));
+
+  position: fixed;
+  left: max(18px, env(safe-area-inset-left));
+  bottom: max(18px, env(safe-area-inset-bottom));
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: min(340px, calc(100vw - 36px));
+  padding: 11px 13px 14px;
+  background: var(--as-card);
+  border: 2px solid var(--as-line);
+  border-radius: 14px;
+  box-shadow: 4px 4px 0 var(--as-shadow);
+  color: var(--as-ink);
+  font-family: var(--as-mono);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.as-play {
+  flex: 0 0 auto;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  background: var(--as-accent);
+  color: #24221f;
+  border: 2px solid var(--as-line);
+  border-radius: 10px;
+  box-shadow: 2px 2px 0 var(--as-shadow);
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .12s ease, background .12s ease, box-shadow .12s ease;
+}
+
+.as-play:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--as-shadow);
+}
+
+.as-play:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--as-shadow);
+}
+
+.autoscroll-dock.is-playing .as-play {
+  background: var(--as-play);
+  color: #fff;
+}
+
+.as-play svg {
+  display: block;
+  width: 19px;
+  height: 19px;
+  fill: currentColor;
+}
+
+.as-ico-pause { display: none; }
+.autoscroll-dock.is-playing .as-ico-play { display: none; }
+.autoscroll-dock.is-playing .as-ico-pause { display: block; }
+
+.as-body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.as-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 1px;
+}
+
+.as-title {
+  overflow: hidden;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  color: var(--as-faint);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.as-speed {
+  flex: 0 0 auto;
+  padding: 1px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #24221f;
+  background: var(--as-accent-soft);
+  border: 1.5px solid var(--as-line);
+  border-radius: 999px;
+  font-variant-numeric: tabular-nums;
+}
+
+.as-range {
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.as-range::-webkit-slider-runnable-track {
+  height: 8px;
+  background: linear-gradient(90deg, var(--as-play) 0 var(--fill, 14%), var(--as-track) var(--fill, 14%) 100%);
+  border: 1.5px solid var(--as-line);
+  border-radius: 999px;
+}
+
+.as-range::-moz-range-track {
+  height: 8px;
+  background: linear-gradient(90deg, var(--as-play) 0 var(--fill, 14%), var(--as-track) var(--fill, 14%) 100%);
+  border: 1.5px solid var(--as-line);
+  border-radius: 999px;
+}
+
+.as-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 17px;
+  height: 17px;
+  margin-top: -5.5px;
+  background: var(--as-thumb);
+  border: 2px solid var(--as-line);
+  border-radius: 50%;
+}
+
+.as-range::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  background: var(--as-thumb);
+  border: 2px solid var(--as-line);
+  border-radius: 50%;
+}
+
+.as-range:focus-visible {
+  outline: 3px solid var(--as-play);
+  outline-offset: 2px;
+  border-radius: 999px;
+}
+
+.as-progress {
+  position: absolute;
+  left: 13px;
+  right: 13px;
+  bottom: 6px;
+  height: 3px;
+  background: rgba(127, 127, 127, .28);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.as-progress i {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--as-play);
+  border-radius: inherit;
+}
+
+@media (max-width: 640px) {
+  .has-autoscroll {
+    padding-bottom: calc(96px + env(safe-area-inset-bottom));
+  }
+  .autoscroll-dock {
+    left: max(12px, env(safe-area-inset-left));
+    right: max(12px, env(safe-area-inset-right));
+    bottom: max(12px, env(safe-area-inset-bottom));
+    width: auto;
+    gap: 9px;
+    padding: 9px 11px 13px;
+  }
+  .as-play {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .as-play {
+    transition: none;
+  }
+}
+
+@media print {
+  .autoscroll-dock {
+    display: none !important;
+  }
+  .has-autoscroll {
+    padding-bottom: 0 !important;
+  }
+}
